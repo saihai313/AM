@@ -21,7 +21,6 @@
   	<!-- ------------------------- header ---------------------------- -->
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
 	
-	
 	<!-- ------------------------- main ---------------------------- -->
     <div class="hero-wrap" style="background-image: url('${contextPath}/resources/images/main_img.png');" data-stellar-background-ratio="0.5" id="main-slide"> 
       <div class="overlay"></div>

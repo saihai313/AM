@@ -92,7 +92,6 @@
 	  </nav>
 	  <!-- END nav -->
 	  
-	
 	  <script type="text/javascript" src="${contextPath}/resources/js/bootstrap.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.animateNumber.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.easing.1.3.js"></script>
