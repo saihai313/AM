@@ -45,7 +45,7 @@
 				<div class="col-md-6 d-flex align-items-center">
 					<p class="mb-0 phone pl-md-2 nav-top">
 						<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>1544-9970</a> 
-						<a href="#"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
+						<a href="${contextPath}/company/contact"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
 					</p>
 				</div>
 
@@ -85,7 +85,7 @@
 	          <li class="nav-item"><a href="${contextPath}/HR/HRList" class="nav-link">인사관리</a></li>
 	          <li class="nav-item"><a href="${contextPath}/work/workList" class="nav-link">근무관리</a></li>
 			  <li class="nav-item"><a href="${contextPath}/pay/payList" class="nav-link">급여관리</a></li>
-			  <li class="nav-item"><a href="${contextPath}/member/mypage" class="nav-link">My Page</a></li>
+			  <li class="nav-item"><a href="${contextPath}/member/updateMember" class="nav-link">My Page</a></li>
 	        </ul>
 	      </div>
 	    </div>

@@ -15,9 +15,9 @@
               <h2 class="ftco-heading-2 logo"><a href="#">AM</a></h2>
               <p>Albeit Management System</p>
               <ul class="ftco-footer-social list-unstyled mt-2">
-                <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="#"><span class="fa fa-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -56,7 +56,7 @@
 	              <ul>
 	                <li><span class="icon fa fa-map marker"></span><span class="text">서울특별시 중구<br>남대문로 120<br>대일빌딩 2F, 3F</span></li>
 	                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">1544-9970</span></a></li>
-	                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">AM@email.com</span></a></li>
+	                <li><a href="${contextPath}/company/contact"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">AM@email.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

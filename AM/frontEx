@@ -53,4 +53,9 @@ ex) <section id="login"><input/></section>
 - 이미지 가운데 정렬 : mx-auto d-block
 - form 안에서 div 가로로 나열:  div에 row 또는 form-row
  
+ 4. 메인 컬러
+ - 초록 : #589168
+ - 연회색 : #F5F4F0
+ - 연노랑 : #FEEBB6
+ - 검정색 : rgba(0, 0, 0, 0.8)
  

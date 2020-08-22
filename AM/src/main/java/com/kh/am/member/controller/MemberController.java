@@ -19,5 +19,23 @@ public class MemberController {
 	public String signUpView() {
 		return "member/signUpView";
 	}
+	
+	// 회원정보 수정 페이지 이동
+	@RequestMapping("updateMember")
+	public String updateMember() {
+		return "member/updateMember";
+	}
+	
+	// 비밀번호 수정 페이지 이동
+	@RequestMapping("updatePwd")
+	public String updatePwd() {
+		return "member/updatePwd";
+	}
+	
+	// 회원 탈퇴 페이지 이동
+	@RequestMapping("secession")
+	public String secession() {
+		return "member/secession";
+	}
 
 }
