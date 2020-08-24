@@ -1,0 +1,56 @@
+
+
+화면 만들때 지켜야할 것!!!
+
+1. *** 무조건 section에 아이디 부여하고 해당 아이디에 스타일 지정할 것
+
+ex) <section id="login"><input/></section>
+    <style>#login input{width:30px;}</style>
+--> 안지키면 나중에 충돌 납니다.
+
+* 기본적인 스타일은 sytle.css에 있습니다.
+* 템플릿이 기본적으로 영어로만 이루어져 있어서 한글 폰트를 따로 style.css에 넣었습니다.
+    해당 폰트를 쓰려면 font-family 복사해서 스타일에 복붙하면 됩니다.
+    폰트 확인하려면 '눈누'에 검색하세요
+* 템플릿 복붙했는데 뭔가 요소가 안보인다 하면 ftco-animate 클래스에서 지우세요(아마 js가 적용안되서 그럴겁니다)
+* 헤더 때문에 콘솔에서 오류나는데 제가 나중에 고칠게요
+
+
+2. 기본틀(복붙해서 사용하면 됩니다)
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+</head>
+<body>
+
+	<!-- ------------------------- header ---------------------------- -->
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
+	<!-- ------------------------- main ---------------------------- -->
+    <section class="ftco-section" id="">
+		여기에 작성
+	</section>
+    
+    <!-- ------------------------- footer ---------------------------- -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+</body>
+</html>
+
+
+3. 팁(계속 업데이트 할게요)~클래스에 넣어주세요
+- div, form, table 등 가운데 정렬 : justify-content-center 또는 mx-auto 를 해당 요소 또는 부모 요소에 삽입
+- 텍스트 가운데 정렬 : text-center_가로/align-middle_세로 
+- 마진 : m-1 == 모든 방향 마진 1씩 //mt-5 == 윗방향 마진 5  m(mt,mb,ml,mr)-0~5
+- 패딩  마진과 동일 p-0~5
+- 넓이에 맞춰 요소 넓이 지정 : form-control
+- 이미지 가운데 정렬 : mx-auto d-block
+- form 안에서 div 가로로 나열:  div에 row 또는 form-row
+ 
+ 
