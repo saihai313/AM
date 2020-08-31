@@ -76,7 +76,7 @@
 <body>
 
 	<!-- ------------------------- header ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<!-- ------------------------- main ---------------------------- -->
 	<section class="ftco-section">

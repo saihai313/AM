@@ -148,7 +148,7 @@
 		                              board라는 변수에 저장하여 내부에서 사용
 		                         -->
 		                         <tr>
-		                         	
+		                         	<!-- 예시 -->
 		                            <td>1</td>
 		                            <td>최지은</td>
 		                            <td><input type="text" name="day">일</td>
