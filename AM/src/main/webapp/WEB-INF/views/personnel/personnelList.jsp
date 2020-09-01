@@ -22,12 +22,12 @@
             <table class="table table-hover table-striped" id="list-table">
                 <thead>
                     <tr>
-                        <th>번호 </th>
                         <th>이름 </th>
-                        <th>이메일</th>
+                        <th>이메일 </th>
                         <th>전화번호</th>
-                        <th>퇴사여부</th>
-                        <th></th>
+                        <th>근무조</th>
+                        <th>근무시간</th>
+                     
                     </tr>
                 </thead>
                 <tbody>
@@ -50,14 +50,14 @@
                 	</c:choose>
                 </tbody>
             </table>
-            <div class="bottom_btn" style="display: flex;" >
-		        <button >입사</button>
-		        <button >퇴사</button>
+            <div class="bottom_btn" style="text-align: center;" >
+		        <a class="btn btn-primary py-3 px-4">입사</a>
+		        <a class="btn btn-primary py-3 px-4">퇴사</a>
             </div>
         </div>
 
         <hr>
-
+	</div>
 	<!-- ------------------------- footer ---------------------------- -->
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
