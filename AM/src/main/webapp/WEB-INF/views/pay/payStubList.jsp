@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+
+		/* 급여명세서 */
     
        .pagination {
             justify-content: center;
@@ -92,9 +94,9 @@
 
 			<!-- ------------------------- side menu ---------------------------- -->
 			 <ul class="tabType1">
-			  <li><a href="${contextPath}/pay/payList">급여설정</a></li>
+			  <li><a href="${contextPath}/pay/insertPay">급여설정</a></li>
 		      <li class="on"><a href="${contextPath}/pay/payStubList">급여 명세서</a></li>
-			  <li><a href="${contextPath}/pay/updatePayStub">정정 신청</a></li>
+			  <li><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 
