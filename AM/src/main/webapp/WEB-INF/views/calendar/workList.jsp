@@ -15,8 +15,6 @@
 </head>
 <body>
 
-	<!-- ------------------------- header ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 	<!-- ------------------------- main ---------------------------- -->
 	<section class="ftco-section">
@@ -43,10 +41,7 @@
 			
 			</div>
 	</section>
-
-	<!-- ------------------------- footer ---------------------------- -->
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-    
+	
     <script type="text/javascript" src="${contextPath}/resources/js/calendar.js"></script>
     
 <script>
@@ -79,6 +74,24 @@
       });
       /* initialize the calendar
       -----------------------------------------------------------------*/
+
+      // 캘린더 값 얻어오는 ajax 
+      $(document).ready(function() {
+    	  $.ajax({
+				url : "calendar/calendarView/",
+				dataType : "JSON",
+				success : function(list){
+					console.log(list);
+					
+				
+					
+				}, error : function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+      });
+      
+      // Ajax success 에 넣으면 될듯
       var calendar = $('#calendar').fullCalendar({
         header: {
           left: 'title',
@@ -105,6 +118,7 @@
         selectHelper: true,
         select: function(start, end, allDay) {
           var title = prompt('Event Title:');
+          // 일 클릭하면 나오는 창
           if (title) {
             calendar.fullCalendar('renderEvent', {
                 title: title,
@@ -142,7 +156,9 @@
           {
             id: 999,
             title: '류진',
-            start: new Date(y, m, 24, 16, 0),
+            start: new Date(y, m, 1, 7, 0),
+            // 여기 년월일시간
+            // 연도는 내비두고, 디비에서 월, 일, 시간
             allDay: false,
             className: 'info'
           },
