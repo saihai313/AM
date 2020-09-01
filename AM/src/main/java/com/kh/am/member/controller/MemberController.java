@@ -29,11 +29,37 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	// 회원가입 페이지 이동
-	@RequestMapping(value="signUp", method = RequestMethod.GET)
+	// 회원가입 페이지_약관 이동
+	@RequestMapping(value="signUp")
 	public String signUpView() {
 		return "member/signUpView";
 	}
+	
+	// 회원가입 페이지 이동
+	@RequestMapping(value="signUp2")
+	public String signUpView2() {
+		return "member/signUpView2";
+	}
+	
+	// 회원정보 수정 페이지 이동
+	@RequestMapping("updateMember")
+	public String updateMember() {
+		return "member/updateMember";
+	}
+	
+	// 비밀번호 수정 페이지 이동
+	@RequestMapping("updatePwd")
+	public String updatePwd() {
+		return "member/updatePwd";
+	}
+	
+	// 회원 탈퇴 페이지 이동
+	@RequestMapping("secession")
+	public String secession() {
+		return "member/secession";
+	}
+	
+	// -----------------------------------------기능---------------------------------------
 
 	// 로그인
 	@RequestMapping("loginAction")
