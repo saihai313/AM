@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+    	
+    	/* 급여 정정 */
     
+    	
        .pagination {
             justify-content: center;
         }

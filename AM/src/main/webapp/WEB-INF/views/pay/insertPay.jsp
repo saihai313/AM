@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+	
+	/* 급여설정 */
 
 	.tabType1 {
 		height: 50px;

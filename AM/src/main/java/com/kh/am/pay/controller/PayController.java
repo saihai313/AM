@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/pay/*")
 public class PayController {
 	
+	// 급여
+	
 	// 급여설정 페이지 전환
 	@RequestMapping("insertPay")
 	public String payListView() {

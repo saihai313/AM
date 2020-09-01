@@ -9,6 +9,8 @@
 <title>급여 설정</title>
 <style>
 
+	/* 급여 수정 */
+
 	.tabType1 {
 		height: 50px;
 		text-align: center;

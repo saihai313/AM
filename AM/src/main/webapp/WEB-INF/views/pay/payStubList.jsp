@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+
+		/* 급여명세서 */
     
        .pagination {
             justify-content: center;
