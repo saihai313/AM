@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+.imed {ime-mode:disabled;}
+.red_text{display:none;font-size:11px;color:#FF0000}
+
+/*middle title*/
+
+.s_members_text{margin-top:90px;color:#589167; font-family: 'S-CoreDream-6Bold'; font-size: 15px;}
+#signUp label{font-family: 'S-CoreDream-4Regular'; font-size: 13px;}
+#signUp p{font-size: 12px;}
+.s_members_left_border_text {display:block;border-left:#595959 5px solid;padding-left:11px;font-size:18px;margin-top:50px;}
+
+/*공통 버튼*/
+.enroll_button {font-family: 'S-CoreDream-6Bold'; font-size: 16px !important;}
+.s_members_join_onebox{width:467px;margin:0 auto; padding-top:35px;}
+.s_member_join_one{float:left; no-repeat;width:119px;height:119px;background-size:119px;text-align:center}
+.s_member_join_two{float:left; no-repeat;width:119px;height:119px;background-size:119px;text-align:center}
+.s_member_join_span1,.s_member_join_span2{display:block;color:#fff;font-weight:bolder}
+.s_member_join_span1{margin-top:15px;font-size:9pt;text-align:center}
+.s_member_join_one img, .s_member_join_two img{margin:7px 0;height:40px;}
+.s_reporter_kal{float:left;line-height:119px;margin:0px 20px;font-weight:bold;font-size:25pt;color:#d7d6d6}
+.s_members_join_box{margin-top:30px;padding-bottom:20px;}
+.s_members_box{width:310px;margin:20px auto}
+.all_check{margin-top:20px;}
+/* 회원가입 */
+.s_member_box{padding:50px 140px;margin-top:40px;border:1px solid #dddddd;}
+.s_member_title{display:block;text-align:center;font-size:18pt;}
+.s_member_mtitle{display:block;margin-top:5px;text-align:center;color:#5e5e5e}
+.s_member_marginbox1{margin-top:50px;float:left;}
+.s_member_marginbox2{margin-top:50px;float:right;}
+.s_member_box2{width:279px;height:230px;padding:20px;background:url(/img/member/bg_member_index1.jpg) no-repeat;border:1px solid #dddddd;}
+.s_member_box3{width:279px;height:230px;padding:20px;background:url(/img/member/bg_member_index2.jpg) no-repeat;border:1px solid #dddddd;}
+.s_member_span{display:block;margin-top:160px;font-size:14pt;}
+.s_member_p{margin-top:8px;font-size:10pt; color:#777;}
+.s_member_a{text-decoration:underline;color:#0088CE;}
+.s_member_button{display:block;margin:25px auto 0px;background:url(/img/bg_button1.jpg) no-repeat; background-size:148px 42px;width:148px;line-height:42px;text-align:center;color:#fff; border:1px solid #dddddd; font-size:10pt;}
+/* 회원가입-  1. 약관동의 */
+.s_join_policy_box{height:250px;padding:10px;overflow-y:scroll;overflow-x:hidden;border:1px solid #e5e5e5;font-size:13px;line-height:20px;margin-top:30px}
+.s_join_policy_box pre{width:100%}
+.s_join_policy_box table{width:100%;border:1px solid #000;border-collapse:collapse;border-spacing:0}
+.s_join_policy_box table th, .join_policy_box table td{padding:5px;font-size:13px;border:1px solid #000}
+.s_join_check_box{margin:20px 0 0 0}
+.s_page_button_alone{display:inline-block;width:240px;margin-left:10px;margin-bottom:5px;padding:10px 0px;border:3px solid #e91000;background:#fc382a;border-radius:20px;font-size:15pt;color:#fff;text-align:center}
+.s_page_button_submit{border:3px solid #e91000;background:#fc382a;color:#fff}
+
+
