@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+
+		/* 급여명세서 */
     
        .pagination {
             justify-content: center;
@@ -64,7 +66,8 @@
 		}
 		
 </style>
-<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> --> 
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
     <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
     <script>
         jQuery(function($){
@@ -92,9 +95,9 @@
 
 			<!-- ------------------------- side menu ---------------------------- -->
 			 <ul class="tabType1">
-			  <li><a href="${contextPath}/pay/payList">급여설정</a></li>
+			  <li><a href="${contextPath}/pay/insertPay">급여설정</a></li>
 		      <li class="on"><a href="${contextPath}/pay/payStubList">급여 명세서</a></li>
-			  <li><a href="${contextPath}/pay/updatePayStub">정정 신청</a></li>
+			  <li><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 
