@@ -16,8 +16,6 @@
 	
 	<div class="container board-list">
 	
-		<h1>${boardList[0].boardName}</h1>
-	
         <div style="height:650px">
             <table class="table table-hover table-striped" id="list-table">
                 <thead>
