@@ -82,7 +82,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="${contextPath}/company/about" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="${contextPath}/HR/HRList" class="nav-link">인사관리</a></li>
+	          <li class="nav-item"><a href="${contextPath}/personnel/personnelList" class="nav-link">인사관리</a></li>
 	          <li class="nav-item"><a href="${contextPath}/work/workList" class="nav-link">근무관리</a></li>
 			  <li class="nav-item"><a href="${contextPath}/pay/insertPay" class="nav-link">급여관리</a></li> <!-- 급여관리 -->
 			    <li class="nav-item"><a href="${contextPath}/management/paysetting" class="nav-link">급여설정</a></li>
