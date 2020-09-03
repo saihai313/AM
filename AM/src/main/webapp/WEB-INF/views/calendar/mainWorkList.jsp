@@ -1,58 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>근무 스케줄</title>
+<title>메인 근무 스케줄</title>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 
 <style>
 	#work-title{border-bottom: 3px solid #F5F4F0;}
-	
-	#notLogin{
-		width: 100%;
-		height: 800px;
-		line-height: 600px;
-		text-align: center;
-	}
-	
-	.part{
-		float: right;
-    margin-right: 10px;
-	}
-	
-	.pix{
-		float: right;
-	}
-	
-	.pageBtn{
-		    width: 90%;
-    		margin-top: 20px;
-	}
 </style>
 </head>
 <body>
-	
-	
 
-
-	 	<!-- ------------------------- header ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 	<!-- ------------------------- main ---------------------------- -->
-	<c:choose>
-		<c:when test="${empty loginMember }">
-		<!--  로그인 x -->
-		<div id="notLogin">로그인 후 이용해주세요</div>
-		</c:when>
-		
-		<c:when test="${!empty loginMember.memberName }">
-		<!-- 로그인 o -->
-		
 	<section class="ftco-section">
 		<div class="overlay"></div>
 		<div class="container">
@@ -74,17 +39,11 @@
 					</div>
 				</div>
 			</div>
-				<div class="pageBtn">
-				<a class="btn btn-primary pix"  href="${contextPath}/calendar/pixSchedule">고정스케쥴 등록</a>
-				<a class="btn btn-primary part" href="${contextPath}/calendar/partTime">파트타임 설정</a>
-				</div>
+			
 			</div>
 	</section>
-
 	
-     <script type="text/javascript" src="${contextPath}/resources/js/calendar.js"></script>
-    
-    <!-- if로 사장, 알바 구분?? -->
+    <script type="text/javascript" src="${contextPath}/resources/js/calendar.js"></script>
     
 <script>
 
@@ -99,6 +58,9 @@
       className: default(transparent), important(red), chill(pink), success(green), info(blue)
 		
       */
+      
+      
+      
       /* initialize the external events
       -----------------------------------------------------------------*/
       $('#external-events div.external-event').each(function() {
@@ -121,96 +83,99 @@
 		// 사장 따로, 알바따로 적용할 수 있게 만들 수 있지 않을까,,?
 	
 	var calList = [];		
-				
+	
 	if(${loginMember.memberGrade== 'M'}){
-	  	  // 아이디가 사장님일 때
-	  	  console.log("m이다");
-	  	  
-	  	  
-	  	// 캘린더 값 얻어오는 ajax 
-	      // 동기로 해서 순서대로 읽을 수 있도록 만들고
-	      // 객체배열이니까 배열 변수 선언하고 그 안에 each 돌린 값 넣기
-	      // + month가 0-11 이여서 -1 
-	    	  $.ajax({
-					url : "master/calendarView/",
-					dataType : "JSON",
-					async : false,
-					success : function(list){
-						console.log(list);
-						$.each(list, function(i){
-							var year = list[i].workingDay.toString().substring(0,4);
-							var month = list[i].workingDay.toString().substring(5,7) - 1;
-							var day = list[i].workingDay.toString().substring(8,10);
-							var name = list[i].memberName;
-							var startTime = list[i].startTime;
-							var endTime = list[i].endTime;
+  	  // 아이디가 사장님일 때
+  	  console.log("m이다");
+  	  
+  	  
+  	// 캘린더 값 얻어오는 ajax 
+      // 동기로 해서 순서대로 읽을 수 있도록 만들고
+      // 객체배열이니까 배열 변수 선언하고 그 안에 each 돌린 값 넣기
+      // + month가 0-11 이여서 -1 
+    	  $.ajax({
+				url : "calendar/master/calendarView/",
+				dataType : "JSON",
+				async : false,
+				success : function(list){
+					console.log(list);
+					$.each(list, function(i){
+						var year = list[i].workingDay.toString().substring(0,4);
+						var month = list[i].workingDay.toString().substring(5,7) - 1;
+						var day = list[i].workingDay.toString().substring(8,10);
+						var name = list[i].memberName;
+						var startTime = list[i].startTime;
+						var endTime = list[i].endTime;
+					
+						/* id: 999,
+				            title: '리아',
+				            start: new Date(y, m, 22, 16, 0),
+				            end : new Date(y, m, 22, 16, 0)
+				            allDay: false,
+				            className: 'info'*/
+						var start = new Date(year, month, day, startTime, 0);
+						var end = new Date(year, month, day, endTime, 0);
+						//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
+						var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
+						console.log(obj);
 						
-							/* id: 999,
-					            title: '리아',
-					            start: new Date(y, m, 22, 16, 0),
-					            end : new Date(y, m, 22, 16, 0)
-					            allDay: false,
-					            className: 'info'*/
-							var start = new Date(year, month, day, startTime, 0);
-							var end = new Date(year, month, day, endTime, 0);
-							//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
-							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
-							console.log(obj);
-							
-							
-							
-							calList.push(obj);
-			        	});
 						
-					}, error : function(){
-						console.log("ajax 통신 실패");
-					}
-				});
-	    }else{
-	  	  // 아이디가 알바생일 때
-	  	  console.log("a이다");
-	  	  
-	  	  
-	  	// 캘린더 값 얻어오는 ajax 
-	      // 동기로 해서 순서대로 읽을 수 있도록 만들고
-	      // 객체배열이니까 배열 변수 선언하고 그 안에 each 돌린 값 넣기
-	      // + month가 0-11 이여서 -1 
-	    	  $.ajax({
-					url : "staff/calendarView/",
-					dataType : "JSON",
-					async : false,
-					success : function(list){
-						console.log(list);
-						$.each(list, function(i){
-							var year = list[i].workingDay.toString().substring(0,4);
-							var month = list[i].workingDay.toString().substring(5,7) - 1;
-							var day = list[i].workingDay.toString().substring(8,10);
-							var name = list[i].memberName;
-							var startTime = list[i].startTime;
-							var endTime = list[i].endTime;
 						
-							/* id: 999,
-					            title: '리아',
-					            start: new Date(y, m, 22, 16, 0),
-					            end : new Date(y, m, 22, 16, 0)
-					            allDay: false,
-					            className: 'info'*/
-							var start = new Date(year, month, day, startTime, 0);
-							var end = new Date(year, month, day, endTime, 0);
-							//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
-							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
-							console.log(obj);
-							
-							
-							
-							calList.push(obj);
-			        	});
+						calList.push(obj);
+		        	});
+					
+				}, error : function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+    }else{
+  	  // 아이디가 알바생일 때
+  	  console.log("a이다");
+  	  
+  	  
+  	// 캘린더 값 얻어오는 ajax 
+      // 동기로 해서 순서대로 읽을 수 있도록 만들고
+      // 객체배열이니까 배열 변수 선언하고 그 안에 each 돌린 값 넣기
+      // + month가 0-11 이여서 -1 
+    	  $.ajax({
+				url : "calendar/staff/calendarView/",
+				dataType : "JSON",
+				async : false,
+				success : function(list){
+					console.log(list);
+					$.each(list, function(i){
+						var year = list[i].workingDay.toString().substring(0,4);
+						var month = list[i].workingDay.toString().substring(5,7) - 1;
+						var day = list[i].workingDay.toString().substring(8,10);
+						var name = list[i].memberName;
+						var startTime = list[i].startTime;
+						var endTime = list[i].endTime;
+					
+						/* id: 999,
+				            title: '리아',
+				            start: new Date(y, m, 22, 16, 0),
+				            end : new Date(y, m, 22, 16, 0)
+				            allDay: false,
+				            className: 'info'*/
+						var start = new Date(year, month, day, startTime, 0);
+						var end = new Date(year, month, day, endTime, 0);
+						//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
+						var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
+						console.log(obj);
 						
-					}, error : function(){
-						console.log("ajax 통신 실패");
-					}
-				});
-	    }
+						
+						
+						calList.push(obj);
+		        	});
+					
+				}, error : function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+    }
+      
+	
+      
       
       
       $(function(){ 
@@ -239,22 +204,7 @@
 	        },
 	        allDaySlot: false,
 	        selectHelper: true,
-	        select: function(start, end, allDay) {
-	          var title = prompt('Event Title:');
-	          // 일 클릭하면 나오는 창
-	          if (title) {
-	            calendar.fullCalendar('renderEvent', {
-	                title: title,
-	                start: start,
-	                end: end,
-	                allDay: allDay
-	              },
-	              true // make the event "stick"
-	            );
-	          }
-	          calendar.fullCalendar('unselect');
-	        },
-	        timeFormat : "H : mm",
+	       timeFormat : "H : mm",
 	        droppable: true, // this allows things to be dropped onto the calendar !!!
 	        drop: function(date, allDay) { // this function is called when something is dropped
 	          // retrieve the dropped element's stored Event Object
@@ -325,11 +275,6 @@
 	    });
     });
 </script>
-</c:when>
-		
-		</c:choose>
-  	 <!-- ------------------------- footer ---------------------------- -->
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	
+  
 </body>
 </html>

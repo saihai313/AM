@@ -9,20 +9,19 @@
 		<result property="memberPwd" column="MEMBER_PWD"/>
 		<result property="memberName" column="MEMBER_NM"/>
 		<result property="memberPhone" column="MEMBER_PHONE"/>
-		<result property="memberAddr" column="MEMBER_ADDR"/>
-		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
 		<result property="memberStatus" column="MEMBER_STATUS"/>
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 		<result property="memberCheck" column="MEMBER_CHECK"/>
 	</resultMap>
 
+		<!-- 회원상태와 이메일인증 확인 검사함 -->
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	
 		SELECT * FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_STATUS = 'Y'
 		AND MEMBER_CHECK = 'O'
-		<!-- 회원상태와 이메일인증 확인 검사함 -->
 	
 	</select>
 

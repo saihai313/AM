@@ -10,7 +10,6 @@ public class Member {
 	private String memberPwd;
 	private String memberName;
 	private String memberPhone;
-	private String memberAddr;
 	private Date memberEnrollDate;
 	private String memberStatus;
 	private String memberGrade;
@@ -21,14 +20,13 @@ public class Member {
 	}
 
 	public Member(int memberNo, String memberEmail, String memberPwd, String memberName, String memberPhone,
-			String memberAddr, Date memberEnrollDate, String memberStatus, String memberGrade, String memberCheck) {
+			Date memberEnrollDate, String memberStatus, String memberGrade, String memberCheck) {
 		super();
 		this.memberNo = memberNo;
 		this.memberEmail = memberEmail;
 		this.memberPwd = memberPwd;
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
-		this.memberAddr = memberAddr;
 		this.memberEnrollDate = memberEnrollDate;
 		this.memberStatus = memberStatus;
 		this.memberGrade = memberGrade;
@@ -75,14 +73,6 @@ public class Member {
 		this.memberPhone = memberPhone;
 	}
 
-	public String getMemberAddr() {
-		return memberAddr;
-	}
-
-	public void setMemberAddr(String memberAddr) {
-		this.memberAddr = memberAddr;
-	}
-
 	public Date getMemberEnrollDate() {
 		return memberEnrollDate;
 	}
@@ -118,10 +108,10 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberEmail=" + memberEmail + ", memberPwd=" + memberPwd
-				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + ", memberAddr=" + memberAddr
-				+ ", memberEnrollDate=" + memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade="
-				+ memberGrade + ", memberCheck=" + memberCheck + "]";
+				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + ", memberEnrollDate="
+				+ memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
+				+ ", memberCheck=" + memberCheck + "]";
 	}
-	
+
 	
 }

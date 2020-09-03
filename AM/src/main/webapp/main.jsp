@@ -22,19 +22,18 @@
 	<jsp:include page="WEB-INF/views/common/header.jsp"/>
 	
 	<!-- ------------------------- main ---------------------------- -->
+	
+	
 	<c:choose>
-		<c:when test="${!empty loginMember.memberName and loginMember.memberGrade == 'M'}">
-		<!--  사장일 때 -->
-		<jsp:include page="WEB-INF/views/calendar/workList.jsp"/>
+		<c:when test="${!empty loginMember.memberName }">
+		
+		<jsp:include page="WEB-INF/views/calendar/mainWorkList.jsp"/>
 		</c:when>
 		
-		<c:when test="${!empty loginMember.memberName and loginMember.memberGrade == 'G'}">
-		<!-- 알바생일 때 -->
-		<jsp:include page="WEB-INF/views/calendar/LeaderSchedule-test.jsp"/>
-		</c:when>
 		
 		<c:otherwise>
-			
+	 
+	 		
     <div class="hero-wrap" style="background-image: url('${contextPath}/resources/images/main_img.png');" data-stellar-background-ratio="0.5" id="main-slide"> 
       <div class="overlay"></div>
       <div class="container">
