@@ -44,8 +44,9 @@
 			
 				<div class="col-md-6 d-flex align-items-center">
 					<p class="mb-0 phone pl-md-2 nav-top">
+						<a href="${contextPath}/company/contact" class="mr-2"><span class="fa mr-1"></span>고객센터&nbsp;&nbsp;</a> 
 						<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>1544-9970</a> 
-						<a href="${contextPath}/company/contact"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
+						<a href="#"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
 					</p>
 				</div>
 

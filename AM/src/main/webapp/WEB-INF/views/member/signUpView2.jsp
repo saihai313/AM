@@ -32,7 +32,7 @@
 				<div class="row">
 					<div class="col-md-12 heading-section text-center fadeInUp">
 						<span class="subheading">JOIN US</span>
-						<h2>Employer</h2>
+						<h2>회원가입</h2>
 					</div>
 				</div>
 
