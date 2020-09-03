@@ -22,7 +22,8 @@
 	-->
 	<typeAliases>
 	<typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
-	<!-- 캘린더 vo 만들고 등록해야함 -->
+	<typeAlias type="com.kh.am.calendar.model.vo.Calendar" alias="Calendar"/>
+	<typeAlias type="com.kh.am.calendar.model.vo.Employer" alias="Employer"/>
 	
 	</typeAliases>
 	
