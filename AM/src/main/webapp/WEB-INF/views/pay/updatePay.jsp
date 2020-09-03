@@ -9,7 +9,7 @@
 <title>급여 설정</title>
 <style>
 
-	/* 급여 수정 */
+	/* 급여설정 - 수정페이지 */
 
 	.tabType1 {
 		height: 50px;
@@ -49,24 +49,12 @@
 	.tabType1 li.on a {
 		color: #fff;
 	}
-	
-	#updateBtn{
-		float : right;
-	}
-	
+
 	#inputTable{
 		width:1100px;
 	}
 	
-	input{
-		text-align:right;
-		width:85px;
-	}
 	
-	form{
-	 	text-align: left;
-	
-	}
 	
 </style>
 
@@ -106,7 +94,7 @@
 									<div class="contact-wrap w-100 p-md-5 p-4">
 										<div class="col-md-12 heading-section fadeInUp">
 								          	<span class="subheading">직원선택</span>
-								            <select>
+								            <select class="form-control" style="width:120px; display: inline-block;">
 								            	<option>최지은</option>
 								            	<option>전상아</option>
 								            	<option>이아라</option>
@@ -118,7 +106,7 @@
 										
 											<div class="row">
 											
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="day">급여일</label> <input
 															type="email" class="form-control" name="day" id="day"
@@ -127,7 +115,7 @@
 													</div>
 												</div>
 												
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="time">근무시간</label> <input
 															type="text" class="form-control" name="time" id="time"
@@ -136,7 +124,7 @@
 												</div>
 												
 												
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="partMoney">시급</label> <input
 															type="text" class="form-control" name="partMoney"
@@ -145,28 +133,28 @@
 												</div>
 												
 												
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="vacaMoney">주휴수당</label> <input
 															type="text" class="form-control" name="vacaMoney" id="vacaMoney"
 															placeholder="원">
 													</div>
 												</div>
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="totalTime">총 일한시간</label> <input
 															type="text" class="form-control" name="totalTime" id="totalTime"
 															placeholder="시간">
 													</div>
 												</div>
-												<div class="col-md-5">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="totalDay">총 일수</label> <input
 															type="text" class="form-control" name="totalDay" id="totalDay"
 															placeholder="일">
 													</div>
 												</div>
-												<div class="col-md-7">
+												<div class="col-md-6">
 													<div class="form-group">
 														<label class="label" for="totalMoney">총 지급액</label> <input
 															type="text" class="form-control" name="totalMoney" id="totalMoney"
@@ -177,7 +165,7 @@
 												
 												<div class="col-md-12 mt-5">
 													<div class="form-group">
-														<input type="submit" value="등록" class="btn btn-primary form-control">
+														<input type="submit" value="수정" class="btn btn-primary form-control">
 														<div class="submitting"></div>
 													</div>
 												</div>
