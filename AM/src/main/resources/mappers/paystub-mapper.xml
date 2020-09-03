@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paystubMapper">
+	
+	<resultMap type="PayStub" id="PayStubResultSet">
+        <id property="paystubNo" column="PAY_STUB_NO"/>
+        <result property="payContent" column="PAY_CONTENT"/>
+        <result property="payStatus" column="PAY_STATUS"/>
+        <result property="payTitle" column="PAY_TITLE"/>
+        <result property="payDate" column="PAY_DATE"/>
+        <result property="payEmployer" column="PAY_EMPLOYER"/>
+        <result property="payNo" column="PAY_NO"/>
+        <result property="payCheck" column="PAY_CHECK"/>
+     
+    </resultMap>
+	
+	
+	
+
+	<select id="paystublistCount" resultType="_int">
+		SELECT COUNT(*) FROM PAYSTUB
+	</select>
+	
+	<select id="selectList" parameterType="_int" resultMap="PayStubResultSet">
+		SELECT * FROM PAYSTUB
+		ORDER BY PAY_STUB_NO DESC
+	</select>
+  
+</mapper>

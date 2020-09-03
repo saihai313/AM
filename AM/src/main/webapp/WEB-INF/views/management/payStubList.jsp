@@ -8,14 +8,12 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
-    	
-    	/* 급여 정정 */
+
+		/* 급여명세서 */
     
-    	
        .pagination {
             justify-content: center;
         }
-       
           
         .board-list{ margin: 100px auto;}
         
@@ -62,17 +60,18 @@
 			color: #fff;
 		}
 		
-		#updatePayStub{
+		#list-table{
 			width:1100px;
 		
 		}
+		
 </style>
 <!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> --> 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
     <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
     <script>
         jQuery(function($){
-            $("#updatePayStub").DataTable();
+            $("#list-table").DataTable();
         });
     </script>
 
@@ -90,15 +89,15 @@
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp">
 					<span class="subheading">SALARY</span>
-					<h2>정정 신청</h2>
+					<h2>급여 명세서</h2>
 				</div>
 			</div>
 
 			<!-- ------------------------- side menu ---------------------------- -->
 			 <ul class="tabType1">
 			  <li><a href="${contextPath}/pay/insertPay">급여설정</a></li>
-		      <li><a href="${contextPath}/management/payStubList/1">급여 명세서</a></li>
-			  <li class="on"><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
+		      <li class="on"><a href="${contextPath}/management/payStubList/1">급여 명세서</a></li>
+			  <li><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 
@@ -108,19 +107,21 @@
 		      <h1>${boardList[0].boardName}</h1>
 		      
 		        <div style="height:530px">
-		            <table class="table table-hover table-striped" id="updatePayStub">
+		            <table class="table table-hover table-striped" id="list-table">
 		               <thead>
 		                    <tr>
 		                        <th>글번호 </th>
-		                        <th>제목</th>
-		                        <th>작성자</th>
+		                        <th>내용</th>
+		                        <th>정정상태</th>
+		                        <th>알바생이름(제목)</th>
 		                        <th>작성일</th>
+		                        <th>작성자</th>
 		                        <th>상태(Y:확인, N:반려, W:대기)</th>
 		                    </tr>
 		                </thead>
 		                 <tbody>
 		                   <c:choose>
-		                      <c:when test="">
+		                      <c:when test="${empty paystubList }">
 		                         <tr>
 		                         <td colspan="5">알바생이 없습니다.</td>
 		                         </tr>
@@ -129,19 +130,37 @@
 		                      <c:otherwise>
 		                         
 		                         
-		                        <!--  boardList에 있는 요소를 반복접근하여
-		                              board라는 변수에 저장하여 내부에서 사용
-		                         -->
-		                         <tr>
-		                         	
-		                            <td>1</td>
-		                            <td>8월 급여명세서 정정이요</td>
-		                            <td>최지은</td>
-		                            <td>2020-08-28</td>
-		                            <td>N</td>
-		                            
-		                         </tr>
+		                        <c:forEach var="paystub" items="${paystubList}">
+		                        		<tr>
+		                        		
+		                        			<td>${paystub.paystubNo }</td>
+		                        			<td>${paystub.payContent }</td>
+		                        			<td>${paystub.payStatus }</td>
+		                        			<td>${paystub.payTitle }</td>
+		                        			<td>
+		                        			${paystub.payDate }
+				                        			<jsp:useBean id="now" class="java.util.Date"/>
+				                        			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+					                                <fmt:formatDate var="createDate" value="${board.boardCreateDate}" pattern="yyyy-MM-dd"/>
+					                                <fmt:formatDate var="createTime" value="${board.boardCreateDate}" pattern="hh:mm:ss"/>
+		                        			 <c:choose>
+                                  
+			                                  <c:when test="${today == createDate}">
+			                                     ${createTime}
+			                                  </c:when>
+			                                  
+			                                  <c:otherwise>
+			                                     ${createDate}
+			                                  </c:otherwise>
+			                               </c:choose>
+		                        			
+		                        			</td>
+		                        			<td>${paystub.payEmployer }</td>
+		                        			<td>${paystub.payCheck}</td>
+		                        		</tr>
 		                        
+		                        </c:forEach>
+		                       
 		                        
 		                      </c:otherwise>
 		                   </c:choose>
