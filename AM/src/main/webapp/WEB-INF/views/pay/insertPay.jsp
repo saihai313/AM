@@ -85,7 +85,7 @@
 			<!-- ------------------------- side menu ---------------------------- -->
 			<ul class="tabType1">
 				<li class="on"><a href="${contextPath}/pay/insertPay">급여설정</a></li>
-				<li><a href="${contextPath}/pay/payStubList">급여 명세서</a></li>
+				<li><a href="${contextPath}/management/payStubList/1">급여 명세서</a></li>
 				<li><a href="${contextPath}/pay/requestPayStub">정정신청</a></li>
 			</ul>
 			<!-- ------------------------- side menu ---------------------------- -->

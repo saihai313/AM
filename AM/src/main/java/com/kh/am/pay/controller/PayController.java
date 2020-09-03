@@ -15,11 +15,12 @@ public class PayController {
 		return "pay/insertPay";
 	}
 	
-	// 급여 명세서 페이지 전환
-	@RequestMapping("payStubList")
-	public String payStubListView() {
-		return "pay/payStubList";
-	}
+	/*
+	 * // 급여 명세서 페이지 전환
+	 * 
+	 * @RequestMapping("payStubList") public String payStubListView() { return
+	 * "pay/payStubList"; }
+	 */
 	
 	// 급여 정정 페이지 전환
 	@RequestMapping("requestPayStub")
