@@ -29,7 +29,7 @@
 			<div id="section" class="contact-wrap w-100 p-md-5 p-4 col-md-12">
 				<div class="col-md-12 heading-section text-center fadeInUp">
 		          	<span class="subheading">JOIN US</span>
-		            <h2>Employer</h2>
+		            <h2>회원가입</h2>
 		        </div>
 		        
 				<div id="content">

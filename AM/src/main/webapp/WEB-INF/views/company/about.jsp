@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>about AM</title>
+<title>About AM</title>
 
 <style>
 	#about-wrapper{
@@ -12,7 +12,7 @@
 		border-bottom: 3px solid #eceaea; 
 	}
 	
-	#about h2{font-family: 'S-CoreDream-6Bold';}
+	#about-title{font-family: 'S-CoreDream-6Bold';}
 	#about p{font-family: 'S-CoreDream-4Regular';}
 </style>
 </head>
@@ -22,8 +22,15 @@
 	
 	<!-- ------------------------- main ---------------------------- -->
 	<section class="ftco-section" id="about">
-
+		<div class="overlay"></div>
 		<div class="container">
+		
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-7 heading-section text-center fadeInUp">
+					<span class="subheading">Welcome to AM</span>
+					<h2>회사 소개</h2>
+				</div>
+			</div>
 			
 			<div class="row" id="about-wrapper">
 				<div
@@ -31,8 +38,7 @@
 					style="background-image: url('${contextPath}/resources/images/about_img.jpg');"></div>
 				<div class="col-md-6 wrap-about px-md-5 py-5 bg-light">
 					<div class="heading-section">
-						<span class="subheading">Welcome to AM</span>
-						<h2 class="mb-4">
+						<h2 class="mb-4" id="about-title">
 							최고의 아르바이트<br>관리 시스템
 						</h2>
 

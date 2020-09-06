@@ -44,8 +44,9 @@
 			
 				<div class="col-md-6 d-flex align-items-center">
 					<p class="mb-0 phone pl-md-2 nav-top">
+						<a href="${contextPath}/company/contact" class="mr-2"><span class="fa mr-1"></span>고객센터&nbsp;&nbsp;</a> 
 						<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>1544-9970</a> 
-						<a href="${contextPath}/company/contact"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
+						<a href="#"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
 					</p>
 				</div>
 
@@ -83,7 +84,7 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="${contextPath}/company/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="${contextPath}/personnel/personnelList" class="nav-link">인사관리</a></li>
-	          <li class="nav-item"><a href="${contextPath}/work/workList" class="nav-link">근무관리</a></li>
+	          <li class="nav-item"><a href="${contextPath}/calendar/workList" class="nav-link">근무관리</a></li>
 			  <li class="nav-item"><a href="${contextPath}/pay/insertPay" class="nav-link">급여관리</a></li> <!-- 급여관리 -->
 			    <li class="nav-item"><a href="${contextPath}/management/paysetting" class="nav-link">급여설정</a></li>
 			  <li class="nav-item"><a href="${contextPath}/member/updateMember" class="nav-link">My Page</a></li>

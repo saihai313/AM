@@ -2,7 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="calendarMapper">
 
-<!-- resultMap 작성해야함 -->
 
 
+	<resultMap type="Calendar" id="calendarResultSet">
+	
+		<id property="workingNo" column="WORKING_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
+		<result property="eStoreNo" column="E_STORE_NO"/>
+		<result property="employeeNo" column="EMPLOYEE_NO"/>
+		<result property="workingDay" column="WORKING_DAY"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="memberName" column="MEMBER_NM"/>
+	
+	</resultMap>
+	
+	<resultMap type="Employer" id="employerResultSet">
+	
+			<id property="storeNo" column="STORE_NO"/>
+			<result property="employerNo" column="EMPLOYER_NO"/>
+			<result property="businessNo" column="BUSINESS_NO"/>
+			<result property="storeName" column="STORE_NM"/>
+			<result property="storePhone" column="STORE_PHONE"/>
+			<result property="storeAddr" column="STORE_ADDR"/>
+	
+	
+	</resultMap>
+
+
+	<!-- 사장님 가게 번호 조회 -->
+	<select id="selectStoreNo" parameterType="_int" resultType="_int">
+		SELECT STORE_NO
+		FROM EMPLOYER
+		WHERE EMPLOYER_NO = #{memberNo}
+	</select>
+	
+	<!-- 스케쥴 조회 (사장) -->
+	<select id="selectCalendarM" parameterType="_int" resultMap="calendarResultSet">
+		SELECT WORKING_NO, E_STORE_NO,  EMPLOYEE_NO, WORKING_DAY, START_TIME, END_TIME, MEMBER_NM FROM CALENDAL JOIN MEMBER ON(MEMBER_NO = EMPLOYEE_NO)
+		WHERE E_STORE_NO = #{storeNo}
+	</select>
+
+
+	<!-- 스케쥴 조회 (알바) -->
+	<select id="selectCalendarS" parameterType="_int" resultMap="calendarResultSet">
+		SELECT WORKING_NO, E_STORE_NO,  EMPLOYEE_NO, WORKING_DAY, START_TIME, END_TIME, MEMBER_NM FROM CALENDAL JOIN MEMBER ON(MEMBER_NO = EMPLOYEE_NO)
+		WHERE EMPLOYEE_NO = #{memberNo}
+	</select>
 </mapper>

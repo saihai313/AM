@@ -4,6 +4,7 @@
 */target/**
 /jspwork/
 */.settings/**
+/target/
 
 ### Eclipse ###
 .metadata
