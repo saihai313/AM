@@ -446,7 +446,12 @@
 					}
 				});
 				if (flag == false) {
-					alert("약관 동의가 필요합니다.");
+					swal({
+						  title: "약관 동의",
+						  text : "약관 동의에 동의해주세요.",
+						  icon: "info",
+						  button: "닫기",
+						});
 					return false;
 				}
 	

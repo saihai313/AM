@@ -22,6 +22,7 @@
 	-->
 	<typeAliases>
 	<typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
+	<typeAlias type="com.kh.am.member.model.vo.Employer" alias="Store"/>
 	<typeAlias type="com.kh.am.management.model.vo.PayStub" alias="PayStub"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Calendar" alias="Calendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employer" alias="Employer"/>

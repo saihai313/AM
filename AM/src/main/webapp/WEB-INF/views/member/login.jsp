@@ -41,7 +41,7 @@
 							
 							<div class="col-md-12 mb-1">
 								<div class="form-group">
-									<input type="text" name="memberPwd" class="form-control" placeholder="비밀번호">
+									<input type="password" name="memberPwd" class="form-control" placeholder="비밀번호" required>
 								</div>
 							</div>
 							
