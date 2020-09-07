@@ -53,19 +53,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group pt-5">
-												<button type="button" id="getCtf" class="btn btn-primary checkBtn">인증번호 받기</button>
-											</div>
-										</div>
-			
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="label" for="certificate">인증번호 확인</label> 
-												<input type="text" class="form-control" name="certificate" id="certificate" required>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group pt-5">
-												<button type="button" id="checkCtf" class="btn btn-primary checkBtn">인증번호 확인</button>
+												<span id="checkEmail" class="checkSpan">&nbsp;</span>
 											</div>
 										</div>
 			
@@ -169,24 +157,24 @@
 										
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="label" for="storeBusinessNo">사업자 번호</label>
+												<label class="label" for="businessNo">사업자 번호</label>
 			
 												<div class="form-row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="number" class="form-control storeBusinessNo" id="storeBusinessNo1" maxlength="3" name="storeBusinessNo1" required>
+															<input type="number" class="form-control businessNo" id="businessNo1" maxlength="3" name="businessNo1" required>
 														</div>
 													</div>
 			
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="number" class="form-control storeBusinessNo" id="storeBusinessNo2" maxlength="2" name="storeBusinessNo2" required>
+															<input type="number" class="form-control businessNo" id="businessNo2" maxlength="2" name="businessNo2" required>
 														</div>
 													</div>
 			
 													<div class="col-md-4">
 														<div class="form-group">
-															<input type="number" class="form-control storeBusinessNo" id="storeBusinessNo3" maxlength="5" name="storeBusinessNo3" required>
+															<input type="number" class="form-control businessNo" id="businessNo3" maxlength="5" name="businessNo3" required>
 														</div>
 													</div>
 												</div>
@@ -194,7 +182,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group pt-5">
-												<span id="checkStoreBusinessNo" class="checkSpan">&nbsp;</span>
+												<span id="checkBusinessNo" class="checkSpan">&nbsp;</span>
 											</div>
 										</div>
 										
@@ -295,74 +283,63 @@
 	<script>
 	 var signUpCheck = { 
 			"email":false,
-			"getCtf":false,
-			"certificate":false,
-			"checkCtf":false,
 			"pwd1":false,
 			"pwd2":false,
 			"name":false,
 			"phone2":false,
-			"storeBusinessNo1":false,
-			"storePhone1":false,
+			"storeName": false,
+			"businessNo1":false,
+			"storePhone1":false
 		};
 	 
 	var $email = $("#email");
-	var $certificate = $("#certificate");
 	var $pwd1 = $("#pwd1");
 	var $pwd2 = $("#pwd2");
 	var $pwd = $("#pwd1, #pwd2");
 	var $name = $("#name");
 	var $phone2 = $("#phone2");
 	var $phone3 = $("#phone3");
-	var $storeBusinessNo1 = $("#storeBusinessNo1");
-	var $storeBusinessNo2 = $("#storeBusinessNo2");
-	var $storeBusinessNo3 = $("#storeBusinessNo3");
+	var $storeName = $("#storeName");
+	var $businessNo1 = $("#businessNo1");
+	var $businessNo2 = $("#businessNo2");
+	var $businessNo3 = $("#businessNo3");
 	var $storePhone1 = $("#storePhone1");
 	var $storePhone2 = $("#storePhone2");
 	var $storePhone3 = $("#storePhone3");
 	
 	// ------------------- 이메일 ---------------------------
-	$email.on("change", function(){
+	$email.on("input", function(){
 		var regExp =  /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/; 
 		
 		if(!regExp.test($email.val())){
-			swal({
-				  title: "이메일 작성 확인",
-				  text: "유효한 이메일을 작성해주세요.",
-				  icon: "info",
-				  button: "닫기",
-				});
-			$email.focus();
+			$("#checkEmail").text("유효하지 않은 이메일").css("color","red");
 			signUpCheck.email = false;
+			
 		}else {
-			signUpCheck.email = true;
+			
+			$.ajax({
+				url : "emailDupCheck",
+				data : {"memberEmail": $email.val()},
+				type : "GET",
+				success : function(result){
+					if(result == 0){
+						$("#checkEmail").text("사용가능한 이메일").css("color", "green");
+						signUpCheck.email = true;
+					}else{
+						$("#checkEmail").text("이미 사용중인 이메일").css("color", "red");
+						signUpCheck.email = false;
+					}
+					
+				}, error : function(){
+					console.log("아이디 중복검사 실패");
+				}
+			});
+			
 		}
-	});
-	
-	// 인증번호 받기
-	$("#getCtf").on("click", function(){
-		
-		if($email.val().trim().length == 0 || signUpCheck.email == false){
-			swal({
-				  title: "이메일 확인",
-				  text: "정확한 이메일을 먼저 작성해주세요.",
-				  icon: "info",
-				  button: "닫기",
-				});
-			$email.focus();
-			signUpCheck.getCtf = false;
-		}else{
-			signUpCheck.getCtf = true;
-		}
-	});
-	
-	// 인증번호 확인
-	$("#checkCtf").on("click", function(){
-		signUpCheck.certificate = true;
-		signUpCheck.checkCtf = true;
 	});
 	
 	// ------------------- 비밀번호 ---------------------------
+	
 	$pwd.on("input", function(){
 		var regExp = /^[A-Za-z0-9]{6,12}$/;
 		
@@ -379,7 +356,7 @@
 			  title: "비밀번호 작성 확인",
 			  text: "유효한 비밀번호를 먼저 작성해 주세요.",
 			  icon: "info",
-			  button: "닫기",
+			  button: "닫기"
 			});
 		$pwd2.val("");
 		$pwd1.focus();
@@ -428,9 +405,18 @@
 		  }
 	});
 	
+ 	// ------------------- 업소명 ---------------------------
+	$storeName.on("input", function(){
+		
+		if($(this).val().trim().length == 0){
+			signUpCheck.storeName = false;
+		}else{
+			signUpCheck.storeName = true;
+		}
+	});
  	
  	// ------------------- 사업자 번호 ---------------------------
- 	$(".storeBusinessNo").on("input",function(){
+ 	$(".businessNo").on("input",function(){
  		
 		if ($(this).val().length > $(this).prop("maxLength")){
 		  $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
@@ -440,14 +426,14 @@
 		    var regExp3 =  /^\d{5}$/; 
 
 		    
-		    if(!regExp1.test($storeBusinessNo1.val()) || 
-		       !regExp2.test($storeBusinessNo2.val()) ||
-		       !regExp3.test($storeBusinessNo3.val()) ){
-		    	$("#checkStoreBusinessNo").text("유효하지 않은 사업자 번호").css("color","red");
-				signUpCheck.storeBusinessNo1 = false;
+		    if(!regExp1.test($businessNo1.val()) || 
+		       !regExp2.test($businessNo2.val()) ||
+		       !regExp3.test($businessNo3.val()) ){
+		    	$("#checkBusinessNo").text("유효하지 않은 사업자 번호").css("color","red");
+				signUpCheck.businessNo1 = false;
 		  }else{
-				$("#checkStoreBusinessNo").text("유효한 사업자 번호").css("color","green");
-				signUpCheck.storeBusinessNo1 = true;
+				$("#checkBusinessNo").text("유효한 사업자 번호").css("color","green");
+				signUpCheck.businessNo1 = true;
 		  }
 	});
  	
@@ -481,36 +467,23 @@
 				
 				var msg;
 				switch(key){
-				case "email" : msg="이메일이 ";  break;
-				case "certificate" : msg="인증번호가 ";  break;
-				case "pwd1" : case "pwd2" : msg="비밀번호가 ";  break;
-				case "name" : msg="이름이 ";  break;
-				case "phone2" : msg="전화번호가 ";  break;
-				case "storeBusinessNo1" : msg="사업자 번호가 ";  break;
-				case "storePhone1" : msg="업소 전화번호가 ";  break;
+				case "email" : msg="이메일이";  break;
+				case "pwd1" : case "pwd2" : msg="비밀번호가"; break;
+				case "name" : msg="이름이";  break;
+				case "phone2" : msg="전화번호가";  break;
+				case "storeName" : msg="상호명이";  break;
+				case "businessNo1" : msg="사업자 번호가";  break;
+				case "storePhone1" : msg="업소 전화번호가";  break;
 				}
+				console.log(msg)
 				
 				swal({
-					  title: msg + "유효하지 않습니다.",
+					  title: msg + " 유효하지 않습니다.",
 					  icon: "error",
-					  button: "닫기",
+					  button: "닫기"
 					});
 				var el = "#"+key;
 				$(el).focus();
-				return false;
-				
-				switch(key){
-				case "getCtf" : msg="인증번호 받기를 ";  break;
-				case "checkCtf" : msg="인증번호 확인을 ";  break;
-				}
-				
-				swal({
-					  title: msg + "실행해주세요. ",
-					  icon: "error",
-					  button: "닫기",
-					});
-				$certificate.val("");
-				$certificate.focus();
 				return false;
 			}
 		}
@@ -518,13 +491,16 @@
 		$memberPhone = $("<input>", {type : "hidden", name : "memberPhone",
 			value : $("#phone1").val()+ "-" + $("#phone2").val()+ "-" +$("#phone3").val()});
 		
+		$businessNo = $("<input>", {type : "hidden", name : "businessNo",
+			value : $("#businessNo1").val()+ "-" + $("#businessNo2").val()+ "-" +$("#businessNo3").val()});
+		
 		$storePhone = $("<input>", {type : "hidden", name : "storePhone",
-			value : $("#storePhone").val()+ "-" + $("#storePhone").val()+ "-" +$("#storePhone").val()});
+			value : $("#storePhone1").val()+ "-" + $("#storePhone2").val()+ "-" +$("#storePhone3").val()});
 		
 		$storeAddress = $("<input>", {type : "hidden", name : "storeAddress",
 			value : $("#post").val()+ "," + $("#address1").val()+ "," +$("#address2").val()});
 		
-		$("form[name='signUpForm']").append($memberPhone, $storePhone, $storeAddress);
+		$("form[name='signUpForm']").append($memberPhone, $businessNo, $storePhone, $storeAddress);
 	}
 	</script>
 

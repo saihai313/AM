@@ -14,17 +14,59 @@
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 		<result property="memberCheck" column="MEMBER_CHECK"/>
 	</resultMap>
-
-		<!-- 회원상태와 이메일인증 확인 검사함 -->
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	
+	<resultMap type="Store" id="employerResultSet">
+		<id property="storeNo" column="STORE_NO"/>
+		<result property="employerNo" column="EMPLOYER_NO"/>
+		<result property="storeName" column="STORE_NM"/>
+		<result property="storePhone" column="STORE_PHONE"/>
+		<result property="storeAddress" column="STORE_ADDR"/>
+		<result property="businessNo" column="BUSINESS_NO"/>
+		<result property="businessStatus" column="BUSINESS_STATUS"/>
+	</resultMap>
+
+	<!-- 회원상태와 이메일인증 확인 검사함 -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_STATUS = 'Y'
-		AND MEMBER_CHECK = 'O'
+		AND MEMBER_GRADE = 'M'
+	</select>
 	
+	<!-- 로그인_사장님 정보 -->
+	<select id="status" parameterType="_int" resultMap="employerResultSet">
+		SELECT * FROM EMPLOYER
+		WHERE EMPLOYER_NO = #{employerNo}
+		AND BUSINESS_STATUS = 'Y'
 	</select>
 
-
+	<!-- 회원가입_아이디 중복 검사 -->
+	<select id="emailDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_STATUS = 'Y'
+		AND MEMBER_GRADE = 'M'
+	</select>
+	
+	<!-- 회원가입_공통 정보 -->
+	<insert id="signUpMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MNO.NEXTVAL, #{memberEmail}, #{memberPwd}, #{memberName},
+		       #{memberPhone}, SYSDATE, 'Y', 'M', 'X')
+	</insert>
+	
+	<!-- 회원가입_회원번호 조회 -->
+	<select id="memberNo" parameterType="string" resultMap="memberResultSet">
+		SELECT MEMBER_NO FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+	<!-- 회원가입_사장님 정보 -->
+	<insert id="signUpEmployer" parameterType="Store">
+		INSERT INTO EMPLOYER
+		VALUES(SEQ_SNO.NEXTVAL, #{employerNo}, 
+			#{storeName}, #{storePhone}, #{storeAddress}, 
+			#{businessNo}, 'N')
+	</insert>
 
 </mapper>
