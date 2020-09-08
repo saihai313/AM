@@ -47,6 +47,15 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		return list;
 	}
+
+	// 사장님 가게 번호 조회
+	@Override
+	public int selectStoreNo(int memberNo) {
+		
+		int storeNo = calendarDAO.selectStoreNo(memberNo);
+		
+		return storeNo;
+	}
 	
 
 }

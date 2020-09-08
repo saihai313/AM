@@ -15,7 +15,8 @@
 		<result property="startTime" column="START_TIME"/>
 		<result property="endTime" column="END_TIME"/>
 		<result property="memberName" column="MEMBER_NM"/>
-	
+		
+		
 	</resultMap>
 	
 	<resultMap type="Employer" id="employerResultSet">
@@ -26,6 +27,7 @@
 			<result property="storeName" column="STORE_NM"/>
 			<result property="storePhone" column="STORE_PHONE"/>
 			<result property="storeAddr" column="STORE_ADDR"/>
+			<result property="businessStatus" column="BUSINESS_STATUS"/>
 	
 	
 	</resultMap>

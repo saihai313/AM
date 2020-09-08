@@ -19,4 +19,10 @@ public interface CalendarService{
 	 */
 	List<Calendar> selectListStaff(int memberNo);
 
+	/** 사장님 가게번호 조회
+	 * @param memberNo
+	 * @return storeNo
+	 */
+	int selectStoreNo(int memberNo);
+
 }
