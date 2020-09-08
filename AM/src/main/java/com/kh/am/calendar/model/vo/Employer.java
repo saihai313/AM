@@ -8,13 +8,16 @@ public class Employer {
 	private String storeName;
 	private String storePhone;
 	private String storeAddr;
+	private String businessStatus;
 	
 	public Employer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employer(int storeNo, int employerNo, int businessNo, String storeName, String storePhone,
-			String storeAddr) {
+	
+
+	public Employer(int storeNo, int employerNo, int businessNo, String storeName, String storePhone, String storeAddr,
+			String businessStatus) {
 		super();
 		this.storeNo = storeNo;
 		this.employerNo = employerNo;
@@ -22,7 +25,22 @@ public class Employer {
 		this.storeName = storeName;
 		this.storePhone = storePhone;
 		this.storeAddr = storeAddr;
+		this.businessStatus = businessStatus;
 	}
+
+
+
+	public String getBusinessStatus() {
+		return businessStatus;
+	}
+
+
+
+	public void setBusinessStatus(String businessStatus) {
+		this.businessStatus = businessStatus;
+	}
+
+
 
 	public int getStoreNo() {
 		return storeNo;
@@ -72,11 +90,15 @@ public class Employer {
 		this.storeAddr = storeAddr;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Employer [storeNo=" + storeNo + ", employerNo=" + employerNo + ", businessNo=" + businessNo
-				+ ", storeName=" + storeName + ", storePhone=" + storePhone + ", storeAddr=" + storeAddr + "]";
+				+ ", storeName=" + storeName + ", storePhone=" + storePhone + ", storeAddr=" + storeAddr
+				+ ", businessStatus=" + businessStatus + "]";
 	}
-	
+
+
 	
 }

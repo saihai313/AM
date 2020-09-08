@@ -23,9 +23,31 @@ public class CanlendarController {
 	@Autowired
 	private CalendarService calendarService;
 	
+	// 알바생, 파트타임 목록 가져오기
 	// 근무 관리 페이지 이동
 	@RequestMapping("workList")
-	public String workList() {
+	public String workList(Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		// 가게번호 얻어오기
+		int storeNo = calendarService.selectStoreNo(memberNo);
+		
+		System.out.println("조회" + storeNo);
+		
+		// 알바생 목록 조회
+		
+		// 기다려~vo만들고 올게!~
+		
+		
+		// 파트타임 목록 조회
+		
+		
+		
+		
 		return "calendar/workList";
 	}
 	// 고정스케쥴 관리 페이지 이동
@@ -77,6 +99,14 @@ public class CanlendarController {
 		
 		return gson.toJson(list);
 		
+	}
+	
+	
+	// 스케쥴 등록
+	@RequestMapping("insertCalendar")
+	public String insertCalendar() {
+		
+		return "calendar/workList";
 	}
 	
 }
