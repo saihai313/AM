@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.am.calendar.model.vo.Calendar;
+import com.kh.am.member.model.vo.Member;
 
 @Repository
 public class CalendarDAO {
@@ -36,6 +37,10 @@ public class CalendarDAO {
 	 */
 	public List<Calendar> selectCalendarS(int memberNo) {
 		return sqlSession.selectList("calendarMapper.selectCalendarS", memberNo);
+	}
+
+	public List<Member> selectEName(int storeNo) {
+		return sqlSession.selectList("calendarMapper.selectEName", storeNo);
 	}
 	
 }

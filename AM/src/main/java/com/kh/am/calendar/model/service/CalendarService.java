@@ -25,4 +25,10 @@ public interface CalendarService{
 	 */
 	int selectStoreNo(int memberNo);
 
+	/** 알바생 목록 조회 (이름)
+	 * @param storeNo
+	 * @return eList
+	 */
+	List<Member> selectEList(int storeNo);
+
 }

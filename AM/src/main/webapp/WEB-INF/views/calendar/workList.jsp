@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,69 +124,44 @@
 		5. 확인(insert) 버튼 눌렀을 때  값 넘어가기
 		6. 넘겨진 값 확인하기 
 	 -->
-	<!-- 모달창 -->
-	 <a class="btn btn-sm btn-outline-secondary" data-toggle="modal" href="#modal-container-1">테스트 모달</a>
-	
-			<div class="modal fade" id="modal-container-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-					
-						<h5 class="modal-title" id="myModalLabel">스케쥴 등록|수정(00/00)</h5>
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body">
-																<!--request.getContextPath() : 요청 주소 중 최상위 주소(/wsp)를 얻어옴  -->
-						<form class="form-signin" method="POST" action="<%= request.getContextPath() %>/member/login.do"
-							onsubmit="return loginValidate();">
-							근무자 : <select>
-									<option>김알밥</option>
-									<option>김둘밥</option>
-									<option>김삼밥</option>
-								</select> <br>
-								
-							part 선택 : <select>
-										<option>part1 [am 10:00 ~ pm 16:00]</option>
-										<option>part2 [pm 14:00 ~ pm 22:00]</option>
-									</select> <br>
-							<div class="checkbox mb-3">
-								
-							</div>
-							<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
-						</form>
-					</div>
-					<div class="modal-footer">
-						
-					</div>
-				</div>
-			</div>
-		</div>
 
 
-<!-- 모달 2 -->
+
+<!-- 모달 -->
 <div id="my_modal">
-          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar">
-							근무자 : <select>
-									<option>김알밥</option>
-									<option>김둘밥</option>
-									<option>김삼밥</option>
-								</select> <br>
+		<c:choose>
+			<c:when test="${empty eList}">
+				<h4>알바생 없음</h4>
+			</c:when>
+			
+			<c:otherwise>
+	          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar" name='insertCalendarForm' onsubmit="return validate();">
+					근무자 : <select id="no">
+			<c:forEach var="member" items="${eList}">
+					<option value="${member.memberNo}">${member.memberName}</option>
+			
+			</c:forEach>
+				</select> <br>
+			
+						part 선택 : <select id="time" name="time">
+						<option>part1 [10:00 ~ 16:00]</option>
+						<option>part2 [14:00 ~ 22:00]</option>
+						</select> 
+						<br>
+			
+				<div class="checkbox mb-3">
+					
+				</div>
+				<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
+			</form>
+			</c:otherwise>
+		</c:choose>
 								
-							part 선택 : <select>
-										<option>part1 [am 10:00 ~ pm 16:00]</option>
-										<option>part2 [pm 14:00 ~ pm 22:00]</option>
-									</select> <br>
-							<div class="checkbox mb-3">
 								
-							</div>
-							<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
-						</form>
             <a class="modal_close_btn">닫기</a>
         </div>
 
-        <button id="popup_open_btn">팝업창 띄어 줘염</button>
+  <%--      <button id="popup_open_btn">팝업창 띄어 줘염</button> --%>
 	
 	
 	
@@ -351,7 +326,7 @@
 	        },
 	        allDaySlot: false,
 	        selectHelper: true,
-	        select: function(start, end, allDay) {
+	        select: function(start, end, allDay, month) {
 	        	
 	        	
 	       
@@ -359,7 +334,8 @@
 	        	
 	        	
 	        	test2(start);
-	        	console.log(start);
+	        	console.log("시간" + start.toString());
+	        	console.log("월" + month);
 	        	// 선택한 날짜 나옴
 	        	
 	        	
@@ -399,41 +375,8 @@
 	            $(this).remove();
 	          }
 	        },
-	        events: calList /*[{
-	            title: '예지',
-	            start: new Date(y, m, 1)
-	          },
-	          {
-	            id: 999,
-	            title: '류진',
-	            start: new Date(y, m, 1, 7, 0),
-	            // 여기 년월일시간
-	            // 연도는 내비두고, 디비에서 월, 일, 시간
-	            allDay: false,
-	            className: 'info'
-	          },
-	          {
-	            id: 999,
-	            title: '리아',
-	            start: new Date(y, m, 22, 16, 0),
-	            allDay: false,
-	            className: 'info'
-	          },
-	          {
-	        	id: 999,
-	            title: '채령',
-	            start: new Date(y, m, 30, 10, 30),
-	            allDay: false,
-	            className: 'info'
-	          },
-	          {
-	            title: '유나',
-	            start: new Date(y, m, 16, 12, 0),
-	            end: new Date(y, m, 16, 14, 0),
-	            allDay: false,
-	            className: 'important'
-	          },
-	          {
+	        events: calList 
+	          /*{
 	            title: 'Birthday Party',
 	            start: new Date(y, m, 14, 19, 0),
 	            end: new Date(y, m, 14, 22, 30),
@@ -532,10 +475,65 @@
         return this;
     };
 
-    document.getElementById('popup_open_btn').addEventListener('click', function() {
+   /* document.getElementById('popup_open_btn').addEventListener('click', function() {
         // 모달창 띄우기
         modal('my_modal');
     });
+    */
+    
+    
+ 	// submit 동작
+	function validate(){
+		
+    	// 디비에 이렇게 입력들어가야함
+    	// 20/09/05
+    	
+    	
+    	
+    	
+    	
+    	
+ 		console.log("서브밋동작" + $("#no").val());
+ 		
+ 		$employeeNo = $("<input>", {type : "hidden", name : "employeeNo", 
+			value : $("#no").val() });
+ 		
+    	var time = $("#time").val();
+    	
+    	console.log("시간 쪼개기" + time);
+ 		
+ 		
+ 		// 뒤에서부터 숫자 끊어서 가져오기
+ 		// str.slice(-3,-1);
+ 		$startTime =$("<input>", {type : "hidden", name : "startTime", 
+			value :  time.slice(-14,-12)});
+ 		
+ 		$endTime =$("<input>", {type : "hidden", name : "endTime", 
+			value :  time.slice(-6,-4)});
+ 		
+ 		$("form[name='insertCalendarForm']").append($employeeNo, $startTime, $endTime);
+ 		
+	 }
+    
+    $(document).ready(function() {
+    	
+    	
+    	//  시작 시
+    	// .slice(-14,-12)
+    	
+    	// 시작 분
+    	// .slice(-11,-9)
+    	
+    	// 종료 시
+    	// .slice(-6,-4)
+    	
+    	// 종료 분
+    	// .slice(-3,-1)
+
+ 		// part1 [10:00 ~ 16:00]
+    	
+    });
+ 	
 </script>
 </c:when>
 		
