@@ -15,7 +15,7 @@
 		text-align: center;
 	}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </head>
 <body>
 	<!-- ------------------------- header ---------------------------- -->
@@ -62,7 +62,7 @@
                 </tbody>
             </table>
             <div class="bottom_btn" style="text-align: center;" >
-		        <button class="btn btn-primary py-3 px-4">직원추가</button>
+		        <button id="addEmployee" class="btn btn-primary py-3 px-4">직원추가</button>
 		        <button class="btn btn-primary py-3 px-4">직원삭제</button>
             </div>
         </div>
@@ -74,7 +74,9 @@
 	<!-- ------------------------- footer ---------------------------- -->
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
    	<script>
-   		
+   		$("#addEmployee").click(function(){
+   			swal("hello world");
+   		});
    	</script>
 </body>
 </html>

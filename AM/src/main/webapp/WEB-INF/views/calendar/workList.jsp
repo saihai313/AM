@@ -8,8 +8,22 @@
 <meta charset="UTF-8">
 <title>근무 스케줄</title>
 
+<!-- 아이콘 등록 -->
+<link rel="icon" type="image/png" href="${contextPath}/resources/images/icons/am.ico"/>
+
 <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+
+
+
+<!-- 모달 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+ 
+
+
 
 <style>
 	#work-title{border-bottom: 3px solid #F5F4F0;}
@@ -34,6 +48,25 @@
 		    width: 90%;
     		margin-top: 20px;
 	}
+	
+	
+	
+	
+	
+	      #my_modal {
+                display: none;
+                width: 400px;
+                padding: 20px 60px;
+                background-color: #fefefe;
+                border: 1px solid #888;
+                border-radius: 3px;
+            }
+
+            #my_modal .modal_close_btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
 </style>
 </head>
 <body>
@@ -82,12 +115,91 @@
 	</section>
 
 	
+	<!-- 
+		1. 날짜 눌렀을 때 모달창 나오기
+		2. 년, 월, 일  값 가져오기
+		3. 알바생 목록 가져오기
+		4. 파트타임 가져오기
+		
+		5. 확인(insert) 버튼 눌렀을 때  값 넘어가기
+		6. 넘겨진 값 확인하기 
+	 -->
+	<!-- 모달창 -->
+	 <a class="btn btn-sm btn-outline-secondary" data-toggle="modal" href="#modal-container-1">테스트 모달</a>
+	
+			<div class="modal fade" id="modal-container-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					
+						<h5 class="modal-title" id="myModalLabel">스케쥴 등록|수정(00/00)</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+																<!--request.getContextPath() : 요청 주소 중 최상위 주소(/wsp)를 얻어옴  -->
+						<form class="form-signin" method="POST" action="<%= request.getContextPath() %>/member/login.do"
+							onsubmit="return loginValidate();">
+							근무자 : <select>
+									<option>김알밥</option>
+									<option>김둘밥</option>
+									<option>김삼밥</option>
+								</select> <br>
+								
+							part 선택 : <select>
+										<option>part1 [am 10:00 ~ pm 16:00]</option>
+										<option>part2 [pm 14:00 ~ pm 22:00]</option>
+									</select> <br>
+							<div class="checkbox mb-3">
+								
+							</div>
+							<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+<!-- 모달 2 -->
+<div id="my_modal">
+          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar">
+							근무자 : <select>
+									<option>김알밥</option>
+									<option>김둘밥</option>
+									<option>김삼밥</option>
+								</select> <br>
+								
+							part 선택 : <select>
+										<option>part1 [am 10:00 ~ pm 16:00]</option>
+										<option>part2 [pm 14:00 ~ pm 22:00]</option>
+									</select> <br>
+							<div class="checkbox mb-3">
+								
+							</div>
+							<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
+						</form>
+            <a class="modal_close_btn">닫기</a>
+        </div>
+
+        <button id="popup_open_btn">팝업창 띄어 줘염</button>
+	
+	
+	
+	
      <script type="text/javascript" src="${contextPath}/resources/js/calendar.js"></script>
     
-    <!-- if로 사장, 알바 구분?? -->
+  
     
 <script>
-
+	// 날짜 클릭했을 때 모달 창 나오기
+	$(".fc-day").on("click", function(){
+		  console.log("111111");
+	});
 
     $(document).ready(function() {
       var date = new Date();
@@ -154,7 +266,7 @@
 							var start = new Date(year, month, day, startTime, 0);
 							var end = new Date(year, month, day, endTime, 0);
 							//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
-							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
+							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false,  "dow": [ 1, 4 ]};
 							console.log(obj);
 							
 							
@@ -240,7 +352,21 @@
 	        allDaySlot: false,
 	        selectHelper: true,
 	        select: function(start, end, allDay) {
-	          var title = prompt('Event Title:');
+	        	
+	        	
+	       
+	        	
+	        	
+	        	
+	        	test2(start);
+	        	console.log(start);
+	        	// 선택한 날짜 나옴
+	        	
+	        	
+	        	// function 호출해서 값 리턴..?
+	        	// 변수 만들어서 값 넣기
+	        	
+	          var title = test();
 	          // 일 클릭하면 나오는 창
 	          if (title) {
 	            calendar.fullCalendar('renderEvent', {
@@ -323,6 +449,92 @@
 	        ]*/
 	      });
 	    });
+      
+      
+    });
+    
+    function test2(day){
+    	
+    	// 클릭한 날짜
+    	console.log(typeof(day));
+    	
+    	
+    	
+    	
+    	modal('my_modal');
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    }
+    function test(){
+    	var t= "테스트"
+    	return t;
+    }
+    
+    
+    // 모달
+    function modal(id) {
+        var zIndex = 9999;
+        var modal = document.getElementById(id);
+
+        // 모달 div 뒤에 희끄무레한 레이어
+        var bg = document.createElement('div');
+        bg.setStyle({
+            position: 'fixed',
+            zIndex: zIndex,
+            left: '0px',
+            top: '0px',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            // 레이어 색갈은 여기서 바꾸면 됨
+            backgroundColor: 'rgba(0,0,0,0.4)'
+        });
+        document.body.append(bg);
+
+        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+        modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+            bg.remove();
+            modal.style.display = 'none';
+        });
+
+        modal.setStyle({
+            position: 'fixed',
+            display: 'block',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+            // 시꺼먼 레이어 보다 한칸 위에 보이기
+            zIndex: zIndex + 1,
+
+            // div center 정렬
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            msTransform: 'translate(-50%, -50%)',
+            webkitTransform: 'translate(-50%, -50%)'
+        });
+    }
+
+    // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    Element.prototype.setStyle = function(styles) {
+        for (var k in styles) this.style[k] = styles[k];
+        return this;
+    };
+
+    document.getElementById('popup_open_btn').addEventListener('click', function() {
+        // 모달창 띄우기
+        modal('my_modal');
     });
 </script>
 </c:when>
