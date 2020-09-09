@@ -2,7 +2,7 @@ package com.kh.am.management.model.vo;
 
 import java.sql.Timestamp;
 
-public class paystubplus {
+public class Paystubplus {
 	private int paystubNo;
 	private String payContent;
 	private String payStatus;
@@ -23,7 +23,7 @@ public class paystubplus {
 	private int storeNo;
 	
 	
-	public paystubplus() {
+	public Paystubplus() {
 		// TODO Auto-generated constructor stub
 	}
 

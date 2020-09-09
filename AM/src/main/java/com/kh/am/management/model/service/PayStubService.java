@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
-import com.kh.am.management.model.vo.paystubplus;
+import com.kh.am.management.model.vo.Paystubplus;
 
 public interface PayStubService {
 
@@ -13,6 +13,6 @@ public interface PayStubService {
 	public abstract List<PayStub> seleceList(PageInfo pInfo);
 
 	//급여상세조회
-	public abstract paystubplus selectone(int boardNo);
+	public abstract Paystubplus selectone(int boardNo);
 
 }

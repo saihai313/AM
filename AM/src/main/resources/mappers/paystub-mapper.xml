@@ -14,7 +14,7 @@
      
     </resultMap>
     
-    	<resultMap type="paystubplus" id="plusset">
+    	<resultMap type="Paystubplus" id="plusset">
         <id property="payNO" column="PAY_NO"/>
         <result property="paystubNo" column="PAY_STUB_NO"/>
         <result property="payContent" column="PAY_CONTENT"/>

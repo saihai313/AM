@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.am.management.model.service.PayStubService;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
-import com.kh.am.management.model.vo.paystubplus;
+import com.kh.am.management.model.vo.Paystubplus;
 
 @Controller
 @RequestMapping("/management/*")
@@ -75,7 +75,7 @@ public class ManagementController {
 			System.out.println(boardNo);
 			
 			String url=null;
-			paystubplus plus =paystubService.selectone(boardNo);
+			Paystubplus plus =paystubService.selectone(boardNo);
 			System.out.println(plus);
 			if(plus!=null) {
 				model.addAttribute("plus", plus);
