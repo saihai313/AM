@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.am.management.model.dao.PayStubDAO;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
+import com.kh.am.management.model.vo.paystubplus;
 
 @Service
 public class PayStubServiceImpl implements PayStubService {
@@ -27,10 +28,17 @@ public class PayStubServiceImpl implements PayStubService {
 		pInfo.setPageInfo(cp,listCount,type);
 		return pInfo;
 	}
-
+	
 	@Override
 	public List<PayStub> seleceList(PageInfo pInfo) {
 		
 		return paystubDAO.selectList(pInfo);
+	}
+
+	//급여명세서 상세조회 
+	@Override
+	public paystubplus selectone(int boardNo) {
+		
+		return paystubDAO.selectone(boardNo);
 	}
 }
