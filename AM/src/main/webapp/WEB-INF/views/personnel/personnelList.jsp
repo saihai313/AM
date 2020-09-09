@@ -63,7 +63,7 @@
             </table>
             <div class="bottom_btn" style="text-align: center;" >
 		        <button id="addEmployee" class="btn btn-primary py-3 px-4">직원추가</button>
-		        <button class="btn btn-primary py-3 px-4">직원삭제</button>
+		        <button id="deleteEmployee" class="btn btn-primary py-3 px-4">직원삭제</button>
             </div>
         </div>
 
@@ -77,6 +77,12 @@
    		$("#addEmployee").click(function(){
    			swal("hello world");
    		});
+   		
+   		
+   		$("#deleteEmployee").click(function(){
+   			swal("hello world");
+   		});
+   		
    	</script>
 </body>
 </html>
