@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
+import com.kh.am.management.model.vo.paystubplus;
 
 public interface PayStubService {
 
 	public abstract PageInfo pagination(int type, int cp);
 
 	public abstract List<PayStub> seleceList(PageInfo pInfo);
+
+	//급여상세조회
+	public abstract paystubplus selectone(int boardNo);
 
 }

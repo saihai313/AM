@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ 
+
 <style>
+
+
 .tabType1 {
 	height: 50px;
 	text-align: center;
@@ -74,7 +81,7 @@ table.type07 td {
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp">
 					<span class="subheading">급여명세서</span>
-					<h2>전상아 님의 8월급여명세서</h2>
+					<h2>${member.loginmember } 님의 8월급여명세서</h2>
 				</div>
 			</div>
 				<table class="type07">
@@ -88,25 +95,25 @@ table.type07 td {
 			    </thead>
 			    <tbody>
 			    <tr>
-			        <th scope="row">기본급여</th>
-			        <td>1,000,000</td>
+			        <th scope="row">시급</th>
+			        <td>${plus.partMoney}</td>
 			    </tr>
 			    <tr>
 			        <th scope="row">주휴수당</th>
-			        <td>100,000</td>
+			        <td>${plus.vacaMoney}</td>
 			    </tr>
 			    <tr>
-			        <th scope="row">시간외 수당</th>
-			        <td>50,000</td>
+			        <th scope="row">일한날짜</th>
+			        <td>${plus.payDay}</td>
 			    </tr>
 			    <tr>
-			        <th scope="row">고용보험</th>
-			        <td>-50,000</td>
+			        <th scope="row">일하는 시간</th>
+			        <td>${plus.patTime}</td>
 			    </tr>
 			    
 			     <tr>
-			        <th scope="row">총합</th>
-			        <td>1,100,000원</td>
+			        <th scope="row">총급여</th>
+			        <td>${plus.payTotalMoney}원</td>
 			    </tr>
 			    </tbody>
 			</table>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
+import com.kh.am.management.model.vo.paystubplus;
 
 @Repository
 public class PayStubDAO {
@@ -29,6 +30,11 @@ public class PayStubDAO {
 		
 
 		return sqlSession.selectList("paystubMapper.selectList",pInfo,rowBounds);
+	}
+
+	public paystubplus selectone(int boardNo) {
+		
+		return sqlSession.selectOne("paystubMapper.selectone",boardNo);
 	}
 
 }
