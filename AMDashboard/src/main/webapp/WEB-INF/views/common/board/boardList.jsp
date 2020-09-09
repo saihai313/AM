@@ -65,21 +65,20 @@
                     </thead>
                     <tbody>
                     <c:choose>
-                    <c:when test="${empty boardList}">
+                    <c:when test="${empty employerList}">
                       <tr><td colspan="6">존재하는 회원이 없습니다.</td></tr>
                     </c:when>
                     <c:otherwise>
-                      <c:forEach var="member" items="${memberList}">
+                      <c:forEach var="Employer" items="${employerList}">
                         <tr>
                           <td>${member.memberName }</td>
                           <td>${member.memberEmail }</td>
                           <td>${member.memberEnrollDate}</td>
-                          <td>${member.상호명}</td>
-                          <td>${member.가게주소}</td>
-                          <td>${member.memberPhone}</td>
+                          <td>${employer.storeName}</td>
+                          <td>${employer.storeAddress}</td>
+                          <td>${employer.storePhone}</td>
                           <td>${member.memberStatus}</td>
                           
-                        
                         </tr>
                       </c:forEach>
                     </c:otherwise>
