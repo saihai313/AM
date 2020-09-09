@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.am.calendar.model.service.CalendarService;
-import com.kh.am.calendar.model.vo.Calendar;
+import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.calendar.model.vo.Employee;
 import com.kh.am.member.model.vo.Member;
 
@@ -80,7 +80,7 @@ public class CanlendarController {
 		int memberNo = loginMember.getMemberNo();
 		
 		//스케쥴 정보를 List<vo> 에 넣어서 가져옴
-		List<Calendar> list = calendarService.selectList(memberNo);
+		List<WorkCalendar> list = calendarService.selectList(memberNo);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
@@ -100,7 +100,7 @@ public class CanlendarController {
 		int memberNo = loginMember.getMemberNo();
 		
 		//스케쥴 정보를 List<vo> 에 넣어서 가져옴
-		List<Calendar> list = calendarService.selectListStaff(memberNo);
+		List<WorkCalendar> list = calendarService.selectListStaff(memberNo);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
@@ -111,7 +111,7 @@ public class CanlendarController {
 	
 	// 스케쥴 등록
 	@RequestMapping(value="insertCalendar", method = RequestMethod.POST)
-	public String insertCalendar(Calendar insertCal) {
+	public String insertCalendar(WorkCalendar insertCal) {
 		
 		
 		// 위에 workList 만든거 가져와야지 정보입력될듯

@@ -299,7 +299,12 @@
 				});
 	    }
       
-      
+	
+	// 클릭한 날의 년,월,일 변수
+	var clickYear = ;
+	var clickMonth = ;
+	var clickDay = ;
+	
       $(function(){ 
 	      // Ajax success 에 넣으면 될듯
 	      var calendar = $('#calendar').fullCalendar({
@@ -335,9 +340,11 @@
 	        	
 	        	test2(start);
 	        	console.log("시간" + start.toString());
-	        	console.log("월" + month);
+	        	console.log(start.toString().substr(4, 3));
 	        	// 선택한 날짜 나옴
-	        	
+
+	        	// 월
+	        	clickMonth.push(start.toString().substr(4, 3));
 	        	
 	        	// function 호출해서 값 리턴..?
 	        	// 변수 만들어서 값 넣기
@@ -482,6 +489,7 @@
     */
     
     
+    
  	// submit 동작
 	function validate(){
 		
@@ -490,6 +498,25 @@
     	
     	
     	
+    	
+ 		console.log("월" + clickMonth);
+    	
+    	var sendMonth = '';
+    	
+    	switch(cickMonth){
+    	case "Jan" : sendMonth = 01; break;
+    	case "Feb" : sendMonth = 02; break;
+    	case "Mar" : sendMonth = 03; break;
+    	case "Apr" : sendMonth = 04; break;
+    	case "May" : sendMonth = 05; break;
+    	case "Jun" : sendMonth = 06; break;
+    	case "Jul" : sendMonth = 07; break;
+    	case "Aug" : sendMonth = 08; break;
+    	case "Sep" : sendMonth = 09; break;
+    	case "Oct" : sendMonth = 10; break;
+    	case "Nov" : sendMonth = 11; break;
+    	case "Dec" : sendMonth = 12; break;
+    	}
     	
     	
     	
@@ -510,6 +537,10 @@
  		
  		$endTime =$("<input>", {type : "hidden", name : "endTime", 
 			value :  time.slice(-6,-4)});
+ 		
+ 		
+ 		// 날짜
+ 		//$workingNo
  		
  		$("form[name='insertCalendarForm']").append($employeeNo, $startTime, $endTime);
  		
