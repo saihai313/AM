@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.am.calendar.model.vo.Calendar;
+import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.member.model.vo.Member;
 
 @Repository
@@ -27,7 +27,7 @@ public class CalendarDAO {
 	 * @param storeNo
 	 * @return list
 	 */
-	public List<Calendar> selectCalendarM(int storeNo) {
+	public List<WorkCalendar> selectCalendarM(int storeNo) {
 		return sqlSession.selectList("calendarMapper.selectCalendarM", storeNo);
 	}
 
@@ -35,7 +35,7 @@ public class CalendarDAO {
 	 * @param storeNo
 	 * @return list
 	 */
-	public List<Calendar> selectCalendarS(int memberNo) {
+	public List<WorkCalendar> selectCalendarS(int memberNo) {
 		return sqlSession.selectList("calendarMapper.selectCalendarS", memberNo);
 	}
 

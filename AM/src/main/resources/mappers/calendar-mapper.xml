@@ -4,16 +4,16 @@
 
 
 
-	<resultMap type="Calendar" id="calendarResultSet">
+	<resultMap type="WorkCalendar" id="calendarResultSet">
 	
-		<id property="workingNo" column="WORKING_NO"/>
+		<id property="workNo" column="WORK_NO"/>
 		
 		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
-		<result property="eStoreNo" column="E_STORE_NO"/>
-		<result property="employeeNo" column="EMPLOYEE_NO"/>
-		<result property="workingDay" column="WORKING_DAY"/>
-		<result property="startTime" column="START_TIME"/>
-		<result property="endTime" column="END_TIME"/>
+		<result property="workDay" column="WORK_DAY"/>
+		<result property="workStart" column="WORK_START"/>
+		<result property="workEnd" column="WORK_END"/>
+		<result property="storeNo" column="STORE_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="memberName" column="MEMBER_NM"/>
 		
 		
@@ -66,15 +66,17 @@
 	
 	<!-- 스케쥴 조회 (사장) -->
 	<select id="selectCalendarM" parameterType="_int" resultMap="calendarResultSet">
-		SELECT WORKING_NO, E_STORE_NO,  EMPLOYEE_NO, WORKING_DAY, START_TIME, END_TIME, MEMBER_NM FROM CALENDAL JOIN MEMBER ON(MEMBER_NO = EMPLOYEE_NO)
-		WHERE E_STORE_NO = #{storeNo}
+		SELECT WORK_NO, STORE_NO,  MEMBER_NO, WORK_DAY, WORK_START, WORK_END, MEMBER_NM 
+		FROM WORK_CALENDAL JOIN MEMBER USING(MEMBER_NO)
+		WHERE STORE_NO =  #{storeNo}
 	</select>
 
 
 	<!-- 스케쥴 조회 (알바) -->
 	<select id="selectCalendarS" parameterType="_int" resultMap="calendarResultSet">
-		SELECT WORKING_NO, E_STORE_NO,  EMPLOYEE_NO, WORKING_DAY, START_TIME, END_TIME, MEMBER_NM FROM CALENDAL JOIN MEMBER ON(MEMBER_NO = EMPLOYEE_NO)
-		WHERE EMPLOYEE_NO = #{memberNo}
+		SELECT WORK_NO, STORE_NO,  MEMBER_NO, WORK_DAY, WORK_START, WORK_END, MEMBER_NM 
+		FROM WORK_CALENDAL JOIN MEMBER USING(MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	
