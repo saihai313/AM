@@ -9,35 +9,36 @@
 		<result property="memberPwd" column="MEMBER_PWD"/>
 		<result property="memberName" column="MEMBER_NM"/>
 		<result property="memberPhone" column="MEMBER_PHONE"/>
-		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
-		<result property="memberStatus" column="MEMBER_STATUS"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 		<result property="memberCheck" column="MEMBER_CHECK"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
 	</resultMap>
 	
-	<resultMap type="Store" id="employerResultSet">
+	<resultMap type="Store" id="storeResultSet">
 		<id property="storeNo" column="STORE_NO"/>
-		<result property="employerNo" column="EMPLOYER_NO"/>
 		<result property="storeName" column="STORE_NM"/>
 		<result property="storePhone" column="STORE_PHONE"/>
 		<result property="storeAddress" column="STORE_ADDR"/>
-		<result property="businessNo" column="BUSINESS_NO"/>
-		<result property="businessStatus" column="BUSINESS_STATUS"/>
+		<result property="storeBizNo" column="STORE_BIZ_NO"/>
+		<result property="storeBizCheck" column="STORE_BIZ_CHECK"/>
+		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 
 	<!-- 회원상태와 이메일인증 확인 검사함 -->
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_GRADE = 'R'
+		AND MEMBER_CHECK = 'Y'
 		AND MEMBER_STATUS = 'Y'
-		AND MEMBER_GRADE = 'M'
 	</select>
 	
 	<!-- 로그인_사장님 정보 -->
-	<select id="status" parameterType="_int" resultMap="employerResultSet">
-		SELECT * FROM EMPLOYER
-		WHERE EMPLOYER_NO = #{employerNo}
-		AND BUSINESS_STATUS = 'Y'
+	<select id="status" parameterType="_int" resultMap="storeResultSet">
+		SELECT * FROM STORE
+		WHERE MEMBER_NO = #{memberNo}
+		AND STORE_BIZ_CHECK = 'Y'
 	</select>
 
 	<!-- 회원가입_아이디 중복 검사 -->
