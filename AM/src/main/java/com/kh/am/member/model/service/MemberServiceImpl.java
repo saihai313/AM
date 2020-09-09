@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.member.model.dao.MemberDAO;
-import com.kh.am.member.model.vo.Employer;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.member.model.vo.Store;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -28,6 +28,8 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			loginMember = null;
+			
+			System.out.println(login);
 		}else {
 			loginMember.setMemberPwd(null);
 		}
@@ -37,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 로그인_사장님 정보
 	@Override
-	public Employer status(int memberNo) {
+	public Store status(int memberNo) {
 		return memberDAO.status(memberNo);
 	}
 	
@@ -63,15 +65,15 @@ public class MemberServiceImpl implements MemberService{
 	// 회원가입_사장님 정보
 	@Transactional(rollbackFor=Exception.class)
 	@Override
-	public int signUpEmployer(Employer employer, String memberEmail) {
+	public int signUpEmployer(Store store, String memberEmail) {
 		
 		int memberNo = (int)((memberDAO.memberNo(memberEmail)).getMemberNo());
 		
 		int result = 0;
 		if(memberNo != 0) {
 			
-			employer.setEmployerNo(memberNo);
-			result = memberDAO.signUpEmployer(employer);
+			store.setMemberNo(memberNo);
+			result = memberDAO.signUpEmployer(store);
 		}
 		return result;
 	}

@@ -13,8 +13,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.am.member.model.service.MemberService;
-import com.kh.am.member.model.vo.Employer;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.member.model.vo.Store;
 
 @SessionAttributes({"loginMember", "loginEmployer"})
 @Controller
@@ -84,12 +84,12 @@ public class MemberController {
 		}else {
 				
 			// 2) 이메일 인증
-			if(loginMember.getMemberCheck().equals("X")) {
+			if(loginMember.getMemberCheck().equals("N")) {
 				text = "이메일 인증을 완료해주세요.";
 				
 			// 3) 사업자 번호 인증
 			}else {
-				Employer loginEmployer = memberService.status(loginMember.getMemberNo());
+				Store loginEmployer = memberService.status(loginMember.getMemberNo());
 				
 				if(loginEmployer != null) {
 					msg = null;
@@ -151,7 +151,7 @@ public class MemberController {
 	// 2) 회원가입
 	@RequestMapping("signUpAction")
 	public String signUpAction(Member signUpMember, 
-							   Employer employer,
+							   Store store,
 							   Model model, RedirectAttributes rdAttr) {
 		
 		int result = memberService.signUpMember(signUpMember);
@@ -162,7 +162,7 @@ public class MemberController {
 		if(result > 0) {
 			
 			String memberEmail = signUpMember.getMemberEmail();
-			result = memberService.signUpEmployer(employer, memberEmail);
+			result = memberService.signUpEmployer(store, memberEmail);
 			
 			if(result > 0) {
 				status = "success";

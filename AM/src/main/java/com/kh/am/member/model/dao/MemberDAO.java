@@ -4,8 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.am.member.model.vo.Employer;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.member.model.vo.Store;
 
 @Repository 
 public class MemberDAO {
@@ -25,8 +25,8 @@ public class MemberDAO {
 	 * @param memberNo
 	 * @return loginEmployer
 	 */
-	public Employer status(int employerNo) {
-		return sqlSession.selectOne("memberMapper.status", employerNo);
+	public Store status(int memberNo) {
+		return sqlSession.selectOne("memberMapper.status", memberNo);
 	}
 	
 	/** 회원가입_아이디 중복 검사
@@ -57,8 +57,8 @@ public class MemberDAO {
 	 * @param employer
 	 * @return result
 	 */
-	public int signUpEmployer(Employer employer) {
-		return sqlSession.insert("memberMapper.signUpEmployer", employer);
+	public int signUpEmployer(Store store) {
+		return sqlSession.insert("memberMapper.signUpEmployer", store);
 	}
 
 

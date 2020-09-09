@@ -1,7 +1,7 @@
 package com.kh.am.member.model.service;
 
-import com.kh.am.member.model.vo.Employer;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.member.model.vo.Store;
 
 public interface MemberService {
 
@@ -15,7 +15,7 @@ public interface MemberService {
 	 * @param memberNo
 	 * @return loginEmployer
 	 */
-	Employer status(int memberNo);
+	Store status(int memberNo);
 	
 	/** 회원가입_아이디 중복 검사
 	 * @param memberEmail
@@ -34,7 +34,7 @@ public interface MemberService {
 	 * @param memberEmail 
 	 * @return result
 	 */
-	int signUpEmployer(Employer employer, String memberEmail);
+	int signUpEmployer(Store store, String memberEmail);
 
 
 

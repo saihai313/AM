@@ -4,23 +4,21 @@ import java.sql.Date;
 
 public class Member {
 
-	
 	private int memberNo;
 	private String memberEmail;
 	private String memberPwd;
 	private String memberName;
 	private String memberPhone;
 	private Date memberEnrollDate;
-	private String memberStatus;
 	private String memberGrade;
 	private String memberCheck;
+	private String memberStatus;
 	
 	public Member() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Member(int memberNo, String memberEmail, String memberPwd, String memberName, String memberPhone,
-			Date memberEnrollDate, String memberStatus, String memberGrade, String memberCheck) {
+			Date memberEnrollDate, String memberGrade, String memberCheck, String memberStatus) {
 		super();
 		this.memberNo = memberNo;
 		this.memberEmail = memberEmail;
@@ -28,9 +26,9 @@ public class Member {
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
 		this.memberEnrollDate = memberEnrollDate;
-		this.memberStatus = memberStatus;
 		this.memberGrade = memberGrade;
 		this.memberCheck = memberCheck;
+		this.memberStatus = memberStatus;
 	}
 
 	public int getMemberNo() {
@@ -81,14 +79,6 @@ public class Member {
 		this.memberEnrollDate = memberEnrollDate;
 	}
 
-	public String getMemberStatus() {
-		return memberStatus;
-	}
-
-	public void setMemberStatus(String memberStatus) {
-		this.memberStatus = memberStatus;
-	}
-
 	public String getMemberGrade() {
 		return memberGrade;
 	}
@@ -105,13 +95,20 @@ public class Member {
 		this.memberCheck = memberCheck;
 	}
 
+	public String getMemberStatus() {
+		return memberStatus;
+	}
+
+	public void setMemberStatus(String memberStatus) {
+		this.memberStatus = memberStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberEmail=" + memberEmail + ", memberPwd=" + memberPwd
 				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + ", memberEnrollDate="
-				+ memberEnrollDate + ", memberStatus=" + memberStatus + ", memberGrade=" + memberGrade
-				+ ", memberCheck=" + memberCheck + "]";
+				+ memberEnrollDate + ", memberGrade=" + memberGrade + ", memberCheck=" + memberCheck + ", memberStatus="
+				+ memberStatus + "]";
 	}
-
 	
 }
