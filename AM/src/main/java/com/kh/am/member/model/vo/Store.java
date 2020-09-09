@@ -6,7 +6,7 @@ public class Store {
 	private String storeName;
 	private String storePhone;
 	private String storeAddress;
-	private int storeBizNo;
+	private String storeBizNo;
 	private String storeBizCheck;
 	private int memberNo;
 	
@@ -16,7 +16,7 @@ public class Store {
 	}
 
 
-	public Store(int storeNo, String storeName, String storePhone, String storeAddress, int storeBizNo,
+	public Store(int storeNo, String storeName, String storePhone, String storeAddress, String storeBizNo,
 			String storeBizCheck, int memberNo) {
 		super();
 		this.storeNo = storeNo;
@@ -69,12 +69,12 @@ public class Store {
 	}
 
 
-	public int getStoreBizNo() {
+	public String getStoreBizNo() {
 		return storeBizNo;
 	}
 
 
-	public void setStoreBizNo(int storeBizNo) {
+	public void setStoreBizNo(String storeBizNo) {
 		this.storeBizNo = storeBizNo;
 	}
 
@@ -105,5 +105,8 @@ public class Store {
 				+ ", storeAddress=" + storeAddress + ", storeBizNo=" + storeBizNo + ", storeBizCheck=" + storeBizCheck
 				+ ", memberNo=" + memberNo + "]";
 	}
+
+
+	
 	
 }
