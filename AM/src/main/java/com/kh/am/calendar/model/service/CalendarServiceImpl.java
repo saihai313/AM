@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.am.calendar.model.dao.CalendarDAO;
 import com.kh.am.calendar.model.vo.Calendar;
+import com.kh.am.calendar.model.vo.Employee;
 import com.kh.am.member.model.vo.Member;
 
 @Service
@@ -55,6 +56,16 @@ public class CalendarServiceImpl implements CalendarService {
 		int storeNo = calendarDAO.selectStoreNo(memberNo);
 		
 		return storeNo;
+	}
+
+	// 알바생 목록 조회
+	@Override
+	public List<Member> selectEList(int storeNo) {
+		
+		// 사장 알바생 이름 조회
+		List<Member> EName = calendarDAO.selectEName(storeNo);
+		
+		return EName;
 	}
 	
 

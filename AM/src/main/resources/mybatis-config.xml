@@ -26,6 +26,7 @@
 	<typeAlias type="com.kh.am.management.model.vo.PayStub" alias="PayStub"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Calendar" alias="Calendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employer" alias="Employer"/>
+	<typeAlias type="com.kh.am.calendar.model.vo.Employee" alias="Employee"/>
 	
 	</typeAliases>
 	
