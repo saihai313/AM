@@ -39,8 +39,21 @@ public class CalendarDAO {
 		return sqlSession.selectList("calendarMapper.selectCalendarS", memberNo);
 	}
 
+	
+	/** 알바생 이름 조회
+	 * @param storeNo
+	 * @return
+	 */
 	public List<Member> selectEName(int storeNo) {
 		return sqlSession.selectList("calendarMapper.selectEName", storeNo);
+	}
+
+	/** 스케쥴 삽입 1개
+	 * @param insertCal
+	 * @return
+	 */
+	public int insertCalendar(WorkCalendar insertCal) {
+		return sqlSession.insert("calendarMapper.insertCalendar", insertCal);
 	}
 	
 }

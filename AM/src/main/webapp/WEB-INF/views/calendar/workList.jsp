@@ -209,9 +209,9 @@
 	
 	var calList = [];		
 				
-	if(${loginMember.memberGrade== 'M'}){
+	if(${loginMember.memberGrade== 'R'}){
 	  	  // 아이디가 사장님일 때
-	  	  console.log("m이다");
+	  	  console.log("사장이다");
 	  	  
 	  	  
 	  	// 캘린더 값 얻어오는 ajax 
@@ -225,12 +225,12 @@
 					success : function(list){
 						console.log(list);
 						$.each(list, function(i){
-							var year = list[i].workingDay.toString().substring(0,4);
-							var month = list[i].workingDay.toString().substring(5,7) - 1;
-							var day = list[i].workingDay.toString().substring(8,10);
+							var year = list[i].workDay.toString().substring(0,4);
+							var month = list[i].workDay.toString().substring(5,7) - 1;
+							var day = list[i].workDay.toString().substring(8,10);
 							var name = list[i].memberName;
-							var startTime = list[i].startTime;
-							var endTime = list[i].endTime;
+							var startTime = list[i].workStart;
+							var endTime = list[i].workEnd;
 						
 							/* id: 999,
 					            title: '리아',
@@ -255,7 +255,7 @@
 				});
 	    }else{
 	  	  // 아이디가 알바생일 때
-	  	  console.log("a이다");
+	  	  console.log("알바생이다");
 	  	  
 	  	  
 	  	// 캘린더 값 얻어오는 ajax 
@@ -269,12 +269,12 @@
 					success : function(list){
 						console.log(list);
 						$.each(list, function(i){
-							var year = list[i].workingDay.toString().substring(0,4);
-							var month = list[i].workingDay.toString().substring(5,7) - 1;
-							var day = list[i].workingDay.toString().substring(8,10);
+							var year = list[i].workDay.toString().substring(0,4);
+							var month = list[i].workDay.toString().substring(5,7) - 1;
+							var day = list[i].workDay.toString().substring(8,10);
 							var name = list[i].memberName;
-							var startTime = list[i].startTime;
-							var endTime = list[i].endTime;
+							var startTime = list[i].workStart;
+							var endTime = list[i].workEnd;
 						
 							/* id: 999,
 					            title: '리아',
@@ -301,9 +301,10 @@
       
 	
 	// 클릭한 날의 년,월,일 변수
-	var clickYear = ;
-	var clickMonth = ;
-	var clickDay = ;
+	var clickYear = 0;
+	var clickMonth = 0;
+	var clickDay = 0;
+	var addDay = 0;
 	
       $(function(){ 
 	      // Ajax success 에 넣으면 될듯
@@ -340,11 +341,39 @@
 	        	
 	        	test2(start);
 	        	console.log("시간" + start.toString());
-	        	console.log(start.toString().substr(4, 3));
+	        	console.log(start.toString().substr(11, 4));
 	        	// 선택한 날짜 나옴
 
+	        	// 년
+	        	clickYear = (start.toString().substr(11, 4));
+	        	
 	        	// 월
-	        	clickMonth.push(start.toString().substr(4, 3));
+	        	//clickMonth = (start.toString().substr(4, 3));
+	        	
+	        	// 일
+	        	clickDay =  (start.toString().substr(8, 2));
+	        	
+	        	
+	        
+	        	
+	        	switch(start.toString().substr(4, 3)){
+	        	case "Jan" : clickMonth = '01'; break;
+	        	case "Feb" : clickMonth = '02'; break;
+	        	case "Mar" : clickMonth = '03'; break;
+	        	case "Apr" : clickMonth = '04'; break;
+	        	case "May" : clickMonth = '05'; break;
+	        	case "Jun" : clickMonth = '06'; break;
+	        	case "Jul" : clickMonth = '07'; break;
+	        	case "Aug" : clickMonth = '08'; break;
+	        	case "Sep" : clickMonth = '09'; break;
+	        	case "Oct" : clickMonth = '10'; break;
+	        	case "Nov" : clickMonth = '11'; break;
+	        	case "Dec" : clickMonth = '12'; break;
+	        	}
+	        	
+	        	addDay = clickYear + "-" + clickMonth + "-" + clickDay;
+	        	console.log(addDay);
+	        	
 	        	
 	        	// function 호출해서 값 리턴..?
 	        	// 변수 만들어서 값 넣기
@@ -488,6 +517,8 @@
     });
     */
     
+     
+    
     
     
  	// submit 동작
@@ -498,31 +529,9 @@
     	
     	
     	
-    	
- 		console.log("월" + clickMonth);
-    	
-    	var sendMonth = '';
-    	
-    	switch(cickMonth){
-    	case "Jan" : sendMonth = 01; break;
-    	case "Feb" : sendMonth = 02; break;
-    	case "Mar" : sendMonth = 03; break;
-    	case "Apr" : sendMonth = 04; break;
-    	case "May" : sendMonth = 05; break;
-    	case "Jun" : sendMonth = 06; break;
-    	case "Jul" : sendMonth = 07; break;
-    	case "Aug" : sendMonth = 08; break;
-    	case "Sep" : sendMonth = 09; break;
-    	case "Oct" : sendMonth = 10; break;
-    	case "Nov" : sendMonth = 11; break;
-    	case "Dec" : sendMonth = 12; break;
-    	}
-    	
-    	
-    	
  		console.log("서브밋동작" + $("#no").val());
  		
- 		$employeeNo = $("<input>", {type : "hidden", name : "employeeNo", 
+ 		$memberNo = $("<input>", {type : "hidden", name : "memberNo", 
 			value : $("#no").val() });
  		
     	var time = $("#time").val();
@@ -532,17 +541,18 @@
  		
  		// 뒤에서부터 숫자 끊어서 가져오기
  		// str.slice(-3,-1);
- 		$startTime =$("<input>", {type : "hidden", name : "startTime", 
+ 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
 			value :  time.slice(-14,-12)});
  		
- 		$endTime =$("<input>", {type : "hidden", name : "endTime", 
+ 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
 			value :  time.slice(-6,-4)});
  		
  		
  		// 날짜
- 		//$workingNo
- 		
- 		$("form[name='insertCalendarForm']").append($employeeNo, $startTime, $endTime);
+ 		$workDay =$("<input>", {type : "hidden", name : "workDay", 
+					value : "2020-09-12"});
+ 			// 왜 안들어가세요...? ㅠ
+ 		$("form[name='insertCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
  		
 	 }
     

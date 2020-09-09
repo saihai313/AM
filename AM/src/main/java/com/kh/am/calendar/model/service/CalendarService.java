@@ -31,4 +31,11 @@ public interface CalendarService{
 	 */
 	List<Member> selectEList(int storeNo);
 
+	/** 스케쥴 삽입
+	 * @param insertCal
+	 * @param memberNo
+	 * @return result
+	 */
+	int insertCalendar(WorkCalendar insertCal, int memberNo);
+
 }
