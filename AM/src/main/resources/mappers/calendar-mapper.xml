@@ -33,6 +33,30 @@
 	</resultMap>
 
 
+	<resultMap type="Employee" id="employeeResultSet">
+		
+			
+			<result property="employeeNo" column="EMPLOYEE_NO"/>
+			<result property="storeNo" column="E_STORE_NO"/>
+			<result property="sal" column="SAL"/>
+			
+		
+		
+		</resultMap>
+
+	<resultMap id="memberResultSet" type="Member" >
+		
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NM"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
+		<result property="memberGrade" column="MEMBER_GRADE"/>
+		<result property="memberCheck" column="MEMBER_CHECK"/>
+	</resultMap>
+
 	<!-- 사장님 가게 번호 조회 -->
 	<select id="selectStoreNo" parameterType="_int" resultType="_int">
 		SELECT STORE_NO
@@ -51,5 +75,15 @@
 	<select id="selectCalendarS" parameterType="_int" resultMap="calendarResultSet">
 		SELECT WORKING_NO, E_STORE_NO,  EMPLOYEE_NO, WORKING_DAY, START_TIME, END_TIME, MEMBER_NM FROM CALENDAL JOIN MEMBER ON(MEMBER_NO = EMPLOYEE_NO)
 		WHERE EMPLOYEE_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 사장 알바생 이름 ,번호목록 조회 -->
+	<select id="selectEName" parameterType="_int" resultMap="memberResultSet">
+		SELECT MEMBER_NM, MEMBER_NO
+		FROM MEMBER
+		WHERE MEMBER_NO IN(SELECT EMPLOYEE_NO
+							FROM EMPLOYEE
+							WHERE E_STORE_NO = #{storeNo})
 	</select>
 </mapper>

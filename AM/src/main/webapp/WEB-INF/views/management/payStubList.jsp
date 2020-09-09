@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>급여 설정</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 
 		/* 급여명세서 */
@@ -181,10 +182,27 @@
    	    		</div>
 		</div>
 	</section>
+	
+	<script >
+		$(function(){
+			$("#list-table td").on("click",function(){
+				console.log("클릭됨");
+				var boardNo = $(this).parent().children().eq(0).text();
+				///am1/management/payStubList/1?=500
+				var payboardUrl="${contextPath}/management/${pInfo.boardType}/"+boardNo;
+				location.href=payboardUrl;
+				
+			
+
+			});
+		});
+	</script>
 
 
 	<!-- ------------------------- footer ---------------------------- -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	
 
 </body>
 </html>
