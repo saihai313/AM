@@ -28,7 +28,7 @@
 	<typeAlias type="com.kh.am.calendar.model.vo.Calendar" alias="Calendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employer" alias="Employer"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employee" alias="Employee"/>
-	
+	<typeAlias type="com.kh.am.pay.model.vo.Pay" alias="Pay"/>
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그 -->
@@ -37,5 +37,6 @@
 		<mapper resource="/mappers/calendar-mapper.xml" />
 		<mapper resource="/mappers/paystub-mapper.xml" />
 		<mapper resource="/mappers/personnel-mapper.xml" />
+		<mapper resource="/mappers/pay-mapper.xml" />
 	</mappers>
 </configuration>
