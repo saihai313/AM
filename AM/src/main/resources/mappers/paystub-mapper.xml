@@ -8,11 +8,34 @@
         <result property="payStatus" column="PAY_STATUS"/>
         <result property="payTitle" column="PAY_TITLE"/>
         <result property="payDate" column="PAY_DATE"/>
-        <result property="payEmployer" column="PAY_EMPLOYER"/>
+        <result property="payEmployer" column="MEMBER_NM"/>
         <result property="payNo" column="PAY_NO"/>
         <result property="payCheck" column="PAY_CHECK"/>
      
     </resultMap>
+    
+    	<resultMap type="paystubplus" id="plusset">
+        <id property="payNO" column="PAY_NO"/>
+        <result property="paystubNo" column="PAY_STUB_NO"/>
+        <result property="payContent" column="PAY_CONTENT"/>
+        <result property="payStatus" column="PAY_STATUS"/>
+        <result property="payTitle" column="MEMBER_NM"/>
+        <result property="payDate" column="PAY_DATE"/>
+        <result property="payEmployer" column="MEMBER_NM"/>
+        <result property="payNo" column="PAY_NO"/>
+        <result property="payCheck" column="PAY_CHECK"/>
+        
+        
+        <result property="payTotalMoney" column="PAY_TOTAL_MONEY"/>
+        <result property="patTime" column="PAY_TIME"/>
+        <result property="payDay" column="PAY_DAY"/>
+        <result property="partMoney" column="PART_MONEY"/>
+        <result property="vacaMoney" column="VACA_MONEY"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="storeNo" column="MEMBER_NO"/>
+     
+    </resultMap>
+    
 	
 	
 	
@@ -23,7 +46,17 @@
 	
 	<select id="selectList" parameterType="_int" resultMap="PayStubResultSet">
 		SELECT * FROM PAYSTUB
+		JOIN MEMBER ON(PAY_EMPLOYER=MEMBER_NO)
 		ORDER BY PAY_STUB_NO DESC
 	</select>
+	
+	<select id="selectone" parameterType="_int" resultMap="plusset">
+		SELECT *
+    	FROM PAYSTUB
+    	JOIN MEMBER ON (PAY_EMPLOYER=MEMBER_NO)
+    	JOIN PAY USING (PAY_NO)
+    	WHERE PAY_NO=#{payNo}
+	</select>
+	
   
 </mapper>

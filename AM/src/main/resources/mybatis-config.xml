@@ -26,6 +26,7 @@
 	<typeAlias type="com.kh.am.management.model.vo.PayStub" alias="PayStub"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Calendar" alias="Calendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employer" alias="Employer"/>
+	<typeAlias type="com.kh.am.management.model.vo.paystubplus" alias="paystubplus"/>
 	
 	</typeAliases>
 	
@@ -34,5 +35,6 @@
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/calendar-mapper.xml" />
 		<mapper resource="/mappers/paystub-mapper.xml" />
+		
 	</mappers>
 </configuration>
