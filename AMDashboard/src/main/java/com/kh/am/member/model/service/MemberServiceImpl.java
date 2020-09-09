@@ -18,6 +18,9 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private BCryptPasswordEncoder bcPwd;
     
+    
+    
+    // 로그인 Service 구현-- 아무거나 되는중 
     @Override
     public Member login(Member member) {
         
