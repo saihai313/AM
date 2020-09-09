@@ -2,27 +2,27 @@ package com.kh.am.calendar.model.vo;
 
 public class Employee {
 
-	private int employeeNo;
+	private int memberNo;
 	private int storeNo;
-	private int sal;
+	private int employeeSal;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(int employeeNo, int storeNo, int sal) {
+	public Employee(int memberNo, int storeNo, int employeeSal) {
 		super();
-		this.employeeNo = employeeNo;
+		this.memberNo = memberNo;
 		this.storeNo = storeNo;
-		this.sal = sal;
+		this.employeeSal = employeeSal;
 	}
 
-	public int getEmployeeNo() {
-		return employeeNo;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setEmployeeNo(int employeeNo) {
-		this.employeeNo = employeeNo;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public int getStoreNo() {
@@ -33,18 +33,19 @@ public class Employee {
 		this.storeNo = storeNo;
 	}
 
-	public int getSal() {
-		return sal;
+	public int getEmployeeSal() {
+		return employeeSal;
 	}
 
-	public void setSal(int sal) {
-		this.sal = sal;
+	public void setEmployeeSal(int employeeSal) {
+		this.employeeSal = employeeSal;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [employeeNo=" + employeeNo + ", storeNo=" + storeNo + ", sal=" + sal + "]";
+		return "Employee [memberNo=" + memberNo + ", storeNo=" + storeNo + ", employeeSal=" + employeeSal + "]";
 	}
+
 	
 	
 }

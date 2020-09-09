@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.calendar.model.dao.CalendarDAO;
 import com.kh.am.calendar.model.vo.WorkCalendar;
@@ -66,6 +67,20 @@ public class CalendarServiceImpl implements CalendarService {
 		List<Member> EName = calendarDAO.selectEName(storeNo);
 		
 		return EName;
+	}
+
+	// 스케쥴 삽입(1개)
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int insertCalendar(WorkCalendar insertCal, int memberNo) {
+		
+		int storeNo = calendarDAO.selectStoreNo(memberNo);
+		
+		insertCal.setStoreNo(storeNo);
+		
+		int result = calendarDAO.insertCalendar(insertCal);
+		
+		return result;
 	}
 	
 

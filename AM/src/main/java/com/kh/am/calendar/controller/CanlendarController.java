@@ -111,12 +111,44 @@ public class CanlendarController {
 	
 	// 스케쥴 등록
 	@RequestMapping(value="insertCalendar", method = RequestMethod.POST)
-	public String insertCalendar(WorkCalendar insertCal) {
+	public String insertCalendar(Model model, WorkCalendar insertCal) {
 		
 		
 		// 위에 workList 만든거 가져와야지 정보입력될듯
 		
-		System.out.println(insertCal);
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		// 사장님 회원번호 이용해서 가게번호 알고 insert 진행
+		int result = calendarService.insertCalendar(insertCal, memberNo);
+		
+		
+		System.out.println("나와 : "+ insertCal);
+		
+		
+		// ------------------------------------------ list 다시
+		
+		// 가게번호 얻어오기
+				int storeNo = calendarService.selectStoreNo(memberNo);
+				
+				System.out.println("조회" + storeNo);
+				
+				// 알바생 목록 조회
+				List<Member> eList = calendarService.selectEList(storeNo);
+				
+				System.out.println("알바" + eList);
+				
+				// 파트타임 목록 조회
+				// 아 여긴 테이블 만들어야 한다해~
+				
+				
+				model.addAttribute("eList", eList);
+		
+		
+		
 		return "calendar/workList";
 	}
 	
