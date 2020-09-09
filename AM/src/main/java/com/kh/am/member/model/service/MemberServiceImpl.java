@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 		if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			loginMember = null;
 			
-			System.out.println(login);
+			//System.out.println(login);
 		}else {
 			loginMember.setMemberPwd(null);
 		}
