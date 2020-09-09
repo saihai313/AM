@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.am.member.model.service.MemberService;
 import com.kh.am.member.model.vo.Member;
-import com.kh.am.member.model.vo.PageInfo;
 
 @SessionAttributes({"loginMember"})
 
