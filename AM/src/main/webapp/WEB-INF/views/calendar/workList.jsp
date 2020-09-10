@@ -62,10 +62,19 @@
                 border-radius: 3px;
             }
 
-            #my_modal .modal_close_btn {
+            #my_modal .modal_close_btn, #my_modal2 .modal_close_btn{
                 position: absolute;
                 top: 10px;
                 right: 10px;
+            }
+            
+             #my_modal2 {
+                display: none;
+                width: 400px;
+                padding: 20px 60px;
+                background-color: #fefefe;
+                border: 1px solid #888;
+                border-radius: 3px;
             }
 </style>
 </head>
@@ -127,8 +136,8 @@
 
 
 
-<!-- 모달 -->
-<div id="my_modal">
+	<!-- 삽입 모달 -->
+	<div id="my_modal">
 		<c:choose>
 			<c:when test="${empty eList}">
 				<h4>알바생 없음</h4>
@@ -136,7 +145,8 @@
 			
 			<c:otherwise>
 	          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar" name='insertCalendarForm' onsubmit="return validate();">
-					근무자 : <select id="no">
+	          <!-- onsubmit="return validate();"  -->
+					근무자 : <select id="no" name="memberNo">
 			<c:forEach var="member" items="${eList}">
 					<option value="${member.memberNo}">${member.memberName}</option>
 			
@@ -144,15 +154,15 @@
 				</select> <br>
 			
 						part 선택 : <select id="time" name="time">
-						<option>part1 [10:00 ~ 16:00]</option>
-						<option>part2 [14:00 ~ 22:00]</option>
+						<option value='part1 [10:00 ~ 16:00]' >part1 [10:00 ~ 16:00]</option>
+						<option value='part2 [14:00 ~ 22:00]' >part2 [14:00 ~ 22:00]</option>
 						</select> 
 						<br>
 			
 				<div class="checkbox mb-3">
 					
 				</div>
-				<button class="btn btn-lg btn-primary" type="submit">등록|수정</button>
+				<button class="btn btn-lg btn-primary" type="submit">등록</button>
 			</form>
 			</c:otherwise>
 		</c:choose>
@@ -163,18 +173,70 @@
 
   <%--      <button id="popup_open_btn">팝업창 띄어 줘염</button> --%>
 	
+	<!-- ------------------------------------------------------------------------------------------------- -->
 	
-	
+	<!-- 수정, 삭제 모달 -->
+	<div id="my_modal2">
+		<c:choose>
+			<c:when test="${empty eList}">
+				<h4>알바생 없음</h4>
+			</c:when>
+			
+			<c:otherwise>
+	          <form class="form-signin" method="POST" action="${contextPath}/calendar/updateCalendar" name='updateCalendarForm' onsubmit="return validate2();">
+	          <!-- onsubmit="return validate();"  -->
+					근무자 : <select id="updateNo" name="memberNo">
+			<c:forEach var="member" items="${eList}">
+					<option value="${member.memberNo}" value2="${member.memberName}">${member.memberName}</option>
+			
+			</c:forEach>
+				</select> <br>
+			
+						part 선택 : <select id="updateTime" name="time">
+						<option value2="1016" value='part1 [10:00 ~ 16:00]'>part1 [10:00 ~ 16:00]</option>
+						<option value2="1422" value='part2 [14:00 ~ 22:00]'>part2 [14:00 ~ 22:00]</option>
+						</select> 
+						<br>
+			
+			
+			
+			
+			
+			
+				<div class="checkbox mb-3">
+					
+				</div>
+				<button class="btn btn-lg btn-primary" type="submit">수정</button>
+				<button class="btn btn-lg btn-primary" type="button" onclick="delete()">삭제</button>
+			</form>
+			</c:otherwise>
+		</c:choose>
+								
+								
+            <a class="modal_close_btn">닫기</a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+<!-- ------------------------------------------------------------------------------------------- -->	
 	
      <script type="text/javascript" src="${contextPath}/resources/js/calendar.js"></script>
     
+<!-- ------------------------------------------------------------------------------------------- -->	
   
     
 <script>
-	// 날짜 클릭했을 때 모달 창 나오기
-	$(".fc-day").on("click", function(){
-		  console.log("111111");
-	});
+
+
+
+	
 
     $(document).ready(function() {
       var date = new Date();
@@ -213,7 +275,7 @@
 	  	  // 아이디가 사장님일 때
 	  	  console.log("사장이다");
 	  	  
-	  	  
+	  	 
 	  	// 캘린더 값 얻어오는 ajax 
 	      // 동기로 해서 순서대로 읽을 수 있도록 만들고
 	      // 객체배열이니까 배열 변수 선언하고 그 안에 each 돌린 값 넣기
@@ -247,6 +309,16 @@
 							
 							
 							calList.push(obj);
+							
+							
+							
+							
+							
+							
+							$workNo =$("<input>", {type : "hidden", name : "workNo", 
+								value : list[i].workNo});
+							
+							$("form[name='updateCalendarForm']").append($workNo);
 			        	});
 						
 					}, error : function(){
@@ -304,7 +376,7 @@
 	var clickYear = 0;
 	var clickMonth = 0;
 	var clickDay = 0;
-	var addDay = 0;
+	//var addDay = "2020-09-22샘플";
 	
       $(function(){ 
 	      // Ajax success 에 넣으면 될듯
@@ -371,16 +443,16 @@
 	        	case "Dec" : clickMonth = '12'; break;
 	        	}
 	        	
-	        	addDay = clickYear + "-" + clickMonth + "-" + clickDay;
+	        	var addDay = clickYear + "-" + clickMonth + "-" + clickDay;
 	        	console.log(addDay);
 	        	
+	        	createAddDay(addDay);
 	        	
-	        	// function 호출해서 값 리턴..?
 	        	// 변수 만들어서 값 넣기
 	        	
 	          var title = test();
 	          // 일 클릭하면 나오는 창
-	          if (title) {
+	          if (title) {  
 	            calendar.fullCalendar('renderEvent', {
 	                title: title,
 	                start: start,
@@ -389,9 +461,11 @@
 	              },
 	              true // make the event "stick"
 	            );
-	          }
+	          } 
 	          calendar.fullCalendar('unselect');
 	        },
+	        
+
 	        timeFormat : "H : mm",
 	        droppable: true, // this allows things to be dropped onto the calendar !!!
 	        drop: function(date, allDay) { // this function is called when something is dropped
@@ -411,6 +485,18 @@
 	            $(this).remove();
 	          }
 	        },
+	        eventRender: function (event, element) {
+	        	// 일정을 클릭했을 때 나옴
+	            element.attr('href', 'javascript:void(0);');
+	            element.click(function() {
+	               //alert(event.title + "\n" +  event.start +"\n" + event.end);
+	              
+	               test3(event.title, event.start, event.end);
+	               
+	               //modal('my_modal2');
+	               // 모달로 이동
+	            });
+	        },
 	        events: calList 
 	          /*{
 	            title: 'Birthday Party',
@@ -426,44 +512,154 @@
 	            className: 'success'
 	          }
 	        ]*/
+	        
+	       
 	      });
 	    });
       
       
     });
     
+    // workDay 변수에 가져오기
+    var workDay;
+    function createAddDay(addDay){
+    	workDay = addDay;
+    }
+    
+    
+    
     function test2(day){
     	
     	// 클릭한 날짜
     	console.log(typeof(day));
     	
-    	
-    	
-    	
     	modal('my_modal');
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    }
-    function test(){
-    	var t= "테스트"
-    	return t;
     }
     
+ function test3(title, start, end){
+    	
+    	console.log(title +"/" + start + "/" + end);
+    	console.log(start.toString().substr(16, 2));
+    	console.log(end.toString().substr(16, 2));
+    	
+    	//파트타임 전체 목록 가져오기 
+    	//console.log($('#time').find('option').map(function() {return $(this).val();}).get());
+    	
+    	var t = title;
+    	var s = start.toString().substr(16, 2);
+    	var e =end.toString().substr(16, 2);
+    	snedContent(t, s, e);
+    	
+    	
+    	
+    	
+    	
+    	console.log(start.toString().substr(11, 4));
+    	// 선택한 날짜 나옴
+
+    	// 년
+    	clickYear = (start.toString().substr(11, 4));
+    	
+    	// 월
+    	//clickMonth = (start.toString().substr(4, 3));
+    	
+    	// 일
+    	clickDay =  (start.toString().substr(8, 2));
+    	
+    	
+    
+    	
+    	switch(start.toString().substr(4, 3)){
+    	case "Jan" : clickMonth = '01'; break;
+    	case "Feb" : clickMonth = '02'; break;
+    	case "Mar" : clickMonth = '03'; break;
+    	case "Apr" : clickMonth = '04'; break;
+    	case "May" : clickMonth = '05'; break;
+    	case "Jun" : clickMonth = '06'; break;
+    	case "Jul" : clickMonth = '07'; break;
+    	case "Aug" : clickMonth = '08'; break;
+    	case "Sep" : clickMonth = '09'; break;
+    	case "Oct" : clickMonth = '10'; break;
+    	case "Nov" : clickMonth = '11'; break;
+    	case "Dec" : clickMonth = '12'; break;
+    	}
+    	
+    	var addDay = clickYear + "-" + clickMonth + "-" + clickDay;
+    	console.log(addDay);
+    	
+    	createAddDay(addDay);
+    	
+    	
+    	
+    	
+    	
+    	modal('my_modal2');
+    	
+    }
+    
+ var updateT;
+ var updateS ;
+ var updateE;
+ // 일정에서 가져온 이름,시작시간, 종료시간
+function snedContent(t, s, e){
+	updateT = t;
+	updateS = s;
+	updateE = e;
+	
+	
+	console.log(updateT + "//" + updateS + "//" + updateE);
+}
+  
     
     // 모달
     function modal(id) {
+    	
+    	// option에 selected 속성추가
+    	
+    	
+    	var partTime = $('#time').find('option').map(function() {return $(this).val();}).get();
+    	var name = $('#no').find('option').map(function() {return $(this).text();}).get();
+    	
+    	
+    	$.each(partTime, function(i){
+    		
+    		
+    		// 시작 시간
+    		console.log(partTime[i].toString().slice(-14,-12));
+    		console.log("입력된 시작 시간 " + updateS);
+    		
+    		// 끝나는 시간
+    		console.log(partTime[i].toString().slice(-6,-4));
+    		console.log("입력된 종료 시간 " + updateE);
+    		
+    		// 파트 타임 비교해서 selected 넣기
+    		if(partTime[i].toString().slice(-14,-12) == updateS && partTime[i].toString().slice(-6,-4) == updateE){
+    			console.log("같은 게 있다");
+    			var add = partTime[i].toString().slice(-14,-12) + partTime[i].toString().slice(-6,-4);
+    			console.log(add);
+    			$("#updateTime option[value2=" + partTime[i].toString().slice(-14,-12) + partTime[i].toString().slice(-6,-4) + "]").attr('selected', 'selected');
+    		}
+    		
+    	});
+    		
+    	
+    		console.log(name);
+    	$.each(name, function(i){
+    	
+    	
+    		// 이름 비교해서 selected 넣기
+    		
+    		if(name[i] == updateT){
+    			console.log("이름 같은 게 있다");
+    			$("#updateNo option[value2="+ name[i] +"]").attr('selected', 'selected');
+    		}
+    		
+    	});
+    		
+    	
+    	
+    	
         var zIndex = 9999;
         var modal = document.getElementById(id);
 
@@ -519,43 +715,6 @@
     
      
     
-    
-    
- 	// submit 동작
-	function validate(){
-		
-    	// 디비에 이렇게 입력들어가야함
-    	// 20/09/05
-    	
-    	
-    	
- 		console.log("서브밋동작" + $("#no").val());
- 		
- 		$memberNo = $("<input>", {type : "hidden", name : "memberNo", 
-			value : $("#no").val() });
- 		
-    	var time = $("#time").val();
-    	
-    	console.log("시간 쪼개기" + time);
- 		
- 		
- 		// 뒤에서부터 숫자 끊어서 가져오기
- 		// str.slice(-3,-1);
- 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-			value :  time.slice(-14,-12)});
- 		
- 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-			value :  time.slice(-6,-4)});
- 		
- 		
- 		// 날짜
- 		$workDay =$("<input>", {type : "hidden", name : "workDay", 
-					value : "2020-09-12"});
- 			// 왜 안들어가세요...? ㅠ
- 		$("form[name='insertCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
- 		
-	 }
-    
     $(document).ready(function() {
     	
     	
@@ -574,7 +733,80 @@
  		// part1 [10:00 ~ 16:00]
     	
     });
- 	
+    
+
+
+ 
+    
+  
+ // 삽입 submit 동작
+	function validate(){
+    	// 디비에 이렇게 입력들어가야함
+    	// 20/09/05
+    
+ 		console.log("서브밋동작" + $("#no").val());
+ 		
+ 		$memberNo = $("<input>", {type : "hidden", name : "memberNo", 
+			value : $("#no").val() });
+ 		
+    	var time = $("#time").val();
+    	
+    	console.log("시간 쪼개기" + time);
+ 		
+ 		
+ 		// 뒤에서부터 숫자 끊어서 가져오기
+ 		// str.slice(-3,-1);
+ 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
+			value :  time.slice(-14,-12)});
+ 		
+ 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
+			value :  time.slice(-6,-4)});
+ 		
+ 		console.log(workDay);
+ 		// 날짜
+ 		$workDay =$("<input>", {type : "hidden", name : "workDay", 
+					value : workDay});
+ 		
+ 		$("form[name='insertCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
+ 		
+ 			
+	 }	
+ 
+	 
+	 // 업데이트 submit 동작
+		function validate2(){
+	    	// 디비에 이렇게 입력들어가야함
+	    	// 20/09/05
+	    
+	 		console.log("서브밋동작" + $("#updateNo").val());
+	 		
+	 		$memberNo = $("<input>", {type : "hidden", name : "memberNo", 
+				value : $("#updateNo").val() });
+	 		
+	 		
+	 		
+	 		
+	    	var time = $("#updateTime").val();
+	    	
+	    	console.log("시간 쪼개기" + time);
+	 		
+	 		
+	 		// 뒤에서부터 숫자 끊어서 가져오기
+	 		// str.slice(-3,-1);
+	 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
+				value :  time.slice(-14,-12)});
+	 		
+	 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
+				value :  time.slice(-6,-4)});
+	 		
+	 		console.log(workDay);
+	 		// 날짜
+	 		$workDay =$("<input>", {type : "hidden", name : "workDay", 
+						value : workDay});
+	 		
+	 		$("form[name='updateCalendarForm']").append($memberNo, $workStart, $workEnd,$workDay );
+	 		
+		 }	
 </script>
 </c:when>
 		

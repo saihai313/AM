@@ -82,6 +82,18 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		return result;
 	}
+
+	// 스케쥴 업데이트
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int updateCalendar(WorkCalendar updateCal) {
+		
+		
+		
+		int result = calendarDAO.updateCalendar(updateCal);
+		
+		return result;
+	}
 	
 
 }

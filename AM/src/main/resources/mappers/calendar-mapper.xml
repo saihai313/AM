@@ -90,7 +90,13 @@
 	<!--  스케쥴 삽입 1개  -->
 	<insert id="insertCalendar" parameterType="WorkCalendar">
 		INSERT INTO WORK_CALENDAL
-		VALUES(SEQ_WNO.NEXTVAL, '2020-09-12', ${workStart} , ${workEnd}, ${storeNo}, ${memberNo})
-		<!-- 의문!!?? 왜 데이트 안넣어져... -->
+		VALUES(SEQ_WNO.NEXTVAL, '${workDay}', ${workStart} , ${workEnd}, ${storeNo}, ${memberNo})
+		
 	</insert>
+	
+	
+	<!-- 스케쥴 업데이트 -->
+	<update id="updateCalendar" parameterType="WorkCalendar">
+	UPDATE WORK_CALENDAL SET  WORK_DAY = '${workDay}' , WORK_START = ${workStart}, WORK_END = ${workEnd} , MEMBER_NO = ${memberNo} WHERE WORK_NO = ${workNo}
+	</update>
 </mapper>
