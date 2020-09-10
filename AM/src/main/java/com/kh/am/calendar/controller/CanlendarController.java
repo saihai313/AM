@@ -82,6 +82,8 @@ public class CanlendarController {
 		//스케쥴 정보를 List<vo> 에 넣어서 가져옴
 		List<WorkCalendar> list = calendarService.selectList(memberNo);
 		
+		System.out.println("스케쥴" + list);
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(list);
@@ -113,6 +115,7 @@ public class CanlendarController {
 	@RequestMapping(value="insertCalendar", method = RequestMethod.POST)
 	public String insertCalendar(Model model, WorkCalendar insertCal) {
 		
+		System.out.println("나와 : "+ insertCal);
 		
 		// 위에 workList 만든거 가져와야지 정보입력될듯
 		
@@ -126,7 +129,6 @@ public class CanlendarController {
 		int result = calendarService.insertCalendar(insertCal, memberNo);
 		
 		
-		System.out.println("나와 : "+ insertCal);
 		
 		
 		// ------------------------------------------ list 다시
@@ -152,6 +154,49 @@ public class CanlendarController {
 		return "calendar/workList";
 	}
 	
+	
+	// 스케쥴 업데이트
+		@RequestMapping(value="updateCalendar", method = RequestMethod.POST)
+		public String updateCalendar(Model model, WorkCalendar updateCal) {
+			
+			System.out.println("나와 업뎃: "+ updateCal);
+			
+			// 위에 workList 만든거 가져와야지 정보입력될듯
+			
+			
+		Member loginMember = (Member)model.getAttribute("loginMember");
+			
+			// 사장님 회원번호
+			int memberNo = loginMember.getMemberNo();
+			
+			// 사장님 회원번호 이용해서 가게번호 알고 update 진행
+			int result = calendarService.updateCalendar(updateCal);
+			
+			System.out.println("업데이트 리졸트" + result);
+			
+			
+			// ------------------------------------------ list 다시
+			
+			// 가게번호 얻어오기
+					int storeNo = calendarService.selectStoreNo(memberNo);
+					
+					System.out.println("조회" + storeNo);
+					
+					// 알바생 목록 조회
+					List<Member> eList = calendarService.selectEList(storeNo);
+					
+					System.out.println("알바" + eList);
+					
+					// 파트타임 목록 조회
+					// 아 여긴 테이블 만들어야 한다해~
+					
+					
+					model.addAttribute("eList", eList);
+			
+			
+			
+			return "calendar/workList";
+		}
 	
 	
 }

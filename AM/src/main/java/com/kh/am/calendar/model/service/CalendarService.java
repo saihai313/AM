@@ -38,4 +38,10 @@ public interface CalendarService{
 	 */
 	int insertCalendar(WorkCalendar insertCal, int memberNo);
 
+	/** 스케쥴 업데이트
+	 * @param updateCal
+	 * @return result
+	 */
+	int updateCalendar(WorkCalendar updateCal);
+
 }
