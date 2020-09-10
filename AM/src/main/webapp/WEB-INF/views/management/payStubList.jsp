@@ -66,6 +66,13 @@
 		
 		}
 		
+		th:nth-of-type(5) { display: none; }   
+		
+		#memberno{
+			display: none;
+		}
+		
+		
 </style>
 <!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> --> 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
@@ -97,7 +104,7 @@
 			<!-- ------------------------- side menu ---------------------------- -->
 			 <ul class="tabType1">
 			  <li><a href="${contextPath}/pay/insertPay">급여설정</a></li>
-		      <li class="on"><a href="${contextPath}/management/payStubList/1">급여 명세서</a></li>
+		      <li class="on"><a href="${contextPath}/management/payStubList">급여 명세서</a></li>
 			  <li><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
@@ -112,12 +119,11 @@
 		               <thead>
 		                    <tr>
 		                        <th>글번호 </th>
-		                        <th>내용</th>
-		                        <th>정정상태</th>
-		                        <th>알바생이름(제목)</th>
-		                        <th>작성일</th>
-		                        <th>작성자</th>
-		                        <th>상태(Y:확인, N:반려, W:대기)</th>
+		                        <th>가게 상호명</th>		                        
+		                        <th>알바생이름</th>		                      
+		                        <th>급여명세서 작성일</th>		                      
+		                        <th >멤버번호</th>		                      
+		                        
 		                    </tr>
 		                </thead>
 		                 <tbody>
@@ -134,30 +140,14 @@
 		                        <c:forEach var="paystub" items="${paystubList}">
 		                        		<tr>
 		                        		
-		                        			<td>${paystub.paystubNo }</td>
-		                        			<td>${paystub.payContent }</td>
-		                        			<td>${paystub.payStatus }</td>
-		                        			<td>${paystub.payTitle }</td>
-		                        			<td>
-		                        			${paystub.payDate }
-				                        			<jsp:useBean id="now" class="java.util.Date"/>
-				                        			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
-					                                <fmt:formatDate var="createDate" value="${board.boardCreateDate}" pattern="yyyy-MM-dd"/>
-					                                <fmt:formatDate var="createTime" value="${board.boardCreateDate}" pattern="hh:mm:ss"/>
-		                        			 <c:choose>
-                                  
-			                                  <c:when test="${today == createDate}">
-			                                     ${createTime}
-			                                  </c:when>
-			                                  
-			                                  <c:otherwise>
-			                                     ${createDate}
-			                                  </c:otherwise>
-			                               </c:choose>
+		                        			<td>${paystub.payNo }</td>
+		                        			<td>${paystub.storeName }</td>
+		                        			<td>${paystub.memberName }</td>
+		                        			<td>${paystub.payCreateDate }</td>
+		                        			<td id="memberno">${ paystub.memberNo}</td>
 		                        			
-		                        			</td>
-		                        			<td>${paystub.payEmployer }</td>
-		                        			<td>${paystub.payCheck}</td>
+		                        			
+		                        		
 		                        		</tr>
 		                        
 		                        </c:forEach>
@@ -172,11 +162,11 @@
 		        </div>
 		
 		        <hr>
-		        
-		        <%-- 로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기 --%>
+		    <%--     
+		        로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기
 		        <c:if test="${!empty loginMember}">
 		          <a class="btn btn-primary float-right" href="../${boardList[0].boardType}/insert">글쓰기</a>
-		      </c:if>
+		      </c:if> --%>
 		         
        
    	    		</div>
@@ -187,9 +177,9 @@
 		$(function(){
 			$("#list-table td").on("click",function(){
 				console.log("클릭됨");
-				var boardNo = $(this).parent().children().eq(0).text();
+				var memberNo = $(this).parent().children().eq(4).text();
 				///am1/management/payStubList/1?=500
-				var payboardUrl="${contextPath}/management/${pInfo.boardType}/"+boardNo;
+				var payboardUrl="${contextPath}/management/bills/" + memberNo;
 				location.href=payboardUrl;
 				
 			

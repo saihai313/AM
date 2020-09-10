@@ -81,7 +81,7 @@ table.type07 td {
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp">
 					<span class="subheading">급여명세서</span>
-					<h2>${member.loginmember } 님의 8월급여명세서</h2>
+					<h2> 급여명세서</h2>
 				</div>
 			</div>
 				<table class="type07">
@@ -94,26 +94,34 @@ table.type07 td {
 			    </tr>
 			    </thead>
 			    <tbody>
+			     <tr>
+			        <th scope="row">총근무일</th>
+			        <td>${plus.payDay}일</td>
+			    </tr>
 			    <tr>
 			        <th scope="row">시급</th>
-			        <td>${plus.partMoney}</td>
+			        <td>${plus.payExtra}원</td>
 			    </tr>
 			    <tr>
 			        <th scope="row">주휴수당</th>
-			        <td>${plus.vacaMoney}</td>
+			        <td>${plus.payExtra}원</td>
+			    </tr>
+			     <tr>
+			        <th scope="row">급여 지급일</th>
+			        <td>${plus.payPayment}일</td>
 			    </tr>
 			    <tr>
-			        <th scope="row">일한날짜</th>
-			        <td>${plus.payDay}</td>
+			        <th scope="row">총근무일</th>
+			        <td>${plus.payDay}일</td>
 			    </tr>
 			    <tr>
-			        <th scope="row">일하는 시간</th>
-			        <td>${plus.patTime}</td>
+			        <th scope="row">총근무시간</th>
+			        <td>${plus.payTime}시간</td>
 			    </tr>
 			    
 			     <tr>
 			        <th scope="row">총급여</th>
-			        <td>${plus.payTotalMoney}원</td>
+			        <td>${plus.paySal}원</td>
 			    </tr>
 			    </tbody>
 			</table>

@@ -3,60 +3,56 @@
 <mapper namespace="paystubMapper">
 	
 	<resultMap type="PayStub" id="PayStubResultSet">
-        <id property="paystubNo" column="PAY_STUB_NO"/>
-        <result property="payContent" column="PAY_CONTENT"/>
+        <id property="payNo" column="PAY_NO"/>
+        <result property="payTime" column="PAY_TIME"/>
+        <result property="payDay" column="PAY_DAY"/>
+        <result property="payExtra" column="PAY_EXTRA"/>
+        <result property="paySal" column="PAY_SAL"/>
+        <result property="payPayment" column="PAY_PAYMENT"/>
+        <result property="payCreateDate" column="PAY_CREATE_DT"/>
         <result property="payStatus" column="PAY_STATUS"/>
-        <result property="payTitle" column="PAY_TITLE"/>
-        <result property="payDate" column="PAY_DATE"/>
-        <result property="payEmployer" column="MEMBER_NM"/>
-        <result property="payNo" column="PAY_NO"/>
-        <result property="payCheck" column="PAY_CHECK"/>
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="storeNo" column="STORE_NO"/>
+        <result property="storeName" column="STORE_NM"/>
+        <result property="memberName" column="MEMBER_NM"/>
      
     </resultMap>
     
-    	<resultMap type="Paystubplus" id="plusset">
-        <id property="payNO" column="PAY_NO"/>
-        <result property="paystubNo" column="PAY_STUB_NO"/>
-        <result property="payContent" column="PAY_CONTENT"/>
-        <result property="payStatus" column="PAY_STATUS"/>
-        <result property="payTitle" column="MEMBER_NM"/>
-        <result property="payDate" column="PAY_DATE"/>
-        <result property="payEmployer" column="MEMBER_NM"/>
-        <result property="payNo" column="PAY_NO"/>
-        <result property="payCheck" column="PAY_CHECK"/>
-        
-        
-        <result property="payTotalMoney" column="PAY_TOTAL_MONEY"/>
-        <result property="patTime" column="PAY_TIME"/>
-        <result property="payDay" column="PAY_DAY"/>
-        <result property="partMoney" column="PART_MONEY"/>
-        <result property="vacaMoney" column="VACA_MONEY"/>
-        <result property="memberNo" column="MEMBER_NO"/>
-        <result property="storeNo" column="MEMBER_NO"/>
-     
-    </resultMap>
+    	
     
 	
 	
 	
 
-	<select id="paystublistCount" resultType="_int">
-		SELECT COUNT(*) FROM PAYSTUB
+	
+	
+<!-- 	<select id="selectList" parameterType="_int" resultMap="PayStubResultSet">
+		SELECT PAY_NO, MEMBER_NM, STORE_NM ,PAY_TIME,PAY_DAY,PAY_EXTRA,PAY_SAL,PAY_PAYMENT,PAY_CREATE_DT,PAY_STATUS 
+		FROM PAY
+		JOIN MEMBER USING (MEMBER_NO)
+		JOIN STORE USING(STORE_NO)
+		WHERE STORE_NO= (SELECT STORE_NO FROM STORE  WHERE MEMBER_NO = #{memberNo})
+		ORDER BY PAY_NO ASC
+	</select> -->
+	
+	
+		<select id="selectList" parameterType="_int" resultMap="PayStubResultSet">
+		 SELECT PAY.PAY_NO, PAY.PAY_TIME, PAY.PAY_DAY, PAY.PAY_EXTRA, PAY.PAY_SAL, PAY.PAY_PAYMENT, 
+        PAY.PAY_CREATE_DT, PAY.PAY_STATUS, PAY.MEMBER_NO, STORE.STORE_NO, STORE.STORE_NM, MEMBER.MEMBER_NM
+		FROM PAY, STORE, MEMBER   
+		WHERE PAY.STORE_NO = STORE.STORE_NO
+		AND PAY.MEMBER_NO = MEMBER.MEMBER_NO
+		AND STORE.STORE_NO=(SELECT STORE_NO FROM STORE  WHERE MEMBER_NO = #{memberNo})
+		ORDER BY PAY.PAY_NO ASC
+
+	</select> 
+	
+	<select id="selectone" parameterType="_int" resultMap="PayStubResultSet"  >
+		SELECT * FROM PAY WHERE MEMBER_NO=#{memberNo}
+	
 	</select>
 	
-	<select id="selectList" parameterType="_int" resultMap="PayStubResultSet">
-		SELECT * FROM PAYSTUB
-		JOIN MEMBER ON(PAY_EMPLOYER=MEMBER_NO)
-		ORDER BY PAY_STUB_NO DESC
-	</select>
 	
-	<select id="selectone" parameterType="_int" resultMap="plusset">
-		SELECT *
-    	FROM PAYSTUB
-    	JOIN MEMBER ON (PAY_EMPLOYER=MEMBER_NO)
-    	JOIN PAY USING (PAY_NO)
-    	WHERE PAY_NO=#{payNo}
-	</select>
 	
   
 </mapper>
