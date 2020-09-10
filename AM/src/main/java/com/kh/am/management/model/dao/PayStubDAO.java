@@ -17,24 +17,18 @@ public class PayStubDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int paytublistCount(int type) {
-		
-		return sqlSession.selectOne("paystubMapper.paystublistCount",type);
+
+	public List<PayStub> selectList(int memberNo) {
+	
+
+		return sqlSession.selectList("paystubMapper.selectList",memberNo);
 	}
 
-	public List<PayStub> selectList(PageInfo pInfo) {
-		int offset =(pInfo.getCurrentPage()-1) *pInfo.getLimit();
+	public PayStub selectone(int memberNo) {
 		
-
-		RowBounds rowBounds =new RowBounds(offset, pInfo.getLimit());
+		System.out.println("11111111");
 		
-
-		return sqlSession.selectList("paystubMapper.selectList",pInfo,rowBounds);
-	}
-
-	public Paystubplus selectone(int boardNo) {
-		
-		return sqlSession.selectOne("paystubMapper.selectone",boardNo);
+		return sqlSession.selectOne("paystubMapper.selectone",memberNo);
 	}
 
 }

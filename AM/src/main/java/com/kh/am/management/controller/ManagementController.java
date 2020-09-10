@@ -11,13 +11,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.am.management.model.service.PayStubService;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
+import com.kh.am.member.model.vo.Member;
 
+@SessionAttributes("loginMember")
 @Controller
 @RequestMapping("/management/*")
 public class ManagementController {
@@ -45,22 +48,18 @@ public class ManagementController {
 //		return "management/moneysetting";
 //	}
 	
-	// 급여 명세서 페이지 전환
-		@RequestMapping("payStubList/{type}")
-		public String payStubListView(@PathVariable int type,
-				@RequestParam(value = "cp",required = false, defaultValue = "1")int cp
-				,Model model) {
-			
-			System.out.println(type);
-			PageInfo pInfo =paystubService.pagination(type,cp);
-			
-			List<PayStub> paystubList=paystubService.seleceList(pInfo);
+	// 급여 명세서 리스트
+		@RequestMapping("payStubList")
+		public String payStubListView(Model model) {
+			int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();			
+			System.out.println(memberNo);
+			List<PayStub> paystubList=paystubService.seleceList(memberNo);
 			
 			for(PayStub p:paystubList) {
 				System.out.println(p);
 			}
 			
-			model.addAttribute("pInfo",pInfo);
+			
 			model.addAttribute("paystubList",paystubList);
 			
 			return "management/payStubList";
@@ -68,14 +67,14 @@ public class ManagementController {
 		
 		
 		//급여명세서 상세조회
-		@RequestMapping("{type}/{boardNo}")
-		public String payStubSelectOne(@PathVariable int boardNo,Model model
-				,RedirectAttributes rdAttr, HttpServletRequest request) {
+		@RequestMapping("bills/{memberNo}")
+		public String payStubSelectOne(@PathVariable int memberNo,Model model
+				,RedirectAttributes rdAttr, HttpServletRequest request,PayStub paystub) {
 			
-			System.out.println(boardNo);
+			
 			
 			String url=null;
-			Paystubplus plus =paystubService.selectone(boardNo);
+			PayStub plus =paystubService.selectone(memberNo);
 			System.out.println(plus);
 			if(plus!=null) {
 				model.addAttribute("plus", plus);

@@ -8,11 +8,12 @@ import com.kh.am.management.model.vo.Paystubplus;
 
 public interface PayStubService {
 
-	public abstract PageInfo pagination(int type, int cp);
-
-	public abstract List<PayStub> seleceList(PageInfo pInfo);
+	/* public abstract PageInfo pagination(int type, int cp); */
+	
+	//급여명세서 리스트 조회
+	public abstract List<PayStub> seleceList(int memberNo);
 
 	//급여상세조회
-	public abstract Paystubplus selectone(int boardNo);
+	public abstract PayStub selectone(int memberNo);
 
 }
