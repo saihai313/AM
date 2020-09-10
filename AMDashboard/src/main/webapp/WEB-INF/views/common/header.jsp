@@ -108,7 +108,7 @@
             </a>
           </li>
           <li>
-            <a href="${contextPath}/member/memberList">
+            <a href="${contextPath}/board/boardList">
               <i class="tim-icons icon-single-02"></i>
               <p>회원 관리</p>
             </a>
