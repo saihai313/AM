@@ -124,13 +124,13 @@
 											<div class="col-md-12 heading-section fadeInUp" id="selectEmployee">
 								          		<span class="subheading">직원선택</span>
 								        	</div>
-										
+											
 											<div class="row">
 											
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="label" for="payDay">급여일</label> <input
-															type="text" class="form-control" name="payDay" id="payDay"
+														<label class="label" for="payPayment">급여일</label> <input
+															type="text" class="form-control" name="payPayment" id="payPayment"
 															placeholder="일" >
 															
 													</div>
@@ -152,8 +152,8 @@
 												
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="label" for="totalDay">총 근무 일수</label> <input
-															type="text" class="form-control" name="totalDay" id="totalDay"
+														<label class="label" for="payDay">총 근무 일수</label> <input
+															type="text" class="form-control" name="payDay" id="payDay"
 															placeholder="일">
 													</div>
 												</div>
@@ -161,8 +161,8 @@
 												
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="label" for="vacaMoney">주휴수당</label> <input
-															type="text" class="form-control" name="vacaMoney" id="vacaMoney"
+														<label class="label" for="payExtra">주휴수당</label> <input
+															type="text" class="form-control" name="payExtra" id="payExtra"
 															placeholder="원" >
 													</div>
 												</div>
@@ -180,8 +180,8 @@
 												
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="label" for="totalMoney">총 지급액</label> <input
-															type="text" class="form-control" name="totalMoney" id="totalMoney"
+														<label class="label" for="paySal">총 지급액</label> <input
+															type="text" class="form-control" name="paySal" id="paySal"
 															placeholder="원">
 													</div>
 												</div>
@@ -213,38 +213,80 @@
 	
 	
 	<script>
+		
+		var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block"});
+		var $option;
+		
+		// 옵션 벨류값
+		var memberNo = "";
 	
-	
-		/* select-option에 등록할 알바생 정보 가져오기 */
+		/* 알바생 이름, 번호 가져오기 */
 		$(function(){
 			$.ajax({
-				url:"selectEmployee/${loginMember.memberNo}",
+				url:"selectEmployeeList/${loginEmployer.storeNo}",
 				dataType:"JSON",
 				success:function(eList){
 					console.log(eList);
-					var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block"});
 					
 					$.each(eList, function(index, item){
 						
-						var $option = $("<option>").text(item.memberName).attr("value", item.memberNo);
+						$option = $("<option>").text(item.memberName).attr("value", item.memberNo);
 						
-						console.log($option.val());
+						console.log("option : " + $option.val());
 						
-						$select.append($option)
-						
+						$select.append($option);
 					});
-					
 					// div
 					$("#selectEmployee").append($select);
-						
-						
 				}, error: function(){
 					console.log("ajax 통신 실패");
 				}
+			});
+			
+			
+			// selected 된 알바생 이번달 총 근무시간, 총 근무일수 조회
+			$select.on("change", function(){
+				memberNo = $(this).prop("seleted",true).val();
+				
+				$.ajax({
+					url:"selectEmployeeWork",
+					data:{"memberNo": memberNo},
+					dataType : "JSON",
+					success:function(wc){
+						console.log(wc);
+						if(wc != null){
+							$("#payDay").val(wc.workStart);
+							$("#payTime").val(wc.workEnd);
+							
+						}else{
+							$("#payDay").val(0);
+							$("#payTime").val(0);
+						}
+					}, error:function(){
+						console.log("ajax 왜 안돼");	
+					}
+				});
+				
+				// 주휴수당에 필요한 알바생 일일 근무 시간 조회
+				$.ajax({
+					url : "selectOneDay",
+					data : {"memberNo" : memberNo},
+					dataType : "json",
+					success : function(){
+						
+					}, error : function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+				
 				
 			});
-		
-		
+			
+			
+			
+			
+			
+			
 		});
 		
 		
@@ -261,37 +303,7 @@
 			
 			/* 급여 계산하기 */
 			
-			var payTime = $("#payTime"); 	 // 일일 근무시간
-			var partMoney = $("#partMoney");  // 시급
-			var totalDay = $("#totalDay");  // 한달 근무 일수
-	       	
-			var tax3 = $("#tax3");         // 세금 3.3%
 			
-			
-			// 주휴수당 함수
-			
-			// function vacaMoneyCal(){}
-			$("#payTime, #partMoney").on("input", function(){
-				if(Number(payTime.val()) * 7 < 40){
-					vacaMoney = (Number(payTime.val()) / 40) * 8 * Number(partMoney.val());
-				}else{
-					vacaMoney = 8 * Number(partMoney.val());
-				}
-				
-				$("#vacaMoney").val(vacaMoney);
-			});
-			
-			
-			
-			// 총 급여 구하기
-			
-			$("#tax3").on("click", function(){
-				
-			});
-		
-		
-		
-		
 		
 		
 		
