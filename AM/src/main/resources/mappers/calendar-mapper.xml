@@ -19,26 +19,23 @@
 		
 	</resultMap>
 	
-	<resultMap type="Employer" id="employerResultSet">
-	
-			<id property="storeNo" column="STORE_NO"/>
-			<result property="employerNo" column="EMPLOYER_NO"/>
-			<result property="businessNo" column="BUSINESS_NO"/>
-			<result property="storeName" column="STORE_NM"/>
-			<result property="storePhone" column="STORE_PHONE"/>
-			<result property="storeAddr" column="STORE_ADDR"/>
-			<result property="businessStatus" column="BUSINESS_STATUS"/>
-	
-	
+	<resultMap type="Store" id="storeResultSet">
+		<id property="storeNo" column="STORE_NO"/>
+		<result property="storeName" column="STORE_NM"/>
+		<result property="storePhone" column="STORE_PHONE"/>
+		<result property="storeAddress" column="STORE_ADDR"/>
+		<result property="storeBizNo" column="STORE_BIZ_NO"/>
+		<result property="storeBizCheck" column="STORE_BIZ_CHECK"/>
+		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 
 
 	<resultMap type="Employee" id="employeeResultSet">
 		
 			
-			<result property="employeeNo" column="EMPLOYEE_NO"/>
-			<result property="storeNo" column="E_STORE_NO"/>
-			<result property="sal" column="SAL"/>
+			<result property="employeeNo" column="MEMBER_NO"/>
+			<result property="storeNo" column="STORE_NO"/>
+			<result property="sal" column="EMPLOYEE_SAL"/>
 			
 		
 		
@@ -60,8 +57,8 @@
 	<!-- 사장님 가게 번호 조회 -->
 	<select id="selectStoreNo" parameterType="_int" resultType="_int">
 		SELECT STORE_NO
-		FROM EMPLOYER
-		WHERE EMPLOYER_NO = #{memberNo}
+		FROM STORE
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 스케쥴 조회 (사장) -->
@@ -84,8 +81,16 @@
 	<select id="selectEName" parameterType="_int" resultMap="memberResultSet">
 		SELECT MEMBER_NM, MEMBER_NO
 		FROM MEMBER
-		WHERE MEMBER_NO IN(SELECT EMPLOYEE_NO
+		WHERE MEMBER_NO IN(SELECT MEMBER_NO
 							FROM EMPLOYEE
-							WHERE E_STORE_NO = #{storeNo})
+							WHERE STORE_NO = #{storeNo})
 	</select>
+	
+	
+	<!--  스케쥴 삽입 1개  -->
+	<insert id="insertCalendar" parameterType="WorkCalendar">
+		INSERT INTO WORK_CALENDAL
+		VALUES(SEQ_WNO.NEXTVAL, '2020-09-12', ${workStart} , ${workEnd}, ${storeNo}, ${memberNo})
+		<!-- 의문!!?? 왜 데이트 안넣어져... -->
+	</insert>
 </mapper>

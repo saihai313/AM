@@ -84,7 +84,7 @@
 	
 	var calList = [];		
 	
-	if(${loginMember.memberGrade== 'M'}){
+	if(${loginMember.memberGrade== 'R'}){
   	  // 아이디가 사장님일 때
   	  console.log("m이다");
   	  
@@ -100,12 +100,12 @@
 				success : function(list){
 					console.log(list);
 					$.each(list, function(i){
-						var year = list[i].workingDay.toString().substring(0,4);
-						var month = list[i].workingDay.toString().substring(5,7) - 1;
-						var day = list[i].workingDay.toString().substring(8,10);
+						var year = list[i].workDay.toString().substring(0,4);
+						var month = list[i].workDay.toString().substring(5,7) - 1;
+						var day = list[i].workDay.toString().substring(8,10);
 						var name = list[i].memberName;
-						var startTime = list[i].startTime;
-						var endTime = list[i].endTime;
+						var startTime = list[i].workStart;
+						var endTime = list[i].workEnd;
 					
 						/* id: 999,
 				            title: '리아',
@@ -144,12 +144,12 @@
 				success : function(list){
 					console.log(list);
 					$.each(list, function(i){
-						var year = list[i].workingDay.toString().substring(0,4);
-						var month = list[i].workingDay.toString().substring(5,7) - 1;
-						var day = list[i].workingDay.toString().substring(8,10);
+						var year = list[i].workDay.toString().substring(0,4);
+						var month = list[i].workDay.toString().substring(5,7) - 1;
+						var day = list[i].workDay.toString().substring(8,10);
 						var name = list[i].memberName;
-						var startTime = list[i].startTime;
-						var endTime = list[i].endTime;
+						var startTime = list[i].workStart;
+						var endTime = list[i].workEnd;
 					
 						/* id: 999,
 				            title: '리아',
