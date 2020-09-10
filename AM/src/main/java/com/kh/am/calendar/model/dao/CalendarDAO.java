@@ -55,5 +55,13 @@ public class CalendarDAO {
 	public int insertCalendar(WorkCalendar insertCal) {
 		return sqlSession.insert("calendarMapper.insertCalendar", insertCal);
 	}
+
+	/** 스케쥴 업데이트
+	 * @param updateCal
+	 * @return result
+	 */
+	public int updateCalendar(WorkCalendar updateCal) {
+		return sqlSession.update("calendarMapper.updateCalendar", updateCal);
+	}
 	
 }
