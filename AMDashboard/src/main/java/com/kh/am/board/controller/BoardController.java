@@ -26,7 +26,7 @@ import com.kh.am.member.model.vo.Member;
 //    @RequestMapping("boardList") 
 //    public String boardList() {
 //        return "board/boardList";
-//    }주석
+//    }야매주석
     
     @RequestMapping("boardList")
     public String storeList(Model model, Store store){
