@@ -35,7 +35,7 @@ import com.kh.am.member.model.vo.Member;
         
         model.addAttribute("list",list);
         model.addAttribute("store", store);
-        System.out.println(list);
+        System.out.println(list+"controller");
         
         return "board/boardList";
 

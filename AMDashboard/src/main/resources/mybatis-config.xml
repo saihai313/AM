@@ -7,6 +7,7 @@
       
        <typeAliases>
     <typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
+    <typeAlias type="com.kh.am.board.model.vo.Store" alias="Store"/>
     </typeAliases>
     
      <mappers>

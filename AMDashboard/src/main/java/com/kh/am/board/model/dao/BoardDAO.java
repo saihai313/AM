@@ -18,9 +18,9 @@ public class BoardDAO {
      * @return
      */
     public List<Store> storeList (Store store) {
-        return sqlSession.selectList("boardMapper.storeList", store);
+        List<Store> list =  sqlSession.selectList("boardMapper.storeList", store);
+        System.out.println(list+"");
+        return list;
     }
-
-    
 
 }
