@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.am.calendar.model.dao.CalendarDAO;
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.calendar.model.vo.Employee;
+import com.kh.am.calendar.model.vo.PartTime;
+import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.member.model.vo.Member;
 
 @Service
@@ -69,6 +71,15 @@ public class CalendarServiceImpl implements CalendarService {
 		return EName;
 	}
 
+	// 파트타임 목록 조회
+		@Override
+		public List<PartTime> selectPList(int storeNo) {
+			
+			List<PartTime> pList = calendarDAO.selectPList(storeNo);
+			
+			return pList;
+		}
+		
 	// 스케쥴 삽입(1개)
 	@Transactional(rollbackFor=Exception.class)
 	@Override
@@ -86,14 +97,34 @@ public class CalendarServiceImpl implements CalendarService {
 	// 스케쥴 업데이트
 	@Transactional(rollbackFor=Exception.class)
 	@Override
-	public int updateCalendar(WorkCalendar updateCal) {
+	public int updateCalendar(UpdateWorkCalendar updateCal, int memberNo) {
 		
+		int storeNo = calendarDAO.selectStoreNo(memberNo);
+			
+		updateCal.setStoreNo(storeNo);
 		
+		System.out.println("업데이트 서비스" + updateCal);
 		
 		int result = calendarDAO.updateCalendar(updateCal);
 		
 		return result;
 	}
+
+	// 스케쥴 삭제
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int deleteCalendar(WorkCalendar deleteCal, int memberNo) {
+		int storeNo = calendarDAO.selectStoreNo(memberNo);
+		
+		deleteCal.setStoreNo(storeNo);
+		
+		System.out.println("딜리트 서비스" + deleteCal);
+		
+		int result = calendarDAO.deleteCalendar(deleteCal);
+		
+		return result;
+	}
+
 	
 
 }

@@ -2,6 +2,8 @@ package com.kh.am.calendar.model.service;
 
 import java.util.List;
 
+import com.kh.am.calendar.model.vo.PartTime;
+import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.member.model.vo.Member;
 
@@ -40,8 +42,22 @@ public interface CalendarService{
 
 	/** 스케쥴 업데이트
 	 * @param updateCal
+	 * @param memberNo 
 	 * @return result
 	 */
-	int updateCalendar(WorkCalendar updateCal);
+	int updateCalendar(UpdateWorkCalendar updateCal, int memberNo);
+
+	/** 스케쥴 삭제
+	 * @param deleteCal
+	 * @param memberNo
+	 * @return result
+	 */
+	int deleteCalendar(WorkCalendar deleteCal, int memberNo);
+
+	/** 파트타임 목록 조회
+	 * @param storeNo
+	 * @return pList
+	 */
+	List<PartTime> selectPList(int storeNo);
 
 }
