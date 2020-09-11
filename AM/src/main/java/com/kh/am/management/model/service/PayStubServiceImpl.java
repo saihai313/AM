@@ -19,26 +19,27 @@ public class PayStubServiceImpl implements PayStubService {
 	@Autowired
 	private PageInfo pInfo;
 	
+
+	/*
+	 * @Override public PageInfo pagination(int type, int cp) {
+	 * 
+	 * int listCount=paystubDAO.paytublistCount(type);
+	 * 
+	 * pInfo.setPageInfo(cp,listCount,type); return pInfo; }
+	 */
 	//급여명세서 리스트 조회
 	@Override
-	public PageInfo pagination(int type, int cp) {
+	public List<PayStub> seleceList(int memberNo) {
 		
-		int listCount=paystubDAO.paytublistCount(type);
-		
-		pInfo.setPageInfo(cp,listCount,type);
-		return pInfo;
-	}
-	
-	@Override
-	public List<PayStub> seleceList(PageInfo pInfo) {
-		
-		return paystubDAO.selectList(pInfo);
+		return paystubDAO.selectList(memberNo);
 	}
 
 	//급여명세서 상세조회 
 	@Override
-	public Paystubplus selectone(int boardNo) {
-		
-		return paystubDAO.selectone(boardNo);
+	public PayStub selectone(int memberNo) {
+		System.out.println("1111111");
+		return paystubDAO.selectone(memberNo);
 	}
+
+
 }

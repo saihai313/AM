@@ -7,27 +7,63 @@
 		<id property="payNo" column="PAY_NO"/>
 		
 		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
-		<result property="payTotalNo" column="PAY_TOTAL_NO"/>
 		<result property="payTime" column="PAY_TIME"/>
 		<result property="payDay" column="PAY_DAY"/>
-		<result property="partMoney" column="PART_MONEY"/>
-		<result property="vacaMoney" column="VACA_MONEY"/>
+		<result property="payExtra" column="PAY_EXTRA"/>
+		<result property="paySal" column="PAY_SAL"/>
+		<result property="payment" column="PAY_PAYMENT"/>
+		<result property="payCreateDate" column="PAY_CREATE_DT"/>
+		<result property="payStatus" column="PAY_STATUS"/>
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="storeNo" column="STORE_NO"/>
 		<result property="memberName" column="MEMBER_NM"/>
+		
 	
 	</resultMap>
 	
+	<resultMap type="WorkCalendar" id="calendarResultSet">
+	
+		<id property="workNo" column="WORK_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
+		<result property="workDay" column="WORK_DAY"/>
+		<result property="workStart" column="WORK_START"/>
+		<result property="workEnd" column="WORK_END"/>
+		<result property="storeNo" column="STORE_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberName" column="MEMBER_NM"/>
+		
+		
+	</resultMap>
+	
+	<!-- 알바생 이름, 번호 조회 -->
 	<select id="selectEmployeeList" parameterType="_int" resultMap="payResultSet">
 		SELECT MEMBER_NM, MEMBER_NO
 		FROM PAY
 		JOIN MEMBER USING(MEMBER_NO)
-		WHERE MEMBER_GRADE = 'G'
+		WHERE MEMBER_GRADE = 'E'
 		AND MEMBER_STATUS = 'Y'
-		AND STORE_NO = (SELECT STORE_NO FROM EMPLOYER WHERE EMPLOYER_NO = #{memberNo})
+		AND STORE_NO = #{storeNo}
 	
 	</select>
 	
-
+	<!-- 알바생 일한 정보 조회 -->
+	<select id="selectEmployeeWork" parameterType="_int" resultMap="calendarResultSet">
+		SELECT COUNT(*) AS WORK_START,  SUM(WORK_END - WORK_START) AS WORK_END 
+		FROM WORK_CALENDAL
+		WHERE EXTRACT(MONTH FROM WORK_DAY) = EXTRACT(MONTH FROM SYSDATE)
+		GROUP BY MEMBER_NO
+		HAVING MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 알바생 일쥬일 근무시간 조회 -->
+	<select id="selectOneDay" parameterType="_int" resultType="_int">
+		SELECT WORK_END - WORK_START
+		FROM WORK_CALENDAL
+		WHERE EXTRACT(MONTH FROM WORK_DAY) = EXTRACT(MONTH FROM SYSDATE) 
+		AND MEMBER_NO = #{memberNo}
+	
+	</select>
 
 </mapper>
