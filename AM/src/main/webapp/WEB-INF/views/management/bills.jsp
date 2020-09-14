@@ -98,10 +98,7 @@ table.type07 td {
 			        <th scope="row">총근무일</th>
 			        <td>${plus.payDay}일</td>
 			    </tr>
-			    <tr>
-			        <th scope="row">시급</th>
-			        <td>${plus.payExtra}원</td>
-			    </tr>
+			    
 			    <tr>
 			        <th scope="row">주휴수당</th>
 			        <td>${plus.payExtra}원</td>

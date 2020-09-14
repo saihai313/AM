@@ -16,4 +16,11 @@ public interface PayStubService {
 	//급여상세조회
 	public abstract PayStub selectone(int memberNo);
 
+	
+	//급여명세서 리스트 조회
+	public abstract List<Paystubplus> requestlist(int memberNo);
+
+	//급여정정 상세조회
+	public abstract Paystubplus requeston(int memberNo);
+
 }
