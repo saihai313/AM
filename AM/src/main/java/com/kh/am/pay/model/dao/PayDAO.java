@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.pay.model.vo.Pay;
 
 @Repository
 public class PayDAO {
@@ -31,11 +32,20 @@ public class PayDAO {
 		return sqlSession.selectOne("payMapper.selectEmployeeWork", memberNo);
 	}
 
-	/** 알바생 일주일 근무시간 조회 DAO
-	 * @param memberNo
+	/** 알바생 총급여, 주휴수당 조회 DAO
+	 * @param pay
+	 * @return payTotal
+	 */
+	public Pay selectOnePay(Pay pay) {
+		return sqlSession.selectOne("payMapper.selectOnePay", pay);
+	}
+
+	/** 급여 등록 DAO
+	 * @param pay
 	 * @return result
 	 */
-	public int selectOneDay(int memberNo) {
-		return sqlSession.selectOne("payMapper.selectOneDay", memberNo);
+	public int insertPay(Pay pay) {
+		return sqlSession.insert("payMapper.insertPay", pay);
 	}
+
 }

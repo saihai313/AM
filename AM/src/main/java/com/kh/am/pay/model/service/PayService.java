@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.member.model.vo.Member;
+import com.kh.am.pay.model.vo.Pay;
 
 public interface PayService {
 
@@ -19,10 +20,17 @@ public interface PayService {
 	 */
 	public abstract WorkCalendar selectEmployeeWork(int memberNo);
 
-	/** 알바생 일주일 근무시간 조회 Service
-	 * @param memberNo
-	 * @return
+	/** 알바생 총급여, 주휴수당 조회 Service
+	 * @param pay
+	 * @return payTotal
 	 */
-	public abstract int selectOneDay(int memberNo);
+	public abstract Pay selectOnePay(Pay pay);
+
+	/** 급여 등록 Service
+	 * @param pay
+	 * @return result
+	 */
+	public abstract int insertPay(Pay pay);
+	
 
 }
