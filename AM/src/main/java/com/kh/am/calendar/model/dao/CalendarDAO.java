@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.am.calendar.model.vo.PartTime;
+import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.member.model.vo.Member;
 
@@ -48,6 +50,14 @@ public class CalendarDAO {
 		return sqlSession.selectList("calendarMapper.selectEName", storeNo);
 	}
 
+	/** 파트타임 목록 조회
+	 * @param storeNo
+	 * @return pList
+	 */
+	public List<PartTime> selectPList(int storeNo) {
+		return sqlSession.selectList("calendarMapper.selectPList", storeNo);
+	}
+	
 	/** 스케쥴 삽입 1개
 	 * @param insertCal
 	 * @return
@@ -60,8 +70,17 @@ public class CalendarDAO {
 	 * @param updateCal
 	 * @return result
 	 */
-	public int updateCalendar(WorkCalendar updateCal) {
+
+	public int updateCalendar(UpdateWorkCalendar updateCal) {
 		return sqlSession.update("calendarMapper.updateCalendar", updateCal);
 	}
-	
+
+	/** 스케쥴 삭제
+	 * @param deleteCal
+	 * @return result
+	 */
+	public int deleteCalendar(WorkCalendar deleteCal) {
+		return sqlSession.delete("calendarMapper.deleteCalendar", deleteCal);
+	}
+
 }

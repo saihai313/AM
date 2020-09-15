@@ -19,6 +19,24 @@
 		
 	</resultMap>
 	
+	
+	<resultMap type="UpdateWorkCalendar" id="upCalendarResultSet">
+	
+		<id property="workNo" column="WORK_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
+		<result property="workDay" column="WORK_DAY"/>
+		<result property="beforeStart" column="WORK_START"/>
+		<result property="beforeEnd" column="WORK_END"/>
+		<result property="workStart" column="WORK_START"/>
+		<result property="workEnd" column="WORK_END"/>
+		<result property="storeNo" column="STORE_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="beforeMemberNo" column="MEMBER_NO"/>
+		
+		
+	</resultMap>
+	
 	<resultMap type="Store" id="storeResultSet">
 		<id property="storeNo" column="STORE_NO"/>
 		<result property="storeName" column="STORE_NM"/>
@@ -53,6 +71,22 @@
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 		<result property="memberCheck" column="MEMBER_CHECK"/>
 	</resultMap>
+	
+	
+	<resultMap type="PartTime" id="partTimeResultSet">
+	
+		<id property="partNo" column="PART_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
+		<result property="partName" column="PART_NM"/>
+		<result property="partStart" column="PART_START"/>
+		<result property="partEnd" column="PART_END"/>
+		<result property="storeNo" column="STORE_NO"/>
+		
+		
+	</resultMap>
+	
+	
 
 	<!-- 사장님 가게 번호 조회 -->
 	<select id="selectStoreNo" parameterType="_int" resultType="_int">
@@ -87,6 +121,12 @@
 	</select>
 	
 	
+	<!-- 사장 파트타임 목록 조회 -->
+	<select id="selectPList" parameterType="_int" resultMap="partTimeResultSet">
+		SELECT * FROM PART_TIME
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
 	<!--  스케쥴 삽입 1개  -->
 	<insert id="insertCalendar" parameterType="WorkCalendar">
 		INSERT INTO WORK_CALENDAL
@@ -96,7 +136,20 @@
 	
 	
 	<!-- 스케쥴 업데이트 -->
-	<update id="updateCalendar" parameterType="WorkCalendar">
-	UPDATE WORK_CALENDAL SET  WORK_DAY = '${workDay}' , WORK_START = ${workStart}, WORK_END = ${workEnd} , MEMBER_NO = ${memberNo} WHERE WORK_NO = ${workNo}
+
+	<update id="updateCalendar" parameterType="UpdateWorkCalendar">
+	UPDATE WORK_CALENDAL SET  WORK_START = ${workStart}, WORK_END = ${workEnd} , MEMBER_NO = ${memberNo}
+	WHERE WORK_DAY = '${workDay}'  
+	AND  WORK_START = ${beforeStart} 
+	AND WORK_END = ${beforeEnd} 
+	AND MEMBER_NO = ${beforeMemberNo} 
+	AND  STORE_NO = ${storeNo}
 	</update>
+	
+	<!-- 스케쥴 삭제 -->
+	<delete id="deleteCalendar" parameterType="WorkCalendar">
+	DELETE FROM WORK_CALENDAL WHERE WORK_NO = 
+	(SELECT WORK_NO FROM WORK_CALENDAL WHERE WORK_DAY = '${workDay}' AND WORK_START = ${workStart}
+	AND WORK_END = ${workEnd} AND STORE_NO = ${storeNo} AND MEMBER_NO = ${memberNo})
+	</delete>
 </mapper>

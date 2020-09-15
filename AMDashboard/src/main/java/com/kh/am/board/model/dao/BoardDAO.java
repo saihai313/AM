@@ -2,21 +2,25 @@ package com.kh.am.board.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.kh.am.board.model.vo.Employer;
+import com.kh.am.board.model.vo.Store;
 
+@Repository
 public class BoardDAO {
-
-    @Autowired
-    private SqlSessionTemplate sqlSession;
     
-    /** 게시글 목록 조회
+    private SqlSessionTemplate sqlSession;
+
+
+    /** 사장 조회 DAO
      * @return
      */
-    public List<Employer> selectList(int storeNo) {
-        return sqlSession.selectList("boardMapper.selectList",storeNo);
+    public List<Store> storeList (Store store) {
+        return sqlSession.selectList("boardMapper.storeList", store);
     }
+
+    
 
 }
