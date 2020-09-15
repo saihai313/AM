@@ -183,7 +183,8 @@
 		$(function(){
 			$("#list-table td").on("click",function(){
 				console.log("클릭됨");
-				var memberNo = $(this).parent().children().eq(4).text();
+				
+				var memberNo = $(this).parent().children().eq(0).text();
 				///am1/management/payStubList/1?=500
 				var payboardUrl="${contextPath}/management/bills/" + memberNo;
 				location.href=payboardUrl;

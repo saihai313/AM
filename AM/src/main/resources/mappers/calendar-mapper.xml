@@ -165,4 +165,11 @@
 		UPDATE PART_TIME SET PART_NM = #{partName}, PART_START=${partStart}, PART_END=${partEnd} 
 		WHERE STORE_NO = #{storeNo} AND PART_NO= #{partNo}
 	</update>
+	
+	
+	<!--  파트타임 삽입 -->
+	<insert id="partTimeInsert" parameterType="PartTime">
+		INSERT INTO PART_TIME
+		VALUES(SEQ_TNO.NEXTVAL, #{partName}, ${partStart}, ${partEnd}, #{storeNo})
+	</insert>
 </mapper>

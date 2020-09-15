@@ -160,6 +160,16 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		return result;
 	}
+	
+	// 파트타임 인서트
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int partTimeInsert(PartTime partTime) {
+		
+		int result = calendarDAO.partTimeInsert(partTime);
+		
+		return result;
+	}
 
 	
 

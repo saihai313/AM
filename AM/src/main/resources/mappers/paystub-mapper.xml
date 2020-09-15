@@ -61,7 +61,7 @@
 	</select> 
 	
 	<select id="selectone" parameterType="_int" resultMap="PayStubResultSet"  >
-		SELECT * FROM PAY WHERE MEMBER_NO=#{memberNo}
+		SELECT * FROM PAY WHERE PAY_NO=#{payNo}
 	
 	</select>
 	
@@ -76,7 +76,7 @@
 	
 	<select id="requestone" parameterType="_int" resultMap="requestResultSet">
 	
-			SELECT * FROM PAY_CORR WHERE MEMBER_NO=#{memberNo}
+			SELECT * FROM PAY_CORR WHERE corr_no=#{CORR_NO}
 	</select>
 	
 	
