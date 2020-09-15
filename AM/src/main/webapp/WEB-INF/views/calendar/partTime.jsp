@@ -70,7 +70,7 @@
     .okBtn2{
    		 margin-right: 10px;
     }
-    .minus, .okBtn{
+    .minus, .okBtn, .okBtn3{
     	width: 50px;
     	height: 40px;
     float: right;
@@ -99,7 +99,7 @@
 	   <div class="sDiv1">
 	   <hr>
 		<h2 id="t1">파트 타임 생성</h2>
-		
+		<h6>정각만 입력 가능합니다.</h6>
         <form method="POST" action="${contextPath}/calendar/updatePartTime" class="" name="updatePartTimForm">
        
        <c:choose>
@@ -135,7 +135,7 @@
            <div class="div2">
        		 <input type="hidden" value="${p.partNo}"name="partNo">
             <h3 class="textS bm">별명 &nbsp;&nbsp;&nbsp;&nbsp;</h3>
-            <input  type="text" id="name" name="partName" style="width: 100px;" value="${p.partName}">
+            <input  type="text"  id="name" name="partName" style="width: 100px;" value="${p.partName}">
             ex) 오전파트, 오후파트
         </div>
             <h3 class="textS">시간선택 &nbsp;&nbsp;&nbsp;&nbsp;</h3>
@@ -173,12 +173,12 @@
 	
 	<div class="sDiv1">
 	    <hr>
-         <form method="POST" action="" class="" name="" onsubmit="return validate();">
+	    <h6>정각만 입력 가능합니다.</h6>
         <div class='fromMain insertForm'>
            <div class="backColor">
            <div class="div2">
             <h3 class="textS2 bm">별명 &nbsp;&nbsp;&nbsp;&nbsp;</h3>
-            <input  type="text" id="name" style="width: 100px;">
+            <input  type="text" class="partName" id="name" style="width: 100px;">
             ex) 오전파트, 오후파트
         </div>
             <h3 class="textS2">시간선택 &nbsp;&nbsp;&nbsp;&nbsp;</h3>
@@ -187,7 +187,7 @@
             <input type="time"  name="partEnd" value="endTime">
 
             일근무 휴게시간 0시간 포함 0 시간
-
+ 		<button class="okBtn3" type="button">확정</button>
         </div>
             <hr>
           </div>
@@ -195,8 +195,8 @@
             <button class="btn btn-primary minus2" type="button">-</button>
             <hr>
          <a class="btn btn-primary pixSubmit " href="${contextPath}/calendar/workList">돌아가기</a>
-         <button class="btn btn-primary pixSubmit okBtn2" type="submit">완료</button>
-        </form>
+         <a class="btn btn-primary pixSubmit okBtn2 " href="${contextPath}/calendar/partTime">완료</a>
+      
 	</div>
 	
 	 <!-- ------------------------- footer ---------------------------- -->
@@ -297,7 +297,7 @@
    	$(".plus").on("click", function(){
    		console.log("버튼클릭");
    		
-   		var partTime =  '<div class="backColor"> <div class="div2">  <h3 class="textS2 bm">별명 &nbsp;&nbsp;&nbsp;&nbsp;</h3>  <input  type="text" id="name" style="width: 100px;">   ex) 오전파트, 오후파트          </div>    	             <h3 class="textS2">시간선택 &nbsp;&nbsp;&nbsp;&nbsp;</h3>    	             <input type="time"  name="partStart" value="startTime">    	             ~    	             <input type="time"  name="partEnd" value="endTime">    	         	    일근무 휴게시간 0시간 포함 0 시간  </div><hr>';
+   		var partTime =  '<div class="backColor"> <div class="div2">  <h3 class="textS2 bm">별명 &nbsp;&nbsp;&nbsp;&nbsp;</h3>  <input  type="text" class="partName" id="name" style="width: 100px;">   ex) 오전파트, 오후파트          </div>    	             <h3 class="textS2">시간선택 &nbsp;&nbsp;&nbsp;&nbsp;</h3>    	             <input type="time"  name="partStart" value="startTime">    	             ~    	             <input type="time"  name="partEnd" value="endTime">    	         	    일근무 휴게시간 0시간 포함 0 시간  <button class="okBtn3" type="button">확정</button></div><hr> ';
  			  $(".insertForm").append(partTime);
    		
    		
@@ -312,6 +312,58 @@
     		$(".insertForm").children().last().remove();
     	});
     	
+    
+    
+    // 삽입부분 INSERT
+   $(".okBtn3").on("click", function(){
+    		
+	   console.log("이름" +$(this).parent().children(".div2").find("input[id=name]").val());
+		console.log("시작" + $(this).parent().find("input[name=partStart]").val().substr(0,2));
+		console.log("끝" + $(this).parent().find("input[name=partEnd]").val().substr(0,2));
+		
+		if(confirm("정말 수정하시겠습니까?")){
+			
+			console.log("출력 " + $(this).parent().children(".div2").find("input[id=name]").val());
+			
+			var name = $(this).parent().children(".div2").find("input[id=name]").val();
+			var start = $(this).parent().find("input[name=partStart]").val().substr(0,2);
+			var end = $(this).parent().find("input[name=partEnd]").val().substr(0,2);
+			
+			
+			$.ajax({
+				url : "${contextPath}/calendar/partTimeInsert",
+				type : "POST",
+				data : {"partName" : name,
+						"partStart" : start,
+						"partEnd" : end},
+				dataType : "text",
+				success : function(result){
+					// 0 실패, 1 성공
+					
+					alert(result);
+					
+					//location.href = "${contextPath}/calendar/partTime";
+					location.href = "${contextPath}/calendar/partTime";
+				},
+				error : function(){
+					console.log("통신 실패");
+				}
+				
+				
+			});
+    				
+    				
+    			
+    		}
+    		
+    		
+    	});
+    
+   
+	
+	
+	
+	calList.push(obj);
     </script>
 </body>
 </html>

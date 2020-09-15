@@ -100,6 +100,14 @@ public class CalendarDAO {
 		return sqlSession.delete("calendarMapper.partTimeUpdate", partTime);
 	}
 
+	/** 파트타임 삽입
+	 * @param partTime
+	 * @return result
+	 */
+	public int partTimeInsert(PartTime partTime) {
+		return sqlSession.insert("calendarMapper.partTimeInsert", partTime);
+	}
+
 	
 	
 }

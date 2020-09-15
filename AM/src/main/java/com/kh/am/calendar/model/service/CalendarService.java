@@ -79,5 +79,11 @@ public interface CalendarService{
 	 */
 	int partTimeUpdate(PartTime partTime);
 
+	/** 파트타임 삽입
+	 * @param partTime
+	 * @return result
+	 */
+	int partTimeInsert(PartTime partTime);
+
 
 }
