@@ -125,6 +125,7 @@
 	<select id="selectPList" parameterType="_int" resultMap="partTimeResultSet">
 		SELECT * FROM PART_TIME
 		WHERE STORE_NO = #{storeNo}
+		ORDER BY PART_START
 	</select>
 	
 	<!--  스케쥴 삽입 1개  -->
@@ -151,4 +152,17 @@
 	(SELECT WORK_NO FROM WORK_CALENDAL WHERE WORK_DAY = '${workDay}' AND WORK_START = ${workStart}
 	AND WORK_END = ${workEnd} AND STORE_NO = ${storeNo} AND MEMBER_NO = ${memberNo})
 	</delete>
+	
+	
+	<!-- 파트타임 삭제 -->
+	<delete id="partTimeDelete" parameterType="PartTime">
+		DELETE FROM PART_TIME WHERE PART_NM = #{partName} AND STORE_NO = #{storeNo}
+	</delete>
+	
+	
+	<!-- 파트타임 업데이트 -->
+	<update id="partTimeUpdate" parameterType="PartTime">
+		UPDATE PART_TIME SET PART_NM = #{partName}, PART_START=${partStart}, PART_END=${partEnd} 
+		WHERE STORE_NO = #{storeNo} AND PART_NO= #{partNo}
+	</update>
 </mapper>

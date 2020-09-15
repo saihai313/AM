@@ -40,6 +40,20 @@ public class PayStubServiceImpl implements PayStubService {
 		System.out.println("1111111");
 		return paystubDAO.selectone(memberNo);
 	}
+	
+	//급여정정리스트 조회 
+	@Override
+	public List<Paystubplus> requestlist(int memberNo) {
+		
+		return paystubDAO.requestlist(memberNo);
+	}
+
+	//급여정정리스트 상세조회
+	@Override
+	public Paystubplus requeston(int memberNo) {
+		
+		return paystubDAO.requestone(memberNo);
+	}
 
 
 }

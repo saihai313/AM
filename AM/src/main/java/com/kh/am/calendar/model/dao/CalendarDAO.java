@@ -1,6 +1,7 @@
 package com.kh.am.calendar.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,23 @@ public class CalendarDAO {
 	 */
 	public int deleteCalendar(WorkCalendar deleteCal) {
 		return sqlSession.delete("calendarMapper.deleteCalendar", deleteCal);
+	}
+
+	/** 파트타임 삭제
+	 * @param partTime
+	 * @return result
+	 */
+	public int partTimeDelete(PartTime partTime) {
+		return sqlSession.delete("calendarMapper.partTimeDelete", partTime);
+	}
+
+	/** 파트타임 업데이트 
+	 * @param map
+	 * @return result
+	 */
+	public int partTimeUpdate(PartTime partTime) {
+		
+		return sqlSession.delete("calendarMapper.partTimeUpdate", partTime);
 	}
 
 	
