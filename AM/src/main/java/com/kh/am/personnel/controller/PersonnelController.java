@@ -41,9 +41,22 @@ public class PersonnelController {
 		List<EmployeeInfo> personnelList = personnelService.selectList(storeNo);
 		
 		
+		/*
+		 * for(EmployeeInfo e : personnelList) { System.out.println(e); }
+		 */
+		
 		model.addAttribute("personnelList", personnelList);
-
+		
 		
 		return "personnel/personnelList";
+	}
+	
+	
+	@RequestMapping("{memberNo}")
+	public String personnelView(@RequestParam("memberNo") int memberNo) {
+		
+		System.out.println(memberNo);
+		
+		return "personnel/personnelView";
 	}
 }
