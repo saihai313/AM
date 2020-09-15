@@ -50,9 +50,9 @@ public class PayStubServiceImpl implements PayStubService {
 
 	//급여정정리스트 상세조회
 	@Override
-	public Paystubplus requeston(int memberNo) {
+	public Paystubplus requeston(int corrNo) {
 		
-		return paystubDAO.requestone(memberNo);
+		return paystubDAO.requestone(corrNo);
 	}
 
 

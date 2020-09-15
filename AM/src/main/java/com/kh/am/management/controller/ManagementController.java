@@ -97,9 +97,9 @@ public class ManagementController {
 			return url;
 		}
 		
-		
+		//급여정정리스트 조회
 		@RequestMapping("requestPayStub" )
-		public String requestPayStub(Model model,PayStub pay) {
+		public String requestPayStubList(Model model,PayStub pay) {
 			int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();
 			List<Paystubplus> list= paystubService.requestlist(memberNo);
 			//Paystubplus rList=paystubService.requeston(memberNo); 
@@ -114,19 +114,22 @@ public class ManagementController {
 	
 			
 		}
+		
+		//급여정정 상세조회
 		@ResponseBody
 		@RequestMapping("request" )
-		public String requestPayStub(Model model,PayStub pay,int memberNo) {
-			
-			
-		System.out.println(memberNo);
-			Paystubplus rList=paystubService.requeston(memberNo); 
+		public String requestPayStub(Model model,Paystubplus pay,int corrNo) {
+			System.out.println(corrNo);
+			Paystubplus rList=paystubService.requeston(corrNo); 
 		
+			System.out.println(rList);
 			model.addAttribute("rList",rList);
 			
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
 			 return gson.toJson(rList);
+		
+		
 
 		}
 		
