@@ -25,8 +25,13 @@ public class MemberServiceImpl implements MemberService{
     public Member login(Member member) {
         
         Member loginMember = memberDAO.login(member);
-        
-        
+        if(member.getMemberPwd().equals(loginMember.getMemberPwd())) {
+            // 비교가 끝난 조회된 비밀번호 삭제 
+            loginMember.setMemberPwd(null);
+        }else {
+            loginMember = null;
+        }
+        /*
         if(loginMember != null) {
             if(!bcPwd.matches(member.getMemberPwd(),
                         loginMember.getMemberPwd())) {
@@ -37,8 +42,7 @@ public class MemberServiceImpl implements MemberService{
                 loginMember.setMemberPwd(null);
             }
        }
-        
-   
+       */
         
         return loginMember;
     }
