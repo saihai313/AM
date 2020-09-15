@@ -36,27 +36,25 @@
                         <th>이름 </th>
                         <th>이메일 </th>
                         <th>전화번호</th>
-                        <th>근무조</th>
-                        <th>근무시간</th>
                      	<th>시급</th>
                     </tr>
                 </thead>
                 <tbody>
                 	<c:choose>
-                		<c:when test="${empty employeList}">
+                		<c:when test="${empty personnelList}">
                 			<tr>
-	                			<td colspan="6">직원을 추가해주세요</td>      			
+	                			<td colspan="4">직원을 추가해주세요</td>      			
                 			</tr>
                 		</c:when>
                 		<c:otherwise>
+                			<c:forEach var="personnelList" items="${personnelList}">
 	                			<tr>
-	                				<td></td>
-	                				<td></td>
-	                				<td></td>
-	                				<td></td>
-	                				<td></td>
-	                				<td></td>			
+	                				<td>${personnelList.memberName}</td>
+	                				<td>${personnelList.memberEmail}</td>
+	                				<td>${personnelList.memberPhone}</td>
+	                				<td></td>		
 	                			</tr> 		
+                			</c:forEach>
                 		</c:otherwise>
                 	</c:choose>
                 </tbody>
