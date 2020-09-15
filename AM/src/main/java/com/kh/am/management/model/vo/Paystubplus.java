@@ -1,11 +1,12 @@
 package com.kh.am.management.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Paystubplus {
 	private int corrNo; //급여정정신청 글벊
 	private String corrContent; //급여 정정신청 이유
-	private Timestamp corrCreateDt;//급여정정신청 작성일
+	private Date corrCreateDt;//급여정정신청 작성일
 	private Timestamp corrModifyDt;//급여정정신청 수정일
 	private String corrStatus;//급여정정신청상태
 	private String corrResult;//급여정정신청결과
@@ -57,13 +58,13 @@ public class Paystubplus {
 
 
 
-	public Timestamp getCorrCreateDt() {
+	public Date getCorrCreateDt() {
 		return corrCreateDt;
 	}
 
 
 
-	public void setCorrCreateDt(Timestamp corrCreateDt) {
+	public void setCorrCreateDt(Date corrCreateDt) {
 		this.corrCreateDt = corrCreateDt;
 	}
 
@@ -148,6 +149,9 @@ public class Paystubplus {
 				+ ", memberNo=" + memberNo + ", StoreNo=" + StoreNo + ", payNo=" + payNo + ", memberName=" + memberName
 				+ "]";
 	}
+
+
+
 
 
 

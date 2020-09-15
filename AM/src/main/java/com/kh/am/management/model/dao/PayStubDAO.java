@@ -36,9 +36,9 @@ public class PayStubDAO {
 		return sqlSession.selectList("paystubMapper.requestlist",memberNo);
 	}
 
-	public Paystubplus requestone(int memberNo) {
+	public Paystubplus requestone(int corrNo) {
 		
-		return sqlSession.selectOne("paystubMapper.requestone",memberNo);
+		return sqlSession.selectOne("paystubMapper.requestone",corrNo);
 	}
 
 }

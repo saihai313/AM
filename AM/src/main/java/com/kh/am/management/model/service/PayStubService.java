@@ -21,6 +21,6 @@ public interface PayStubService {
 	public abstract List<Paystubplus> requestlist(int memberNo);
 
 	//급여정정 상세조회
-	public abstract Paystubplus requeston(int memberNo);
+	public abstract Paystubplus requeston(int corrNo);
 
 }
