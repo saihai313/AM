@@ -1,6 +1,7 @@
 package com.kh.am.calendar.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,7 +98,6 @@ public class CalendarServiceImpl implements CalendarService {
 	// 스케쥴 업데이트
 	@Transactional(rollbackFor=Exception.class)
 	@Override
-
 	public int updateCalendar(UpdateWorkCalendar updateCal, int memberNo) {
 		
 		int storeNo = calendarDAO.selectStoreNo(memberNo);
@@ -105,7 +105,7 @@ public class CalendarServiceImpl implements CalendarService {
 		updateCal.setStoreNo(storeNo);
 		
 		System.out.println("업데이트 서비스" + updateCal);
-
+		
 		int result = calendarDAO.updateCalendar(updateCal);
 		
 		return result;
@@ -126,5 +126,41 @@ public class CalendarServiceImpl implements CalendarService {
 		return result;
 	}
 
+	// 파트타임 페이지 파트타임 조회
+	@Override
+	public List<PartTime> selectPartTime(int memberNo) {
+		
+		// 가게번호 조회
+		int storeNo = calendarDAO.selectStoreNo(memberNo);
+		
+		// 파트타임 목록 조회
+		List<PartTime> pList = calendarDAO.selectPList(storeNo);
+		
+		return pList;
+	}
+
+	// 파트타임 삭제
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int partTimeDelete(PartTime partTime) {
+		
+		System.out.println("파트타임 삭제 서비스 : "+ partTime);
+		
+		int result = calendarDAO.partTimeDelete(partTime);
+		
+		return result;
+	}
+
+	// 파트타임 업데이트
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int partTimeUpdate(PartTime partTime) {
+		
+		int result = calendarDAO.partTimeUpdate(partTime);
+		
+		return result;
+	}
+
+	
 
 }
