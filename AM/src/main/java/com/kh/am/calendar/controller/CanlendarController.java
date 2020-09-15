@@ -163,6 +163,7 @@ public class CanlendarController {
 	
 	// 스케쥴 업데이트
 		@RequestMapping(value="updateCalendar", method = RequestMethod.POST)
+
 		public String updateCalendar(Model model, UpdateWorkCalendar updateCal) {
 			
 			System.out.println("나와 업뎃: "+ updateCal);
@@ -176,6 +177,7 @@ public class CanlendarController {
 			int memberNo = loginMember.getMemberNo();
 			
 			// 사장님 회원번호 이용해서 가게번호 알고 update 진행
+
 			int result = calendarService.updateCalendar(updateCal, memberNo);
 			
 			System.out.println("업데이트 리졸트" + result);
@@ -196,6 +198,7 @@ public class CanlendarController {
 					// 파트타임 목록 조회
 					// 아 여긴 테이블 만들어야 한다해~
 					
+
 					// 파트타임 목록 조회
 					List<PartTime> pList = calendarService.selectPList(storeNo);
 					model.addAttribute("pList", pList);
@@ -250,6 +253,5 @@ public class CanlendarController {
 					
 					return "calendar/workList";
 				}
-		
 	
 }

@@ -42,6 +42,7 @@ public interface CalendarService{
 
 	/** 스케쥴 업데이트
 	 * @param updateCal
+
 	 * @param memberNo 
 	 * @return result
 	 */

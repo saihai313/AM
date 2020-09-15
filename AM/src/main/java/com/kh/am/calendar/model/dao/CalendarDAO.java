@@ -70,6 +70,7 @@ public class CalendarDAO {
 	 * @param updateCal
 	 * @return result
 	 */
+
 	public int updateCalendar(UpdateWorkCalendar updateCal) {
 		return sqlSession.update("calendarMapper.updateCalendar", updateCal);
 	}
@@ -82,6 +83,4 @@ public class CalendarDAO {
 		return sqlSession.delete("calendarMapper.deleteCalendar", deleteCal);
 	}
 
-	
-	
 }

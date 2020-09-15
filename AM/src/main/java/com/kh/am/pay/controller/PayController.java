@@ -45,11 +45,12 @@ public class PayController {
 	 * "pay/payStubList"; }
 	 */
 	
-	// 급여 정정 페이지 전환
-	@RequestMapping("requestPayStub")
-	public String updatePayStubView() {
-		return "pay/requestPayStub";
-	}
+	/*
+	 * // 급여 정정 페이지 전환
+	 * 
+	 * @RequestMapping("requestPayStub") public String updatePayStubView() { return
+	 * "pay/requestPayStub"; }
+	 */
 	
 	// 알바생 조회하기
 	@ResponseBody

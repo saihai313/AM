@@ -97,6 +97,7 @@ public class CalendarServiceImpl implements CalendarService {
 	// 스케쥴 업데이트
 	@Transactional(rollbackFor=Exception.class)
 	@Override
+
 	public int updateCalendar(UpdateWorkCalendar updateCal, int memberNo) {
 		
 		int storeNo = calendarDAO.selectStoreNo(memberNo);
@@ -104,7 +105,7 @@ public class CalendarServiceImpl implements CalendarService {
 		updateCal.setStoreNo(storeNo);
 		
 		System.out.println("업데이트 서비스" + updateCal);
-		
+
 		int result = calendarDAO.updateCalendar(updateCal);
 		
 		return result;
@@ -125,6 +126,5 @@ public class CalendarServiceImpl implements CalendarService {
 		return result;
 	}
 
-	
 
 }

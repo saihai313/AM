@@ -136,6 +136,7 @@
 	
 	
 	<!-- 스케쥴 업데이트 -->
+
 	<update id="updateCalendar" parameterType="UpdateWorkCalendar">
 	UPDATE WORK_CALENDAL SET  WORK_START = ${workStart}, WORK_END = ${workEnd} , MEMBER_NO = ${memberNo}
 	WHERE WORK_DAY = '${workDay}'  
