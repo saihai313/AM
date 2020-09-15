@@ -65,11 +65,17 @@
 			width:1100px;
 		
 		}
-		
-		th:nth-of-type(5) { display: none; }   
+		 
+		 th{
+		 	background-color: bcdeb0;	
+		 }
+		th:nth-of-type(5) { display: none; 
+				
+		}   
 		
 		#memberno{
 			display: none;
+			
 		}
 		
 		
@@ -105,7 +111,7 @@
 			 <ul class="tabType1">
 			  <li><a href="${contextPath}/pay/insertPay">급여설정</a></li>
 		      <li class="on"><a href="${contextPath}/management/payStubList">급여 명세서</a></li>
-			  <li><a href="${contextPath}/pay/requestPayStub">정정 신청</a></li>
+			  <li><a href="${contextPath}/management/requestPayStub">정정 신청</a></li>
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 

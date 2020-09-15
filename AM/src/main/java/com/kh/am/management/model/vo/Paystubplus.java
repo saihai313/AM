@@ -3,24 +3,16 @@ package com.kh.am.management.model.vo;
 import java.sql.Timestamp;
 
 public class Paystubplus {
-	private int paystubNo;
-	private String payContent;
-	private String payStatus;
-	private String payTitle;
-	private Timestamp payDate;
-	private String payEmployer;
-	private int payNo;
-	private String payCheck;
-	
-	
-	private int payNO;
-	private int payTotalMoney;
-	private String patTime;
-	private String payDay;
-	private int partMoney;
-	private int vacaMoney;
-	private int memberNo;
-	private int storeNo;
+	private int corrNo; //급여정정신청 글벊
+	private String corrContent; //급여 정정신청 이유
+	private Timestamp corrCreateDt;//급여정정신청 작성일
+	private Timestamp corrModifyDt;//급여정정신청 수정일
+	private String corrStatus;//급여정정신청상태
+	private String corrResult;//급여정정신청결과
+	private int memberNo;//회원번호
+	private int StoreNo;//가게번호
+	private int payNo;//급여번호
+	private String memberName;
 	
 	
 	public Paystubplus() {
@@ -28,144 +20,89 @@ public class Paystubplus {
 	}
 
 
-	public int getPaystubNo() {
-		return paystubNo;
+
+	public String getMemberName() {
+		return memberName;
 	}
 
 
-	public void setPaystubNo(int paystubNo) {
-		this.paystubNo = paystubNo;
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 
-	public String getPayContent() {
-		return payContent;
+
+	public int getCorrNo() {
+		return corrNo;
 	}
 
 
-	public void setPayContent(String payContent) {
-		this.payContent = payContent;
+
+	public void setCorrNo(int corrNo) {
+		this.corrNo = corrNo;
 	}
 
 
-	public String getPayStatus() {
-		return payStatus;
+
+	public String getCorrContent() {
+		return corrContent;
 	}
 
 
-	public void setPayStatus(String payStatus) {
-		this.payStatus = payStatus;
+
+	public void setCorrContent(String corrContent) {
+		this.corrContent = corrContent;
 	}
 
 
-	public String getPayTitle() {
-		return payTitle;
+
+	public Timestamp getCorrCreateDt() {
+		return corrCreateDt;
 	}
 
 
-	public void setPayTitle(String payTitle) {
-		this.payTitle = payTitle;
+
+	public void setCorrCreateDt(Timestamp corrCreateDt) {
+		this.corrCreateDt = corrCreateDt;
 	}
 
 
-	public Timestamp getPayDate() {
-		return payDate;
+
+	public Timestamp getCorrModifyDt() {
+		return corrModifyDt;
 	}
 
 
-	public void setPayDate(Timestamp payDate) {
-		this.payDate = payDate;
+
+	public void setCorrModifyDt(Timestamp corrModifyDt) {
+		this.corrModifyDt = corrModifyDt;
 	}
 
 
-	public String getPayEmployer() {
-		return payEmployer;
+
+	public String getCorrStatus() {
+		return corrStatus;
 	}
 
 
-	public void setPayEmployer(String payEmployer) {
-		this.payEmployer = payEmployer;
+
+	public void setCorrStatus(String corrStatus) {
+		this.corrStatus = corrStatus;
 	}
 
 
-	public int getPayNo() {
-		return payNo;
+
+	public String getCorrResult() {
+		return corrResult;
 	}
 
 
-	public void setPayNo(int payNo) {
-		this.payNo = payNo;
+
+	public void setCorrResult(String corrResult) {
+		this.corrResult = corrResult;
 	}
 
-
-	public String getPayCheck() {
-		return payCheck;
-	}
-
-
-	public void setPayCheck(String payCheck) {
-		this.payCheck = payCheck;
-	}
-
-
-	public int getPayNO() {
-		return payNO;
-	}
-
-
-	public void setPayNO(int payNO) {
-		this.payNO = payNO;
-	}
-
-
-	public int getPayTotalMoney() {
-		return payTotalMoney;
-	}
-
-
-	public void setPayTotalMoney(int payTotalMoney) {
-		this.payTotalMoney = payTotalMoney;
-	}
-
-
-	public String getPatTime() {
-		return patTime;
-	}
-
-
-	public void setPatTime(String patTime) {
-		this.patTime = patTime;
-	}
-
-
-	public String getPayDay() {
-		return payDay;
-	}
-
-
-	public void setPayDay(String payDay) {
-		this.payDay = payDay;
-	}
-
-
-	public int getPartMoney() {
-		return partMoney;
-	}
-
-
-	public void setPartMoney(int partMoney) {
-		this.partMoney = partMoney;
-	}
-
-
-	public int getVacaMoney() {
-		return vacaMoney;
-	}
-
-
-	public void setVacaMoney(int vacaMoney) {
-		this.vacaMoney = vacaMoney;
-	}
 
 
 	public int getMemberNo() {
@@ -173,29 +110,48 @@ public class Paystubplus {
 	}
 
 
+
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
 
 
+
 	public int getStoreNo() {
-		return storeNo;
+		return StoreNo;
 	}
+
 
 
 	public void setStoreNo(int storeNo) {
-		this.storeNo = storeNo;
+		StoreNo = storeNo;
 	}
+
+
+
+	public int getPayNo() {
+		return payNo;
+	}
+
+
+
+	public void setPayNo(int payNo) {
+		this.payNo = payNo;
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "paystubplus [paystubNo=" + paystubNo + ", payContent=" + payContent + ", payStatus=" + payStatus
-				+ ", payTitle=" + payTitle + ", payDate=" + payDate + ", payEmployer=" + payEmployer + ", payNo="
-				+ payNo + ", payCheck=" + payCheck + ", payNO=" + payNO + ", payTotalMoney=" + payTotalMoney
-				+ ", patTime=" + patTime + ", payDay=" + payDay + ", partMoney=" + partMoney + ", vacaMoney="
-				+ vacaMoney + ", memberNo=" + memberNo + ", storeNo=" + storeNo + "]";
+		return "Paystubplus [corrNo=" + corrNo + ", corrContent=" + corrContent + ", corrCreateDt=" + corrCreateDt
+				+ ", corrModifyDt=" + corrModifyDt + ", corrStatus=" + corrStatus + ", corrResult=" + corrResult
+				+ ", memberNo=" + memberNo + ", StoreNo=" + StoreNo + ", payNo=" + payNo + ", memberName=" + memberName
+				+ "]";
 	}
+
+
+
+	
 	
 	
 	

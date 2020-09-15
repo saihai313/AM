@@ -76,10 +76,11 @@
                 border: 1px solid #888;
                 border-radius: 3px;
             }
-            
+  
         #deleteBtn{
         	display: none;
         }
+
 </style>
 </head>
 <body>
@@ -158,6 +159,7 @@
 				</select> <br>
 			
 						part 선택 : <select id="time" name="time">
+
 						<c:forEach var="partTime" items="${pList}">
 							<!--  슈바
 								시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
@@ -176,6 +178,7 @@
 									${partTime.partName}[${start}:00 ~ ${partTime.partEnd}:00]</option>
 							
 						</c:forEach>
+
 						</select> 
 						<br>
 			
@@ -213,6 +216,7 @@
 				</select> <br>
 			
 						part 선택 : <select id="updateTime" name="time">
+
 						<c:forEach var="partTime" items="${pList}">
 							<!--  슈바
 								시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
@@ -249,6 +253,7 @@
 					
 				</div>
 				<button class="btn btn-lg btn-primary" type="submit">수정</button>
+
 				<button class="btn btn-lg btn-primary" onclick="deleteBtn()" type="button" >삭제</button>
 				
 			</form>
@@ -279,6 +284,7 @@
   
     
 <script>
+
 function deleteBtn(){
 	
 	$("#deleteBtn").trigger("click");
@@ -366,6 +372,7 @@ function deleteBtn(){
 							$workNo =$("<input>", {type : "hidden", name : "workNo", 
 								value : list[i].workNo});
 							
+
 							console.log("일번호 " + list[i].workNo);
 							
 							$("form[name='updateCalendarForm']").append($workNo);
@@ -540,6 +547,7 @@ function deleteBtn(){
 	            element.attr('href', 'javascript:void(0);');
 	            element.click(function() {
 	               //alert(event.title + "\n" +  event.start +"\n" + event.end);
+
 	            
 	               
 	              // alert("업데이트 맞음" + event.title);
@@ -549,10 +557,7 @@ function deleteBtn(){
 	             console.log("업데이트 시작 시간" +  event.start);
 	              
 	              test3(event.title, event.start, event.end);
-	               
-	               
-	               
-	               
+ 
 	               //modal('my_modal2');
 	               // 모달로 이동
 	            });
@@ -609,14 +614,19 @@ function deleteBtn(){
     	var t = title;
     	var s = start.toString().substr(16, 2);
     	var e =end.toString().substr(16, 2);
-    	
 
     	snedContent(t, s, e);
     	
     	
     	
     	
+    	console.log(start.toString().substr(11, 4));
+    	// 선택한 날짜 나옴
+
+    	// 년
+    	clickYear = (start.toString().substr(11, 4));
     	
+
     	console.log(start.toString().substr(11, 4));
     	// 선택한 날짜 나옴
 
@@ -629,9 +639,8 @@ function deleteBtn(){
     	// 일
     	clickDay =  (start.toString().substr(8, 2));
     	
-    	
     
-    	
+	
     	switch(start.toString().substr(4, 3)){
     	case "Jan" : clickMonth = '01'; break;
     	case "Feb" : clickMonth = '02'; break;
@@ -698,6 +707,7 @@ function snedContent(t, s, e){
     		console.log(partTime[i].toString().slice(-6,-4));
     		console.log("입력된 종료 시간 " + updateE);
     		
+
     			if(updateS == 00){
     				updateS = 24;
     			}else if(updateE == 00){
@@ -718,8 +728,7 @@ function snedContent(t, s, e){
     		}else{
     			console.log("같은 게 없다");
     			console.log("실패" + partTime[i].toString().slice(-14,-12) + "/" +  updateS +"||" + partTime[i].toString().slice(-6,-4) + "/" + updateE);
-    			
-    			
+
     		}
     		
     	});
@@ -734,6 +743,7 @@ function snedContent(t, s, e){
     		if(name[i] == updateT){
     			console.log("이름 같은 게 있다");
     			$("#updateNo option[value2="+ name[i] +"]").attr('selected', 'selected');
+
     			var beforeNo = $("#updateNo option:selected").val();
     			console.log("업데이트 예전 번호" + beforeNo);
     			
@@ -818,15 +828,17 @@ function snedContent(t, s, e){
  		// part1 [10:00 ~ 16:00]
     	
     });
-    
+
 var b;
     function createBeforeNo(beforeNo){
      	b =beforeNo;	
     }
+
     
+
+
+ 
     
-  
-  
  // 삽입 submit 동작
 	function validate(){
     	// 디비에 이렇게 입력들어가야함
@@ -869,11 +881,12 @@ var b;
 	    
 	 		console.log("서브밋동작" + $("#updateNo").val());
 	 		
+
 	 		console.log("beforeMemberNo" + b);
 	 		
 	 		$beforeMemberNo = $("<input>", {type : "hidden", name : "beforeMemberNo", 
 				value : b });
-	    	
+
 	 		$memberNo = $("<input>", {type : "hidden", name : "memberNo", 
 				value : $("#updateNo").val() });
 	 		
@@ -887,7 +900,7 @@ var b;
 	 		
 	 		// 뒤에서부터 숫자 끊어서 가져오기
 	 		// str.slice(-3,-1);
-	 		
+
 	 		$beforeStart =$("<input>", {type : "hidden", name : "beforeStart", 
 				value :  updateS});
 	 		
@@ -906,6 +919,7 @@ var b;
 	 		$workDay =$("<input>", {type : "hidden", name : "workDay", 
 						value : workDay});
 	 		
+
 	 		$("form[name='updateCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay, $beforeStart, $beforeEnd, $beforeMemberNo  );
 	 		
 	 		

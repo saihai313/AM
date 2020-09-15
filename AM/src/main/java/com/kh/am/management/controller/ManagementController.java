@@ -1,5 +1,7 @@
 package com.kh.am.management.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +13,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.am.management.model.service.PayStubService;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
@@ -91,4 +96,41 @@ public class ManagementController {
 			
 			return url;
 		}
+		
+		
+		@RequestMapping("requestPayStub" )
+		public String requestPayStub(Model model,PayStub pay) {
+			int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();
+			List<Paystubplus> list= paystubService.requestlist(memberNo);
+			//Paystubplus rList=paystubService.requeston(memberNo); 
+			
+//			System.out.println(list);
+//			System.out.println(rList);
+			model.addAttribute("list",list);
+			//model.addAttribute("rList",rList);
+			
+			
+			return "management/requestPayStub";
+	
+			
+		}
+		@ResponseBody
+		@RequestMapping("request" )
+		public String requestPayStub(Model model,PayStub pay,int memberNo) {
+			
+			
+		System.out.println(memberNo);
+			Paystubplus rList=paystubService.requeston(memberNo); 
+		
+			model.addAttribute("rList",rList);
+			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+			 return gson.toJson(rList);
+
+		}
+		
+		 
+		
+		
 }
