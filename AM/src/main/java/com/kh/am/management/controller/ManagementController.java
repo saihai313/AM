@@ -137,7 +137,7 @@ public class ManagementController {
 		public String Correction(Model model, int corrNo) {
 			System.out.println("!" + corrNo);
 			//Paystubplus correction =paystubService.correction(corrNo);
-			
+			//UPDATE
 			int result=paystubService.correction(corrNo);
 			
 			System.out.println("result : " + result);
@@ -156,7 +156,11 @@ public class ManagementController {
 			
 			cr.setStoreNo(storeNo);
 			int result=paystubService.transmit(cr);
-			
+			int corrNo=cr.getCorrNo();
+			if(result>0) {
+				
+				result=paystubService.correction(corrNo);
+			}
 			
 			model.addAttribute("result",result);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

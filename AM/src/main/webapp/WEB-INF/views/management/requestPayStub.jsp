@@ -410,7 +410,7 @@
         });
          
          /* status */
-         $("#correction").click(function(){
+        /*  $("#correction").click(function(){
         	 console.log(this);
         	 var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
         	 console.log("!!!!" + corrNo);
@@ -430,12 +430,9 @@
        			   } 
       		    
         	 });
-         });
+         }); */
          
-         $("#test").click(function(){
-        	$("#staticBackdrop").modal("hide"); 
-         });
-         
+       
          
          $("#transmit").click(function(){
         	var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
