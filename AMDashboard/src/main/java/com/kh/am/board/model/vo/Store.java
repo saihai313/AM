@@ -9,31 +9,33 @@ public class Store {
     private String storeName;
     private String storePhone;
     private String storeAddress;
-    private String businessNo;
-    private char businessStatus;
+    private String storeBizNo;
+    private char storeBizCheck;
     private String memberName;
     private String memberEmail;
     private Date memberEnrollDate;
     private String memberStatus;
+    private String memberPhone;
 
     public Store() {
 }
 
     public Store(int storeNo, int employerNo, String storeName, String storePhone, String storeAddress,
-            String businessNo, char businessStatus, String memberName, String memberEmail, Date memberEnrollDate,
-            String memberStatus) {
+            String storeBizNo, char storeBizCheck, String memberName, String memberEmail, Date memberEnrollDate,
+            String memberStatus, String memberPhone) {
         super();
         this.storeNo = storeNo;
         this.employerNo = employerNo;
         this.storeName = storeName;
         this.storePhone = storePhone;
         this.storeAddress = storeAddress;
-        this.businessNo = businessNo;
-        this.businessStatus = businessStatus;
+        this.storeBizNo = storeBizNo;
+        this.storeBizCheck = storeBizCheck;
         this.memberName = memberName;
         this.memberEmail = memberEmail;
         this.memberEnrollDate = memberEnrollDate;
         this.memberStatus = memberStatus;
+        this.memberPhone = memberPhone;
     }
 
     public int getStoreNo() {
@@ -76,20 +78,20 @@ public class Store {
         this.storeAddress = storeAddress;
     }
 
-    public String getBusinessNo() {
-        return businessNo;
+    public String getStoreBizNo() {
+        return storeBizNo;
     }
 
-    public void setBusinessNo(String businessNo) {
-        this.businessNo = businessNo;
+    public void setStoreBizNo(String storeBizNo) {
+        this.storeBizNo = storeBizNo;
     }
 
-    public char getBusinessStatus() {
-        return businessStatus;
+    public char getStoreBizCheck() {
+        return storeBizCheck;
     }
 
-    public void setBusinessStatus(char businessStatus) {
-        this.businessStatus = businessStatus;
+    public void setStoreBizCheck(char storeBizCheck) {
+        this.storeBizCheck = storeBizCheck;
     }
 
     public String getMemberName() {
@@ -124,14 +126,22 @@ public class Store {
         this.memberStatus = memberStatus;
     }
 
+    public String getMemberPhone() {
+        return memberPhone;
+    }
+
+    public void setMemberPhone(String memberPhone) {
+        this.memberPhone = memberPhone;
+    }
+
     @Override
     public String toString() {
         return "Store [storeNo=" + storeNo + ", employerNo=" + employerNo + ", storeName=" + storeName + ", storePhone="
-                + storePhone + ", storeAddress=" + storeAddress + ", businessNo=" + businessNo + ", businessStatus="
-                + businessStatus + ", memberName=" + memberName + ", memberEmail=" + memberEmail + ", memberEnrollDate="
-                + memberEnrollDate + ", memberStatus=" + memberStatus + "]";
-    }    
+                + storePhone + ", storeAddress=" + storeAddress + ", storeBizNo=" + storeBizNo + ", storeBizCheck="
+                + storeBizCheck + ", memberName=" + memberName + ", memberEmail=" + memberEmail + ", memberEnrollDate="
+                + memberEnrollDate + ", memberStatus=" + memberStatus + ", memberPhone=" + memberPhone + "]";
+    }
 
-    
+  
     
 }

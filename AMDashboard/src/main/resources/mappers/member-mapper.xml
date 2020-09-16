@@ -22,7 +22,7 @@
     SELECT * FROM MEMBER
     WHERE MEMBER_EMAIL = #{memberEmail}
     AND MEMBER_STATUS = 'Y'
-    AND MEMBER_CHECK = 'O'
+    AND MEMBER_CHECK = 'Y'
     <!-- 회원상태와 이메일인증 확인 검사함 -->
   </select>
 

@@ -33,7 +33,7 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title"> Simple Table</h4>
+                <h4 class="card-title"> 사장 회원 조회</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -58,7 +58,7 @@
                         <th>
                           전화번호
                         </th>
-                        <th>
+                        <th class="text-center">
                           회원상태
                         </th>
                       </tr>
@@ -69,7 +69,7 @@
                       <tr><td colspan="6">존재하는 회원이 없습니다.</td></tr>
                     </c:when>
                     <c:otherwise>
-                      <c:forEach var="store" items="${list}">
+                      <c:forEach var="store" items="${storeList}">
                         <tr>
                           <td>${store.memberName }</td>
                           <td>${store.memberEmail }</td>
@@ -77,7 +77,7 @@
                           <td>${store.storeName}</td>
                           <td>${store.storeAddress}</td>
                           <td>${store.storePhone}</td>
-                          <td>${store.memberStatus}</td>
+                          <td class="text-center">${store.memberStatus}</td>
                           
                         </tr>
                       </c:forEach>
@@ -92,127 +92,53 @@
           <div class="col-md-12">
             <div class="card  card-plain">
               <div class="card-header">
-                <h4 class="card-title"> Table on Plain Background</h4>
-                <p class="category"> Here is a subtitle for this table</p>
+                <h4 class="card-title"> 알바 회원 조회</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table tablesorter " id="">
                     <thead class=" text-primary">
                       <tr>
-                        <th>
-                          Name
+                       <th>
+                          이름
+                        </th>
+                        <th >
+                          이메일
+                        </th>
+                        <th >
+                          가입일
                         </th>
                         <th>
-                          Country
+                          상호명
                         </th>
                         <th>
-                          City
+                          전화번호
                         </th>
                         <th class="text-center">
-                          Salary
+                          회원상태
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          Dakota Rice
-                        </td>
-                        <td>
-                          Niger
-                        </td>
-                        <td>
-                          Oud-Turnhout
-                        </td>
-                        <td class="text-center">
-                          $36,738
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Minerva Hooper
-                        </td>
-                        <td>
-                          Curaçao
-                        </td>
-                        <td>
-                          Sinaai-Waas
-                        </td>
-                        <td class="text-center">
-                          $23,789
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Sage Rodriguez
-                        </td>
-                        <td>
-                          Netherlands
-                        </td>
-                        <td>
-                          Baileux
-                        </td>
-                        <td class="text-center">
-                          $56,142
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Philip Chaney
-                        </td>
-                        <td>
-                          Korea, South
-                        </td>
-                        <td>
-                          Overland Park
-                        </td>
-                        <td class="text-center">
-                          $38,735
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Doris Greene
-                        </td>
-                        <td>
-                          Malawi
-                        </td>
-                        <td>
-                          Feldkirchen in Kärnten
-                        </td>
-                        <td class="text-center">
-                          $63,542
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Mason Porter
-                        </td>
-                        <td>
-                          Chile
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $78,615
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Jon Porter
-                        </td>
-                        <td>
-                          Portugal
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $98,615
-                        </td>
-                      </tr>
+                    <c:choose>
+                    <c:when test="${empty storeList}">
+                      <tr><td colspan="7">존재하는 회원이 없습니다.</td></tr>
+                    </c:when>
+                    <c:otherwise>
+                      <c:forEach var="employee" items="${employeeList}">
+                        <tr>
+                          <td>${employee.memberName }</td>
+                          <td>${employee.memberEmail }</td>
+                          <td>${employee.memberEnrollDate}</td>
+                          <td>${employee.storeName}</td>
+                          <td>${employee.memberPhone}</td>
+                          <td class="text-center">${employee.memberStatus}</td>
+                          
+                        </tr>
+                      </c:forEach>
+                    </c:otherwise>
+                  </c:choose>
+                     
                     </tbody>
                   </table>
                 </div>
@@ -268,6 +194,8 @@
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
   </noscript>
+  
 </body>
+
 
 </html>

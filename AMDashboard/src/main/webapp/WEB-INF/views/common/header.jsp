@@ -102,15 +102,21 @@
             </a>
           </li>
           <li>
-            <a href="./icons.html">
-              <i class="tim-icons icon-atom"></i>
+            <a href="${contextPath}/board/userConfirm">
+              <i class="tim-icons icon-check-2"></i>
               <p>회원 인증</p>
             </a>
           </li>
           <li>
             <a href="${contextPath}/board/boardList">
-              <i class="tim-icons icon-single-02"></i>
+              <i class="tim-icons icon-single-copy-04"></i>
               <p>회원 관리</p>
+            </a>
+          </li>
+           <li>
+            <a href="${contextPath}/member/adminProfile">
+              <i class="tim-icons icon-single-02"></i>
+              <p>USER PROFILE</p>
             </a>
           </li>
           <li>
