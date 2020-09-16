@@ -334,12 +334,52 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
-                        <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button>
+                       <!--  <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button> -->
+                <button id="test"  type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려</button>
+                
+                <!--class="btn btn-warning contentBtn btn-rounded"  -->
                       </div>
                     </div>
                   </div>
                 </div> 
                 
+               
+       <!--  모달2-->
+       
+          <div class="modal fade" id="static" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">급여 정정 신청</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+
+                        <div class="container-fluid" id="content">
+                        
+                        
+									정정신청내용 : 
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                
+                                	
+                                    <textarea name="correctionContent" id="correctionContent2" cols="30" rows="7" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                          </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
+                        <button type="button"data-dismiss="modal" id="transmit" class="btn btn-primary viewBtn">반려내용전송</button>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                         
          <script>
          $(".contentBtn").click(function(){
         	 var memberNo = $("#test1").text(); 
@@ -350,16 +390,16 @@
          	console.log("corrNo:"+corrNo)
          	   $.ajax({
 	   url : "${contextPath}/management/request",
-	   data : {"corrNo":corrNo,
+	   data : {"corrNo":corrNo
 		   }, 
-	   type : "GET",
+	   type : "GET",	
 	   dataType : "JSON",
 	   success:function(rList){
 		   console.log(rList)
 		   console.log(rList.corrContent)
 		  $("#staticBackdrop").append(rList.corrContent);
-		   $("#content").text(rList.corrContent);
-        modal('staticBackdrop');
+		   $("#correctionContent").val(rList.corrContent);
+    
 	   },error:function(){
 		   console.log("ajax 통신 실패");
  
@@ -368,6 +408,55 @@
  	   
    });
         });
+         
+         /* status */
+         $("#correction").click(function(){
+        	 console.log(this);
+        	 var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
+        	 console.log("!!!!" + corrNo);
+        	 
+        	 $.ajax({
+        		 url : "correction",
+        		 data : {"corrNo" : corrNo},
+       			   dataType : "JSON",
+       			   success:function(result){
+       					console.log("1");
+       					
+       				  
+                      
+       			   },error:function(){	
+       				   console.log("ajax 통신 실패");
+       		 
+       			   } 
+      		    
+        	 });
+         });
+         
+         $("#test").click(function(){
+        	$("#staticBackdrop").modal("hide"); 
+         });
+         
+         
+         $("#transmit").click(function(){
+        	var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
+        	var corrReContent=$("#correctionContent2").val();
+        	 $.ajax({
+        		url : "transmit" ,
+        		data :{"corrNo" : corrNo,"corrReContent":corrReContent},
+        		dataType : "JSON",
+        		 success:function(result){
+    					
+    				   if(result>0){
+    						alert("qksfusodyddmf wjsthdgottmqselk.")
+    				   }
+    				  
+                   
+    			   },error:function(){	
+    				   console.log("ajax 통신 실패");
+    		 
+    			   } 
+        	 });
+         });
     </script>  
     </body>
 </html>

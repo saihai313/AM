@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.management.model.dao.PayStubDAO;
+import com.kh.am.management.model.vo.CorrectionReply;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
@@ -53,6 +55,20 @@ public class PayStubServiceImpl implements PayStubService {
 	public Paystubplus requeston(int corrNo) {
 		
 		return paystubDAO.requestone(corrNo);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int correction(int corrNo) {
+		// TODO Auto-generated method stub
+		return paystubDAO.correction(corrNo);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int transmit(CorrectionReply cr) {
+		// TODO Auto-generated method stub
+		return paystubDAO.transmit(cr);
 	}
 
 

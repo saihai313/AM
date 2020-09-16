@@ -80,5 +80,16 @@
 	</select>
 	
 	
+	<update id="correction" parameterType="_int" >
+			
+	UPDATE   PAY_CORR  SET CORR_STATUS='N' WHERE CORR_NO=#{corrNo}
+	</update>
+	
+	<insert id="transmit" parameterType="CorrectionReply">
+	
+	
+		INSERT INTO PAY_CORR_RE VALUES(SEQ_RNO.NEXTVAL, #{corrReContent},SYSDATE, #{corrNo}, #{storeNo})
+	</insert>
+	
   
 </mapper>

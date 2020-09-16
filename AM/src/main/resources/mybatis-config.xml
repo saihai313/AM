@@ -24,6 +24,7 @@
 	<typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
 	<typeAlias type="com.kh.am.member.model.vo.Store" alias="Store"/>
  	<typeAlias type="com.kh.am.management.model.vo.PayStub" alias="PayStub"/>
+ 	<typeAlias type="com.kh.am.management.model.vo.CorrectionReply" alias="CorrectionReply"/>
 
  	<typeAlias type="com.kh.am.management.model.vo.Paystubplus" alias="Paystubplus"/> 
 	<typeAlias type="com.kh.am.calendar.model.vo.PartTime" alias="PartTime"/>
