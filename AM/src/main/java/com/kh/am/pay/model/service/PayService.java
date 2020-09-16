@@ -33,4 +33,13 @@ public interface PayService {
 	public abstract int insertPay(Pay pay);
 	
 
+	/** 급여명세서 수정 Service
+	 * @param pay
+	 * @return result
+	 */
+	public abstract int updatePayAction(Pay pay);
+	
+	
+	
+	
 }

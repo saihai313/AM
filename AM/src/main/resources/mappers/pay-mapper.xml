@@ -122,6 +122,12 @@
 		
 	</insert>
 	
+	<update id="updatePay" parameterType="Pay">
+		UPDATE PAY SET PAY_TIME = #{payTime}, PAY_DAY = #{payDay}, PAY_EXTRA = #{payExtra}, 
+				PAY_SAL = #{paySal}, PAY_PAYMENT = #{payPayment} , PAY_CREATE_DT = SYSDATE
+		WHERE PAY_NO = #{payNo}
+	</update>
+	
 	
 
 </mapper>

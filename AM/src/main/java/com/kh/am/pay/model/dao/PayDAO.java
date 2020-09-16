@@ -47,5 +47,14 @@ public class PayDAO {
 	public int insertPay(Pay pay) {
 		return sqlSession.insert("payMapper.insertPay", pay);
 	}
+	
+	
+	/** 급여명세서 수정 DAO
+	 * @param pay
+	 * @return result
+	 */
+	public int updatePay(Pay pay) {
+		return sqlSession.update("payMapper.updatePay", pay);
+	}
 
 }

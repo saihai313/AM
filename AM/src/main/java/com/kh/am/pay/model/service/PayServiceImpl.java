@@ -45,6 +45,14 @@ public class PayServiceImpl implements PayService{
 	public int insertPay(Pay pay) {
 		return payDAO.insertPay(pay);
 	}
+	
+	
+	// 급여명세서 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updatePayAction(Pay pay) {
+		return payDAO.updatePay(pay);
+	}
 
 	
 	
