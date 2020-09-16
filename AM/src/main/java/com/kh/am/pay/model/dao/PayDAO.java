@@ -16,7 +16,7 @@ public class PayDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	/** 알바생 조회 DAO
+	/** 알바생 조회 DAO!!
 	 * @param memberNo
 	 * @return eList
 	 */
@@ -46,6 +46,15 @@ public class PayDAO {
 	 */
 	public int insertPay(Pay pay) {
 		return sqlSession.insert("payMapper.insertPay", pay);
+	}
+	
+	
+	/** 급여명세서 수정 DAO
+	 * @param pay
+	 * @return result
+	 */
+	public int updatePay(Pay pay) {
+		return sqlSession.update("payMapper.updatePay", pay);
 	}
 
 }

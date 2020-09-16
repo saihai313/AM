@@ -18,7 +18,7 @@ public class PayServiceImpl implements PayService{
 	private PayDAO payDAO;
 	
 	
-	// 알바생 조회 Service 구현
+	// 알바생 조회 Service 구현!
 	@Override
 	public List<Member> selectEmployeeList(int storeNo) {
 		return payDAO.selectEmployeeList(storeNo);
@@ -44,6 +44,14 @@ public class PayServiceImpl implements PayService{
 	@Override
 	public int insertPay(Pay pay) {
 		return payDAO.insertPay(pay);
+	}
+	
+	
+	// 급여명세서 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updatePayAction(Pay pay) {
+		return payDAO.updatePay(pay);
 	}
 
 	
