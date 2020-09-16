@@ -115,6 +115,7 @@
 	
 	</select>
 	
+	<!-- 급여 설정 입력 -->
 	<insert id="insertPay" parameterType="Pay" >
 		INSERT INTO PAY VALUES(SEQ_PNO.NEXTVAL, #{payTime}, #{payDay}, 
 								#{payExtra}, #{paySal}, #{payPayment}, 
@@ -122,6 +123,7 @@
 		
 	</insert>
 	
+	<!-- 급여명세서 수정 -->
 	<update id="updatePay" parameterType="Pay">
 		UPDATE PAY SET PAY_TIME = #{payTime}, PAY_DAY = #{payDay}, PAY_EXTRA = #{payExtra}, 
 				PAY_SAL = #{paySal}, PAY_PAYMENT = #{payPayment} , PAY_CREATE_DT = SYSDATE

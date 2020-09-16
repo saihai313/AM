@@ -18,7 +18,7 @@ public class PayServiceImpl implements PayService{
 	private PayDAO payDAO;
 	
 	
-	// 알바생 조회 Service 구현
+	// 알바생 조회 Service 구현!
 	@Override
 	public List<Member> selectEmployeeList(int storeNo) {
 		return payDAO.selectEmployeeList(storeNo);

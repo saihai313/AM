@@ -8,7 +8,7 @@ import com.kh.am.pay.model.vo.Pay;
 
 public interface PayService {
 
-	/** 알바생 조회 Service
+	/** 알바생 조회 Service!
 	 * @param memberNo
 	 * @return eList
 	 */

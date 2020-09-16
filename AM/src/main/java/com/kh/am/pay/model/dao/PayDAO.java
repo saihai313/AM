@@ -16,7 +16,7 @@ public class PayDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	/** 알바생 조회 DAO
+	/** 알바생 조회 DAO!!
 	 * @param memberNo
 	 * @return eList
 	 */

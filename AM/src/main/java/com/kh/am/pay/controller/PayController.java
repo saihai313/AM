@@ -30,7 +30,7 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
-	// 급여
+	// 급여!!!
 	
 	// 급여설정 페이지 전환
 	@RequestMapping("insertPay")
