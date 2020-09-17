@@ -12,6 +12,7 @@
 
 <style>
 	#work-title{border-bottom: 3px solid #F5F4F0;}
+	#notice{float: right; padding-top : 10px;}
 </style>
 </head>
 <body>
@@ -32,8 +33,8 @@
 			<div class="row justify-content-center">
 				<div class="col-md-10">
 					<div class="wrapper px-md-4">
-
 						<div id='calendar'></div>
+							<h6 id="notice">*스케쥴 변경은 근무관리에서 가능합니다.</h6>
 						<div style='clear: both'></div>
 						
 					</div>

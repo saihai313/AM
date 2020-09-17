@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.personnel.model.dao.PersonnelDAO;
 import com.kh.am.personnel.model.vo.EmployeeInfo;
@@ -33,10 +34,29 @@ public class PersonnelServiceImpl implements PersonnelService{
 	@Override
 	public List<EmployeeInfo> selectList(int storeNo) {
 
-		List<EmployeeInfo> elmployeeList = personnelDAO.selectList(storeNo);
+		List<EmployeeInfo> personnelList = personnelDAO.selectList(storeNo);
 		
 		
-		return elmployeeList;
+		return personnelList;
+	}
+
+	// 직원 상세정보 조회
+	@Override
+	public EmployeeInfo selectInfo(int memberNo) {
+
+		EmployeeInfo eInfo = personnelDAO.selectInfo(memberNo);
+		
+		
+		return eInfo;
+	}
+
+	
+	// 직원 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deletePersonnel(int memberNo) {
+
+		return personnelDAO.deletePersonnel(memberNo);
 	}
 
 	

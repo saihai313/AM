@@ -19,4 +19,16 @@ public interface PersonnelService {
 	 * @return
 	 */
 	List<EmployeeInfo> selectList(int storeNo);
+
+	/** 직원 상세정보 조회
+	 * @param memberNo
+	 * @return
+	 */
+	EmployeeInfo selectInfo(int memberNo);
+
+	/** 직원 삭제
+	 * @param memberNo
+	 * @return
+	 */
+	int deletePersonnel(int memberNo);
 }

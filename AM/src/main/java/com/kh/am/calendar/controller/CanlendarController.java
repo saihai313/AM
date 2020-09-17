@@ -1,6 +1,10 @@
 package com.kh.am.calendar.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,14 +65,67 @@ public class CanlendarController {
 		
 		return "calendar/workList";
 	}
+	
+	
+	
+	
 	// 고정스케쥴 관리 페이지 이동
 	@RequestMapping("pixSchedule")
-	public String pixSchedule() {
+	public String pixSchedule(Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		// 가게번호 얻어오기
+		int storeNo = calendarService.selectStoreNo(memberNo);
+		
+		System.out.println("조회" + storeNo);
+		
+		// 알바생 목록 조회
+		List<Member> eList = calendarService.selectEList(storeNo);
+		
+		System.out.println("알바" + eList);
+		
+		// 파트타임 목록 조회
+		List<PartTime> pList = calendarService.selectPList(storeNo);
+		
+		System.out.println("파트타임 목록 " + pList);
+		
+		model.addAttribute("eList", eList);
+		model.addAttribute("pList", pList);
+		}
+		
+		
+		
+		
+		
 		return "calendar/pixSchedule";
 	}
+	
+	
+	
+	
+	
+	
 	// 파트타임 관리 페이지 이동
 	@RequestMapping("partTime")
-	public String partTime() {
+	public String partTime(Model model) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		
+		List<PartTime> pList = calendarService.selectPartTime(memberNo);
+		
+		model.addAttribute("pList", pList);
+		
+		System.out.println("파트타임 페이지에서 파트타임 목록 조회" + pList);
+		
 		return "calendar/partTime";
 	}
 	
@@ -161,14 +218,9 @@ public class CanlendarController {
 	}
 	
 	
-	// 스케쥴 업데이트
+		// 스케쥴 업데이트
 		@RequestMapping(value="updateCalendar", method = RequestMethod.POST)
 		public String updateCalendar(Model model, UpdateWorkCalendar updateCal) {
-			
-			System.out.println("나와 업뎃: "+ updateCal);
-			
-			// 위에 workList 만든거 가져와야지 정보입력될듯
-			
 			
 		Member loginMember = (Member)model.getAttribute("loginMember");
 			
@@ -177,8 +229,6 @@ public class CanlendarController {
 			
 			// 사장님 회원번호 이용해서 가게번호 알고 update 진행
 			int result = calendarService.updateCalendar(updateCal, memberNo);
-			
-			System.out.println("업데이트 리졸트" + result);
 			
 			
 			// ------------------------------------------ list 다시
@@ -192,10 +242,7 @@ public class CanlendarController {
 					List<Member> eList = calendarService.selectEList(storeNo);
 					
 					System.out.println("알바" + eList);
-					
-					// 파트타임 목록 조회
-					// 아 여긴 테이블 만들어야 한다해~
-					
+
 					// 파트타임 목록 조회
 					List<PartTime> pList = calendarService.selectPList(storeNo);
 					model.addAttribute("pList", pList);
@@ -250,6 +297,108 @@ public class CanlendarController {
 					
 					return "calendar/workList";
 				}
+			
+				
+	// 파트타임 삭제			
+	@ResponseBody
+	@RequestMapping(value="partTimeDelete", produces = "applicateion/text; charset=utf-8")
+	public String partTimeDelete(PartTime partTime, Model model) {
 		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		System.out.println("파트타임 삭제" + partTime);
+		
+		// 사장님 가게 번호
+		int storeNo = calendarService.selectStoreNo(memberNo);
+
+		//세팅
+		partTime.setStoreNo(storeNo);
+		
+		
+		int result = calendarService.partTimeDelete(partTime);
+		
+		String str = "파트타임 지우기 ";
+		
+		if(result > 0) {
+			str += "성공";
+		}else {
+			str += "실패";
+			
+		}
+		return str;
+	}
+		
+	// 파트타임 업데이트
+	@ResponseBody
+	@RequestMapping(value="partTimeUpdate", produces = "applicateion/text; charset=utf-8")
+	public String updatePartTime(Model model, PartTime partTime) {
+		
+		System.out.println("업데이트" + partTime);
+		
+		
+		
+		
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		System.out.println("파트타임 삭제" + partTime);
+		
+		// 사장님 가게 번호
+		int storeNo = calendarService.selectStoreNo(memberNo);
+
+		//세팅
+		partTime.setStoreNo(storeNo);
+		
+		System.out.println("업데이트 데이트 " + partTime );
+		int result = calendarService.partTimeUpdate(partTime);
+		
+		String str = "파트타임 수정에 ";
+		
+		if(result > 0) {
+			str += "성공";
+		}else {
+			str += "실패";
+			
+		}
+		return str;
+	}
+	
+	
+	//파트타임 삽입
+	@ResponseBody
+	@RequestMapping(value="partTimeInsert", produces = "applicateion/text; charset=utf-8")
+	public String partTimeInsert(Model model, PartTime partTime) {
+		
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		
+		// 사장님 가게 번호
+		int storeNo = calendarService.selectStoreNo(memberNo);
+
+		//세팅
+		partTime.setStoreNo(storeNo);
+		
+		System.out.println("인서트 데이트 " + partTime );
+		int result = calendarService.partTimeInsert(partTime);
+		
+		String str = "파트타임 삽입에 ";
+		
+		if(result > 0) {
+			str += "성공";
+		}else {
+			str += "실패";
+			
+		}
+		return str;
+	}
 	
 }

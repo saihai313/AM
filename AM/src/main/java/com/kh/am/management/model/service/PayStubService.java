@@ -2,6 +2,7 @@ package com.kh.am.management.model.service;
 
 import java.util.List;
 
+import com.kh.am.management.model.vo.CorrectionReply;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
@@ -21,6 +22,10 @@ public interface PayStubService {
 	public abstract List<Paystubplus> requestlist(int memberNo);
 
 	//급여정정 상세조회
-	public abstract Paystubplus requeston(int memberNo);
+	public abstract Paystubplus requeston(int corrNo);
+
+	public abstract int correction(int corrNo);
+
+	public abstract int transmit(CorrectionReply cr);
 
 }

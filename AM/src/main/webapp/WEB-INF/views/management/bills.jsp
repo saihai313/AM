@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원정보 수정</title>
+<title>급여 명세서</title>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
  
 
@@ -14,9 +14,9 @@
 
 
 .tabType1 {
-	height: 50px;
-	text-align: center;
-	font-family: 'S-CoreDream-6Bold';
+   height: 50px;
+   text-align: center;
+   font-family: 'S-CoreDream-6Bold';
 }
 
 
@@ -24,7 +24,7 @@
 
 
 .tabType1 li.on a {
-	color: #fff;
+   color: #fff;
 }
 table.type07 {
     border-collapse: collapse;
@@ -62,7 +62,7 @@ table.type07 td {
 }
 
 #correction{
-	float: right;
+   float: right;
 }
 
 </style>
@@ -70,72 +70,70 @@ table.type07 td {
 </head>
 <body>
 
-	<!-- ------------------------- header ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+   <!-- ------------------------- header ---------------------------- -->
+   <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-	<!-- ------------------------- main ---------------------------- -->
-	<section class="ftco-section">
-		<div class="overlay"></div>
-		<div class="container">
+   <!-- ------------------------- main ---------------------------- -->
+   <section class="ftco-section">
+      <div class="overlay"></div>
+      <div class="container">
 
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-7 heading-section text-center fadeInUp">
-					<span class="subheading">급여명세서</span>
-					<h2> 급여명세서</h2>
-				</div>
-			</div>
-				<table class="type07">
-				
-				<div class="billscontent">
-			    <thead>
-			    <tr>
-			        <th scope="cols">지급항목</th>
-			        <th scope="cols"></th>
-			    </tr>
-			    </thead>
-			    <tbody>
-			     <tr>
-			        <th scope="row">총근무일</th>
-			        <td>${plus.payDay}일</td>
-			    </tr>
-			    
-			    <tr>
-			        <th scope="row">주휴수당</th>
-			        <td>${plus.payExtra}원</td>
-			    </tr>
-			     <tr>
-			        <th scope="row">급여 지급일</th>
-			        <td>${plus.payPayment}일</td>
-			    </tr>
-			    <tr>
-			        <th scope="row">총근무일</th>
-			        <td>${plus.payDay}일</td>
-			    </tr>
-			    <tr>
-			        <th scope="row">총근무시간</th>
-			        <td>${plus.payTime}시간</td>
-			    </tr>
-			    
-			     <tr>
-			        <th scope="row">총급여</th>
-			        <td>${plus.paySal}원</td>
-			    </tr>
-			    </tbody>
-			</table>
-			<button type="button" class="btn btn-outline-success" id="correction">수정</button>
-		</div>	
-		</div>
-	</section>
-
-
-	<!-- ------------------------- footer ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	
-	<script >
-		("#correction").on("click",function(){
-			
-		})
-	</script>
+         <div class="row justify-content-center pb-5">
+            <div class="col-md-7 heading-section text-center fadeInUp">
+               <span class="subheading">급여명세서</span>
+               <h2> 급여명세서</h2>
+            </div>
+         </div>
+            <div class="billscontent">
+            <form method="POST" action="../../pay/updatePayAction/${payNo}">
+               <table class="type07">
+                <thead>
+                   <tr>
+                       <th scope="col">지급항목</th>
+                       <th scope="col"></th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                       <th scope="row">총 근무일</th>
+                       <td><input type="text" name="payDay" value="${plus.payDay}">일</td>
+                   </tr>
+                  
+                   <tr>
+                       <th scope="row">주휴수당</th>
+                       <td><input type="text" name="payExtra" value="${plus.payExtra}">원</td>
+                   </tr>
+                    <tr>
+                       <th scope="row">급여 지급일</th>
+                       <td><input type="text" name="payPayment" value="${plus.payPayment}">일</td>
+                   </tr>
+                   
+                   <tr>
+                       <th scope="row">총근무시간</th>
+                       <td><input type="text" name="payTime" value="${plus.payTime}">시간</td>
+                   </tr>
+                   
+                    <tr>
+                       <th scope="row">총 급여</th>
+                       <td><input type="text" name="paySal" value="${plus.paySal}">원</td>
+                   </tr>
+                </tbody>
+              </table>
+               <button class="btn btn-outline-success" id="correction">수정</button>
+<%--                <a class="btn btn-primary float-right" href="${header.referer}">목록으로</a>
+ --%>           </form>   
+              </div>
+      </div>
+   </section>
+   
+   
+   
+   
+   
+   
+   <!-- ------------------------- footer ---------------------------- -->
+   <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+   
 
 </body>
 </html>

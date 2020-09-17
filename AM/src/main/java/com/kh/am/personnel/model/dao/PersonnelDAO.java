@@ -32,4 +32,16 @@ public class PersonnelDAO {
 		return sqlSession.selectList("personnelMapper.selectList", storeNo);
 	}
 
+
+	public EmployeeInfo selectInfo(int memberNo) {
+
+		return sqlSession.selectOne("personnelMapper.selectInfo", memberNo);
+	}
+
+
+	public int deletePersonnel(int memberNo) {
+
+		return sqlSession.update("personnelMapper.deletePersonnel", memberNo);
+	}
+
 }

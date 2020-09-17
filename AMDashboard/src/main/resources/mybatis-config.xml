@@ -7,10 +7,14 @@
       
        <typeAliases>
     <typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
+    <typeAlias type="com.kh.am.board.model.vo.Store" alias="Store"/>
+    <typeAlias type="com.kh.am.board.model.vo.Employee" alias="Employee"/>
+    
     </typeAliases>
     
      <mappers>
-    <mapper resource="/mappers/member-mapper.xml"/>
+		    <mapper resource="/mappers/member-mapper.xml"/>
+		    <mapper resource="/mappers/board-mapper.xml"/>
     </mappers>
     
 </configuration>

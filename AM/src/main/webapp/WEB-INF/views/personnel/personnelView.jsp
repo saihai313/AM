@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${eInfo.memberNo}</title>
 <style>
 	.employeeInfo{
 		
@@ -15,6 +15,10 @@
 	.bottom_btn{
 		margin-bottom: 50px;
 	}
+	
+	.employeeInfo > div{
+		padding-bottom: 10px;
+	}
 
 	
 </style>
@@ -22,21 +26,19 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="employeeInfo">
-		<h2>${member.memberName}님의 상세정보</h2>
-		<div class="employee__name"><h3>이름 :</h3></div>
-		<div class="employee__email"><h3>이메일 :</h3></div>
-		<div class="employee__phone"><h3>연락처 :</h3></div>
-		<div class="employee__hourlyWage"><h3>이름 :</h3></div>
-		<div class="employee__shift"><h3>시급 :</h3></div>
-		<div class="employee__workTime"><h3>근무조 :</h3></div>
-		<div class="employee__workDay"><h3>근무시간 :</h3></div>			
-		<div class="employee__workDay"><h3>근무요일 :</h3></div>			
+		<h2>${eInfo.memberName} 님의 상세정보</h2>
+		<div class="employee__email"><h4>이메일 : ${eInfo.memberEmail}</h4></div>
+		<div class="employee__phone"><h4>연락처 : ${eInfo.memberPhone}</h4></div>
+		<div class="employee__hourlyWage"><h4>시급 : ${eInfo.sal}</h4></div>
+		<div class="employee__shift"><h4>근무조 :</h4></div>
+		<div class="employee__workDay"><h4>근무시간 :</h4></div>			
+		<div class="employee__workDay"><h4>근무요일 :</h4></div>			
 	</div>
 	<br>
 
 	
      <div class="bottom_btn" style="text-align: center;" >
-       <button id="" class="btn btn-primary py-3 px-4">목록으로</button>
+       <button id="toList" class="btn btn-primary py-3 px-4">목록으로</button>
        <button id="deleteEmployee" class="btn btn-primary py-3 px-4">직원삭제</button>
      </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -44,10 +46,20 @@
 		<script>	
 		$("#deleteEmployee").on("click",function(){
 			if(confirm("정말 삭제하시겠습니까?")){
-				// spring/board/1/515/delete
-				location.href="${board.boardNo}/delete";
+				
+				var memberNo = ${eInfo.memberNo};
+				console.log(memberNo);
+				location.href="${contextPath}/personnel/delete";
+				
 			}
 				
+		});
+		
+		$("#toList").on("click",function(){
+			var personnelList = 
+				"${contextPath}/personnel/personnelList";
+				console.log(memberNo);
+			location.href = personnelList;			
 		});
 		
 		

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.am.management.model.vo.CorrectionReply;
 import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
@@ -36,9 +37,22 @@ public class PayStubDAO {
 		return sqlSession.selectList("paystubMapper.requestlist",memberNo);
 	}
 
-	public Paystubplus requestone(int memberNo) {
+	public Paystubplus requestone(int corrNo) {
 		
-		return sqlSession.selectOne("paystubMapper.requestone",memberNo);
+		return sqlSession.selectOne("paystubMapper.requestone",corrNo);
+	}
+
+	public int correction(int corrNo) {
+		System.out.println(sqlSession);
+		System.out.println(corrNo);
+		Integer result =  sqlSession.update("paystubMapper.correction",corrNo);
+		System.out.println(result);
+		return result;
+	}
+
+	public int transmit(CorrectionReply cr) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("paystubMapper.transmit",cr);
 	}
 
 }

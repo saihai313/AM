@@ -30,7 +30,7 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
-	// 급여
+	// 급여!!!
 	
 	// 급여설정 페이지 전환
 	@RequestMapping("insertPay")
@@ -130,7 +130,34 @@ public class PayController {
 		
 		return url;
 	}
-		
+	
+	// 급여 명세서 수정
+			@RequestMapping("updatePayAction/{payNo}")
+			public String updatePayAction(Pay pay, RedirectAttributes rdAttr, HttpServletRequest request) {
+				System.out.println("updatePayAction : " + pay);
+				
+				
+				
+				  int result = payService.updatePayAction(pay);
+				  
+				  String status = null;
+				  String msg = null;
+				  String url = null; 
+				  if(result > 0) {
+					  status = "success";
+					  msg = "성공";
+					  url ="redirect:../../management/bills/"+pay.getPayNo(); 
+				  }
+				  else { 
+					  status ="error"; 
+					  url = "redirect:" + request.getHeader("referer"); 
+					}
+				  
+				  rdAttr.addFlashAttribute("status", status); 
+				  rdAttr.addFlashAttribute("msg", msg); 
+				 
+				return url;
+			}
 		
 	
 	

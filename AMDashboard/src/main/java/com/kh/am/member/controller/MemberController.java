@@ -37,13 +37,19 @@ public class MemberController {
     @RequestMapping("loginAction")
     public String loginAction(Member member,Model model, RedirectAttributes rdAttr,
                               HttpServletResponse response) {
-     
+        
+        System.out.println("member로그인"+member.getMemberEmail());
+        System.out.println("memberps"+member.getMemberPwd());
+
         Member loginMember = memberService.login(member);
         
         if(loginMember == null) {
             rdAttr.addFlashAttribute("status", "error");
             rdAttr.addFlashAttribute("msg","로그인 실패");
             rdAttr.addFlashAttribute("text","아이디 또는 비밀번호를 확인해 주세요");
+            
+            return "redirect:/"; 
+
         }else {
             model.addAttribute("loginMember",loginMember);
         }
@@ -58,11 +64,17 @@ public class MemberController {
     // 로그아웃
     @RequestMapping("logout")
     public String logout(SessionStatus status) {
-        
         status.setComplete();
         return "redirect:/";
     }
     
+    
+    // 마이페이지
+    @RequestMapping("adminProfile")
+    public String userProfile(SessionStatus status) {
+        status.setComplete();
+        return "member/adminProfile";
+    }
     
         
     

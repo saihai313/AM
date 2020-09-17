@@ -2,31 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="personnelMapper">
 	
-	<resultMap id="memberResultSet" type="Member" >
-		
+	<resultMap  id="employeeInfoResultSet" type="EmployeeInfo">
 		<id property="memberNo" column="MEMBER_NO"/>
 		<result property="memberEmail" column="MEMBER_EMAIL"/>
-		<result property="memberPwd" column="MEMBER_PWD"/>
 		<result property="memberName" column="MEMBER_NM"/>
 		<result property="memberPhone" column="MEMBER_PHONE"/>
-		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
-		<result property="memberGrade" column="MEMBER_GRADE"/>
-		<result property="memberCheck" column="MEMBER_CHECK"/>
 		<result property="memberStatus" column="MEMBER_STATUS"/>
-	</resultMap>
-	
-	<resultMap type="Store" id="storeResultSet">
-		<id property="storeNo" column="STORE_NO"/>
-		<result property="storeName" column="STORE_NM"/>
-		<result property="storePhone" column="STORE_PHONE"/>
-		<result property="storeAddress" column="STORE_ADDR"/>
-		<result property="storeBizNo" column="STORE_BIZ_NO"/>
-		<result property="storeBizCheck" column="STORE_BIZ_CHECK"/>
-		<result property="memberNo" column="MEMBER_NO"/>
-	</resultMap>
-	
-	<resultMap type="Employee" id="employeeResultSet">			
-		<result property="employeeNo" column="MEMBER_NO"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
 		<result property="storeNo" column="STORE_NO"/>
 		<result property="sal" column="EMPLOYEE_SAL"/>
 	</resultMap>
@@ -40,10 +22,23 @@
 
 	
 	<!-- 알바생 목록조회 -->
-	<select id="selectList" parameterType="_int" resultMap="memberResultSet">
+	<select id="selectList" parameterType="_int" resultMap="employeeInfoResultSet">
 		SELECT * FROM V_EMPLOYEELIST
 		WHERE STORE_NO = #{storeNo}
 		ORDER BY MEMBER_NO DESC
 	</select>
+	
+	<!-- 알바생 상세조회 -->
+	<select id="selectInfo" parameterType="_int" resultMap="employeeInfoResultSet">
+		SELECT * FROM V_EMPLOYEELIST
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 알바생 삭제  -->
+	<update id="deleteEmployee" parameterType="_int">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
 </mapper>

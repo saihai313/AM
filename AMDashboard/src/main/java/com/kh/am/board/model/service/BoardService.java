@@ -2,14 +2,32 @@ package com.kh.am.board.model.service;
 
 import java.util.List;
 
+import com.kh.am.board.model.vo.Employee;
 import com.kh.am.board.model.vo.Store;
 
 public interface BoardService {
 
-    /**  게시글 조회 
+    /**  사장 회원 조회 
      * @return
      */
-    List<Store> storeList(Store store);
+    List<Store> storeList();
+
+    /** 알바 회원 조회
+     * @return
+     */
+    List<Employee> employeeList();
+
+    /** 사장 회원 인증 
+     * @return
+     */
+    List<Store> confirmList();
+
+    /** 사장정보 상세 조회
+     * @param storeNo
+     * @return
+     */
+    List<Store> storeConfirm(int storeNo);
+
 }
 
 
