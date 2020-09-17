@@ -80,7 +80,7 @@ table.type07 td {
 
          <div class="row justify-content-center pb-5">
             <div class="col-md-7 heading-section text-center fadeInUp">
-               <span class="subheading">급여명세서</span>
+               <span class="subheading">Salary</span>
                <h2> 급여명세서</h2>
             </div>
          </div>
