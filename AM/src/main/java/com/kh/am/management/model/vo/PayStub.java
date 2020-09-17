@@ -1,5 +1,6 @@
 package com.kh.am.management.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class PayStub {
@@ -11,7 +12,7 @@ public class PayStub {
 	private int payExtra; //주휴수당
 	private int paySal; //총 급여
 	private int payPayment; //급여지급일
-	private Timestamp payCreateDate; //급여명세서 작성일
+	private Date payCreateDate; //급여명세서 작성일
 	private String payStatus; //급여상태
 	private int memberNo; // 알바생회원번호
 	private int storeNo; //가게번호
@@ -105,12 +106,12 @@ public class PayStub {
 	}
 
 
-	public Timestamp getPayCreateDate() {
+	public Date getPayCreateDate() {
 		return payCreateDate;
 	}
 
 
-	public void setPayCreateDate(Timestamp payCreateDate) {
+	public void setPayCreateDate(Date payCreateDate) {
 		this.payCreateDate = payCreateDate;
 	}
 

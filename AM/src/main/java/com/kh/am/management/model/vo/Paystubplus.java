@@ -7,7 +7,7 @@ public class Paystubplus {
 	private int corrNo; //급여정정신청 글벊
 	private String corrContent; //급여 정정신청 이유
 	private Date corrCreateDt;//급여정정신청 작성일
-	private Timestamp corrModifyDt;//급여정정신청 수정일
+	private Date corrModifyDt;//급여정정신청 수정일
 	private String corrStatus;//급여정정신청상태
 	private String corrResult;//급여정정신청결과
 	private int memberNo;//회원번호
@@ -70,13 +70,13 @@ public class Paystubplus {
 
 
 
-	public Timestamp getCorrModifyDt() {
+	public Date getCorrModifyDt() {
 		return corrModifyDt;
 	}
 
 
 
-	public void setCorrModifyDt(Timestamp corrModifyDt) {
+	public void setCorrModifyDt(Date corrModifyDt) {
 		this.corrModifyDt = corrModifyDt;
 	}
 
