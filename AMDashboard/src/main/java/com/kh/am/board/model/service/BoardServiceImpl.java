@@ -45,6 +45,23 @@ public class BoardServiceImpl implements BoardService  {
         return boardDAO.storeConfirm( storeNo);
     }
 
+    // 인증 확인
+    @Transactional(rollbackFor = Exception.class)
+	@Override
+	public int auth(int storeNo) {
+    	
+    	int result1 = boardDAO.auth(storeNo);
+    	
+    	int result = 0;
+    	if(result1 > 0) {
+    		
+    		result = boardDAO.auth2(storeNo);
+    	}
+    	
+    	
+		return result;
+	}
+
 
 
 }

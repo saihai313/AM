@@ -43,8 +43,18 @@ public class BoardDAO {
 
 
     public List<Store> storeConfirm(int storeNo) {
-        return sqlSession.selectOne("boardMapper.storeConfirm", storeNo);
+        return sqlSession.selectList("boardMapper.storeConfirm", storeNo);
     }
+
+
+	public int auth(int storeNo) {
+		return  sqlSession.update("boardMapper.auth", storeNo);
+	}
+
+
+	public int auth2(int storeNo) {
+		return  sqlSession.update("boardMapper.auth2", storeNo);
+	}
 
 
 

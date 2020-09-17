@@ -30,6 +30,15 @@
     
 </head>
 <body>
+		<c:if test="${!empty msg }">
+		<script>
+			swal({icon : "${status}",
+				  title : "${msg}",
+				  text : "${text}"
+				});
+		</script>
+		<c:remove var="msg"/>
+	</c:if>
 
 <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
@@ -42,7 +51,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="${contextPath}/member/loginAction">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -81,7 +90,7 @@
       </nav>
       
       <div class="wrapper">
-    <div class="sidebar">
+    <div class="sidebar" data="green">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
     -->
@@ -101,7 +110,7 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="${contextPath}/board/userConfirm">
               <i class="tim-icons icon-check-2"></i>
               <p>회원 인증</p>
@@ -122,7 +131,7 @@
           <li>
             <a href="./map.html">
               <i class="tim-icons icon-pin"></i>
-              <p>Maps</p>
+              <p>To do List</p>
             </a>
           </li>
           <li>
@@ -158,8 +167,50 @@
         </ul>
       </div>
     </div>
-      
-      
+    
+    <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Background</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors text-center">
+              <span class="badge filter badge-primary active" data-color="primary"></span>
+              <span class="badge filter badge-info" data-color="blue"></span>
+              <span class="badge filter badge-success" data-color="green"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="adjustments-line text-center color-change">
+          <span class="color-label">LIGHT MODE</span>
+          <span class="badge light-badge mr-2"></span>
+          <span class="badge dark-badge ml-2"></span>
+          <span class="color-label">DARK MODE</span>
+        </li>
+        <li class="button-container">
+          <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
+          <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
+            Documentation
+          </a>
+        </li>
+        <li class="header-title">Thank you for 95 shares!</li>
+        <li class="button-container text-center">
+          <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
+          <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
+          <br>
+          <br>
+          <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    
+      	<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+  	  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
       
@@ -188,7 +239,7 @@
 
         $sidebar_responsive = $('body > .navbar-collapse');
         sidebar_mini_active = true;
-        white_color = false;
+        white_ = false;
 
         window_width = $(window).width();
 

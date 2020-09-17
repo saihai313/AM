@@ -28,6 +28,14 @@ public interface BoardService {
      */
     List<Store> storeConfirm(int storeNo);
 
+    
+    
+	/** 인증확인
+	 * @param storeNo
+	 * @return
+	 */
+	int auth(int storeNo);
+
 }
 
 

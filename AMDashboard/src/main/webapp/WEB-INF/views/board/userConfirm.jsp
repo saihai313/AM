@@ -34,6 +34,17 @@
             width: 40%; /* Could be more or less, depending on screen size */                          
         }
  
+ 	.text1{
+ 		color: black;
+ 	}
+ 	
+ 	.modal1{
+ 		    width: 700px;
+    height: 550px;
+ 	}
+ 	
+ 	
+ 	
 </style>
   <script>
   $( document ).ready(function() {
@@ -59,13 +70,25 @@
             url : url,
             type : "POST",
             dataType : "JSON",
-            data : {"$_storeNo" : $_storeNo},
+            data : {"storeNo" : $_storeNo},
             success : function(storeConfirm){
-              alert(storeConfirm)
               console.log(123);
               console.log(storeConfirm+"디용");
               
               console.log( $_storeNo+"오오오");
+            
+        	$("#name").text(storeConfirm[0].memberName);
+        	$("#memberPhone").text(storeConfirm[0].memberPhone);
+        	$("#storeName").text(storeConfirm[0].storeName);
+        	$("#memberEnrollDate").text(storeConfirm[0].memberEnrollDate);
+        	$("#memberEmail").text(storeConfirm[0].memberEmail);
+        	$("#storeBizNo").text(storeConfirm[0].storeBizNo);
+        	$("#storePhone").text(storeConfirm[0].storePhone);
+        	$("#storeAddress").text(storeConfirm[0].storeAddress);
+        	
+        	$storeNo = $("<input>", {type : "hidden", name : "storeNo",  id : "storeNo",
+				value : storeConfirm[0].storeNo });
+        	$(".storeNo").append($storeNo);
             }, error : function(){
               console.log("ajax 통신 실패");
             }
@@ -73,6 +96,10 @@
       
     });
   });
+  
+  
+  
+ 
   </script> 
 </head>
 
@@ -102,27 +129,16 @@
                 <h4 class="card-title"> 사장 회원 조회</h4>
               </div>
               <div class="card-body">
-                <div class="table-responsive">
                   <table class="table tablesorter " id="">
                     <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          No.
-                        </th>
-                        <th>
-                          상호명
-                        </th>
-                        <th>
-                          사업자번호
-                        </th>
-                         <th >
-                          가입일
-                        </th>
-                        <th class="text-center">
-                          회원인증
-                        </th>
-                      </tr>
-                    </thead>
+						<tr>
+							<th>No.</th>
+							<th>상호명</th>
+							<th>사업자번호</th>
+							<th>가입일</th>
+							<th class="text-center">회원인증</th>
+						</tr>
+					</thead>
                     <tbody>
                     <c:choose>
                     <c:when test="${empty confirmList}">
@@ -137,7 +153,7 @@
                           <td>${store.memberEnrollDate}</td>
                           <td class="text-center">
                             <c:choose>
-                              <c:when test="${store.storeBizCheck ne 'Y'.charAt(0)}">
+                              <c:when test="${store.storeBizCheck eq 'Y'.charAt(0)}">
                               완료
                               </c:when>                              
                               <c:otherwise>
@@ -153,7 +169,6 @@
                   </c:choose>
                     </tbody>
                   </table>
-                </div>
               </div>
             </div>
           </div>
@@ -162,94 +177,50 @@
    
     </div>
   </div>
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> Sidebar Background</li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger background-color">
-            <div class="badge-colors text-center">
-              <span class="badge filter badge-primary active" data-color="primary"></span>
-              <span class="badge filter badge-info" data-color="blue"></span>
-              <span class="badge filter badge-success" data-color="green"></span>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="adjustments-line text-center color-change">
-          <span class="color-label">LIGHT MODE</span>
-          <span class="badge light-badge mr-2"></span>
-          <span class="badge dark-badge ml-2"></span>
-          <span class="color-label">DARK MODE</span>
-        </li>
-        <li class="button-container">
-          <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-          <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-            Documentation
-          </a>
-        </li>
-        <li class="header-title">Thank you for 95 shares!</li>
-        <li class="button-container text-center">
-          <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-          <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-          <br>
-          <br>
-          <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-        </li>
-      </ul>
-    </div>
-  </div>
- 
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
   </noscript>
-   </body>
-
-</html>
-
-
+  
+  
     <!-- The Modal -->
     <div id="myModal" class="modal">
  
       <!-- Modal content -->
-		<div class="modal-content">
-			<div class="col-xs-8 col-md-8">
-				<h2 class="text-center">상제 정보 조회</h2>
+		<div class="modal-content modal1">
+			<div >
+				<h2 class="text-center text1">상세 정보 조회</h2>
 				<p>&nbsp;</p>
-				<div class="table table-responsive">
+				<div class="table table-responsive storeNo">
 					<table class="modal-table">
 						<tr>
 							<th class="success">이름</th>
-							<td>${store.memberName }</td>
+							<td id="name">${store.memberName }</td>
 							<th class="success">연락처</th>
-							<td>${store.memberPhone}</td>
+							<td id="memberPhone">${store.memberPhone }</td>
 						</tr>
 						<tr>
-							<th class="success">이메일</th>
-							<td>${store.memberEmail }</td>
+						<th class="success">상호명</th>
+							<td id="storeName">${store.storeName }</td>
+							
 							<th class="success">작성일</th>
-							<td>${store.memberEnrollDate}</td>
+							<td id="memberEnrollDate">${store.memberEnrollDate }</td>
 						</tr>
 
 						<tr>
-							<th class="success">상호명</th>
-							<td>${store.storeName}</td>
+							<th class="success">이메일</th>
+							<td id="memberEmail">${store.memberEmail }</td>
 						</tr>
 						<tr>
 							<th class="success">사업자 번호</th>
-							<td>${store.storeBizNo }</td>
+							<td id="storeBizNo">${store.storeBizNo }</td>
 						</tr>
 						<tr>
-							<th class="success">가게 번호
-							<th>
-							<td>${store.storePhone}</td>
+							<th class="success">가게 번호</th>
+							<td id="storePhone">${store.storePhone }</td>
 						</tr>
 						<tr>
 							<th class="success">가게 주소</th>
-							<td>${store.storeAddress}</td>
+							<td id="storeAddress">${store.storeAddress }</td>
 						</tr>
 					</table>
 				</div>
@@ -257,18 +228,46 @@
 			</div>
 			<div
 				style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
-				onClick="close_pop();">
+				onClick="">
 
 				<tr>
-					<td colspan="4" class="text-center"><input type="button"
-						class="btn btn-warning" value="취소" onclick=""> <input
-						type="button" class="btn btn-danger" value="인증" onclick="">
+					<td colspan="4" class="text-center">
+					<input type="button" class="btn btn-warning" value="취소" onclick=""> 
+						<input	type="button" class="btn btn-danger auth" id="auth"value="인증" >
 					</td>
 				</tr>
 			</div>
 		</div>
 
 	</div>
+	
         <!--End Modal-->
-       
-        
+       <script>
+       $("#auth").on("click", function(){
+    	    
+    	   var storeNo = $("#storeNo").val();
+    	   
+    	   console.log("인증 눌렀을떄" +storeNo);
+    	      $.ajax({
+    	            url : "${contextPath}/board/auth",
+    	            type : "POST",
+    	            dataType : "text",
+    	            data : {"storeNo" : storeNo},
+    	            success : function(result){
+    	            	
+		    		alert("인증이 완료되었습니다!","","success"); 
+		    			
+    	            	location.href = "${contextPath}/board/userConfirm";
+    	            }, error : function(){
+    	              console.log("ASDSADSADajax 통신 실패");
+    	            }
+    	       });
+    		  
+    		  
+    		  
+    		  
+    	  });
+       </script>
+ </body>
+
+</html>

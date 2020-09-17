@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
     
     
     
-    // 로그인 Service 구현-- 아무거나 되는중 
+    // 로그인 Service  
     @Override
     public Member login(Member member) {
         

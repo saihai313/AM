@@ -46,24 +46,36 @@
        
   </select>
   
-  <!-- 사장 회원 인증 -->
-    <update id="userConfirm" parameterType="_int" >
-      UPDATE STORE SET 
-      STORE_BIZ_CHECK = 'N'
-      WHERE STORE_NO = #{storeNo}
-      
-  </update>
+  
+ 
   
   <!-- 사장 회원 상세 조회 -->
   <select id="storeConfirm"  parameterType="_int" resultMap="storeResultSet">
 		  	SELECT STORE_NO, MEMBER_NM, MEMBER_EMAIL, MEMBER_PHONE, STORE_NM,
-				STORE_BIZ_NO,STORE_PHONE,STORE_ADDR
+				STORE_BIZ_NO,STORE_PHONE,STORE_ADDR,MEMBER_ENROLL_DT
 				FROM STORE
 				JOIN MEMBER USING (MEMBER_NO)
 				WHERE STORE_NO = #{storeNo}
 				AND MEMBER_STATUS = 'Y'
       
   </select>
+  
+  
+   <!-- 사장 회원 인증 1-->
+    <update id="auth" parameterType="_int" >
+      UPDATE STORE SET 
+      STORE_BIZ_CHECK = 'Y'
+      WHERE STORE_NO = #{storeNo}
+  </update>
+  
+  <!-- 사장 회원 인증 2-->
+    <update id="auth2" parameterType="_int" >
+      UPDATE MEMBER SET MEMBER_CHECK = 'Y' WHERE MEMBER_NO =(SELECT MEMBER_NO 
+                                                             FROM MEMBER 
+                                                             JOIN STORE USING (MEMBER_NO)
+                                                             WHERE STORE_NO=#{storeNo})
+  </update>
+  
   
 </mapper>
 
