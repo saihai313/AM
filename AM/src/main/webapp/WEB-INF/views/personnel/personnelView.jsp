@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${eInfo.memberNo}</title>
+<title>${eInfo.memberName}님의 상세정보</title>
 <style>
 	.employeeInfo{
 		
@@ -38,9 +38,11 @@
 
 	
      <div class="bottom_btn" style="text-align: center;" >
-       <button id="toList" class="btn btn-primary py-3 px-4">목록으로</button>
-       <button id="deleteEmployee" class="btn btn-primary py-3 px-4">직원삭제</button>
+       <button id="toList" class="btn btn-primary py-2 px-3">목록으로</button>
+       <button id="deleteEmployee" class="btn btn-primary py-2 px-3">직원삭제</button>
+       <button id="updateHourlyWage" class="btn btn-primary py-2 px-3">시급수정</button>
      </div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 		<script>	
@@ -61,6 +63,18 @@
 			location.href = personnelList;			
 		});
 		
+		$("#updateHourlyWage").on("click",function(){
+			swal({
+				  content: {
+				    element: "input",
+				    attributes: {
+				      placeholder: "시급을 입력해 주세요",
+				      type: "number",
+				    },
+				  },
+				});
+			location.href = personnelList;			
+		});
 		
 	</script>
 	    <!-- ------------------------- footer ---------------------------- -->

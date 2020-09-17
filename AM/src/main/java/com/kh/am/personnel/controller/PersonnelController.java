@@ -65,7 +65,7 @@ public class PersonnelController {
 	}
 	
 	@RequestMapping("delete")
-	public String deletePersonnel(int memberNo,Model model,
+	public String deletePersonnel(int memberNo,
 									RedirectAttributes rdAttr,
 									HttpServletRequest request
 			) {
@@ -95,5 +95,11 @@ public class PersonnelController {
 			
 			
 		return "redirect:" + url;
+	}
+	
+	public String updateHourlyWage(int memberNo, RedirectAttributes rdAttr,
+									HttpServletRequest request) {
+		
+		return null;
 	}
 }
