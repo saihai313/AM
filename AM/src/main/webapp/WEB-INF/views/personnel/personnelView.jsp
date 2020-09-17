@@ -49,7 +49,7 @@
 				
 				var memberNo = ${eInfo.memberNo};
 				console.log(memberNo);
-				location.href="${contextPath}/personnel/delete";
+				location.href="${contextPath}/personnel/delete?memberNo=" + memberNo;
 				
 			}
 				
@@ -58,11 +58,12 @@
 		$("#toList").on("click",function(){
 			var personnelList = 
 				"${contextPath}/personnel/personnelList";
-				console.log(memberNo);
 			location.href = personnelList;			
 		});
 		
 		
 	</script>
+	    <!-- ------------------------- footer ---------------------------- -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

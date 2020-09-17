@@ -35,7 +35,7 @@
 	</select>
 	
 	<!-- 알바생 삭제  -->
-	<update id="deleteEmployee" parameterType="_int">
+	<update id="deletePersonnel" parameterType="_int">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'N'
 		WHERE MEMBER_NO = #{memberNo}
