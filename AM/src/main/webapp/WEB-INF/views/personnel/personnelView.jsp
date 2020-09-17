@@ -73,6 +73,8 @@
 				    },
 				  },
 				});
+			
+			
 			location.href = personnelList;			
 		});
 		
