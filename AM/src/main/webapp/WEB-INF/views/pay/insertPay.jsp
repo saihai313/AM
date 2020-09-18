@@ -61,8 +61,8 @@
 		text-align: center;
 	}
 	
-	/* #outer{
-		text-align: center;
+	#outer{
+		background-color: #d7ebc2;
 	}
 	#inner{
 		margin: 0 auto;		
@@ -129,17 +129,12 @@
 											
 										
 											<div id="outer">
-												<div class="col-md-6 heading-section fadeInUp" id="inner">
-													
-									        		<label class="label" for="payPayment">등록일</label> <input
-																type="date" class="form-control" name="payDate" id="payDate">
-													
-									        	</div>
-											
-												<div class="col-md-12 heading-section fadeInUp" id="selectEmployee">
-													
+												
+								        		<span class="label">등록일</span> 
+								        		<input style="width: 200px" type="date" class="form-control" name="payDate" id="payDate">
+									        
+												<div class=" heading-section fadeInUp" id="selectEmployee">
 								          			<span class="subheading">직원선택</span>
-									          		
 									        	</div>
 								        	</div>
 								        	

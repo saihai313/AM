@@ -21,12 +21,8 @@
 
       /* 급여명세서 */
     
-       .pagination {
-            justify-content: center;
-        }
-          
-        .board-list{ margin: 100px auto;}
-        
+      .board-list{ margin: 40px auto;}
+     
         #list-table td{
            cursor: pointer;
         }
@@ -129,9 +125,7 @@
          <!-- ------------------------- side menu ---------------------------- -->
 
 
-         <div class="container board-list">
-            
-            <h1>${boardList[0].boardName}</h1>
+       		<div class="container board-list">
             
               <div style="height:530px">
                   <table class="table table-hover tabType1 table-striped" id="list-table">
@@ -179,7 +173,7 @@
                       </tbody>
                   </table>
               </div>
-      
+  	</div>
           <%--     
               로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기
               <c:if test="${!empty loginMember}">
@@ -188,7 +182,9 @@
                
        
                 </div>
-      </div>
+                
+           
+ 
    </section>
    
    <script >

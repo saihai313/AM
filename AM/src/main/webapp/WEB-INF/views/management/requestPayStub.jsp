@@ -13,7 +13,7 @@
     	/* 급여 정정 */
     
     	
-        .board-list{ margin: 100px auto;}
+        .board-list{ margin: 40px auto;}
         
         #list-table td{
         	cursor: pointer;
