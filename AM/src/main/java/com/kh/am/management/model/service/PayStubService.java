@@ -28,4 +28,6 @@ public interface PayStubService {
 
 	public abstract int transmit(CorrectionReply cr);
 
+	public abstract List<Paystubplus> requestMonthlist(PayStub pmonth);
+
 }
