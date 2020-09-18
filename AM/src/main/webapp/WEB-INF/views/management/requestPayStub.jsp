@@ -82,6 +82,9 @@
       font-family: 'S-CoreDream-8Heavy';
       font-weight: bold;
    }
+   #month{
+   	width: 150px;
+   }
 </style>
 
 
@@ -119,11 +122,26 @@
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 
-
 			<div class="container board-list">
+			
 		      
 		        <div style="height:530px">
 		            <table class="table table-hover tabType1 table-striped" id="updatePayStub">
+		              <select id="month" class="custom-select custom-select-sm" >
+						  <option selected>월별 검색</option>
+						  <option value="01">01</option>
+						  <option value="02">02</option>
+						  <option value="03">03</option>
+						  <option value="04">04</option>
+						  <option value="05">05</option>
+						  <option value="06">06</option>
+						  <option value="07">07</option>
+						  <option value="08">08</option>
+						  <option value="09">09</option>
+						  <option value="10">10</option>
+						  <option value="11">11</option>
+						  <option value="12">12</option>
+					</select>
 		               <thead>
 		                    <tr>
 		                         <th>글번호 </th> 
@@ -158,10 +176,10 @@
 		               <%-- <td><a href='#' onClick="fn_view(${result.code})"><c:out value="${result.title }"/></a></td>  --%>
 		                           
 		                            <td>${paystubplus.corrCreateDt }</td>
-		                            <td>${paystubplus.corrModifyDt }</td>
-		                            <td>${paystubplus.corrStatus }</td>
+		                            <td class="mddate">${paystubplus.corrModifyDt }</td>
+		                            <td >${paystubplus.corrStatus }</td>
 		                            <td>${paystubplus.corrResult }</td>
-		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
+		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded nameBtn" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
 		                            <%--<td>${paystubplus.memberName }</td> --%>
 		                            
 		                            <%-- <input type="hidden" id="mid" value="${paystubplus.memberNo}"> --%>
@@ -312,11 +330,11 @@
 
                       </div>
                       <div class="modal-footer">
+                      	
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                        <!--  <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button> -->
-                <button id="test"  type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려</button>
-                
-                <!--class="btn btn-warning contentBtn btn-rounded"  -->
+		                <button type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려이유작성</button>
+		                <!--class="btn btn-warning contentBtn btn-rounded"  -->
                       </div>
                     </div>
                   </div>
@@ -352,6 +370,7 @@
 
                       </div>
                       <div class="modal-footer">
+                      	<input type="hidden" id="corr">
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                         <button type="button"data-dismiss="modal" id="transmit" class="btn btn-primary viewBtn">반려내용전송</button>
                       </div>
@@ -360,10 +379,10 @@
                 </div> 
                          
          <script>
-         $(".contentBtn").click(function(){
+         $(".nameBtn").click(function(){
         	 var memberNo = $("#test1").text(); 
         	 var corrNo=$(this).parent().parent().children().eq(0).text();
-        	
+        	 $("#corr").val(corrNo);
         	 var corrContent= $("#rList.corrContent").text();
         	 
          	console.log("corrNo:"+corrNo)
@@ -372,7 +391,7 @@
 	   data : {"corrNo":corrNo
 		   }, 
 	   type : "GET",	
-	   dataType : "JSON",
+	   
 	   success:function(rList){
 		   console.log(rList)
 		   console.log(rList.corrContent)
@@ -388,42 +407,23 @@
    });
         });
          
-         /* status */
-        /*  $("#correction").click(function(){
-        	 console.log(this);
-        	 var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
-        	 console.log("!!!!" + corrNo);
-        	 
-        	 $.ajax({
-        		 url : "correction",
-        		 data : {"corrNo" : corrNo},
-       			   dataType : "JSON",
-       			   success:function(result){
-       					console.log("1");
-       					
-       				  
-                      
-       			   },error:function(){	
-       				   console.log("ajax 통신 실패");
-       		 
-       			   } 
-      		    
-        	 });
-         }); */
-         
        
          
          $("#transmit").click(function(){
-        	var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
+        	var corrNo=$("#transmit").parent().children().eq(0).val();
         	var corrReContent=$("#correctionContent2").val();
+        	console.log("^^ : " + corrNo);
         	 $.ajax({
         		url : "transmit" ,
         		data :{"corrNo" : corrNo,"corrReContent":corrReContent},
-        		dataType : "JSON",
         		 success:function(result){
     					
     				   if(result>0){
-    						alert("qksfusodyddmf wjsthdgottmqselk.")
+    						alert("반려되었습니다.");
+    						location.href = "requestPayStub";
+    				   }else{
+    					   alert("실패했습니다");
+    					   location.href = "requestPayStub";
     				   }
     				  
                    
@@ -431,6 +431,46 @@
     				   console.log("ajax 통신 실패");
     		 
     			   } 
+        	 });
+         });
+         
+        $("#month").change(function(){
+        	 var month=$(this).val();
+        	 
+        	 console.log(month);
+        	 
+        	 $.ajax({
+        		 url:"select",
+        		 data:{"month":month},
+        		 dataType: "json",
+        		 type : "GET",		 
+        		 success:function(list){
+        			$tbody = $("#updatePayStub > tbody");
+        			 console.log(list);
+        			 console.log($tbody);
+        			
+        			
+        			$tbody.html("");
+        			
+        			 $.each(list, function(index, item){
+       					$tr = $("<tr>");
+               			
+       					$td1 = $("<td>").text(item.corrNo);
+       					$td2 = $("<td>").text(item.corrCreateDt);
+       					$td3 = $("<td>").addClass("mddate").text(item.corrModifyDt);
+       					$td4 = $("<td>").text(item.corrStatus);
+       					$td5 = $("<td>").text(item.corrResult);
+       					
+       					$td6btn = $("<button id='test' class='btn btn-warning contentBtn btn-rounded nameBtn' type='button' data-toggle='modal' data-target='#staticBackdrop'>").text(item.corrNo);	
+       					$td6 = $("<td>");
+       					$td6.append(item.memberName);
+       					
+       					$tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+               			$tbody.append($tr);
+        			 });
+        		 },error:function(){
+        			 alert("ajax전송실패");
+        		 }
         	 });
          });
     </script>  
