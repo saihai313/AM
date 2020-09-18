@@ -2,7 +2,9 @@ package com.kh.am.board.model.service;
 
 import java.util.List;
 
+import com.kh.am.board.model.vo.CurrentSal;
 import com.kh.am.board.model.vo.Employee;
+import com.kh.am.board.model.vo.NewsBoard;
 import com.kh.am.board.model.vo.Store;
 
 public interface BoardService {
@@ -35,6 +37,16 @@ public interface BoardService {
 	 * @return
 	 */
 	int auth(int storeNo);
+
+	/** 최저시급 조회
+	 * @return
+	 */
+	List<CurrentSal> selectSal();
+
+	/** 뉴스 정보 조회
+	 * @return
+	 */
+	List<NewsBoard> selectnews();
 
 }
 

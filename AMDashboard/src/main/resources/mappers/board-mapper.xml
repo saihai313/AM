@@ -16,9 +16,24 @@
 	    <result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
 	    <result property="memberStatus" column="MEMBER_STATUS"/>
 	    <result property="memberPhone" column="MEMBER_PHONE"/>
-	    
   </resultMap>
   
+  
+  
+  <resultMap type="CurrnetSal" id="CurrentSalResultSet">
+  	<result property="currentYear" column="CURRENT_YEAR"/>
+  	<result property="currentMinSal" column="CURRENT_MIN_SAL"/>
+  </resultMap>
+  
+  <resultMap type="NewsBoard" id="NewsBoardResultSet">
+  	<id property="newsNo" column="NEWS_NO"/>
+    <result property="createDate" column="CREATE_DATE"/>
+    <result property="memberType" column="MEMBER_TYPE"/>
+    <result property="title" column="TITLE"/>
+    <result property="address" column="ADDRESS"/>
+  
+  
+  </resultMap>
   
   
   <!--  사장 회원 조회 -->
@@ -61,14 +76,14 @@
   </select>
   
   
-   <!-- 사장 회원 인증 1-->
+   <!-- 사장 회원 사업자번호 인증 변경-->
     <update id="auth" parameterType="_int" >
       UPDATE STORE SET 
       STORE_BIZ_CHECK = 'Y'
       WHERE STORE_NO = #{storeNo}
   </update>
   
-  <!-- 사장 회원 인증 2-->
+  <!-- 사장 회원 이메일 인증상태 변경-->
     <update id="auth2" parameterType="_int" >
       UPDATE MEMBER SET MEMBER_CHECK = 'Y' WHERE MEMBER_NO =(SELECT MEMBER_NO 
                                                              FROM MEMBER 
@@ -77,6 +92,19 @@
   </update>
   
   
+  <!-- 최저 시급 조회 -->
+  <select id="selectSal" resultMap="CurrentSalResultSet">
+  	SELECT* FROM CURRENT_SAL
+  	ORDER BY CURRENT_YEAR DESC
+  </select>
+  
+  
+  <!-- 뉴스 정보 조회 -->
+  <select id="selectNews" resultMap="NewsBoardResultSet">
+  	SELECT * FROM NEWS_BOARD
+  	ORDER BY NEWS_NO DESC
+  
+  </select>
 </mapper>
 
 

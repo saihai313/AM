@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.board.model.dao.BoardDAO;
+import com.kh.am.board.model.vo.CurrentSal;
 import com.kh.am.board.model.vo.Employee;
+import com.kh.am.board.model.vo.NewsBoard;
 import com.kh.am.board.model.vo.Store;
 
 @Service
@@ -45,7 +47,7 @@ public class BoardServiceImpl implements BoardService  {
         return boardDAO.storeConfirm( storeNo);
     }
 
-    // 인증 확인
+    // 사업자번호, 이메일 인증 상태 변경 
     @Transactional(rollbackFor = Exception.class)
 	@Override
 	public int auth(int storeNo) {
@@ -60,6 +62,18 @@ public class BoardServiceImpl implements BoardService  {
     	
     	
 		return result;
+	}
+
+    // 최저시급 조회
+	@Override
+	public List<CurrentSal> selectSal() {
+		return boardDAO.selectSal();
+	}
+
+	// 뉴스정보 조회
+	@Override
+	public List<NewsBoard> selectnews() {
+		return boardDAO.selectnews();
 	}
 
 

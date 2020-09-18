@@ -77,7 +77,7 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                  <li class="nav-link"><a href="${contextPath}/member/adminProfile" class="nav-item dropdown-item">Profile</a></li>
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
                   <li class="dropdown-divider"></li>
                   <li class="nav-link"><a href="${contextPath}/member/logout" class="nav-item dropdown-item">Log out</a></li>
@@ -88,6 +88,19 @@
           </div>
         </div>
       </nav>
+        <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       
       <div class="wrapper">
     <div class="sidebar" data="green">
@@ -129,15 +142,15 @@
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="${contextPath}/board/CurrentSal">
               <i class="tim-icons icon-pin"></i>
-              <p>To do List</p>
+              <p>최저 시급</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="${contextPath}/board/newsBoard">
               <i class="tim-icons icon-bell-55"></i>
-              <p>Notifications</p>
+              <p>뉴스 정보</p>
             </a>
           </li>
           <li>
