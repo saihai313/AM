@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${eInfo.memberNo}</title>
+<title>${eInfo.memberName}님의 상세정보</title>
 <style>
 	.employeeInfo{
 		
@@ -38,9 +38,11 @@
 
 	
      <div class="bottom_btn" style="text-align: center;" >
-       <button id="toList" class="btn btn-primary py-3 px-4">목록으로</button>
-       <button id="deleteEmployee" class="btn btn-primary py-3 px-4">직원삭제</button>
+       <button id="toList" class="btn btn-primary py-2 px-3">목록으로</button>
+       <button id="deleteEmployee" class="btn btn-primary py-2 px-3">직원삭제</button>
+       <button id="updateHourlyWage" class="btn btn-primary py-2 px-3">시급수정</button>
      </div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 		<script>	
@@ -49,7 +51,8 @@
 				
 				var memberNo = ${eInfo.memberNo};
 				console.log(memberNo);
-				location.href="${contextPath}/personnel/delete";
+				var url = "${contextPath}/personnel/delete?memberNo=" + memberNo;
+				location.href= url;
 				
 			}
 				
@@ -58,11 +61,24 @@
 		$("#toList").on("click",function(){
 			var personnelList = 
 				"${contextPath}/personnel/personnelList";
-				console.log(memberNo);
 			location.href = personnelList;			
 		});
 		
+		$("#updateHourlyWage").on("click",function(){
+			
+			var memberNo = ${eInfo.memberNo};
+			var sal = prompt("수정할 시급을 입력해주세요","");
+			var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo+"&sal="+sal;
+			//var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo;
+			console.log(sal);
+			console.log(memberNo);
+			
+			location.href = url;			
+		});
+
 		
 	</script>
+	    <!-- ------------------------- footer ---------------------------- -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

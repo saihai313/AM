@@ -22,6 +22,9 @@
 	#list-table tr{
 		cursor: default;
 	}
+	.bottom_btn{
+		padding-top: 20px;
+	}
 </style>
 
 </head>
@@ -83,15 +86,9 @@
 
    	<script>
    		$("#addEmployee").click(function(){
-   			swal({
-   			  content: {
-   			    element: "input",
-   			    attributes: {
-   			      placeholder: "추가 할 직원의 이메일을 입력해주세요.",
-   			      type: "email",
-   			    },
-   			  },
-   			});
+   			var sal = prompt("추가할 직원의 이메일을 입력해주세요.","");
+   			//var url = "${contextPath}/personnel/???";
+   			
    		});
    		
 
@@ -110,11 +107,12 @@
 				$("#list-table").after($form);
 					
 				$("#tmpForm").submit();
-				//location.href = boardUrl;
 			});
 		});	
    		
    		
    	</script>
+<!-- ------------------------- footer ---------------------------- -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

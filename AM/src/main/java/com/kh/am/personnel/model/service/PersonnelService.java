@@ -31,4 +31,10 @@ public interface PersonnelService {
 	 * @return
 	 */
 	int deletePersonnel(int memberNo);
+
+	/** 시급 수정
+	 * @param memberNo, sal
+	 * @return
+	 */
+	int updateHourlyWage(int memberNo, int sal);
 }
