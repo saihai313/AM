@@ -125,7 +125,8 @@ public class PersonnelController {
 			
 		return "redirect:" + url;
 	}
-	  @RequestMapping(value = "/register", method = RequestMethod.POST)
+	
+	  /*@RequestMapping(value = "/register", method = RequestMethod.POST)
 	    public String RegisterPost(MemberVO user,Model model,RedirectAttributes rttr) throws Exception{
 	    
 	        System.out.println("regesterPost 진입 ");
@@ -133,7 +134,7 @@ public class PersonnelController {
 	        rttr.addFlashAttribute("msg" , "가입시 사용한 이메일로 인증해주세요");
 	        return "redirect:/";
 	    }
-
+	  
 	    //이메일 인증 코드 검증
 	    @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
 	    public String emailConfirm(MemberVO user,Model model,RedirectAttributes rttr) throws Exception { 
@@ -148,5 +149,5 @@ public class PersonnelController {
 	        //System.out.println("usercontroller vo =" +vo);
 	        model.addAttribute("login",vo);
 	        return "/user/emailConfirm";
-	    }
+	    }*/
 }
