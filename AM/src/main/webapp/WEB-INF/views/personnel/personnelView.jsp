@@ -51,7 +51,8 @@
 				
 				var memberNo = ${eInfo.memberNo};
 				console.log(memberNo);
-				location.href="${contextPath}/personnel/delete?memberNo=" + memberNo;
+				var url = "${contextPath}/personnel/delete?memberNo=" + memberNo;
+				location.href= url;
 				
 			}
 				
@@ -64,19 +65,17 @@
 		});
 		
 		$("#updateHourlyWage").on("click",function(){
-			swal({
-				  content: {
-				    element: "input",
-				    attributes: {
-				      placeholder: "시급을 입력해 주세요",
-				      type: "number",
-				    },
-				  },
-				});
 			
+			var memberNo = ${eInfo.memberNo};
+			var sal = prompt("수정할 시급을 입력해주세요","");
+			var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo+"&sal="+sal;
+			//var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo;
+			console.log(sal);
+			console.log(memberNo);
 			
-			location.href = personnelList;			
+			location.href = url;			
 		});
+
 		
 	</script>
 	    <!-- ------------------------- footer ---------------------------- -->

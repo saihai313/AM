@@ -41,4 +41,10 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 시급 수정  -->
+	<update id="updateHourlyWage" parameterType="_int">
+		UPDATE EMPLOYEE SET
+		EMPLOYEE_SAL = #{sal}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

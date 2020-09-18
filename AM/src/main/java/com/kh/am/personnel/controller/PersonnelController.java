@@ -97,9 +97,32 @@ public class PersonnelController {
 		return "redirect:" + url;
 	}
 	
-	public String updateHourlyWage(int memberNo, RedirectAttributes rdAttr,
+	@RequestMapping("updateHourlyWage")
+	public String updateHourlyWage(int memberNo, int sal,
+									RedirectAttributes rdAttr,
 									HttpServletRequest request) {
 		
-		return null;
+		int result = personnelService.updateHourlyWage(memberNo, sal);
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "시급 수정 성공!";
+			url = "/personnel/personnelList";
+		}else {
+			status = "error";
+			msg = "시급 수정 실패!";
+			url = request.getHeader("referer");
+			
+		}
+	
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+			
+			
+		return "redirect:" + url;
 	}
 }
