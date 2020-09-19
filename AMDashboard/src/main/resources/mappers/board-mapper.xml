@@ -103,8 +103,15 @@
   <select id="selectNews" resultMap="NewsBoardResultSet">
   	SELECT * FROM NEWS_BOARD
   	ORDER BY NEWS_NO DESC
-  
   </select>
+  
+  <!-- 뉴스 등록 -->
+  <insert id="insertNews" parameterType="NewsBoard">
+     INSERT INTO NEWS_BOARD VALUES(
+      #{newsNo},SYSDATE,#{memberType},
+      #{title},#{address}
+      )
+  </insert>
 </mapper>
 
 

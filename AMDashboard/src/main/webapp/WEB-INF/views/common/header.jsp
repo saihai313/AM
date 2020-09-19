@@ -28,7 +28,10 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="${contextPath}/resources/assets/demo/demo.css" rel="stylesheet" />
     
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
+
 <body>
 		<c:if test="${!empty msg }">
 		<script>
@@ -39,6 +42,8 @@
 		</script>
 		<c:remove var="msg"/>
 	</c:if>
+	
+	
 
 <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">

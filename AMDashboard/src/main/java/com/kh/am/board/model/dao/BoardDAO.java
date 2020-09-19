@@ -87,5 +87,14 @@ public class BoardDAO {
 	}
 
 
+    /** 뉴스 등록
+     * @param newsBoard
+     * @return
+     */
+    public int insertnews(NewsBoard newsBoard) {
+        return sqlSession.insert("boardMapper.insertNews", newsBoard);
+    }
+
+
 
 }

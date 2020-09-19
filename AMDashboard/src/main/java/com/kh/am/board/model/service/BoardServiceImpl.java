@@ -77,5 +77,12 @@ public class BoardServiceImpl implements BoardService  {
 	}
 
 
+	// 뉴스 등록
+    @Override
+    public int insertNews(NewsBoard newsBoard) {
+        return boardDAO.insertnews(newsBoard);
+    }
+
+
 
 }

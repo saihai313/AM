@@ -32,9 +32,10 @@
 		                                </td>
 		                                 <td>회원 구분</td>
 		                                <td>
-		                                    <select id="memberG">
+		                                    <select id="memberselect" name="memberType">
 		                                    	<option value="R">사장 정보</option>
 		                                    	<option value="A">알바 정보</option>
+		                                    	<option selected>--선택-- </option>
 		                                    </select>
 		                                </td>
 		                            </tr>

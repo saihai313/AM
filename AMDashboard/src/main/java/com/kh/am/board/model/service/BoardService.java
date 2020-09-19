@@ -48,6 +48,12 @@ public interface BoardService {
 	 */
 	List<NewsBoard> selectnews();
 
+    /** 뉴스 등록
+     * @param newsBoard
+     * @return
+     */
+    int insertNews(NewsBoard newsBoard);
+
 }
 
 
