@@ -20,7 +20,7 @@
   
   
   
-  <resultMap type="CurrnetSal" id="CurrentSalResultSet">
+  <resultMap type="CurrentSal" id="CurrentSalResultSet">
   	<result property="currentYear" column="CURRENT_YEAR"/>
   	<result property="currentMinSal" column="CURRENT_MIN_SAL"/>
   </resultMap>
@@ -58,6 +58,7 @@
       SELECT STORE_NO, STORE_NM, STORE_BIZ_NO, MEMBER_ENROLL_DT,STORE_BIZ_CHECK
        FROM STORE
       JOIN MEMBER USING (MEMBER_NO)
+      ORDER BY STORE_NO DESC
        
   </select>
   
@@ -72,7 +73,6 @@
 				JOIN MEMBER USING (MEMBER_NO)
 				WHERE STORE_NO = #{storeNo}
 				AND MEMBER_STATUS = 'Y'
-      
   </select>
   
   
@@ -82,6 +82,7 @@
       STORE_BIZ_CHECK = 'Y'
       WHERE STORE_NO = #{storeNo}
   </update>
+  
   
   <!-- 사장 회원 이메일 인증상태 변경-->
     <update id="auth2" parameterType="_int" >
@@ -98,6 +99,12 @@
   	ORDER BY CURRENT_YEAR DESC
   </select>
   
+  <!-- 최저 시급 등록 -->
+  <insert id="insertSal" parameterType="CurrentSal">
+    INSERT INTO CURRENT_SAL VALUES(
+       #{currentYear},#{currentMinSal}
+    )
+  </insert>
   
   <!-- 뉴스 정보 조회 -->
   <select id="selectNews" resultMap="NewsBoardResultSet">

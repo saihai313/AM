@@ -69,6 +69,12 @@ public class BoardServiceImpl implements BoardService  {
 	public List<CurrentSal> selectSal() {
 		return boardDAO.selectSal();
 	}
+	
+	   // 시급 등록
+    @Override
+    public int insertSal(CurrentSal currentSal) {
+        return boardDAO.insertSal(currentSal);
+    }
 
 	// 뉴스정보 조회
 	@Override
@@ -82,6 +88,8 @@ public class BoardServiceImpl implements BoardService  {
     public int insertNews(NewsBoard newsBoard) {
         return boardDAO.insertnews(newsBoard);
     }
+
+ 
 
 
 

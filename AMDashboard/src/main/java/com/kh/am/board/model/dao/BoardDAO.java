@@ -78,6 +78,13 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.selectSal");
 	}
 
+    /** 시급 등록
+     * @param currentSal
+     * @return
+     */
+    public int insertSal(CurrentSal currentSal) {
+        return sqlSession.insert("boardMapper.insertSal",currentSal);
+    }
 
 	/** 뉴스 정보 조회
 	 * @return
@@ -94,6 +101,9 @@ public class BoardDAO {
     public int insertnews(NewsBoard newsBoard) {
         return sqlSession.insert("boardMapper.insertNews", newsBoard);
     }
+
+
+
 
 
 

@@ -28,14 +28,14 @@
 		                            <tr style="line-height:32px;">
 		                                <td>기사 제목</td>
 		                                <td>
-		                                    <input type="text" name="title" class="form-control" value="">
+		                                    <input type="text" name="title" class="form-control" value="" required>
 		                                </td>
 		                                 <td>회원 구분</td>
 		                                <td>
-		                                    <select id="memberselect" name="memberType">
+		                                    <select id="memberselect" name="memberType" >
+		                                    	<option selected>--선택-- </option>
 		                                    	<option value="R">사장 정보</option>
 		                                    	<option value="A">알바 정보</option>
-		                                    	<option selected>--선택-- </option>
 		                                    </select>
 		                                </td>
 		                            </tr>
@@ -45,7 +45,7 @@
 		                               
 		                                 <td>기사 링크</td>
 		                                <td>
-		                                    <input type="text" name="address" class="form-control" value="">
+		                                    <input type="text" name="address" class="form-control" value="" required>
 		                                </td>
 		                            </tr>
 		                           
@@ -117,15 +117,7 @@
 	</noscript>
 
 
-<script>
- function validate(){
-	 
-		$memberType =$("<input>", {type : "hidden", name : "memberType", 
-			value : $("")});
-	
-		$("form[name='deleteCalendarForm']").append($memberType);
- }
-</script>
+
 </body>
 
 

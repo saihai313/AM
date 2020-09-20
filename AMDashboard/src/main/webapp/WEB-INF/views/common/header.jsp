@@ -123,7 +123,7 @@
         </div>
         <ul class="nav">
           <li class="active ">
-            <a href="./dashboard.html">
+            <a href="${contextPath}/member/main">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
@@ -156,24 +156,6 @@
             <a href="${contextPath}/board/newsBoard">
               <i class="tim-icons icon-bell-55"></i>
               <p>뉴스 정보</p>
-            </a>
-          </li>
-          <li>
-            <a href="./tables.html">
-              <i class="tim-icons icon-puzzle-10"></i>
-              <p>Table List</p>
-            </a>
-          </li>
-          <li>
-            <a href="./typography.html">
-              <i class="tim-icons icon-align-center"></i>
-              <p>Typography</p>
-            </a>
-          </li>
-          <li>
-            <a href="./rtl.html">
-              <i class="tim-icons icon-world"></i>
-              <p>RTL Support</p>
             </a>
           </li>
           <li class="active-pro">

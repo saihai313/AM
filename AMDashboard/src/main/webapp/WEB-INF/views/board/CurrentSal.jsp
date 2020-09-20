@@ -19,7 +19,7 @@
 					<div class="col-md-6">
 						<div class="card ">
 							<div class="card-header">
-								<h4 class="card-title">최저 시급</h4>
+								<h4 class="card-title"> 최저 시급 조회</h4>
 							</div>
 							<div class="card-body">
 								<table class="table tablesorter " id="">
@@ -50,23 +50,20 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			 <div class="content">
-        <div class="row">
-          <div class="col-md-6">
+					  <div class="col-md-6">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title">시급 등록</h4>
+                <h4 class="card-title"> 시급 등록</h4>
               </div>
               <div class="card-body">
-                      <form action="${contextPath }/board/insertNews" onsubmit="return validate();">
+                      <form action="${contextPath }/board/insertSal" onsubmit="return validate();">
                             <table class="table">
                                 <tbody>
                                 <tr style="line-height:32px;">
                                     <td>년도</td>
                                      <td>
-                                        <select id="memberselect" name="memberType">
+                                        <select id="selectYear" name="currentYear">
+                                          <option selected>--선택-- </option>
                                           <option value="2016">2016</option>
                                           <option value="2017">2017</option>
                                           <option value="2018">2018</option>
@@ -76,7 +73,13 @@
                                           <option value="2022">2022</option>
                                           <option value="2023">2023</option>
                                           <option value="2024">2024</option>
-                                          <option selected>--선택-- </option>
+                                          <option value="2024">2025</option>
+                                          <option value="2024">2026</option>
+                                          <option value="2024">2027</option>
+                                          <option value="2024">2028</option>
+                                          <option value="2024">2029</option>
+                                          <option value="2024">2030</option>
+                                             
                                         </select>
                                     </td>
                                 </tr>
@@ -86,7 +89,7 @@
                                    
                                      <td>최저 임금</td>
                                     <td>
-                                        <input type="text" name="address" class="form-control" value="">
+                                        <input type="text" name="currentMinSal" class="form-control" value="">
                                     </td>
                                 </tr>
                                
@@ -100,6 +103,11 @@
               </div>
             </div>
           </div>
+				</div>
+			</div>
+			 <div class="content">
+        <div class="row">
+        
         </div>
       </div>
 
