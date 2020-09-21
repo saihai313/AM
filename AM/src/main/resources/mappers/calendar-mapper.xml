@@ -66,7 +66,7 @@
 		<result property="memberPwd" column="MEMBER_PWD"/>
 		<result property="memberName" column="MEMBER_NM"/>
 		<result property="memberPhone" column="MEMBER_PHONE"/>
-		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
 		<result property="memberStatus" column="MEMBER_STATUS"/>
 		<result property="memberGrade" column="MEMBER_GRADE"/>
 		<result property="memberCheck" column="MEMBER_CHECK"/>
@@ -82,6 +82,22 @@
 		<result property="partStart" column="PART_START"/>
 		<result property="partEnd" column="PART_END"/>
 		<result property="storeNo" column="STORE_NO"/>
+		
+		
+	</resultMap>
+	
+	
+	
+	<resultMap type="NewsBoard" id="newsBoardResultSet">
+	
+		<id property="newsNo" column="NEWS_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성  -->
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="title" column="TITLE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="newsType" column="NEWS_TYPE"/>
 		
 		
 	</resultMap>
@@ -172,4 +188,26 @@
 		INSERT INTO PART_TIME
 		VALUES(SEQ_TNO.NEXTVAL, #{partName}, ${partStart}, ${partEnd}, #{storeNo})
 	</insert>
+	
+	
+	<!-- 메인화면 알바생 정보 목록 -->
+	<select id="selectMList" parameterType="_int" resultMap="memberResultSet">
+	SELECT MEMBER_NM,  MEMBER_PHONE, MEMBER_ENROLL_DT
+	FROM MEMBER
+	WHERE MEMBER_NO IN(SELECT MEMBER_NO FROM EMPLOYEE WHERE STORE_NO = #{storeNo})
+	</select>
+	
+	
+	<!-- 뉴스보드리스트 -->
+	<select id="selectNewsList" parameterType="string" resultMap="newsBoardResultSet">
+		  SELECT *  FROM NEWS_BOARD
+   		 WHERE MEMBER_TYPE = #{memberGrade} AND NEWS_TYPE = 1
+	</select>
+	
+	
+	<!-- 생활뉴스리스트 -->
+	<select id="selectNews2List" resultMap="newsBoardResultSet">
+		  SELECT TITLE, ADDRESS FROM NEWS_BOARD
+		  WHERE NEWS_TYPE = 2
+	</select>
 </mapper>

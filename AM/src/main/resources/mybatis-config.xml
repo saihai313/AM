@@ -29,10 +29,12 @@
  	<typeAlias type="com.kh.am.management.model.vo.Paystubplus" alias="Paystubplus"/> 
 	<typeAlias type="com.kh.am.calendar.model.vo.PartTime" alias="PartTime"/>
 
+	<typeAlias type="com.kh.am.calendar.model.vo.NewsBoard" alias="NewsBoard"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.WorkCalendar" alias="WorkCalendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.UpdateWorkCalendar" alias="UpdateWorkCalendar"/>
 	<typeAlias type="com.kh.am.calendar.model.vo.Employee" alias="Employee"/>
 	<typeAlias type="com.kh.am.pay.model.vo.Pay" alias="Pay"/>
+	
 	</typeAliases>
 	
 	<!-- mapper.xml 파일을 등록하는 태그 -->
