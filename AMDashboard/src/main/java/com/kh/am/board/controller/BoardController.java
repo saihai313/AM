@@ -192,5 +192,16 @@ import com.kh.am.board.model.vo.Store;
         return path;
     }
     
+    // 시급 삭제
+    @ResponseBody
+    @RequestMapping(value="deleteSal", method = RequestMethod.POST)
+    public String deleteSal(Model model, int currentYear) {
+        int result = boardService.deleteSal(currentYear);
+
+        System.out.println("??"+currentYear);
+        return null;
+        
+    }
+    
     
 }

@@ -8,6 +8,34 @@
 
 <head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
+<script>
+  $(document).ready(function(){
+	  $("img[name='deleteIcon']").on("click",function(){
+		  var $_trObj = $(this).closest("tr");
+	    var $_currentYear = $_trObj.find("td[name='currentYear']").text();
+	    var url = "${contextPath}/board/deleteSal";
+         console.log($_currentYear);
+
+         $.ajax({
+             url : url,
+             type : "POST",
+             dataType : "text",
+             data : {"currentYear" : $_currentYear},
+             success : function(result){
+            	 console.log(되나연);
+            	 alert("삭제하시겠습니까?","","success");
+               location.href = "${contextPath}/board/deleteSal";
+             }, error : function(){
+               console.log("ajax 통신 실패");
+             }
+        });
+         
+	  });
+  });
+</script>
+
+
 </head>
 
 <body class="">
@@ -22,6 +50,7 @@
 								<h4 class="card-title"> 최저 시급 조회</h4>
 							</div>
 							<div class="card-body">
+							<form action="${contextPath }/board/deleteSal" onsubmit="return validate();">
 								<table class="table tablesorter " id="">
 									<thead class=" text-primary">
 										<tr class="text-center">
@@ -39,14 +68,18 @@
 											<c:otherwise>
 												<c:forEach var="CurrentSal" items="${selectSal}">
 													<tr class="text-center">
-														<td>${CurrentSal.currentYear }</td>
+														<td name="currentYear">${CurrentSal.currentYear }</td>
 														<td>${CurrentSal.currentMinSal }</td>
+														<td>
+														    <img name="deleteIcon" type="submit" src="${contextPath}/resources/assets/img/delete.ico" style=width:20px; height:20px; >
+														</td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
 										</c:choose>
 									</tbody>
 								</table>
+								</form>
 							</div>
 						</div>
 					</div>

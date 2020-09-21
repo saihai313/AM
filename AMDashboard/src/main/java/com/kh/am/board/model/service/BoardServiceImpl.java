@@ -89,6 +89,12 @@ public class BoardServiceImpl implements BoardService  {
         return boardDAO.insertnews(newsBoard);
     }
 
+    // 시급 삭제
+    @Override
+    public int deleteSal(int currentYear) {
+        return boardDAO.deleteSal(currentYear);
+    }
+
  
 
 
