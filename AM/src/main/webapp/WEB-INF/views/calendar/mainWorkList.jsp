@@ -32,6 +32,8 @@ body {margin:0;}
  	        border-radius: 14px;
  	        padding: 10px;
  	        border: 2px solid lightgray;
+ 	        
+ 
  }
  
  .employee{
@@ -61,7 +63,10 @@ body {margin:0;}
     
  .fc-sat{color:#0000FF;}
  .fc-sun{ color:#FF0000; }
-
+.backColor{
+	 background-image: url(${contextPath}/resources/images/배경2.png);
+    background-repeat: no-repeat;
+}
 </style>
 </head>
 <body>
@@ -79,7 +84,7 @@ body {margin:0;}
 	<hr>
 	<section class="ftco-section">
 		<div class="overlay"></div>
-		<div class="container one1">
+		<div class="container one1 backColor">
 
 			<div class="row justify-content-center pb-5 ">
 				<div class="col-md-7 heading-section text-center fadeInUp" id="work-title">
