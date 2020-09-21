@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>급여 명세서</title>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
- 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script> 
 
 <style>
 
@@ -45,7 +45,7 @@ table.type07 thead th {
     color: #fff;
 }
 table.type07 tbody th {
-    width: 300px;
+    width: 250px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -55,7 +55,7 @@ table.type07 tbody th {
      text-align: center;
 }
 table.type07 td {
-    width: 600px;
+    width: 450px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
@@ -75,54 +75,83 @@ table.type07 td {
 
    <!-- ------------------------- main ---------------------------- -->
    <section class="ftco-section">
-      <div class="overlay"></div>
-      <div class="container">
+      <div class="overlay">
+      
+      
+        <div class="container board-list">
+            
+            <h1>${boardList[0].boardName}</h1>
+            
+            
+            <div class="row justify-content-center p-5 col-md-10 mx-auto" style="border: 50px solid #F5F4F0">
+               
+               <div class="row justify-content-center pb-5">
+		            <div class="col-md-12 heading-section text-center fadeInUp">
+		               <span class="subheading">Salary</span>
+		               <h2> 급여명세서</h2>
+		            </div>
+         	  </div>
+               
+               
+               <!-- 제목  -->
+               <div class="col-md-10 text-center mb-5">
+                  <fmt:formatDate var="payTitle" value="${paystub.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
+                       <h1 style="font-weight: bold;">${payTitle }</h1>
+                  <hr>
+               </div>
+               
+               <div class="row" style="width: 500px;">
+               <!-- 내용  -->
+               <div class="col-md-12">
+               <table class="col-md-12 p-5 table table-borderless mx-auto">
+                  <tr>
+                     <td>이름</td>
+                     <td>${loginMember.memberName }</td>
+                  </tr>
+                  <tr>
+                     <td>근무 가게</td>
+                     <td>${loginStore.storeName }</td>
+                  </tr>
+                  <tr>
+                     <td>급여지급일</td>
+                     <td>${paystub.payCreateDate }</td>
+                  </tr>
+                  <tr>
+                     <td>총 근무시간</td>
+                     <td>${paystub.payTime}</td>
+                  </tr>
+                  <tr>
+                     <td>총 근무일수</td>
+                     <td>${paystub.payDay }</td>
+                  </tr>
+                  <tr>
+                     <td>주휴수당</td>
+                     <td>${paystub.payExtra }</td>
+                  </tr>
+                  <tr>
+                     <td>시급</td>
+                     <td>${paystub.payExtra }</td>
+                  </tr>
+               </table>
+               </div>
+               
+               <div class="col-md-12 row mt-5 mb-5 justify-content-center" id="total-sal">
+                  <h3 id="total">
+                     <span>총 급여</span>
+                     <span>${paystub.paySalary } 500₩</span>
+                  	 
+                  </h3>
+               </div>
+               <div class="col-md-12">
+               	<button style="float: right; " type="button" id="correction" class="btn btn-lg  btn-primary viewBtn">수정하기</button>
+               </div>
+               
+              
 
-         <div class="row justify-content-center pb-5">
-            <div class="col-md-7 heading-section text-center fadeInUp">
-               <span class="subheading">급여명세서</span>
-               <h2> 급여명세서</h2>
+               
+              </div>
             </div>
          </div>
-            <div class="billscontent">
-            <form method="POST" action="../../pay/updatePayAction/${payNo}">
-               <table class="type07">
-                <thead>
-                   <tr>
-                       <th scope="col">지급항목</th>
-                       <th scope="col"></th>
-                   </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                       <th scope="row">총 근무일</th>
-                       <td><input type="text" name="payDay" value="${plus.payDay}">일</td>
-                   </tr>
-                  
-                   <tr>
-                       <th scope="row">주휴수당</th>
-                       <td><input type="text" name="payExtra" value="${plus.payExtra}">원</td>
-                   </tr>
-                    <tr>
-                       <th scope="row">급여 지급일</th>
-                       <td><input type="text" name="payPayment" value="${plus.payPayment}">일</td>
-                   </tr>
-                   
-                   <tr>
-                       <th scope="row">총근무시간</th>
-                       <td><input type="text" name="payTime" value="${plus.payTime}">시간</td>
-                   </tr>
-                   
-                    <tr>
-                       <th scope="row">총 급여</th>
-                       <td><input type="text" name="paySal" value="${plus.paySal}">원</td>
-                   </tr>
-                </tbody>
-              </table>
-               <button class="btn btn-outline-success" id="correction">수정</button>
-<%--                <a class="btn btn-primary float-right" href="${header.referer}">목록으로</a>
- --%>           </form>   
-              </div>
       </div>
    </section>
    

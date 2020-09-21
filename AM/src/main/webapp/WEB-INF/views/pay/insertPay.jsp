@@ -49,11 +49,7 @@
 	.tabType1 li.on a {
 		color: #fff;
 	}
-	
-	#updateBtn{
-		float : right;
-	}
-	
+
 	#inputTable{
 		width:1100px;
 	}
@@ -64,6 +60,14 @@
 		line-height: 600px;
 		text-align: center;
 	}
+	
+	#outer{
+		background-color: #d7ebc2;
+	}
+	#inner{
+		margin: 0 auto;		
+		display: inline-block;
+	} */
 	
 	
 	
@@ -120,18 +124,21 @@
 								          	</select>
 								          -->
 								        
-										<form method="POST" action="insertPayAction" name="contactForm" class="contactForm mt-5">
+										<form method="POST" action="insertPayAction" name="contactForm" class="contactForm mt-5" >
+											
+											
 										
-											<div class="col-md-5 heading-section fadeInUp">
-								        		<label class="label" for="payPayment">등록일</label> <input
-															type="date" class="form-control" name="payDate" id="payDate">
-								        	</div>
-										
-											<div class="col-md-12 heading-section fadeInUp" id="selectEmployee">
-								          		<span class="subheading">직원선택</span>
+											<div id="outer">
+												
+								        		<span class="label">등록일</span> 
+								        		<input style="width: 200px" type="date" class="form-control" name="payDate" id="payDate">
+									        
+												<div class=" heading-section fadeInUp" id="selectEmployee">
+								          			<span class="subheading">직원선택</span>
+									        	</div>
 								        	</div>
 								        	
-								        	
+											
 											
 											<div class="row">
 											
@@ -143,12 +150,7 @@
 															
 													</div>
 												</div>
-												<!-- <div class="col-md-6">
-													<div class="form-group">
-														
-															
-													</div>
-												</div> -->
+												
 												
 												<div class="col-md-6">
 													<div class="form-group">

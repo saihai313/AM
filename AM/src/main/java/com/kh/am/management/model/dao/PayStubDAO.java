@@ -45,7 +45,7 @@ public class PayStubDAO {
 	public int correction(int corrNo) {
 		System.out.println(sqlSession);
 		System.out.println(corrNo);
-		Integer result =  sqlSession.update("paystubMapper.correction",corrNo);
+		int result =  sqlSession.update("paystubMapper.correction",corrNo);
 		System.out.println(result);
 		return result;
 	}
@@ -53,6 +53,11 @@ public class PayStubDAO {
 	public int transmit(CorrectionReply cr) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("paystubMapper.transmit",cr);
+	}
+
+	public List<Paystubplus> requestMonthlist(PayStub pmonth) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("paystubMapper.requestMonthlist", pmonth);
 	}
 
 }

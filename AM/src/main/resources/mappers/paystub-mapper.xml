@@ -91,5 +91,14 @@
 		INSERT INTO PAY_CORR_RE VALUES(SEQ_RNO.NEXTVAL, #{corrReContent},SYSDATE, #{corrNo}, #{storeNo})
 	</insert>
 	
+	<select id="requestMonthlist" parameterType="PayStub" resultMap="requestResultSet">
+			SELECT P.*, M.MEMBER_NM
+			FROM PAY_CORR P
+			JOIN STORE S ON(P.STORE_NO=S.STORE_NO)
+			JOIN MEMBER M ON(P.MEMBER_NO = M.MEMBER_NO)
+			WHERE S.MEMBER_NO = #{memberNo}
+			AND EXTRACT(MONTH FROM CORR_CREATE_DT) = #{payDay}
+	</select>
+	
   
 </mapper>

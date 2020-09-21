@@ -45,8 +45,8 @@
 				<div class="col-md-6 d-flex align-items-center">
 					<p class="mb-0 phone pl-md-2 nav-top">
 						<a href="${contextPath}/company/contact" class="mr-2"><span class="fa mr-1"></span>고객센터&nbsp;&nbsp;</a> 
-						<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>1544-9970</a> 
-						<a href="#"><span class="fa fa-paper-plane mr-1"></span> AM@email.com</a>
+						<a href="tel://12345678" class="mr-2"><span class="fa fa-phone mr-1"></span>+ 1234-5678</a> 
+						<a href="mailto:AlbeitManagement@gmail.com"><span class="fa fa-paper-plane mr-1"></span> AlbeitManagement@gmail.com</a>
 					</p>
 				</div>
 

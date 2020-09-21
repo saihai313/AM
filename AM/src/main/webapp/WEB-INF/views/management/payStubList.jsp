@@ -8,16 +8,21 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script> -->
+<!-- data table에서 jquery를 사용하기 때문에 가져옵니다.-->
+<!-- data table -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
 <style>
 
       /* 급여명세서 */
     
-       .pagination {
-            justify-content: center;
-        }
-          
-        .board-list{ margin: 100px auto;}
-        
+      .board-list{ margin: 40px auto;}
+     
         #list-table td{
            cursor: pointer;
         }
@@ -52,7 +57,7 @@
       }
       
       .tabType1 li.on {
-         position: relative;
+        position: relative;
          border-color: #c4c4c4;
          background: #589168;
       }
@@ -78,15 +83,19 @@
          
       }
       
+    
+      
       
 </style>
 <!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> --> 
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+   
     <script>
         jQuery(function($){
             $("#list-table").DataTable();
+            
         });
+        
+       
     </script>
 
 </head>
@@ -116,12 +125,10 @@
          <!-- ------------------------- side menu ---------------------------- -->
 
 
-         <div class="container board-list">
-            
-            <h1>${boardList[0].boardName}</h1>
+       		<div class="container board-list">
             
               <div style="height:530px">
-                  <table class="table table-hover table-striped" id="list-table">
+                  <table class="table table-hover tabType1 table-striped" id="list-table">
                      <thead>
                           <tr>
                               <th>글번호 </th>
@@ -166,8 +173,7 @@
                       </tbody>
                   </table>
               </div>
-      
-              <hr>
+  	</div>
           <%--     
               로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기
               <c:if test="${!empty loginMember}">
@@ -176,7 +182,9 @@
                
        
                 </div>
-      </div>
+                
+           
+ 
    </section>
    
    <script >

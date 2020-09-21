@@ -4,13 +4,23 @@
   <settings>
       <setting name="jdbcTypeForNull" value="NULL"/>
       </settings>
-      
-       <typeAliases>
-    <typeAlias type="com.kh.am.member.model.vo.Member" alias="Member"/>
-    <typeAlias type="com.kh.am.board.model.vo.Store" alias="Store"/>
-    <typeAlias type="com.kh.am.board.model.vo.Employee" alias="Employee"/>
+
+
+
+	<typeAliases>
+		<typeAlias type="com.kh.am.member.model.vo.Member"
+			alias="Member" />
+		<typeAlias type="com.kh.am.board.model.vo.Store"
+			alias="Store" />
+		<typeAlias type="com.kh.am.board.model.vo.Employee"
+			alias="Employee" />
+		<typeAlias type="com.kh.am.board.model.vo.CurrentSal"
+			alias="CurrnetSal" />
+		<typeAlias type="com.kh.am.board.model.vo.NewsBoard"
+			alias="NewsBoard" />
+	</typeAliases>
     
-    </typeAliases>
+    
     
      <mappers>
 		    <mapper resource="/mappers/member-mapper.xml"/>

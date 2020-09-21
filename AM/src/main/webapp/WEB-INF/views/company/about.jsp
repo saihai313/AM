@@ -56,6 +56,98 @@
 			</div>
 		</div>
 	</section>
+	
+	<hr id="aboutAddress">
+	
+	<section class="ftco-section">
+			<div class="container">
+			
+			<div class="row justify-content-center pb-5 mt-5">
+				<div class="col-md-7 heading-section text-center fadeInUp">
+					<span class="subheading">contact us</span>
+					<h2>오시는 길</h2>
+				</div>
+			</div>
+				<div class="row justify-content-center">
+				
+					<div class="col-md-12">
+						<div class="wrapper px-md-4">
+							
+							<div class="row no-gutters">
+								<div class="col-md-7">
+									<div class="contact-wrap w-100 p-md-5 p-4">
+										
+										<div class="row mb-5">
+										<div class="col-md-4">
+												<div class="dbox w-100 text-center">
+							        		<div class="icon d-flex align-items-center justify-content-center">
+							        			<span class="fa fa-map-marker"></span>
+							        		</div>
+							        		<div class="text">
+								            <p><span>Address<br></span> 서울특별시 중구<br>남대문로 120<br>대일빌딩 2F, 3F</p>
+								          </div>
+							          	</div>
+											</div>
+											<div class="col-md-4">
+												<div class="dbox w-100 text-center">
+							        		<div class="icon d-flex align-items-center justify-content-center">
+							        			<span class="fa fa-phone"></span>
+							        		</div>
+							        		<div class="text">
+								            <p><span>Phone<br></span> <a href="tel://12345678">+ 1234 5678</a></p>
+								          </div>
+							          </div>
+											</div>
+										<div class="col-md-4">
+											<div class="dbox w-100 text-center">
+								        		<div class="icon d-flex align-items-center justify-content-center">
+								        			<span class="fa fa-paper-plane"></span>
+								        		</div>
+								        		<div class="text">
+									            <p><span>Email<br></span> <a href="mailto:AlbeitManagement@gmail.com">AlbeitManagement<br>@gmail.com</a></p>
+									          </div>
+								          </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-5 order-md-first d-flex align-items-stretch">
+								<div id="map" style="width:100%; "></div>
+			
+									<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_stM0rLGlj1xzE0Kq_epQJSi_bgDKxyw&callback=initMap&region=kr"></script>
+									<script>
+										let marker;
+	
+										function initMap() {
+										  const map = new google.maps.Map(document.getElementById("map"), {
+										    zoom: 17,
+										    center: { lat: 37.567975 ,lng: 126.983126 }
+										  });
+										  marker = new google.maps.Marker({
+										    map,
+										    draggable: true,
+										    animation: google.maps.Animation.DROP,
+										    position: { lat: 37.567975 ,lng: 126.983126 }
+										  });
+										  marker.addListener("click", toggleBounce);
+										}
+	
+										function toggleBounce() {
+										  if (marker.getAnimation() !== null) {
+										    marker.setAnimation(null);
+										  } else {
+										    marker.setAnimation(google.maps.Animation.BOUNCE);
+										  }
+										}
+									</script>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 	<!-- ------------------------- footer ---------------------------- -->
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -54,9 +54,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon fa fa-map marker"></span><span class="text">서울특별시 중구<br>남대문로 120<br>대일빌딩 2F, 3F</span></li>
-	                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">1544-9970</span></a></li>
-	                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">AM@email.com</span></a></li>
+	                 <li><a href="${contextPath}/company/about#aboutAddress"><span class="icon fa fa-map marker"></span><span class="text">서울특별시 중구<br>남대문로 120<br>대일빌딩 2F, 3F</span></a></li>
+	                <li><a href="tel://12345678"><span class="icon fa fa-phone"></span><span class="text">+ 1234-5678</span></a></li>
+	                <li><a href="mailto:AlbeitManagement@gmail.com"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">AlbeitManagement@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

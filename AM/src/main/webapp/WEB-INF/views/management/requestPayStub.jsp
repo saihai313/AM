@@ -7,60 +7,56 @@
 <head>
 <meta charset="UTF-8">
 <title>급여 설정</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
     	
     	/* 급여 정정 */
     
     	
-       .pagination {
-            justify-content: center;
-        }
-       
-          
-        .board-list{ margin: 100px auto;}
+        .board-list{ margin: 40px auto;}
         
         #list-table td{
         	cursor: pointer;
         }
 
-		.tabType1 {
-			height: 50px;
-			text-align: center;
-			font-family: 'S-CoreDream-6Bold';
-		}
-		
-		.tabType1 li {
-			display: inline-block;
-			width: 199px;
-			height: 48px;
-			margin-left: -4px;
-			border: 1px solid #c4c4c4;
-			border-left-width: 0;
-		}
-		
-		.tabType1 li:first-child {
-			margin-left: 0;
-			border-left-width: 1px;
-		}
-		
-		.tabType1 li a {
-			display: block;
-			height: 48px;
-			text-align: center;
-			line-height: 48px;
-			font-size: 10px;
-			color: #3A3847;
-		}
-		
-		.tabType1 li.on {
-			position: relative;
-			border-color: #c4c4c4;
-			background: #589168;
-		}
-		
-		.tabType1 li.on a {
-			color: #fff;
-		}
+		 .tabType1 {
+         height: 50px;
+         text-align: center;
+         font-family: 'S-CoreDream-6Bold';
+      }
+      
+      .tabType1 li {
+         display: inline-block;
+         width: 199px;
+         height: 48px;
+         margin-left: -4px;
+         border: 1px solid #c4c4c4;
+         border-left-width: 0;
+      }
+      
+      .tabType1 li:first-child {
+         margin-left: 0;
+         border-left-width: 1px;
+      }
+      
+      .tabType1 li a {
+         display: block;
+         height: 48px;
+         text-align: center;
+         line-height: 48px;
+         font-size: 14px;
+         color: #3A3847;
+      }
+      
+      .tabType1 li.on {
+        position: relative;
+         border-color: #c4c4c4;
+         background: #589168;
+      }
+      
+      .tabType1 li.on a {
+         color: #fff;
+      }
 		
 		#updatePayStub{
 			width:1100px;
@@ -86,14 +82,14 @@
       font-family: 'S-CoreDream-8Heavy';
       font-weight: bold;
    }
+   #month{
+   	width: 150px;
+   }
 </style>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
-<!-- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> --> 
+
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
         jQuery(function($){
             $("#updatePayStub").DataTable();
@@ -112,7 +108,7 @@
 		<div class="container">
 
 			<div class="row justify-content-center pb-5">
-				<div class="col-md-7 heading-section text-center fadeInUp">
+				<div class="col-md-7 heading-section  text-center fadeInUp">
 					<span class="subheading">SALARY</span>
 					<h2>정정 신청</h2>
 				</div>
@@ -126,13 +122,26 @@
 		    </ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 
-
 			<div class="container board-list">
-		      
-		      <h1>정정신청</h1>
+			
 		      
 		        <div style="height:530px">
-		            <table class="table table-hover table-striped" id="updatePayStub">
+		            <table class="table table-hover tabType1 table-striped" id="updatePayStub">
+		              <select id="month" class="custom-select custom-select-sm" >
+						  <option selected>월별 검색</option>
+						  <option value="01">01</option>
+						  <option value="02">02</option>
+						  <option value="03">03</option>
+						  <option value="04">04</option>
+						  <option value="05">05</option>
+						  <option value="06">06</option>
+						  <option value="07">07</option>
+						  <option value="08">08</option>
+						  <option value="09">09</option>
+						  <option value="10">10</option>
+						  <option value="11">11</option>
+						  <option value="12">12</option>
+					</select>
 		               <thead>
 		                    <tr>
 		                         <th>글번호 </th> 
@@ -167,10 +176,10 @@
 		               <%-- <td><a href='#' onClick="fn_view(${result.code})"><c:out value="${result.title }"/></a></td>  --%>
 		                           
 		                            <td>${paystubplus.corrCreateDt }</td>
-		                            <td>${paystubplus.corrModifyDt }</td>
-		                            <td>${paystubplus.corrStatus }</td>
+		                            <td class="mddate">${paystubplus.corrModifyDt }</td>
+		                            <td >${paystubplus.corrStatus }</td>
 		                            <td>${paystubplus.corrResult }</td>
-		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
+		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded nameBtn" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
 		                            <%--<td>${paystubplus.memberName }</td> --%>
 		                            
 		                            <%-- <input type="hidden" id="mid" value="${paystubplus.memberNo}"> --%>
@@ -185,18 +194,6 @@
 		                
 		                </tbody>
 		            </table>
-		          
-			 
-			
-		
-		        <hr>
-		        
-		        <%-- 로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기 --%>
-		        <c:if test="${!empty loginMember}">
-		          <a class="btn btn-primary float-right" href="../${boardList[0].boardType}/insert">글쓰기</a>
-		      </c:if>
-		         
-       
    	    		</div>
   	    	</div>
 		</div>
@@ -333,11 +330,11 @@
 
                       </div>
                       <div class="modal-footer">
+                      	
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                        <!--  <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button> -->
-                <button id="test"  type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려</button>
-                
-                <!--class="btn btn-warning contentBtn btn-rounded"  -->
+		                <button type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려이유작성</button>
+		                <!--class="btn btn-warning contentBtn btn-rounded"  -->
                       </div>
                     </div>
                   </div>
@@ -373,6 +370,7 @@
 
                       </div>
                       <div class="modal-footer">
+                      	<input type="hidden" id="corr">
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                         <button type="button"data-dismiss="modal" id="transmit" class="btn btn-primary viewBtn">반려내용전송</button>
                       </div>
@@ -381,10 +379,10 @@
                 </div> 
                          
          <script>
-         $(".contentBtn").click(function(){
+         $(".nameBtn").click(function(){
         	 var memberNo = $("#test1").text(); 
         	 var corrNo=$(this).parent().parent().children().eq(0).text();
-        	
+        	 $("#corr").val(corrNo);
         	 var corrContent= $("#rList.corrContent").text();
         	 
          	console.log("corrNo:"+corrNo)
@@ -393,7 +391,7 @@
 	   data : {"corrNo":corrNo
 		   }, 
 	   type : "GET",	
-	   dataType : "JSON",
+	   
 	   success:function(rList){
 		   console.log(rList)
 		   console.log(rList.corrContent)
@@ -409,42 +407,23 @@
    });
         });
          
-         /* status */
-        /*  $("#correction").click(function(){
-        	 console.log(this);
-        	 var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
-        	 console.log("!!!!" + corrNo);
-        	 
-        	 $.ajax({
-        		 url : "correction",
-        		 data : {"corrNo" : corrNo},
-       			   dataType : "JSON",
-       			   success:function(result){
-       					console.log("1");
-       					
-       				  
-                      
-       			   },error:function(){	
-       				   console.log("ajax 통신 실패");
-       		 
-       			   } 
-      		    
-        	 });
-         }); */
-         
        
          
          $("#transmit").click(function(){
-        	var corrNo=$(".contentBtn").parent().parent().children().eq(0).text();
+        	var corrNo=$("#transmit").parent().children().eq(0).val();
         	var corrReContent=$("#correctionContent2").val();
+        	console.log("^^ : " + corrNo);
         	 $.ajax({
         		url : "transmit" ,
         		data :{"corrNo" : corrNo,"corrReContent":corrReContent},
-        		dataType : "JSON",
         		 success:function(result){
     					
     				   if(result>0){
-    						alert("qksfusodyddmf wjsthdgottmqselk.")
+    						alert("반려되었습니다.");
+    						location.href = "requestPayStub";
+    				   }else{
+    					   alert("실패했습니다");
+    					   location.href = "requestPayStub";
     				   }
     				  
                    
@@ -452,6 +431,46 @@
     				   console.log("ajax 통신 실패");
     		 
     			   } 
+        	 });
+         });
+         
+        $("#month").change(function(){
+        	 var month=$(this).val();
+        	 
+        	 console.log(month);
+        	 
+        	 $.ajax({
+        		 url:"select",
+        		 data:{"month":month},
+        		 dataType: "json",
+        		 type : "GET",		 
+        		 success:function(list){
+        			$tbody = $("#updatePayStub > tbody");
+        			 console.log(list);
+        			 console.log($tbody);
+        			
+        			
+        			$tbody.html("");
+        			
+        			 $.each(list, function(index, item){
+       					$tr = $("<tr>");
+               			
+       					$td1 = $("<td>").text(item.corrNo);
+       					$td2 = $("<td>").text(item.corrCreateDt);
+       					$td3 = $("<td>").addClass("mddate").text(item.corrModifyDt);
+       					$td4 = $("<td>").text(item.corrStatus);
+       					$td5 = $("<td>").text(item.corrResult);
+       					
+       					$td6btn = $("<button id='test' class='btn btn-warning contentBtn btn-rounded nameBtn' type='button' data-toggle='modal' data-target='#staticBackdrop'>").text(item.corrNo);	
+       					$td6 = $("<td>");
+       					$td6.append(item.memberName);
+       					
+       					$tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+               			$tbody.append($tr);
+        			 });
+        		 },error:function(){
+        			 alert("ajax전송실패");
+        		 }
         	 });
          });
     </script>  
