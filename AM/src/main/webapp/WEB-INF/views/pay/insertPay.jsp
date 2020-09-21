@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>급여 설정</title>
 <style>
+
 	
 	
 
@@ -62,13 +63,9 @@
 	}
 	
 	#outer{
-		background-color: #d7ebc2;
+		/* background-color: #d7ebc2; */
 	}
-	#inner{
-		margin: 0 auto;		
-		display: inline-block;
-	} */
-	
+
 	
 	
 </style>
@@ -95,7 +92,7 @@
 		      <div class="overlay"></div>
 			     <div class="row justify-content-center pb-5">
 			
-			
+				
 			
 				  <div class="col-md-12 heading-section text-center fadeInUp">
 					<span class="subheading">SALARY</span>
@@ -112,7 +109,7 @@
 			</ul>
 			<!-- ------------------------- side menu ---------------------------- -->
 			
-			<div class="container">
+			<div class="container board-list">
 				<div class="row justify-content-center">
 					<div class="col-md-8">
 						<div class="wrapper px-md-4">
@@ -124,27 +121,35 @@
 								          	</select>
 								          -->
 								        
-										<form method="POST" action="insertPayAction" name="contactForm" class="contactForm mt-5" >
-											
-											
-										
-											<div id="outer">
-												
-								        		<span class="label">등록일</span> 
-								        		<input style="width: 200px" type="date" class="form-control" name="payDate" id="payDate">
-									        
-												<div class=" heading-section fadeInUp" id="selectEmployee">
-								          			<span class="subheading">직원선택</span>
-									        	</div>
-								        	</div>
-								        	
-											
+										<form method="POST" action="insertPayAction" name="contactForm" class="contactForm mt-5" 
+													style="font-family: 'S-CoreDream-6Bold';" onsubmit="return validate();">
 											
 											<div class="row">
+													
+													
+												<div class="col-md-6">
+													<div class="form-group">	
+										        		<span class="label">등록일</span> 
+										        		<input  type="date" class="form-control" name="payDate" id="payDate">
+										        	</div>
+										       	</div> 
+										        
+										        <div class="col-md-6">
+										        	<div class="form-group">
+														<div class="label" id="selectEmployee">
+									          				<div class="subheading">직원선택</div>
+										        		</div>
+										        	</div>	
+								        		</div>
+											
+											
+											
 											
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="label" for="payPayment">급여일</label> <input
+														<label class="label" for="payPayment">급여일</label>
+														<span id="paymentCheck"></span> 
+														<input
 															type="text" class="form-control" name="payPayment" id="payPayment"
 															placeholder="일" >
 															
@@ -167,6 +172,8 @@
 															placeholder="일">
 													</div>
 												</div>
+												
+												
 												
 												
 												<div class="col-md-6">
@@ -224,7 +231,7 @@
 	
 	<script>
 		
-		var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block"}).attr("name","memberNo");
+		var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block", "margin-top":"8px"}).attr("name","memberNo");
 		var $option;
 		
 		// 옵션 벨류 값
@@ -330,7 +337,18 @@
 			
 		});
 		
-		
+		function validate(){
+			var payment = $("#payPament").val();
+			
+			var regExp = /^\d$/;
+			
+			if(regExp.test(payment)){
+				$("#paymentCheck").text("급여일은 숫자만 입력 가능합니다.").css("color","red");
+				return false;
+			}
+			
+			
+		}
 		
 		
 			
