@@ -9,9 +9,7 @@
 <!-- 아이콘 등록 -->
 <link rel="icon" type="image/png" href="${contextPath}/resources/images/icons/am.ico"/>
 <style>
-	*{
-	    font-family: 'S-CoreDream-6Bold' !important;
-	}
+	
 
  .textS{
         display: inline-block;
@@ -34,6 +32,8 @@
    #t1{
    	padding-bottom: 60px;
    	font-weight: bold;
+   	    margin: auto;
+    width: 1000px;
        
    }
 	
@@ -49,6 +49,8 @@
     height: 150px;
     border-radius: 10px;
         padding-left: 20px;
+            width: 1000px;
+    margin: auto;
     }
      .backColor2{
     border: 4px solid rgb(88 145 103);
@@ -57,6 +59,8 @@
     border-radius: 10px;
         padding-left: 20px;
         color: white;
+            width: 1000px;
+    margin: auto;
     }
     .div2{
     	    padding-top: 30px;
@@ -81,6 +85,12 @@
     margin-right: 10px;
     margin-top: 20px; 
     }
+    
+    .timeText{
+    	 width: 1000px;
+    margin: auto;
+    padding-bottom: 10px;
+    }
 </style>
 </head>
 <body>
@@ -98,8 +108,8 @@
 	 --%>
 	   <div class="sDiv1">
 	   <hr>
-		<h2 id="t1">파트 타임 생성</h2>
-		<h6>정각만 입력 가능합니다.</h6>
+		<h2 id="t1">파트 타임 만들기</h2>
+		<h6 class="timeText">정각만 입력 가능합니다.</h6>
         <form method="POST" action="${contextPath}/calendar/updatePartTime" class="" name="updatePartTimForm">
        
        <c:choose>
@@ -144,7 +154,7 @@
             <input type="time" name="partEnd" value="${end}:00" value2="endTime" >
             
 		
-		            일근무 휴게시간 0시간 포함 0 시간
+		            일근무  ${ p.partEnd - p.partStart}시간 (휴게시간 포함)
 		
 	 	<button class="minus" type="button">삭제</button>
          <button class="okBtn" type="button">수정</button>
@@ -173,7 +183,7 @@
 	
 	<div class="sDiv1">
 	    <hr>
-	    <h6>정각만 입력 가능합니다.</h6>
+	    <h6 class="timeText">정각만 입력 가능합니다.</h6>
         <div class='fromMain insertForm'>
            <div class="backColor">
            <div class="div2">

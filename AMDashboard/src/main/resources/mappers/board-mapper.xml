@@ -16,9 +16,24 @@
 	    <result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
 	    <result property="memberStatus" column="MEMBER_STATUS"/>
 	    <result property="memberPhone" column="MEMBER_PHONE"/>
-	    
   </resultMap>
   
+  
+  
+  <resultMap type="CurrentSal" id="CurrentSalResultSet">
+  	<result property="currentYear" column="CURRENT_YEAR"/>
+  	<result property="currentMinSal" column="CURRENT_MIN_SAL"/>
+  </resultMap>
+  
+  <resultMap type="NewsBoard" id="NewsBoardResultSet">
+  	<id property="newsNo" column="NEWS_NO"/>
+    <result property="createDate" column="CREATE_DATE"/>
+    <result property="memberType" column="MEMBER_TYPE"/>
+    <result property="title" column="TITLE"/>
+    <result property="address" column="ADDRESS"/>
+  
+  
+  </resultMap>
   
   
   <!--  사장 회원 조회 -->
@@ -43,28 +58,67 @@
       SELECT STORE_NO, STORE_NM, STORE_BIZ_NO, MEMBER_ENROLL_DT,STORE_BIZ_CHECK
        FROM STORE
       JOIN MEMBER USING (MEMBER_NO)
+      ORDER BY STORE_NO DESC
        
   </select>
   
-  <!-- 사장 회원 인증 -->
-    <update id="userConfirm" parameterType="_int" >
-      UPDATE STORE SET 
-      STORE_BIZ_CHECK = 'N'
-      WHERE STORE_NO = #{storeNo}
-      
-  </update>
+  
+ 
   
   <!-- 사장 회원 상세 조회 -->
   <select id="storeConfirm"  parameterType="_int" resultMap="storeResultSet">
 		  	SELECT STORE_NO, MEMBER_NM, MEMBER_EMAIL, MEMBER_PHONE, STORE_NM,
-				STORE_BIZ_NO,STORE_PHONE,STORE_ADDR
+				STORE_BIZ_NO,STORE_PHONE,STORE_ADDR,MEMBER_ENROLL_DT
 				FROM STORE
 				JOIN MEMBER USING (MEMBER_NO)
 				WHERE STORE_NO = #{storeNo}
 				AND MEMBER_STATUS = 'Y'
-      
   </select>
   
+  
+   <!-- 사장 회원 사업자번호 인증 변경-->
+    <update id="auth" parameterType="_int" >
+      UPDATE STORE SET 
+      STORE_BIZ_CHECK = 'Y'
+      WHERE STORE_NO = #{storeNo}
+  </update>
+  
+  
+  <!-- 사장 회원 이메일 인증상태 변경-->
+    <update id="auth2" parameterType="_int" >
+      UPDATE MEMBER SET MEMBER_CHECK = 'Y' WHERE MEMBER_NO =(SELECT MEMBER_NO 
+                                                             FROM MEMBER 
+                                                             JOIN STORE USING (MEMBER_NO)
+                                                             WHERE STORE_NO=#{storeNo})
+  </update>
+  
+  
+  <!-- 최저 시급 조회 -->
+  <select id="selectSal" resultMap="CurrentSalResultSet">
+  	SELECT* FROM CURRENT_SAL
+  	ORDER BY CURRENT_YEAR DESC
+  </select>
+  
+  <!-- 최저 시급 등록 -->
+  <insert id="insertSal" parameterType="CurrentSal">
+    INSERT INTO CURRENT_SAL VALUES(
+       #{currentYear},#{currentMinSal}
+    )
+  </insert>
+  
+  <!-- 뉴스 정보 조회 -->
+  <select id="selectNews" resultMap="NewsBoardResultSet">
+  	SELECT * FROM NEWS_BOARD
+  	ORDER BY NEWS_NO DESC
+  </select>
+  
+  <!-- 뉴스 등록 -->
+  <insert id="insertNews" parameterType="NewsBoard">
+     INSERT INTO NEWS_BOARD VALUES(
+      #{newsNo},SYSDATE,#{memberType},
+      #{title},#{address}
+      )
+  </insert>
 </mapper>
 
 

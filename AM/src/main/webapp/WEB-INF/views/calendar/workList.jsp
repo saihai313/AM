@@ -59,7 +59,7 @@
                 padding: 20px 60px;
                 background-color: #fefefe;
                 border: 1px solid #888;
-                border-radius: 3px;
+                border-radius: 18px;
             }
 
             #my_modal .modal_close_btn, #my_modal2 .modal_close_btn{
@@ -74,12 +74,90 @@
                 padding: 20px 60px;
                 background-color: #fefefe;
                 border: 1px solid #888;
-                border-radius: 3px;
+                border-radius: 18px;
             }
             
         #deleteBtn{
         	display: none;
         }
+        
+        
+ .one1{
+ 	    background-color: bisque;
+ 	        border-radius: 14px;
+ 	        padding: 10px;
+ 	        border: 2px solid lightgray;
+ 	        height: 950px;
+ }
+ 
+ .timeCss{
+ 	    margin-left: 50px;
+ }
+
+#noticeBoard{
+	width: 1100px;
+	margin: auto;
+	padding: 30px;
+	border: 1px solid;
+	margin-bottom: 50px;
+	border-radius: 10px;
+	font-family: 'S-CoreDream-6Bold' !important;
+}
+
+body {margin:0;}
+ #wrap {margin:0 auto;text-align:center;}
+ #quick_bg {margin:0 auto;text-align:center;width:1400px;position:relative;}
+ #quick {position:absolute;z-index:2;top:15px;width:153px;right:0px;}
+ #containert {position:relative;}
+ 
+ .news{
+     width: 550px;
+ }
+ 
+ .newsA{
+ 	border-bottom: 1px solid;
+ 	font-size: 15px;
+ }
+ 
+ .newsA:hover{
+ 	color: #184424;
+ }
+ 
+  #calendar{
+ 	    background-color: white;
+ }
+ 
+ .btns{
+    margin-bottom: 10px;
+ }
+ 
+ .updateBtn{
+ 	margin-left: 120px;
+ }
+ 
+ .insetBtn{
+ margin-left: 140px;
+ margin-bottom: 10px;
+ }
+ 
+  .fc-sat{color:#0000FF;}
+ .fc-sun{ color:#FF0000; }
+ 
+ #partDiv{
+    text-align: center;
+ }
+ 
+ #partTimeDiv, #noti{
+	width: 500px;
+	margin: auto;
+	padding: 30px;
+	border: 1px solid;
+	margin-bottom: 50px;
+	border-radius: 10px;
+	font-family: 'S-CoreDream-6Bold' !important;
+	display: inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -90,6 +168,19 @@
 	 	<!-- ------------------------- header ---------------------------- -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<!-- ------------------------- main ---------------------------- -->
+	
+	 <div id="wrap">
+	<div id="containert">
+		<div id="quick_bg">
+			<div id="quick">
+			<a href="#form" style="position:fixed;margin-top:-350px"><img src="${contextPath}/resources/images/배너.jpg" style="width:200px"></a>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+	
 	<c:choose>
 		<c:when test="${empty loginMember }">
 		<!--  로그인 x -->
@@ -101,7 +192,7 @@
 		
 	<section class="ftco-section">
 		<div class="overlay"></div>
-		<div class="container">
+		<div class="container one1">
 
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp" id="work-title">
@@ -121,12 +212,90 @@
 				</div>
 			</div>
 				<div class="pageBtn">
-				<a class="btn btn-primary pix"  href="${contextPath}/calendar/pixSchedule">고정스케쥴 등록</a>
+				<%-- <a class="btn btn-primary pix"  href="${contextPath}/calendar/pixSchedule">고정스케쥴 등록</a>--%>
 				<a class="btn btn-primary part" href="${contextPath}/calendar/partTime">파트타임 설정</a>
 				</div>
 			</div>
 	</section>
 
+
+	<!-- 파트타임 -->	
+
+	<div id="partDiv">
+	<div id="partTimeDiv">
+		<span><h3 style="display: inline;">더 편한 근무관리를 위해!</h3><h6 style="display: inline;"> 파트타임 설정으로 편리하게 입력|수정하세요.</h6></span>
+		<hr>
+		
+		
+			<c:forEach var="partTime" items="${pList}">
+				<!--  
+					시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
+				 -->
+		
+					
+					
+				<h6>${partTime.partName}[${partTime.partStart}:00 ~ ${partTime.partEnd}:00]</h6>
+						<hr>
+						</c:forEach>
+	</div>					
+	<div id="noti">
+		<span><h3 style="display: inline;">더 편한 근무관리를 위해!</h3><h6 style="display: inline;"> 파트타임 설정으로 편리하게 입력|수정하세요.</h6></span>
+		<hr>
+		
+		
+			<c:forEach var="partTime" items="${pList}">
+			<!--  
+				시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
+			 -->
+		
+				
+				
+			<h6>${partTime.partName}[${partTime.partStart}:00 ~ ${partTime.partEnd}:00]</h6>
+					<hr>
+				</c:forEach>
+	
+
+</div>
+</div>
+
+
+	<!-- -------------------------------------- -->
+
+
+	<div id="noticeBoard">
+	<div style=" width: 50%; display: inline-block;">	<h3>뉴스 소식
+	<img src="${contextPath}/resources/images/new.gif" style="width:40px; padding-bottom: 10px;">
+	</h3>
+	<hr>
+		<table style="width: 100%;">
+		
+			<c:forEach items="${nList}" var="n">
+			<tr>
+				<th class="news"><a class="newsA" href="${n.address}">${n.title}</a></th>
+			</tr>
+			</c:forEach>
+		
+			
+		</table>
+		</div>
+	
+		<div style="width: 40%; display: inline-block;">
+			<h3>생활 소식
+	<img src="${contextPath}/resources/images/new.gif" style="width:40px; padding-bottom: 10px;">
+	</h3>
+	<hr>
+		<table style="width: 100%;">
+		
+			<c:forEach items="${n2List}" var="n">
+			<tr>
+				<th class="news"><a class="newsA" href="${n.address}">${n.title}</a></th>
+			</tr>
+			</c:forEach>
+		
+			
+		</table>
+		</div>
+	</div>
 	
 	<!-- 
 		1. 날짜 눌렀을 때 모달창 나오기
@@ -148,7 +317,8 @@
 			</c:when>
 			
 			<c:otherwise>
-	          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar" name='insertCalendarForm' onsubmit="return validate();">
+	          <form class="form-signin" method="POST" action="${contextPath}/calendar/insertCalendar" name='insertCalendarForm' onsubmit="return validate();"
+	          	 style="text-align: ; padding-top: 40px;  padding-left: 10px;">
 	          <!-- onsubmit="return validate();"  -->
 					근무자 : <select id="no" name="memberNo">
 			<c:forEach var="member" items="${eList}">
@@ -157,9 +327,11 @@
 			</c:forEach>
 				</select> <br>
 			
-						part 선택 : <select id="time" name="time">
+						part 선택 :
+							
+						 <select id="time" name="time">
 						<c:forEach var="partTime" items="${pList}">
-							<!--  슈바
+							<!--  
 								시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
 							 -->
 						<c:if test="${partTime.partStart <10}">
@@ -177,12 +349,32 @@
 							
 						</c:forEach>
 						</select> 
+						
+						
+						<c:if test="${pList[0].partStart <10}">
+						 <c:set var="start" value="0${pList[0].partStart}"/>								
+						</c:if>
+						
+						<c:if test="${pList[0].partStart >=10}">
+						 <c:set var="start" value="${pList[0].partStart}"/>								
+						</c:if>
+						
+						
+						<c:if test="${pList[0].partEnd <10}">
+						 <c:set var="end" value="0${pList[0].partEnd}"/>								
+						</c:if>
+						
+						<c:if test="${pList[0].partEnd >=10}">
+						 <c:set var="end" value="${pList[0].partEnd}"/>								
+						</c:if>
+						
+						<input type="time" class="timeCss" id="timeS"  value="${start}:00"> ~ <input type="time" id="timeE"value="${end}:00">
 						<br>
 			
 				<div class="checkbox mb-3">
 					
 				</div>
-				<button class="btn btn-lg btn-primary" type="submit">등록</button>
+				<button class="btn btn-lg btn-primary insetBtn"  type="submit">등록</button>
 			</form>
 			</c:otherwise>
 		</c:choose>
@@ -203,7 +395,9 @@
 			</c:when>
 			
 			<c:otherwise>
-	          <form class="form-signin" method="POST" action="${contextPath}/calendar/updateCalendar" name='updateCalendarForm' onsubmit="return validate2();">
+	      
+	          <form class="form-signin" method="POST" action="${contextPath}/calendar/updateCalendar" name='updateCalendarForm' onsubmit="return validate2();" 
+	          style="text-align: ; padding-top: 30px;  padding-left: 10px;">
 	          <!-- onsubmit="return validate();"  -->
 					근무자 : <select id="updateNo" name="memberNo">
 			<c:forEach var="member" items="${eList}">
@@ -213,8 +407,9 @@
 				</select> <br>
 			
 						part 선택 : <select id="updateTime" name="time">
+						<option vlaue="not">-----------------</option>
 						<c:forEach var="partTime" items="${pList}">
-							<!--  슈바
+							<!--  
 								시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
 							 -->
 						<c:if test="${partTime.partStart <10}">
@@ -238,6 +433,26 @@
 						<option value2="1422" value='part2 [14:00 ~ 22:00]'>part2 [14:00 ~ 22:00]</option>
 						--%>
 						</select> 
+						
+						<c:if test="${pList[0].partStart <10}">
+						 <c:set var="start" value="0${pList[0].partStart}"/>								
+						</c:if>
+						
+						<c:if test="${pList[0].partStart >=10}">
+						 <c:set var="start" value="${pList[0].partStart}"/>								
+						</c:if>
+						
+						
+						<c:if test="${pList[0].partEnd <10}">
+						 <c:set var="end" value="0${pList[0].partEnd}"/>								
+						</c:if>
+						
+						<c:if test="${pList[0].partEnd >=10}">
+						 <c:set var="end" value="${pList[0].partEnd}"/>								
+						</c:if>
+						
+						<input type="time" class="timeCss" id="timeS2"  value="${start}:00"> ~ <input type="time" id="timeE2"value="${end}:00">
+						
 						<br>
 			
 			
@@ -248,12 +463,12 @@
 				<div class="checkbox mb-3">
 					
 				</div>
-				<button class="btn btn-lg btn-primary" type="submit">수정</button>
-				<button class="btn btn-lg btn-primary" onclick="deleteBtn()" type="button" >삭제</button>
-				
+				<button class="btn btn-lg btn-primary btns updateBtn" type="submit">수정</button>
+				<button class="btn btn-lg btn-primary btns" onclick="deleteBtn()" type="button" >삭제</button>
+				    <h6 style="font-size: 13px;">*동일한 파트타임이 존재하지 않아도 정상 삭제 가능</h6>
 			</form>
-				<form class="form-signin" method="POST" action="${contextPath}/calendar/deleteCalendar" name='deleteCalendarForm' onsubmit="return validate3();">
-				<button class="btn btn-lg btn-primary" id="deleteBtn" type="submit" >삭제</button>
+				<form class="form-signin " method="POST" action="${contextPath}/calendar/deleteCalendar" name='deleteCalendarForm' onsubmit="return validate3();">
+				<button class="btn btn-lg btn-primary " id="deleteBtn" type="submit" >삭제</button>
 				</form>
 			</c:otherwise>
 		</c:choose>
@@ -287,6 +502,10 @@ function deleteBtn(){
 	
 
     $(document).ready(function() {
+    	
+    
+    	
+    	
       var date = new Date();
       var d = date.getDate();
       var m = date.getMonth();
@@ -348,10 +567,15 @@ function deleteBtn(){
 					            end : new Date(y, m, 22, 16, 0)
 					            allDay: false,
 					            className: 'info'*/
+					            
+					            
+					            if(endTime == 0){
+					            	endTime = 24;
+					            }
 							var start = new Date(year, month, day, startTime, 0);
 							var end = new Date(year, month, day, endTime, 0);
 							//var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
-							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false,  "dow": [ 1, 4 ], "workNo" : workNo};
+							var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
 							console.log(obj);
 							
 							
@@ -487,19 +711,7 @@ function deleteBtn(){
 	        	
 	        	createAddDay(addDay);
 	        	
-	          var title = test();
-	          // 일 클릭하면 나오는 창
-	          if (title) {  
-	            calendar.fullCalendar('renderEvent', {
-	                title: title,
-	                start: start,
-	                end: end,
-	                allDay: allDay
-	              },
-	              true // make the event "stick"
-	            );
-	          } 
-	          calendar.fullCalendar('unselect');
+	         
 	        },
 	        timeFormat : "H : mm",
 	        droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -586,14 +798,22 @@ function deleteBtn(){
     	
     	console.log(title +"/" + start + "/" + end);
     	console.log(start.toString().substr(16, 2));
-    	console.log(end.toString().substr(16, 2));
+    	//console.log(end.toString().substr(16, 2));
+    	
+    	var end1;
+    	if(end == null){
+    		end1 = "24";
+    	}else{
+    		end1 = end.toString().substr(16, 2);
+    	}
+    	
     	
     	//파트타임 전체 목록 가져오기 
     	//console.log($('#time').find('option').map(function() {return $(this).val();}).get());
     	
     	var t = title;
     	var s = start.toString().substr(16, 2);
-    	var e =end.toString().substr(16, 2);
+    	var e =end1;
     	
 
     	snedContent(t, s, e);
@@ -678,11 +898,12 @@ function snedContent(t, s, e){
     		// 시작 시간
     		console.log(partTime[i].toString().slice(-14,-12));
     		console.log("입력된 시작 시간 " + updateS);
-    		
     		// 끝나는 시간
     		console.log(partTime[i].toString().slice(-6,-4));
     		console.log("입력된 종료 시간 " + updateE);
     		
+    		$("#timeS2").val(updateS + ":00");
+			$("#timeE2").val(updateE+ ":00");
     			if(updateS == 00){
     				updateS = 24;
     			}else if(updateE == 00){
@@ -700,10 +921,11 @@ function snedContent(t, s, e){
     			console.log("add" + add);
     			console.log("성공 " + partTime[i].toString().slice(-14,-12) + "/" +  updateS +"||" + partTime[i].toString().slice(-6,-4) + "/" + updateE);
     			$("#updateTime option[value2=" +add + "]").attr('selected', 'selected');
+    			
     		}else{
     			console.log("같은 게 없다");
     			console.log("실패" + partTime[i].toString().slice(-14,-12) + "/" +  updateS +"||" + partTime[i].toString().slice(-6,-4) + "/" + updateE);
-    			
+    			$("#updateTime option[value='not']").attr('selected', 'selected');
     			
     		}
     		
@@ -745,6 +967,7 @@ function snedContent(t, s, e){
             overflow: 'auto',
             // 레이어 색갈은 여기서 바꾸면 됨
             backgroundColor: 'rgba(0,0,0,0.4)'
+            
         });
         document.body.append(bg);
 
@@ -758,7 +981,9 @@ function snedContent(t, s, e){
             position: 'fixed',
             display: 'block',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
+			width : "500px",
+		    height: "280px",
+		    
             // 시꺼먼 레이어 보다 한칸 위에 보이기
             zIndex: zIndex + 1,
 
@@ -784,25 +1009,7 @@ function snedContent(t, s, e){
     */
     
      
-    
-    $(document).ready(function() {
-    	
-    	
-    	//  시작 시
-    	// .slice(-14,-12)
-    	
-    	// 시작 분
-    	// .slice(-11,-9)
-    	
-    	// 종료 시
-    	// .slice(-6,-4)
-    	
-    	// 종료 분
-    	// .slice(-3,-1)
-
- 		// part1 [10:00 ~ 16:00]
-    	
-    });
+   
     
 var b;
     function createBeforeNo(beforeNo){
@@ -815,6 +1022,10 @@ var b;
  // 삽입 submit 동작
 	function validate(){
     
+		console.log("시작" + $("input[id=timeS]").val().substr(0,2));
+		console.log("끝" + $("input[id=timeE]").val().substr(0,2));
+	 
+	 
  		console.log("서브밋동작" + $("#no").val());
  		
  		
@@ -825,12 +1036,13 @@ var b;
     	
     	console.log("시간 쪼개기" + time);
  		
+    	
  		
  		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-			value :  time.slice(-14,-12)});
+			value :  $("input[id=timeS]").val().substr(0,2)});
  		
  		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-			value :  time.slice(-6,-4)});
+			value :  $("input[id=timeE]").val().substr(0,2)});
  		
  		console.log(workDay);
  		// 날짜
@@ -838,6 +1050,7 @@ var b;
 					value : workDay});
  		
  		$("form[name='insertCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
+ 		
  		
  			
 	 }	
@@ -866,6 +1079,12 @@ var b;
 	    	console.log("시간 쪼개기" + time);
 	 		
 	 		
+	    	
+	    	var start = $("input[id=timeS2]").val().substr(0,2);
+	    	var end = $("input[id=timeE2]").val().substr(0,2);
+	    	
+	    	
+	    	
 	 		// 뒤에서부터 숫자 끊어서 가져오기
 	 		// str.slice(-3,-1);
 	 		
@@ -877,10 +1096,10 @@ var b;
 	 		
 	 		
 	 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-				value :  time.slice(-14,-12)});
+				value :  $("input[id=timeS2]").val().substr(0,2)});
 	 		
 	 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-				value :  time.slice(-6,-4)});
+				value :  $("input[id=timeE2]").val().substr(0,2)});
 	 		
 	 		console.log(workDay);
 	 		// 날짜
@@ -918,10 +1137,10 @@ var b;
 	 		
 	 		
 	 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-				value :  time.slice(-14,-12)});
+				value :  updateS});
 	 		
 	 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-				value :  time.slice(-6,-4)});
+				value :  updateE});
 	 		
 	 		console.log(workDay);
 	 		// 날짜
@@ -931,6 +1150,58 @@ var b;
 	 		$("form[name='deleteCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
 		}
 		
+	 
+	 $("#time").on("change", function(){
+		console.log("정상 작동"); 
+		var time = $("#time").val();
+		console.log("정상 작동" + time); 
+		
+		var start = time.slice(-14,-9);
+		var end = time.slice(-6,-1);
+		
+		console.log("정상 start" + start); 
+		console.log("정상 end" + end); 
+		
+		
+		$("#timeS").val(start);
+		$("#timeE").val(end);
+		
+		
+	 });
+	 
+	 
+	 $("#updateTime").on("change", function(){
+			console.log("정상 작동"); 
+			var time = $("#updateTime").val();
+			console.log("정상 작동" + time); 
+			
+			var start = time.slice(-14,-9);
+			var end = time.slice(-6,-1);
+			
+			console.log("정상 start" + start); 
+			console.log("정상 end" + end); 
+			
+			
+			$("#timeS2").val(start);
+			$("#timeE2").val(end);
+			
+			
+		 });
+	 
+	 
+	//배너
+	    var quick_menu = $('#quick');
+	    var quick_top = 470;
+
+	    quick_menu.css('top', $(window).height() );
+	    $(document).ready(function(){
+	    quick_menu.animate( { "top": $(document).scrollTop() + quick_top +"px" }, 200 ); 
+	    $(window).scroll(function(){
+	    quick_menu.stop();
+	    quick_menu.animate( { "top": $(document).scrollTop() + quick_top + "px" }, 500 );
+	    });
+	    });
+	  
 </script>
 </c:when>
 		

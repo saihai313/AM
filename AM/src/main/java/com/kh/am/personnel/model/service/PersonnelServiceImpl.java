@@ -1,6 +1,8 @@
 package com.kh.am.personnel.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +59,18 @@ public class PersonnelServiceImpl implements PersonnelService{
 	public int deletePersonnel(int memberNo) {
 
 		return personnelDAO.deletePersonnel(memberNo);
+	}
+
+	// 시급 수정
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateHourlyWage(int memberNo, int sal) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("sal", sal);
+		
+		return personnelDAO.updateHourlyWage(map);
 	}
 
 	

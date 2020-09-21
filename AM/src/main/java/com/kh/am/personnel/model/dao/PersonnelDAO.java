@@ -1,6 +1,7 @@
 package com.kh.am.personnel.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,6 +43,12 @@ public class PersonnelDAO {
 	public int deletePersonnel(int memberNo) {
 
 		return sqlSession.update("personnelMapper.deletePersonnel", memberNo);
+	}
+
+
+	public int updateHourlyWage(Map<String, Object> map) {
+
+		return sqlSession.update("personnelMapper.updateHourlyWage", map);
 	}
 
 }

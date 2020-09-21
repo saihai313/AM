@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.am.calendar.model.vo.NewsBoard;
 import com.kh.am.calendar.model.vo.PartTime;
 import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.calendar.model.vo.WorkCalendar;
@@ -106,6 +107,29 @@ public class CalendarDAO {
 	 */
 	public int partTimeInsert(PartTime partTime) {
 		return sqlSession.insert("calendarMapper.partTimeInsert", partTime);
+	}
+
+	/** 메인화면 알바생 정보 조회
+	 * @param storeNo
+	 * @return
+	 */
+	public List<Member> selectMList(int storeNo) {
+		return sqlSession.selectList("calendarMapper.selectMList", storeNo);
+	}
+
+	/** 뉴스보드 리스트
+	 * @param memberGrade
+	 * @return
+	 */
+	public List<NewsBoard> selectNewsList(String memberGrade) {
+		return sqlSession.selectList("calendarMapper.selectNewsList", memberGrade);
+	}
+
+	/** 생활뉴스 리스트
+	 * @return
+	 */
+	public List<NewsBoard> selectNews2List() {
+		return sqlSession.selectList("calendarMapper.selectNews2List");
 	}
 
 	
