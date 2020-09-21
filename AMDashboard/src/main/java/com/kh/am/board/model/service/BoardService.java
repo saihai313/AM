@@ -42,12 +42,31 @@ public interface BoardService {
 	 * @return
 	 */
 	List<CurrentSal> selectSal();
+	
+	
+    
+    /** 시급 등록
+     * @param currentSal
+     * @return
+     */
+    int insertSal(CurrentSal currentSal);
 
+    
+    
 	/** 뉴스 정보 조회
 	 * @return
 	 */
 	List<NewsBoard> selectnews();
 
+    /** 뉴스 등록
+     * @param newsBoard
+     * @return
+     */
+    int insertNews(NewsBoard newsBoard);
+
+
+    
+  
 }
 
 

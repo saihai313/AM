@@ -19,7 +19,7 @@
 					<div class="col-md-6">
 						<div class="card ">
 							<div class="card-header">
-								<h4 class="card-title">최저 시급</h4>
+								<h4 class="card-title"> 최저 시급 조회</h4>
 							</div>
 							<div class="card-body">
 								<table class="table tablesorter " id="">
@@ -50,8 +50,66 @@
 							</div>
 						</div>
 					</div>
+					  <div class="col-md-6">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title"> 시급 등록</h4>
+              </div>
+              <div class="card-body">
+                      <form action="${contextPath }/board/insertSal" onsubmit="return validate();">
+                            <table class="table">
+                                <tbody>
+                                <tr style="line-height:32px;">
+                                    <td>년도</td>
+                                     <td>
+                                        <select id="selectYear" name="currentYear">
+                                          <option selected>--선택-- </option>
+                                          <option value="2016">2016</option>
+                                          <option value="2017">2017</option>
+                                          <option value="2018">2018</option>
+                                          <option value="2019">2019</option>
+                                          <option value="2020">2020</option>
+                                          <option value="2021">2021</option>
+                                          <option value="2022">2022</option>
+                                          <option value="2023">2023</option>
+                                          <option value="2024">2024</option>
+                                          <option value="2024">2025</option>
+                                          <option value="2024">2026</option>
+                                          <option value="2024">2027</option>
+                                          <option value="2024">2028</option>
+                                          <option value="2024">2029</option>
+                                          <option value="2024">2030</option>
+                                             
+                                        </select>
+                                    </td>
+                                </tr>
+                               
+                          
+                                <tr>
+                                   
+                                     <td>최저 임금</td>
+                                    <td>
+                                        <input type="text" name="currentMinSal" class="form-control" value="">
+                                    </td>
+                                </tr>
+                               
+                                </tbody>
+                                
+                            </table>
+                         <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-info">등록</button>
+              </div>
+                        </form>
+              </div>
+            </div>
+          </div>
 				</div>
 			</div>
+			 <div class="content">
+        <div class="row">
+        
+        </div>
+      </div>
 
 		</div>
 	</div>

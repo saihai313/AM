@@ -60,6 +60,11 @@ public class MemberController {
          return "member/main";
     }
     
+    // 메인 화면 이동 
+    @RequestMapping("main")
+    public String main() {
+        return "member/main";
+    }
     
     // 로그아웃
     @RequestMapping("logout")
@@ -67,6 +72,7 @@ public class MemberController {
         status.setComplete();
         return "redirect:/";
     }
+    
     
     
     // 마이페이지

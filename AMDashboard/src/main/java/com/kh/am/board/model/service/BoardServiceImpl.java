@@ -69,12 +69,27 @@ public class BoardServiceImpl implements BoardService  {
 	public List<CurrentSal> selectSal() {
 		return boardDAO.selectSal();
 	}
+	
+	   // 시급 등록
+    @Override
+    public int insertSal(CurrentSal currentSal) {
+        return boardDAO.insertSal(currentSal);
+    }
 
 	// 뉴스정보 조회
 	@Override
 	public List<NewsBoard> selectnews() {
 		return boardDAO.selectnews();
 	}
+
+
+	// 뉴스 등록
+    @Override
+    public int insertNews(NewsBoard newsBoard) {
+        return boardDAO.insertnews(newsBoard);
+    }
+
+ 
 
 
 

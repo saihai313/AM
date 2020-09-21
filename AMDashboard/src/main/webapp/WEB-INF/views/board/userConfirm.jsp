@@ -236,11 +236,11 @@
     	            data : {"storeNo" : storeNo},
     	            success : function(result){
     	            	
-		    		alert("인증이 완료되었습니다!","","success"); 
+		    		      alert("인증이 완료되었습니다!","","success"); 
 		    			
     	            	location.href = "${contextPath}/board/userConfirm";
     	            }, error : function(){
-    	              console.log("ASDSADSADajax 통신 실패");
+    	              console.log("ajax 통신 실패");
     	            }
     	       });
     		  
