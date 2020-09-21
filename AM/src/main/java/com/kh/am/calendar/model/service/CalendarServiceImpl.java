@@ -6,10 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.ls.LSInput;
 
 import com.kh.am.calendar.model.dao.CalendarDAO;
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.calendar.model.vo.Employee;
+import com.kh.am.calendar.model.vo.NewsBoard;
 import com.kh.am.calendar.model.vo.PartTime;
 import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.member.model.vo.Member;
@@ -169,6 +171,31 @@ public class CalendarServiceImpl implements CalendarService {
 		int result = calendarDAO.partTimeInsert(partTime);
 		
 		return result;
+	}
+
+	// 메인화면 알바생 정보 조회
+	@Override
+	public List<Member> selectMList(int storeNo) {
+		
+		List<Member> mList = calendarDAO.selectMList(storeNo);
+		
+		return mList;
+	}
+
+	// 뉴스보드 리스트
+	@Override
+	public List<NewsBoard> selectNewsList(String memberGrade) {
+		
+		List<NewsBoard> list = calendarDAO.selectNewsList(memberGrade);
+		return list;
+	}
+
+	// 생활뉴스 리스트
+	@Override
+	public List<NewsBoard> selectNews2List() {
+		List<NewsBoard> list = calendarDAO.selectNews2List();
+		
+		return list;
 	}
 
 	

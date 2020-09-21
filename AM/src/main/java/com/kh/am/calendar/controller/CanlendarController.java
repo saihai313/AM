@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.am.calendar.model.service.CalendarService;
 import com.kh.am.calendar.model.vo.WorkCalendar;
 import com.kh.am.calendar.model.vo.Employee;
+import com.kh.am.calendar.model.vo.NewsBoard;
 import com.kh.am.calendar.model.vo.PartTime;
 import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.member.model.vo.Member;
@@ -44,6 +45,9 @@ public class CanlendarController {
 		// 사장님 회원번호
 		int memberNo = loginMember.getMemberNo();
 		
+		String memberGrade = loginMember.getMemberGrade();
+		
+		System.out.println("등급 " + memberGrade);
 		// 가게번호 얻어오기
 		int storeNo = calendarService.selectStoreNo(memberNo);
 		
@@ -59,8 +63,27 @@ public class CanlendarController {
 		
 		System.out.println("파트타임 목록 " + pList);
 		
+	
+		
+		
 		model.addAttribute("eList", eList);
 		model.addAttribute("pList", pList);
+		
+		
+		
+		//---------뉴스 가져오기
+		// VO, 마이바티스, 매퍼 작성
+		List<NewsBoard> nList = calendarService.selectNewsList(memberGrade);
+		model.addAttribute("nList", nList);
+		
+		
+		
+		//생활뉴스 목록
+		List<NewsBoard> n2List = calendarService.selectNews2List();
+		model.addAttribute("n2List", n2List);
+		System.out.println("n2List" + n2List);
+		
+		
 		}
 		
 		return "calendar/workList";
@@ -131,7 +154,7 @@ public class CanlendarController {
 	
 	// 사장님 캘린더 조회
 	@ResponseBody
-	@RequestMapping("master/calendarView")
+	@RequestMapping(value="master/calendarView", produces = "application/json; charset=utf-8")
 	public String calendarView(Model model) {
 		
 		Member loginMember = (Member)model.getAttribute("loginMember");
@@ -401,4 +424,26 @@ public class CanlendarController {
 		return str;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="employeeList", produces = "application/json; charset=utf-8")
+	public String employeeList(Model model) {
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		
+		// 사장님 회원번호
+		int memberNo = loginMember.getMemberNo();
+		
+		
+		// 사장님 가게 번호
+		int storeNo = calendarService.selectStoreNo(memberNo);
+		
+		
+		// 알바생 정보 목록
+		List<Member> list = calendarService.selectMList(storeNo);
+		System.out.println("알바 정보 목록 " + list);
+		model.addAttribute("mList", list);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
 }

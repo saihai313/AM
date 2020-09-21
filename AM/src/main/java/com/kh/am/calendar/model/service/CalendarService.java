@@ -3,6 +3,7 @@ package com.kh.am.calendar.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.am.calendar.model.vo.NewsBoard;
 import com.kh.am.calendar.model.vo.PartTime;
 import com.kh.am.calendar.model.vo.UpdateWorkCalendar;
 import com.kh.am.calendar.model.vo.WorkCalendar;
@@ -84,6 +85,23 @@ public interface CalendarService{
 	 * @return result
 	 */
 	int partTimeInsert(PartTime partTime);
+
+	/** 메인화면 알바생 정보 조회
+	 * @param storeNo
+	 * @return
+	 */
+	List<Member> selectMList(int storeNo);
+
+	/** 뉴스보드 리스트
+	 * @param memberGrade
+	 * @return
+	 */
+	List<NewsBoard> selectNewsList(String memberGrade);
+
+	/** 생활뉴스 리스트
+	 * @return
+	 */
+	List<NewsBoard> selectNews2List();
 
 
 }
