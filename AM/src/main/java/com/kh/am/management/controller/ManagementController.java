@@ -1,5 +1,6 @@
 package com.kh.am.management.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
 import com.kh.am.member.model.vo.Member;
 import com.kh.am.member.model.vo.Store;
+
+import javafx.scene.control.Alert;
 
 @SessionAttributes({"loginMember", "loginEmployer"})
 @Controller
@@ -69,15 +72,14 @@ public class ManagementController {
 		
 		
 		//급여명세서 상세조회
-		@RequestMapping("bills/{memberNo}")
-		public String payStubSelectOne(@PathVariable int memberNo,Model model
+		@RequestMapping("bills/{payNo}")
+		public String payStubSelectOne(@PathVariable int payNo,Model model
 				,RedirectAttributes rdAttr, HttpServletRequest request,PayStub paystub) {
 			
-			
+			System.out.println("!!!!!payStub : " + paystub);
 			
 			String url=null;
-			PayStub plus =paystubService.selectone(memberNo);
-			System.out.println(plus);
+			PayStub plus =paystubService.selectone(payNo);
 			if(plus!=null) {
 				model.addAttribute("plus", plus);
 				url="management/bills";
@@ -132,41 +134,53 @@ public class ManagementController {
 		
 		
 		//반려상태 변경
-		@ResponseBody
-		@RequestMapping("correction")
-		public String Correction(Model model, int corrNo) {
+	
+		@RequestMapping("changePayStub/{corrNo}")
+		public String Correction(Model model, @PathVariable int corrNo,HttpServletRequest request) {
 			System.out.println("!" + corrNo);
-			//Paystubplus correction =paystubService.correction(corrNo);
+		
 			//UPDATE
-			int result=paystubService.correction(corrNo);
+			//int result=paystubService.correction(corrNo);
 			
-			System.out.println("result : " + result);
+			//System.out.println("result : " + result);
 			
-			model.addAttribute("result",result);
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-
-			 return gson.toJson(result);
+			
+			return "redirect:../requestPayStub";
 		}
 		
-		//반려이유전송
+		//반려이유전송  
 		@ResponseBody
 		@RequestMapping("transmit")
 		public String transmit(Model model,CorrectionReply cr) {
+			System.out.println("여기" + cr);
 			int storeNo = ((Store)model.getAttribute("loginEmployer")).getStoreNo();
 			
 			cr.setStoreNo(storeNo);
 			int result=paystubService.transmit(cr);
-			int corrNo=cr.getCorrNo();
+			
 			if(result>0) {
-				
-				result=paystubService.correction(corrNo);
+				result=paystubService.correction(cr.getCorrNo());
 			}
 			
-			model.addAttribute("result",result);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			 return gson.toJson(result);
 		}
 		
+		//같은월 찾기
+		//반려이유전송  
+		@ResponseBody
+		@RequestMapping("select")
+		public String select(int month, Model model) {
+			int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();			
+			PayStub pmonth = new PayStub();
+			pmonth.setMemberNo(memberNo);
+			pmonth.setPayDay(month);
+			List<Paystubplus> list = paystubService.requestMonthlist(pmonth);
+			System.out.println(list);
+			model.addAttribute("list",list);
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			 return gson.toJson(list);
+		}
 		 
 		
 		

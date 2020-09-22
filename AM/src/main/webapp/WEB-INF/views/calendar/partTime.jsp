@@ -9,10 +9,7 @@
 <!-- 아이콘 등록 -->
 <link rel="icon" type="image/png" href="${contextPath}/resources/images/icons/am.ico"/>
 <style>
-	*{
-	    font-family: 'S-CoreDream-6Bold' !important;
-	}
-
+	@font-face { font-family: 'LAB디지털'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LAB디지털.woff') format('woff'); font-weight: normal; font-style: normal; }
  .textS{
         display: inline-block;
         padding-left: 8px;
@@ -34,6 +31,8 @@
    #t1{
    	padding-bottom: 60px;
    	font-weight: bold;
+   	    margin: auto;
+    width: 1000px;
        
    }
 	
@@ -49,6 +48,8 @@
     height: 150px;
     border-radius: 10px;
         padding-left: 20px;
+            width: 1000px;
+    margin: auto;
     }
      .backColor2{
     border: 4px solid rgb(88 145 103);
@@ -57,6 +58,8 @@
     border-radius: 10px;
         padding-left: 20px;
         color: white;
+            width: 1000px;
+    margin: auto;
     }
     .div2{
     	    padding-top: 30px;
@@ -81,6 +84,19 @@
     margin-right: 10px;
     margin-top: 20px; 
     }
+    
+    .timeText{
+    	 width: 1000px;
+    margin: auto;
+    padding-bottom: 10px;
+    }
+    
+    
+body {margin:0;}
+ #wrap {margin:0 auto;text-align:center;}
+ #quick_bg {margin:0 auto;text-align:center;width:1400px;position:relative;}
+ #quick {position:absolute;z-index:2;top:15px;width:153px;right:0px;}
+ #containert {position:relative;}
 </style>
 </head>
 <body>
@@ -88,6 +104,15 @@
 	 	<!-- ------------------------- header ---------------------------- -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
+	<div id="wrap">
+	<div id="containert">
+		<div id="quick_bg">
+			<div id="quick">
+			<a href="#form" style="position:fixed;margin-top:-350px"><img src="${contextPath}/resources/images/배너.jpg" style="width:200px"></a>
+			</div>
+		</div>
+	</div>
+</div>
 	
 	<%--
 		해야할 것
@@ -98,8 +123,8 @@
 	 --%>
 	   <div class="sDiv1">
 	   <hr>
-		<h2 id="t1">파트 타임 생성</h2>
-		<h6>정각만 입력 가능합니다.</h6>
+		<h2 id="t1">파트 타임 만들기</h2>
+		<h6 class="timeText">정각만 입력 가능합니다.</h6>
         <form method="POST" action="${contextPath}/calendar/updatePartTime" class="" name="updatePartTimForm">
        
        <c:choose>
@@ -144,7 +169,7 @@
             <input type="time" name="partEnd" value="${end}:00" value2="endTime" >
             
 		
-		            일근무 휴게시간 0시간 포함 0 시간
+		            일근무  ${ p.partEnd - p.partStart}시간 (휴게시간 포함)
 		
 	 	<button class="minus" type="button">삭제</button>
          <button class="okBtn" type="button">수정</button>
@@ -173,7 +198,7 @@
 	
 	<div class="sDiv1">
 	    <hr>
-	    <h6>정각만 입력 가능합니다.</h6>
+	    <h6 class="timeText">정각만 입력 가능합니다.</h6>
         <div class='fromMain insertForm'>
            <div class="backColor">
            <div class="div2">
@@ -186,7 +211,7 @@
             ~
             <input type="time"  name="partEnd" value="endTime">
 
-            일근무 휴게시간 0시간 포함 0 시간
+            
  		<button class="okBtn3" type="button">확정</button>
         </div>
             <hr>
@@ -203,6 +228,18 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script>
+  //배너
+    var quick_menu = $('#quick');
+    var quick_top = 470;
+
+    quick_menu.css('top', $(window).height() );
+    $(document).ready(function(){
+    quick_menu.animate( { "top": $(document).scrollTop() + quick_top +"px" }, 200 ); 
+    $(window).scroll(function(){
+    quick_menu.stop();
+    quick_menu.animate( { "top": $(document).scrollTop() + quick_top + "px" }, 500 );
+    });
+    });
     
     	// 파트목록 수정 버튼
     	$(".okBtn").on("click", function(){
@@ -321,7 +358,7 @@
 		console.log("시작" + $(this).parent().find("input[name=partStart]").val().substr(0,2));
 		console.log("끝" + $(this).parent().find("input[name=partEnd]").val().substr(0,2));
 		
-		if(confirm("정말 수정하시겠습니까?")){
+		if(confirm("정말 확정하겠습니까?")){
 			
 			console.log("출력 " + $(this).parent().children(".div2").find("input[id=name]").val());
 			
@@ -364,6 +401,11 @@
 	
 	
 	calList.push(obj);
+	
+	
+	
+	
+  
     </script>
 </body>
 </html>

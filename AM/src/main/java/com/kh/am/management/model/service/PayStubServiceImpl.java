@@ -57,6 +57,7 @@ public class PayStubServiceImpl implements PayStubService {
 		return paystubDAO.requestone(corrNo);
 	}
 	
+	//상태 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int correction(int corrNo) {
@@ -67,8 +68,14 @@ public class PayStubServiceImpl implements PayStubService {
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int transmit(CorrectionReply cr) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return paystubDAO.transmit(cr);
+	}
+
+	@Override
+	public List<Paystubplus> requestMonthlist(PayStub pmonth) {
+		// TODO Auto-generated method stub
+		return paystubDAO.requestMonthlist(pmonth);
 	}
 
 

@@ -1,12 +1,18 @@
 package com.kh.am.member.controller;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -23,6 +29,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	// 로그인 페이지 이동
 	@RequestMapping("login")
@@ -165,9 +174,23 @@ public class MemberController {
 			result = memberService.signUpEmployer(store, memberEmail);
 			
 			if(result > 0) {
-				status = "success";
-				msg = "가입 성공";
-				rdAttr.addFlashAttribute("text", "인증메일을 확인하여 회원가입을 완료해주세요.");
+				
+				String memberName = signUpMember.getMemberName();
+	
+				result = sendEmail(memberEmail, memberName);
+				
+				if(result > 0) {
+					status = "success";
+					msg = "가입 성공";
+					rdAttr.addFlashAttribute("text", "인증메일을 확인하여 회원가입을 완료해주세요.");
+					
+				}else {
+					status = "error";
+					msg = "이메일 전송 실패";
+					rdAttr.addFlashAttribute("text", "인증이메일 전송에 실패하였습니다.");
+				}
+
+			
 			}else {
 				status = "error";
 				msg = "가입(사장님) 실패";
@@ -182,5 +205,49 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+
 	
+	 
+	// 인증 이메일 전송
+	private int sendEmail(String memberEmail, String memberName) {
+        
+		int result = 0;
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			 messageHelper.setFrom("AlbeitManagement@gmail.com"); 
+	         messageHelper.setTo(memberEmail); 
+	         
+	         messageHelper.setSubject("AM 회원가입 인증메일 입니다."); 
+	         messageHelper.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+	                 .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+	                 .append("<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=")
+	                 .append(memberEmail)
+	                 .append("' target='_blenk'>이메일 인증 확인</a>")
+	                 .toString()); 
+			
+	         mailSender.send(message);
+	         
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		  
+		return result;
+	}
+	
+	
+	// 인증 이메일 확인
+	@GetMapping("signUpEmail")
+	public void signUpEmail(@RequestParam String memberEmail) {
+		System.out.println(memberEmail);
+		
+		if(memberEmail != null) {
+			memberService.signUpEmail(memberEmail);
+		}
+	}
+	
+	
+	
+
 }

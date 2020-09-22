@@ -54,12 +54,17 @@ public class MemberController {
             model.addAttribute("loginMember",loginMember);
         }
         
-        System.out.println(loginMember);
-        
+        System.out.println(loginMember+"로그인 다믕ㄴ거");
+         
         
          return "member/main";
     }
     
+    // 메인 화면 이동 
+    @RequestMapping("main")
+    public String main() {
+        return "member/main";
+    }
     
     // 로그아웃
     @RequestMapping("logout")
@@ -67,6 +72,7 @@ public class MemberController {
         status.setComplete();
         return "redirect:/";
     }
+    
     
     
     // 마이페이지
