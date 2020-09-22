@@ -85,10 +85,17 @@
 	<!-- ------------------------- footer ---------------------------- -->
 
    	<script>
+
    		$("#addEmployee").click(function(){
-   			var sal = prompt("추가할 직원의 이메일을 입력해주세요.","");
-   			//var url = "${contextPath}/personnel/???";
+   			var employeeEmail = prompt("추가할 직원의 이메일을 입력해주세요.","");
+   			var url = "${contextPath}/personnel/insertAuthKey?employeeEmail="+employeeEmail;
    			
+   			console.log(url);
+   			
+   			if(employeeEmail != null){
+   				
+   			location.href = url;
+   			}
    		});
    		
 
@@ -98,7 +105,6 @@
 			$("#list-table .toView").on("click", function(){
 			
 				var memberNo = $(this).parent().children().eq(0).children().eq(0).val();
-				console.log(memberNo);
 				var boardUrl = 
 					"${contextPath}/personnel/personnelView";	
 					
