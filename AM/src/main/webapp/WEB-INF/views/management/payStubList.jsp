@@ -83,6 +83,11 @@
          
       }
       
+      
+      #month{
+	   	width: 150px;
+	   }
+      
     
       
       
@@ -128,7 +133,24 @@
        		<div class="container board-list">
             
               <div style="height:530px">
+              		
+              		
                   <table class="table table-hover tabType1 table-striped" id="list-table">
+                  	<select id="month" class="custom-select custom-select-sm" >
+						  <option selected>월별 검색</option>
+						  <option value="01">01</option>
+						  <option value="02">02</option>
+						  <option value="03">03</option>
+						  <option value="04">04</option>
+						  <option value="05">05</option>
+						  <option value="06">06</option>
+						  <option value="07">07</option>
+						  <option value="08">08</option>
+						  <option value="09">09</option>
+						  <option value="10">10</option>
+						  <option value="11">11</option>
+						  <option value="12">12</option>
+					</select>
                      <thead>
                           <tr>
                               <th>글번호 </th>
@@ -201,6 +223,45 @@
 
          });
       });
+      
+      
+      $("#month").change(function(){
+     	 var month=$(this).val();
+     	 
+     	 console.log(month);
+     	 
+     	 $.ajax({
+     		 url:"selectPaystub",
+     		 data:{"month":month},
+     		 dataType: "json",
+     		 type : "GET",		 
+     		 success:function(list){
+     			$tbody = $("#list-table > tbody");
+     			 console.log("list : "+list);
+     			 console.log($tbody);
+     			
+     			
+     			$tbody.html("");
+     			
+     			 $.each(list, function(index, item){
+    					$tr = $("<tr>");
+            			
+    					$td1 = $("<td>").text(item.payNo);
+    					$td2 = $("<td>").text(item.storeName);
+    					$td3 = $("<td>").text(item.memberName);
+    					$td4 = $("<td>").text(item.payCreateDt);
+    					$td5 = $("<td>").text(item.payStatus);
+
+    					$tr.append($td1, $td2, $td3, $td4, $td5);
+            			$tbody.append($tr);
+            			
+     			 });
+     		 },error:function(){
+     			 alert("ajax전송실패");
+     		 }
+     	 });
+      
+      
    </script>
 
 

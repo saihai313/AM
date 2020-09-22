@@ -30,4 +30,6 @@ public interface PayStubService {
 
 	public abstract List<Paystubplus> requestMonthlist(PayStub pmonth);
 
+	public abstract List<PayStub> selectPaystub(PayStub pmonth);
+
 }
