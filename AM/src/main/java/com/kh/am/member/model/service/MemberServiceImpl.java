@@ -1,5 +1,8 @@
 package com.kh.am.member.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +90,69 @@ public class MemberServiceImpl implements MemberService{
 	public void signUpEmail(String memberEmail) {
 		memberDAO.signUpEmail(memberEmail);
 	}
+	
+	
+	// 마이페이지_회원정보 수정
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int updateMemberAction(int memberNo, String memberPhone) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("memberPhone", memberPhone);
+		
+		return memberDAO.updateMemberAction(map);
+	}
+	
+	// 마이페이지_가게정보 수정
+	@Override
+	public int updateStoreAction(int memberNo, String storePhone) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("storePhone", storePhone);
+		
+		return memberDAO.updateStoreAction(map);
+	}
+
+	// 마이페이지_비밀번호 수정
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int updatePwdAction(Member loginMember, String newPwd) {
+		
+		String savePwd = memberDAO.selectPwd(loginMember.getMemberNo());
+		
+		int result = 0;
+		
+		if(savePwd != null) {
+			if(bcPwd.matches(loginMember.getMemberPwd(), savePwd)) {
+				
+				String encPwd = bcPwd.encode(newPwd);
+				loginMember.setMemberPwd(encPwd);
+				
+				result = memberDAO.updatePwdAction(loginMember);
+			}
+		}
+		return result;
+	}
+
+	
+	@Override
+	@Transactional(rollbackFor=Exception.class)
+	public int secessionAction(Member loginMember, String memberPwd) {
+
+		String savePwd = memberDAO.selectPwd(loginMember.getMemberNo());
+		int result = 0;
+		
+		if(savePwd != null) {
+			if(bcPwd.matches(loginMember.getMemberPwd(), savePwd)) {
+				
+				result = memberDAO.secessionAction(loginMember);
+			}
+		}
+		
+		return result;
+	}
+
 	
 	
 	

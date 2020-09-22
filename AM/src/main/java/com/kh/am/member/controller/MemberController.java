@@ -3,6 +3,7 @@ package com.kh.am.member.controller;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -250,6 +251,121 @@ public class MemberController {
 			memberService.signUpEmail(memberEmail);
 		}
 	}
+	
+	
+	// ----------------------- 회원정보 수정 ------------------------------------------------------
+	
+		@RequestMapping("updateMemberAction")
+		public String updateMemberAction(String memberPhone, String storePhone, 
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
+			
+			Member loginMember = (Member) model.getAttribute("loginMember");
+			Store loginEmployer = (Store)model.getAttribute("loginEmployer");
+			int memberNo = loginMember.getMemberNo();
+			
+			
+			int result = memberService.updateMemberAction(memberNo, memberPhone);
+			
+			String status = null;
+			String msg = null;
+			
+			if(result > 0) {
+				
+				loginMember.setMemberPhone(memberPhone);
+				model.addAttribute("loginMember", loginMember);
+				
+				result = memberService.updateStoreAction(memberNo, storePhone);
+				
+				if(result > 0) {
+					loginEmployer.setStorePhone(storePhone);
+					model.addAttribute("loginEmployer", loginEmployer);
+					
+					status = "success";
+					msg = "수정 성공";
+					
+				}else {
+					status = "error";
+					msg = "가게 수정 실패";
+				}
+				
+				
+				
+			}else {
+				status = "error";
+				msg = "회원 수정 실패";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			
+			request.getHeader("referer");
+			return "redirect:" + request.getHeader("referer");
+		}
+		
+		
+		// ----------------------- 비밀번호 수정 ------------------------------------------------------
+		
+		@RequestMapping("updatePwdAction")
+		public String updatePwdAction(String nowPwd, String newPwd,
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
+			
+			Member loginMember = (Member) model.getAttribute("loginMember");
+			
+			loginMember.setMemberPwd(nowPwd);
+			
+			int result = memberService.updatePwdAction(loginMember, newPwd);
+			
+			String status = null;
+			String msg = null;
+			String text = null;
+			
+			if(result > 0) {
+				status = "success";
+				msg = "비밀번호 변경 성공";
+			}else {
+				status = "error";
+				msg = "비밀번호 변경 실패";
+				text = "현재 비밀번호를 확인해 주세요.";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			rdAttr.addFlashAttribute("text", text);
+			
+			return "redirect:updatePwd";
+		}
+		
+		// ----------------------- 회원 탈퇴 ------------------------------------------------------
+		@RequestMapping("secessionAction")
+		public String secessionAction(String memberPwd,
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus sessionStatus) {
+			
+			Member loginMember = (Member)model.getAttribute("loginMember");
+			loginMember.setMemberPwd(memberPwd);
+			
+			int result = memberService.secessionAction(loginMember, memberPwd);
+			
+			String status = null;
+			String msg = null;
+			String text = null;
+			String path = null;
+			
+			if(result > 0) {
+				status = "success";
+				msg = "회원 탈퇴 성공";
+				path = "/";
+				
+				sessionStatus.setComplete();
+			}else {
+				status = "error";
+				msg = "회원 탈퇴 실패";
+				text = "현재 비밀번호를 확인해 주세요.";
+				path= "secession";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			rdAttr.addFlashAttribute("text", text);
+			
+			return "redirect:" + path;
+		}
 	
 	
 	

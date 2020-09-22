@@ -41,5 +41,13 @@ public interface MemberService {
 	 */
 	void signUpEmail(String memberEmail);
 
+	int updateMemberAction(int memberNo, String memberPhone);
+
+	int updateStoreAction(int memberNo, String storePhone);
+
+	int updatePwdAction(Member loginMember, String newPwd);
+
+	int secessionAction(Member loginMember, String memberPwd);
+
 
 }
