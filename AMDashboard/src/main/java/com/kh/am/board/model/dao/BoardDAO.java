@@ -103,6 +103,15 @@ public class BoardDAO {
     }
 
 
+    /** 시급 삭제
+     * @param currentYear
+     * @return
+     */
+    public int deleteSal(int currentYear) {
+        return sqlSession.delete("boardMapper.deleteSal",currentYear);
+    }
+
+
 
 
 

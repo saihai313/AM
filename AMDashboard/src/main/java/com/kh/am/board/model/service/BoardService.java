@@ -64,6 +64,12 @@ public interface BoardService {
      */
     int insertNews(NewsBoard newsBoard);
 
+    /** 시급 삭제
+     * @param currentYear
+     * @return
+     */
+    int deleteSal(int currentYear);
+
 
     
   
