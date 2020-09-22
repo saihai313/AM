@@ -46,28 +46,37 @@
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_STATUS = 'Y'
-		AND MEMBER_GRADE = 'M'
+		AND MEMBER_GRADE = 'R'
 	</select>
 	
 	<!-- 회원가입_공통 정보 -->
 	<insert id="signUpMember" parameterType="Member">
 		INSERT INTO MEMBER
 		VALUES(SEQ_MNO.NEXTVAL, #{memberEmail}, #{memberPwd}, #{memberName},
-		       #{memberPhone}, SYSDATE, 'Y', 'M', 'X')
+		       #{memberPhone}, SYSDATE, 'R', 'N', 'Y')
 	</insert>
 	
 	<!-- 회원가입_회원번호 조회 -->
 	<select id="memberNo" parameterType="string" resultMap="memberResultSet">
 		SELECT MEMBER_NO FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_GRADE = 'R'
 	</select>
 	
 	<!-- 회원가입_사장님 정보 -->
 	<insert id="signUpEmployer" parameterType="Store">
-		INSERT INTO EMPLOYER
-		VALUES(SEQ_SNO.NEXTVAL, #{employerNo}, 
+		INSERT INTO STORE
+		VALUES(SEQ_SNO.NEXTVAL, 
 			#{storeName}, #{storePhone}, #{storeAddress}, 
-			#{businessNo}, 'N')
+			#{storeBizNo}, 'N', #{memberNo})
 	</insert>
+	
+	<!-- 회원가입_이메일 인증 확인  -->
+	<update id="signUpEmail" parameterType="Member">
+		UPDATE MEMBER
+		SET MEMBER_CHECK = 'Y'
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_GRADE = 'R'
+	</update>
 
 </mapper>

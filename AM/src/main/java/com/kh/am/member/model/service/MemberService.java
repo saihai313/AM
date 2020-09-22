@@ -29,14 +29,17 @@ public interface MemberService {
 	 */
 	int signUpMember(Member signUpMember);
 
-	/** 회원정보_사장님 정보
+	/** 회원가입_사장님 정보
 	 * @param employer
 	 * @param memberEmail 
 	 * @return result
 	 */
 	int signUpEmployer(Store store, String memberEmail);
 
-
+	/** 회원가입_이메일 인증 확인
+	 * @param memberEmail
+	 */
+	void signUpEmail(String memberEmail);
 
 
 }

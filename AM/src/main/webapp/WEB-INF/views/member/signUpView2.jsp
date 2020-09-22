@@ -486,12 +486,13 @@
 				$(el).focus();
 				return false;
 			}
+			
 		}
 
 		$memberPhone = $("<input>", {type : "hidden", name : "memberPhone",
 			value : $("#phone1").val()+ "-" + $("#phone2").val()+ "-" +$("#phone3").val()});
 		
-		$businessNo = $("<input>", {type : "hidden", name : "businessNo",
+		$storeBizNo = $("<input>", {type : "hidden", name : "storeBizNo",
 			value : $("#businessNo1").val()+ "-" + $("#businessNo2").val()+ "-" +$("#businessNo3").val()});
 		
 		$storePhone = $("<input>", {type : "hidden", name : "storePhone",
@@ -499,8 +500,8 @@
 		
 		$storeAddress = $("<input>", {type : "hidden", name : "storeAddress",
 			value : $("#post").val()+ "," + $("#address1").val()+ "," +$("#address2").val()});
-		
-		$("form[name='signUpForm']").append($memberPhone, $businessNo, $storePhone, $storeAddress);
+
+		$("form[name='signUpForm']").append($memberPhone, $storeBizNo, $storePhone, $storeAddress);
 	}
 	</script>
 

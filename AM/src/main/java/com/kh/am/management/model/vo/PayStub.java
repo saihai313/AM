@@ -18,9 +18,21 @@ public class PayStub {
 	private int storeNo; //가게번호
 	private String storeName; //가게이름
 	private String memberName; //회원이름 
+	private int employeeSal; // 알바생 시급
 	
 	
 	
+	
+	public int getEmployeeSal() {
+		return employeeSal;
+	}
+
+
+	public void setEmployeeSal(int employeeSal) {
+		this.employeeSal = employeeSal;
+	}
+
+
 	public String getMemberName() {
 		return memberName;
 	}
@@ -151,9 +163,11 @@ public class PayStub {
 		return "PayStub [payNo=" + payNo + ", payTime=" + payTime + ", payDay=" + payDay + ", payExtra=" + payExtra
 				+ ", paySal=" + paySal + ", payPayment=" + payPayment + ", payCreateDate=" + payCreateDate
 				+ ", payStatus=" + payStatus + ", memberNo=" + memberNo + ", storeNo=" + storeNo + ", storeName="
-				+ storeName + ", memberName=" + memberName + "]";
+				+ storeName + ", memberName=" + memberName + ", employeeSal=" + employeeSal + "]";
 	}
 
+
+	
 
 
 	

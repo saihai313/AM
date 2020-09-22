@@ -9,8 +9,7 @@
 <!-- 아이콘 등록 -->
 <link rel="icon" type="image/png" href="${contextPath}/resources/images/icons/am.ico"/>
 <style>
-	
-
+	@font-face { font-family: 'LAB디지털'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LAB디지털.woff') format('woff'); font-weight: normal; font-style: normal; }
  .textS{
         display: inline-block;
         padding-left: 8px;
@@ -91,6 +90,13 @@
     margin: auto;
     padding-bottom: 10px;
     }
+    
+    
+body {margin:0;}
+ #wrap {margin:0 auto;text-align:center;}
+ #quick_bg {margin:0 auto;text-align:center;width:1400px;position:relative;}
+ #quick {position:absolute;z-index:2;top:15px;width:153px;right:0px;}
+ #containert {position:relative;}
 </style>
 </head>
 <body>
@@ -98,6 +104,15 @@
 	 	<!-- ------------------------- header ---------------------------- -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
+	<div id="wrap">
+	<div id="containert">
+		<div id="quick_bg">
+			<div id="quick">
+			<a href="#form" style="position:fixed;margin-top:-350px"><img src="${contextPath}/resources/images/배너.jpg" style="width:200px"></a>
+			</div>
+		</div>
+	</div>
+</div>
 	
 	<%--
 		해야할 것
@@ -196,7 +211,7 @@
             ~
             <input type="time"  name="partEnd" value="endTime">
 
-            일근무 휴게시간 0시간 포함 0 시간
+            
  		<button class="okBtn3" type="button">확정</button>
         </div>
             <hr>
@@ -213,6 +228,18 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script>
+  //배너
+    var quick_menu = $('#quick');
+    var quick_top = 470;
+
+    quick_menu.css('top', $(window).height() );
+    $(document).ready(function(){
+    quick_menu.animate( { "top": $(document).scrollTop() + quick_top +"px" }, 200 ); 
+    $(window).scroll(function(){
+    quick_menu.stop();
+    quick_menu.animate( { "top": $(document).scrollTop() + quick_top + "px" }, 500 );
+    });
+    });
     
     	// 파트목록 수정 버튼
     	$(".okBtn").on("click", function(){
@@ -331,7 +358,7 @@
 		console.log("시작" + $(this).parent().find("input[name=partStart]").val().substr(0,2));
 		console.log("끝" + $(this).parent().find("input[name=partEnd]").val().substr(0,2));
 		
-		if(confirm("정말 수정하시겠습니까?")){
+		if(confirm("정말 확정하겠습니까?")){
 			
 			console.log("출력 " + $(this).parent().children(".div2").find("input[id=name]").val());
 			
@@ -374,6 +401,11 @@
 	
 	
 	calList.push(obj);
+	
+	
+	
+	
+  
     </script>
 </body>
 </html>
