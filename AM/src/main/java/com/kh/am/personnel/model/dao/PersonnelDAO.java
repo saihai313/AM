@@ -51,4 +51,18 @@ public class PersonnelDAO {
 		return sqlSession.update("personnelMapper.updateHourlyWage", map);
 	}
 
+
+	public int inserAuthKey(Map<String, Object> map) {
+
+		return sqlSession.insert("personnelMapper.insertAuthKey", map);
+	}
+
+
+	public int updateAuthKey(Map<String, Object> map) {
+		
+		return sqlSession.update("personnelMapper.updateAuthKey", map);
+	}
+
+
+
 }

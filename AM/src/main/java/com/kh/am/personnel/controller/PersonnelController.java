@@ -1,32 +1,30 @@
 package com.kh.am.personnel.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.am.member.model.vo.Member;
-import com.kh.am.personnel.model.service.MailSendService;
+import com.kh.am.member.model.vo.Store;
 import com.kh.am.personnel.model.service.PersonnelService;
 import com.kh.am.personnel.model.vo.EmployeeInfo;
-import com.kh.am.personnel.model.vo.ListInfo;
 
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","loginEmployer"})
 @Controller
 @RequestMapping("/personnel/*")
 public class PersonnelController {
 	
-	@Autowired
-	private MailSendService mailSendService;
 	
 	@Autowired 
 	private PersonnelService personnelService;
@@ -59,6 +57,7 @@ public class PersonnelController {
 		
 		EmployeeInfo eInfo = personnelService.selectInfo(memberNo);
 		
+		
 		model.addAttribute("eInfo", eInfo);
 		
 		return "personnel/personnelView";
@@ -69,9 +68,7 @@ public class PersonnelController {
 									RedirectAttributes rdAttr,
 									HttpServletRequest request
 			) {
-		
-		
-		System.out.println(memberNo);
+
 		
 		int result = personnelService.deletePersonnel(memberNo);
 		
@@ -109,6 +106,7 @@ public class PersonnelController {
 		String url = null;
 		
 		if(result > 0) {
+			
 			status = "success";
 			msg = "시급 수정 성공!";
 			url = "/personnel/personnelList";
@@ -126,28 +124,83 @@ public class PersonnelController {
 		return "redirect:" + url;
 	}
 	
-	  /*@RequestMapping(value = "/register", method = RequestMethod.POST)
-	    public String RegisterPost(MemberVO user,Model model,RedirectAttributes rttr) throws Exception{
-	    
-	        System.out.println("regesterPost 진입 ");
-	        service.regist(user);
-	        rttr.addFlashAttribute("msg" , "가입시 사용한 이메일로 인증해주세요");
-	        return "redirect:/";
-	    }
-	  
-	    //이메일 인증 코드 검증
-	    @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-	    public String emailConfirm(MemberVO user,Model model,RedirectAttributes rttr) throws Exception { 
-	        
-	        System.out.println("cont get user"+user);
-	        MemberVO vo = new MemberVO();
-	        vo=service.userAuth(user);
-	        if(vo == null) {
-	            rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-	            return "redirect:/";
-	        }
-	        //System.out.println("usercontroller vo =" +vo);
-	        model.addAttribute("login",vo);
-	        return "/user/emailConfirm";
-	    }*/
+	//회원 가입
+	
+	@RequestMapping("insertAuthKey")
+	public String insertAuthKey(@RequestParam
+								String employeeEmail,
+								RedirectAttributes rdAttr,
+								HttpServletRequest request,
+								Model model) throws UnsupportedEncodingException, MessagingException {
+
+		int storeNo = ((Store)model.getAttribute("loginEmployer")).getStoreNo();
+		
+		System.out.println(employeeEmail);
+		String authKey = init();
+		
+		int result = 0;
+		
+		if(authKey != null) {
+			
+		result = personnelService.inserAuthKey(employeeEmail, storeNo, authKey);
+			
+		}
+		
+		
+		
+		String status = null;
+		String msg = null;
+		String url = null;
+		
+		if(result > 0) {
+			status = "success";
+			msg = "메일 전송 성공!";
+			url = "/personnel/personnelList";
+		}else {
+			status = "error";
+			msg = "메일 전송 실패!";
+			url = request.getHeader("referer");
+			
+		}
+	
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg", msg);
+			
+			
+		return "redirect:" + url;
+	}
+	
+    
+    @SuppressWarnings("unused")
+	private String init() {
+        Random ran = new Random();
+        StringBuffer sb = new StringBuffer();
+        
+        int num = 0;
+        
+        do {
+            num = ran.nextInt(75) + 48;
+            
+            if((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+                sb.append((char)num);
+            }else {
+                continue;
+            }
+        } while (sb.length() < 6);
+        
+        if(false) {
+            return sb.toString().toLowerCase();
+        }
+        
+        return sb.toString();
+    }
+    
+    @RequestMapping("updateAuthKey")
+    public void updateAuthKey(@RequestParam
+    							String employeeEmail, @RequestParam String authKey) {
+    	
+    	int result = personnelService.updateAuthKey(employeeEmail, authKey);
+    }
+	
+
 }
