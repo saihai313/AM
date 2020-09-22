@@ -153,6 +153,7 @@ public class MemberController {
 	public String signUpAction(Member signUpMember, 
 							   Store store,
 							   Model model, RedirectAttributes rdAttr) {
+		System.out.println(store);
 		
 		int result = memberService.signUpMember(signUpMember);
 		
