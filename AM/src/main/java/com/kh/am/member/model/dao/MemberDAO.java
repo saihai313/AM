@@ -61,5 +61,12 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.signUpEmployer", store);
 	}
 
+	/** 회원가입_이메일 인증
+	 * @param memberEmail
+	 */
+	public void signUpEmail(String memberEmail) {
+		sqlSession.update("memberMapper.signUpEmail", memberEmail);
+	}
+
 
 }

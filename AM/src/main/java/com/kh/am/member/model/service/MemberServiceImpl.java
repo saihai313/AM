@@ -1,6 +1,9 @@
 package com.kh.am.member.model.service;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +18,6 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	// 비밀번호 암호화
 	@Autowired
 	private BCryptPasswordEncoder bcPwd;
 
@@ -79,6 +81,13 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	// 회원가입_이메일 인증 확인
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public void signUpEmail(String memberEmail) {
+		memberDAO.signUpEmail(memberEmail);
+	}
+	
 	
 	
 }

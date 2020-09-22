@@ -70,5 +70,13 @@
 			#{storeName}, #{storePhone}, #{storeAddress}, 
 			#{storeBizNo}, 'N', #{memberNo})
 	</insert>
+	
+	<!-- 회원가입_이메일 인증 확인  -->
+	<update id="signUpEmail" parameterType="Member">
+		UPDATE MEMBER
+		SET MEMBER_CHECK = 'Y'
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_GRADE = 'R'
+	</update>
 
 </mapper>
