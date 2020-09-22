@@ -4,7 +4,6 @@
 <html lang="ko">
 <head>
 
- <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,7 +55,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="${contextPath}/member/loginAction">Dashboard</a>
+            <a class="navbar-brand" href="${contextPath}/member/main">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>

@@ -31,6 +31,7 @@
     <result property="memberType" column="MEMBER_TYPE"/>
     <result property="title" column="TITLE"/>
     <result property="address" column="ADDRESS"/>
+    <result property="newsType" column="NEWS_TYPE"/>
   
   
   </resultMap>
@@ -120,8 +121,8 @@
   <!-- 뉴스 등록 -->
   <insert id="insertNews" parameterType="NewsBoard">
      INSERT INTO NEWS_BOARD VALUES(
-      #{newsNo},SYSDATE,#{memberType},
-      #{title},#{address}
+     SEQ_ANO.NEXTVAL,SYSDATE,#{memberType},
+      #{title},#{address},#{newsType}
       )
   </insert>
   
@@ -129,7 +130,7 @@
   <!-- 시급 삭제 -->
   <delete id="deleteSal" parameterType="_int">
     DELETE FROM CURRENT_SAL
-    WHERE CURRENT_YEAR = #{currentYear};
+    WHERE CURRENT_YEAR = #{currentYear}
   </delete>
 </mapper>
 

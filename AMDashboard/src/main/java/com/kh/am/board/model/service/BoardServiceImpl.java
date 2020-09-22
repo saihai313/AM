@@ -90,6 +90,7 @@ public class BoardServiceImpl implements BoardService  {
     }
 
     // 시급 삭제
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int deleteSal(int currentYear) {
         return boardDAO.deleteSal(currentYear);
