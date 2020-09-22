@@ -107,9 +107,7 @@ import com.kh.am.board.model.vo.Store;
     public String selectSal(Model model) {
     	
     	List<CurrentSal> selectSal = boardService.selectSal();
-    	
     	model.addAttribute("selectSal",selectSal);
-    	System.out.println("최저시급"+ selectSal);
     	
     	return "board/CurrentSal";
     }
@@ -150,22 +148,26 @@ import com.kh.am.board.model.vo.Store;
     
     
     
+    
+    
     // 뉴스 정보 조회
     @RequestMapping("newsBoard")
     public String selectnews(Model model) {
     	List<NewsBoard> selectnews = boardService.selectnews();
-    	
     	model.addAttribute("selectnews",selectnews);
-    		System.out.println("뉴스정보조회"+ selectnews);
     	return "board/newsBoard";
     
     }
+    
+    
     
     // 뉴스 등록 화면 이동 
     @RequestMapping("news")
     public String main() {
         return "board/newsBoard";
     }
+    
+    
     
    // 뉴스 등록
     @RequestMapping("insertNews")
@@ -194,12 +196,22 @@ import com.kh.am.board.model.vo.Store;
     
     // 시급 삭제
     @ResponseBody
-    @RequestMapping(value="deleteSal", method = RequestMethod.POST)
-    public String deleteSal(Model model, int currentYear) {
+    @RequestMapping(value="deleteSal", method = RequestMethod.GET)
+    public int deleteSal(Model model, int currentYear,HttpServletRequest request) {
+    	System.out.println("녀도년도"+currentYear);
+    	
         int result = boardService.deleteSal(currentYear);
 
-        System.out.println("??"+currentYear);
-        return null;
+        System.out.println("??"+result);
+        
+        String path;
+        if(result>0) {
+        	 path = "redirect:" + request.getHeader("referer");
+        }else {
+        	 path = "board/news";
+        }
+        
+        return result;
         
     }
     
