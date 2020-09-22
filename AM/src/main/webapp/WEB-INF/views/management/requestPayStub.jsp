@@ -85,6 +85,15 @@
    #month{
    	width: 150px;
    }
+   
+   #correctionContent{
+   	  display:inline-block;	
+   	  width: 400px;
+   	  height: 400px;
+   }
+   
+   
+   
 </style>
 
 
@@ -320,7 +329,7 @@
                                 <div class="form-group">
                                 
                                 	
-                                    <textarea name="correctionContent" id="correctionContent" cols="30" rows="7" class="form-control">
+                                    <textarea id="correctionContent" cols="30" rows="7"  class="form-control" readonly="readonly">
                                     		
                                     </textarea>
                                 </div>
@@ -388,6 +397,7 @@
          	console.log("corrNo:"+corrNo)
          	   $.ajax({
 	   url : "${contextPath}/management/request",
+	   dataType : "JSON",
 	   data : {"corrNo":corrNo
 		   }, 
 	   type : "GET",	

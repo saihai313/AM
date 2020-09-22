@@ -30,7 +30,6 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
-	// 급여!!!
 	
 	// 급여설정 페이지 전환
 	@RequestMapping("insertPay")
@@ -79,7 +78,7 @@ public class PayController {
 		return gson.toJson(wc);
 	}
 	
-	
+	// 알바생 하루 일한 시간 조회
 	@ResponseBody
 	@RequestMapping("selectOnePay")
 	public String selectOnePay(Pay pay) {
@@ -99,7 +98,7 @@ public class PayController {
 		return gson.toJson(payTotal);
 	}
 	
-	// 급여 등록
+	// 알바생 급여 등록
 	@RequestMapping("insertPayAction")
 	public String insertPayAction(Pay pay, Model model, HttpServletRequest request, RedirectAttributes rdAttr) {
 		

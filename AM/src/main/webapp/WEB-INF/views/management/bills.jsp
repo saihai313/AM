@@ -66,6 +66,11 @@ table.type07 td {
    float: right;
 }
 
+#btnArea > button{
+	float: right;
+}
+
+
 </style>
 
 </head>
@@ -111,39 +116,43 @@ table.type07 td {
 			                     <td>${plus.storeName }</td>
 			                  </tr>
 			                  <tr>
-			                     <td>급여지급일</td>
-			                     <td><input class="form-control" style="width: 100px;" type="text" name="payPayment" value="${plus.payPayment }"></td>
-			                  </tr>
-			                  <tr>
-			                     <td>총 근무시간</td>
-			                     <td>${plus.payTime}시간</td>
-			                  </tr>
-			                  <tr>
-			                     <td>총 근무일수</td>
-			                     <td>${plus.payDay }일</td>
-			                  </tr>
-			                  <tr>
-			                     <td>주휴수당</td>
-			                     <td><fmt:formatNumber value="${plus.payExtra }" pattern="#,###" />₩</td>
-			                  </tr>
-			                  <tr>
 			                     <td>시급</td>
 			                     <td><fmt:formatNumber value="${plus.employeeSal }" pattern="#,###" />₩</td>
 			                  </tr>
+			                  <tr>
+			                     <td>급여지급일</td>
+			                     <td><input class="form-control" style="width: 100px;" type="number" name="payPayment" value="${plus.payPayment }"></td>
+			                  </tr>
+			                  <tr>
+			                     <td>총 근무시간</td>
+			                     <td><input class="form-control" style="width: 100px;" type="number" name="payTime" value="${plus.payTime}"></td>
+			                  </tr>
+			                  <tr>
+			                     <td>총 근무일수</td>
+			                     <td><input class="form-control" style="width: 100px;" type="number" name="payDay" value="${plus.payDay }"></td>
+			                  </tr>
+			                  <tr>
+			                     <td>주휴수당</td>
+			                     <td><input class="form-control" style="width: 100px;" type="number" name="payExtra" value="${plus.payExtra }"></td>
+			                  </tr>
+			                  
 			               </table>
 			               </div>
+			               
+			               
 		               
 			               <div class="col-md-12 row mt-5 mb-5 justify-content-center" id="total-sal">
-			                  <h3 id="total">
-			                     <span>총 급여</span>
-			                     <span><fmt:formatNumber value="${plus.paySal }" pattern="#,###" />₩</span>
+			                  <h3 id="total"><span >총 급여</span> &nbsp;
+			                     <span style="float: right;"><input class="form-control" style="width: 100px;" type="number" name="paySal" value="${plus.paySal }"></span>
 			                  	 
 			                  </h3>
 			               </div>
-			               <div class="col-md-12">
-			               	<button style="float: right; " id="updateBtn" class="btn btn-lg  btn-primary viewBtn">수정하기</button>
+			               
+			               <div id="btnArea" class="col-12">
+			               	<button id="updateBtn" class=" ml-2 btn btn-lg  btn-primary viewBtn">수정하기</button>
+			               	<button type="button" class="btn btn-lg  btn-primary viewBtn" onclick="history.back();">목록으로</button>
 			               </div>
-		               
+			                            
 		              
 		
 	               
