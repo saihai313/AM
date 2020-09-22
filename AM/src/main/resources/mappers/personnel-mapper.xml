@@ -13,6 +13,14 @@
 		<result property="sal" column="EMPLOYEE_SAL"/>
 	</resultMap>
 	
+	<resultMap  id="authKeyResultSet" type="memberAuth">
+		<id property="storeNo" column="STORE_NO"/>
+		<result property="employeeEmail" column="AUTH_EMAIL"/>
+		<result property="authKey" column="AUTH_KEY"/>
+		<result property="authCheck" column="AUTH_CHECK"/>
+	</resultMap>
+	
+	
 	<!-- 사장님 가게 번호 조회 -->
 	<select id="selectStoreNo" parameterType="_int" resultType="_int">
 		SELECT STORE_NO
@@ -42,9 +50,23 @@
 	</update>
 	
 	<!-- 시급 수정  -->
-	<update id="updateHourlyWage" parameterType="_int">
+	<update id="updateHourlyWage" parameterType="map">
 		UPDATE EMPLOYEE SET
 		EMPLOYEE_SAL = #{sal}
 		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 메일 인증  -->
+	<insert id="insertAuthKey" parameterType="map">
+		INSERT INTO MEMBER_AUTH
+  		VALUES(#{employeeEmail}, #{storeNo}, #{authKey}, DEFAULT)
+	</insert>
+	
+	<!-- 인증키 업데이트 -->
+	<update id="updateAuthKey" parameterType="map">
+		UPDATE MEMBER_AUTH SET
+		AUTH_CHECK = 'Y'
+		WHERE AUTH_EMAIL = #{employeeEmail}
+		AND AUTH_KEY = #{authKey}
 	</update>
 </mapper>

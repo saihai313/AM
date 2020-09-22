@@ -73,17 +73,36 @@
        </bean>
        
        <!-- mail -->
-	      <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		    <property name="host" value="smtp.gmail.com" />
-		    <property name="port" value="587" />
-		    <property name="username" value="AlbeitManagement@gmail.com" />
-		    <property name="password" value="pekomzpxeoorvnxu" />
+	    <!--    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		    <property name="port" value="465" />
+		    <property name="username" value="testforam3@gmail.com" />
+		    <property name="password" value="iigbtleuuokufknk" />
 		    <property name="javaMailProperties">
 		    <props>
-		      <prop key="mail.smtp.auth">true</prop>
+		   	  <prop key="mail.smtp.host">smtp.gmail.com</prop>
 		      <prop key="mail.smtp.starttls.enable">true</prop>
+		      <prop key="mail.smtp.auth">true</prop>
+		      <prop key="mail.smtp.debug">true</prop>
+		      <prop key="mail.smtp.socketFactory.port">465</prop>
+		      <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+		      <prop key="mail.smtp.socketFactory.fallback">false</prop>		      
 		    </props>
 		    </property>
-		  </bean>
+		  </bean> -->
+<!-- 회원가입 메일 인증 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="testforam3@gmail.com"/>
+        <property name="password" value="iigbtleuuokufknk"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
       
 </beans>

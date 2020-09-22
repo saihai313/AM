@@ -1,6 +1,9 @@
 package com.kh.am.personnel.model.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import com.kh.am.personnel.model.vo.EmployeeInfo;
 import com.kh.am.personnel.model.vo.ListInfo;
@@ -37,4 +40,20 @@ public interface PersonnelService {
 	 * @return
 	 */
 	int updateHourlyWage(int memberNo, int sal);
+
+	/** 알바생 추가
+	 * @param employeeEmail
+	 * @param storeNo
+	 * @return
+	 * @throws MessagingException 
+	 * @throws UnsupportedEncodingException 
+	 */
+	int inserAuthKey(String employeeEmail, int storeNo, String authKey) throws MessagingException, UnsupportedEncodingException;
+
+	/** 알바생 인증키 업데이트
+	 * @param employeeEmail
+	 * @param authKey
+	 * @return
+	 */
+	int updateAuthKey(String employeeEmail, String authKey);
 }
