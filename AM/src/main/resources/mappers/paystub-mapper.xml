@@ -15,6 +15,7 @@
         <result property="storeNo" column="STORE_NO"/>
         <result property="storeName" column="STORE_NM"/>
         <result property="memberName" column="MEMBER_NM"/>
+        <result property="employeeSal" column="EMPLOYEE_SAL"/>
      
     </resultMap>
     
@@ -61,7 +62,12 @@
 	</select> 
 	
 	<select id="selectone" parameterType="_int" resultMap="PayStubResultSet"  >
-		SELECT * FROM PAY WHERE PAY_NO=#{payNo}
+		SELECT P.* , EMPLOYEE_SAL, MEMBER_NM, STORE_NM
+		FROM PAY P
+		JOIN EMPLOYEE E ON P.MEMBER_NO = E.MEMBER_NO
+		JOIN MEMBER M ON P.MEMBER_NO = M.MEMBER_NO
+		JOIN STORE S ON P.STORE_NO = S.STORE_NO
+		WHERE PAY_NO=#{payNo}
 	
 	</select>
 	

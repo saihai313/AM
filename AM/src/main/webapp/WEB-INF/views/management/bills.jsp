@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,83 +81,80 @@ table.type07 td {
       
         <div class="container board-list">
             
-            <h1>${boardList[0].boardName}</h1>
-            
-            
             <div class="row justify-content-center p-5 col-md-10 mx-auto" style="border: 50px solid #F5F4F0">
                
-               <div class="row justify-content-center pb-5">
+              <!--  <div class="row justify-content-center pb-5">
 		            <div class="col-md-12 heading-section text-center fadeInUp">
 		               <span class="subheading">Salary</span>
 		               <h2> 급여명세서</h2>
 		            </div>
-         	  </div>
+         	  </div> -->
                
                
                <!-- 제목  -->
                <div class="col-md-10 text-center mb-5">
-                  <fmt:formatDate var="payTitle" value="${paystub.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
+                  <fmt:formatDate var="payTitle" value="${plus.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
                        <h1 style="font-weight: bold;">${payTitle }</h1>
                   <hr>
                </div>
-               
-               <div class="row" style="width: 500px;">
-               <!-- 내용  -->
-               <div class="col-md-12">
-               <table class="col-md-12 p-5 table table-borderless mx-auto">
-                  <tr>
-                     <td>이름</td>
-                     <td>${loginMember.memberName }</td>
-                  </tr>
-                  <tr>
-                     <td>근무 가게</td>
-                     <td>${loginStore.storeName }</td>
-                  </tr>
-                  <tr>
-                     <td>급여지급일</td>
-                     <td>${paystub.payCreateDate }</td>
-                  </tr>
-                  <tr>
-                     <td>총 근무시간</td>
-                     <td>${paystub.payTime}</td>
-                  </tr>
-                  <tr>
-                     <td>총 근무일수</td>
-                     <td>${paystub.payDay }</td>
-                  </tr>
-                  <tr>
-                     <td>주휴수당</td>
-                     <td>${paystub.payExtra }</td>
-                  </tr>
-                  <tr>
-                     <td>시급</td>
-                     <td>${paystub.payExtra }</td>
-                  </tr>
-               </table>
-               </div>
-               
-               <div class="col-md-12 row mt-5 mb-5 justify-content-center" id="total-sal">
-                  <h3 id="total">
-                     <span>총 급여</span>
-                     <span>${paystub.paySalary } 500₩</span>
-                  	 
-                  </h3>
-               </div>
-               <div class="col-md-12">
-               	<button style="float: right; " type="button" id="correction" class="btn btn-lg  btn-primary viewBtn">수정하기</button>
-               </div>
-               
-              
-
-               
-              </div>
+               <form action="../../pay/updatePayAction/${payNo}" method="post">
+	               <div class="row" style="width: 500px;">
+			               <!-- 내용  -->
+			               <div class="col-md-12">
+			               <table class="col-md-12 p-5 table table-borderless mx-auto">
+			                <tr>
+			                     <td>이름</td>
+			                     <td>${plus.memberName }</td>
+			                  </tr>
+			                  <tr>
+			                     <td>근무 가게</td>
+			                     <td>${plus.storeName }</td>
+			                  </tr>
+			                  <tr>
+			                     <td>급여지급일</td>
+			                     <td><input class="form-control" style="width: 100px;" type="text" name="payPayment" value="${plus.payPayment }"></td>
+			                  </tr>
+			                  <tr>
+			                     <td>총 근무시간</td>
+			                     <td>${plus.payTime}시간</td>
+			                  </tr>
+			                  <tr>
+			                     <td>총 근무일수</td>
+			                     <td>${plus.payDay }일</td>
+			                  </tr>
+			                  <tr>
+			                     <td>주휴수당</td>
+			                     <td><fmt:formatNumber value="${plus.payExtra }" pattern="#,###" />₩</td>
+			                  </tr>
+			                  <tr>
+			                     <td>시급</td>
+			                     <td><fmt:formatNumber value="${plus.employeeSal }" pattern="#,###" />₩</td>
+			                  </tr>
+			               </table>
+			               </div>
+		               
+			               <div class="col-md-12 row mt-5 mb-5 justify-content-center" id="total-sal">
+			                  <h3 id="total">
+			                     <span>총 급여</span>
+			                     <span><fmt:formatNumber value="${plus.paySal }" pattern="#,###" />₩</span>
+			                  	 
+			                  </h3>
+			               </div>
+			               <div class="col-md-12">
+			               	<button style="float: right; " id="updateBtn" class="btn btn-lg  btn-primary viewBtn">수정하기</button>
+			               </div>
+		               
+		              
+		
+	               
+	              </div>
+              </form>
             </div>
          </div>
       </div>
    </section>
    
-   
-   
+  
    
    
    

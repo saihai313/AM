@@ -72,15 +72,14 @@ public class ManagementController {
 		
 		
 		//급여명세서 상세조회
-		@RequestMapping("bills/{memberNo}")
-		public String payStubSelectOne(@PathVariable int memberNo,Model model
+		@RequestMapping("bills/{payNo}")
+		public String payStubSelectOne(@PathVariable int payNo,Model model
 				,RedirectAttributes rdAttr, HttpServletRequest request,PayStub paystub) {
 			
-			
+			System.out.println("!!!!!payStub : " + paystub);
 			
 			String url=null;
-			PayStub plus =paystubService.selectone(memberNo);
-			System.out.println(plus);
+			PayStub plus =paystubService.selectone(payNo);
 			if(plus!=null) {
 				model.addAttribute("plus", plus);
 				url="management/bills";
