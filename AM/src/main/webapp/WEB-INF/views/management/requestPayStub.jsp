@@ -159,7 +159,6 @@
 		                        <th>작성일</th>
 		                        <th>명세서수정일</th>
 		                        <th>상태(Y:확인, N:반려, W:대기)</th>
-		                        <th>정정결과</th>
 		                        <th>이름</th>
 		                     
 		                    </tr>
@@ -187,7 +186,6 @@
 		                            <td>${paystubplus.corrCreateDt }</td>
 		                            <td class="mddate">${paystubplus.corrModifyDt }</td>
 		                            <td >${paystubplus.corrStatus }</td>
-		                            <td>${paystubplus.corrResult }</td>
 		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded nameBtn" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
 		                            <%--<td>${paystubplus.memberName }</td> --%>
 		                            
@@ -443,6 +441,7 @@
     			   } 
         	 });
          });
+        
          
         $("#month").change(function(){
         	 var month=$(this).val();
@@ -469,14 +468,19 @@
        					$td2 = $("<td>").text(item.corrCreateDt);
        					$td3 = $("<td>").addClass("mddate").text(item.corrModifyDt);
        					$td4 = $("<td>").text(item.corrStatus);
-       					$td5 = $("<td>").text(item.corrResult);
        					
-       					$td6btn = $("<button id='test' class='btn btn-warning contentBtn btn-rounded nameBtn' type='button' data-toggle='modal' data-target='#staticBackdrop'>").text(item.corrNo);	
+       					
+       					
+       					$td6btn = $("<button id='test' class='mt-2 btn btn-warning contentBtn btn-rounded nameBtn' type='button' data-toggle='modal' data-target='#staticBackdrop'>");	
        					$td6 = $("<td>");
-       					$td6.append(item.memberName);
-       					
-       					$tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+       					/* $td6.append(item.memberName); */
+       					$td6btn.append(item.memberName);
+       					$tr.append($td1, $td2, $td3, $td4, $td6btn);
                			$tbody.append($tr);
+               			
+               			$("#correctionContent").val(item.corrContent);
+               			
+               			
         			 });
         		 },error:function(){
         			 alert("ajax전송실패");
