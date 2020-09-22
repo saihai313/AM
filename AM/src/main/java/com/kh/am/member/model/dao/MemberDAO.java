@@ -65,9 +65,10 @@ public class MemberDAO {
 
 	/** 회원가입_이메일 인증
 	 * @param memberEmail
+	 * @return 
 	 */
-	public void signUpEmail(String memberEmail) {
-		sqlSession.update("memberMapper.signUpEmail", memberEmail);
+	public int signUpEmail(String memberEmail) {
+		return sqlSession.update("memberMapper.signUpEmail", memberEmail);
 	}
 	
 	/** 마이페이지_회원정보 수정

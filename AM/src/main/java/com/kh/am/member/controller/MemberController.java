@@ -1,6 +1,8 @@
 package com.kh.am.member.controller;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -213,22 +215,16 @@ public class MemberController {
 	private int sendEmail(String memberEmail, String memberName) {
         
 		int result = 0;
+		
+		MimeMessage mail = mailSender.createMimeMessage();
+		String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+		                    + "<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=" 
+		                    + memberEmail + "' target='_blenk'>이메일 인증 확인</a>";
 		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			
-			 messageHelper.setFrom("AlbeitManagement@gmail.com"); 
-	         messageHelper.setTo(memberEmail); 
-	         
-	         messageHelper.setSubject("AM 회원가입 인증메일 입니다."); 
-	         messageHelper.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-	                 .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-	                 .append("<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=")
-	                 .append(memberEmail)
-	                 .append("' target='_blenk'>이메일 인증 확인</a>")
-	                 .toString()); 
-			
-	         mailSender.send(message);
+	         mail.setSubject("AM 회원가입 이메일 인증 ", "utf-8");
+	         mail.setText(mailContent, "utf-8", "html");
+	         mail.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail));
+	         mailSender.send(mail);
 	         
 	         result = 1;
 	         
@@ -244,12 +240,28 @@ public class MemberController {
 	
 	// 인증 이메일 확인
 	@GetMapping("signUpEmail")
-	public void signUpEmail(@RequestParam String memberEmail) {
+	public String signUpEmail(@RequestParam String memberEmail, HttpServletRequest req) {
 		System.out.println(memberEmail);
 		
+		String status = null;
+		String msg = null;
+		
 		if(memberEmail != null) {
-			memberService.signUpEmail(memberEmail);
+			int result = memberService.signUpEmail(memberEmail);
+			
+			if(result > 0) {
+				status = "success";
+				msg = "이메일 인증 성공";
+				 req.setAttribute("text", "이제 로그인하면 모든 AM의 기능을 누릴 수 있습니다!");
+			}else {
+				status = "error";
+				msg = "이메일 인증 실패";
+			}
 		}
+		req.setAttribute("status", status);
+		req.setAttribute("msg", msg);
+        
+		return "member/login"; 
 	}
 	
 	

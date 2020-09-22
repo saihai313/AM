@@ -39,7 +39,7 @@ public interface MemberService {
 	/** 회원가입_이메일 인증 확인
 	 * @param memberEmail
 	 */
-	void signUpEmail(String memberEmail);
+	int signUpEmail(String memberEmail);
 
 	int updateMemberAction(int memberNo, String memberPhone);
 

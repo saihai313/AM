@@ -87,8 +87,8 @@ public class MemberServiceImpl implements MemberService{
 	// 회원가입_이메일 인증 확인
 	@Transactional(rollbackFor=Exception.class)
 	@Override
-	public void signUpEmail(String memberEmail) {
-		memberDAO.signUpEmail(memberEmail);
+	public int signUpEmail(String memberEmail) {
+		return memberDAO.signUpEmail(memberEmail);
 	}
 	
 	
