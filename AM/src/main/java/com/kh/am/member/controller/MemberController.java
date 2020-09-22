@@ -229,10 +229,14 @@ public class MemberController {
 			
 	         mailSender.send(message);
 	         
+	         result = 1;
+	         
 		} catch (MessagingException e) {
+			result = 0;
 			e.printStackTrace();
 		}
-		  
+		
+		System.out.println(result);
 		return result;
 	}
 	
