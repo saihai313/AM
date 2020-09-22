@@ -23,18 +23,16 @@ public class MemberServiceImpl implements MemberService{
 	// 로그인_회원 정보
 	@Override
 	public Member login(Member member) {
-		String encoPwd = bcPwd.encode(member.getMemberPwd());
-		System.out.println(encoPwd);
-		
+
 		Member loginMember = memberDAO.login(member);
-		System.out.println(member);
-		System.out.println(loginMember);
 		
-		if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			loginMember = null;
+		if(loginMember != null) {
 			
-		}else {
-			loginMember.setMemberPwd(null);
+			if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+				loginMember = null;
+			}else {
+				loginMember.setMemberPwd(null);
+			}
 		}
 		
 		return loginMember;
