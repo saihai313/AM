@@ -147,7 +147,7 @@ body {margin:0;}
     text-align: center;
  }
  
- #partTimeDiv, #noti{
+ #partTimeDiv{
 	width: 500px;
 	margin: auto;
 	padding: 30px;
@@ -156,8 +156,25 @@ body {margin:0;}
 	border-radius: 10px;
 	font-family: 'S-CoreDream-6Bold' !important;
 	display: inline-block;
+	overflow-y: scroll;
+	    height: 476px;
 }
 
+#noti{
+	width: 500px;
+	margin: auto;
+	
+	margin-bottom: 50px;
+	border-radius: 10px;
+	font-family: 'S-CoreDream-6Bold' !important;
+	display: inline-block;
+	
+}
+
+.backColor{
+	 background-image: url(${contextPath}/resources/images/배경2.png);
+    background-repeat: no-repeat;
+}
 </style>
 </head>
 <body>
@@ -192,7 +209,7 @@ body {margin:0;}
 		
 	<section class="ftco-section">
 		<div class="overlay"></div>
-		<div class="container one1">
+		<div class="container one1 backColor">
 
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp" id="work-title">
@@ -213,7 +230,7 @@ body {margin:0;}
 			</div>
 				<div class="pageBtn">
 				<%-- <a class="btn btn-primary pix"  href="${contextPath}/calendar/pixSchedule">고정스케쥴 등록</a>--%>
-				<a class="btn btn-primary part" href="${contextPath}/calendar/partTime">파트타임 설정</a>
+			
 				</div>
 			</div>
 	</section>
@@ -223,7 +240,8 @@ body {margin:0;}
 
 	<div id="partDiv">
 	<div id="partTimeDiv">
-		<span><h3 style="display: inline;">더 편한 근무관리를 위해!</h3><h6 style="display: inline;"> 파트타임 설정으로 편리하게 입력|수정하세요.</h6></span>
+		<span><h3>더 편한 근무관리를 위해!</h3>
+		<h6> 파트타임 설정으로 편리하게 입력|수정하세요.</h6></span>
 		<hr>
 		
 		
@@ -239,20 +257,7 @@ body {margin:0;}
 						</c:forEach>
 	</div>					
 	<div id="noti">
-		<span><h3 style="display: inline;">더 편한 근무관리를 위해!</h3><h6 style="display: inline;"> 파트타임 설정으로 편리하게 입력|수정하세요.</h6></span>
-		<hr>
-		
-		
-			<c:forEach var="partTime" items="${pList}">
-			<!--  
-				시간이 10미만이면 0을 붙이고 10이상이면 그대로 변수저장
-			 -->
-		
-				
-				
-			<h6>${partTime.partName}[${partTime.partStart}:00 ~ ${partTime.partEnd}:00]</h6>
-					<hr>
-				</c:forEach>
+		<a href="${contextPath}/calendar/partTime"><img alt="" src="${contextPath}/resources/images/파트타임.png" style="float: left;width: 100%;border-radius: 10px;"></a>
 	
 
 </div>
