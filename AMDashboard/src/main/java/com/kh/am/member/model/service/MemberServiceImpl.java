@@ -24,25 +24,20 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member login(Member member) {
         
+    	
         Member loginMember = memberDAO.login(member);
-        if(member.getMemberPwd().equals(loginMember.getMemberPwd())) {
-            // 비교가 끝난 조회된 비밀번호 삭제 
-            loginMember.setMemberPwd(null);
-        }else {
-            loginMember = null;
-        }
-        /*
+        
         if(loginMember != null) {
-            if(!bcPwd.matches(member.getMemberPwd(),
-                        loginMember.getMemberPwd())) {
-                
-                loginMember = null;
-            }else {
-                // 비교가 끝난 조회된 비밀번호 삭제 
-                loginMember.setMemberPwd(null);
-            }
-       }
-       */
+			if(!bcPwd.matches(member.getMemberPwd(), 
+						loginMember.getMemberPwd())) {
+			// 입력한 비밀번호가 DB에 저장된 값과 같지 않을 경우 
+			loginMember = null;
+			
+			}else {
+				// 비교가 끝난 조회된 비밀번호 삭제 
+				loginMember.setMemberPwd(null);
+			}
+		}
         
         return loginMember;
     }

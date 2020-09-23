@@ -30,9 +30,9 @@
 		<div class="employee__email"><h4>이메일 : ${eInfo.memberEmail}</h4></div>
 		<div class="employee__phone"><h4>연락처 : ${eInfo.memberPhone}</h4></div>
 		<div class="employee__hourlyWage"><h4>시급 : ${eInfo.sal}</h4></div>
-		<div class="employee__shift"><h4>근무조 :</h4></div>
+<!-- 		<div class="employee__shift"><h4>근무조 :</h4></div>
 		<div class="employee__workDay"><h4>근무시간 :</h4></div>			
-		<div class="employee__workDay"><h4>근무요일 :</h4></div>			
+		<div class="employee__workDay"><h4>근무요일 :</h4></div>	 -->		
 	</div>
 	<br>
 
@@ -54,6 +54,9 @@
 				var url = "${contextPath}/personnel/delete?memberNo=" + memberNo;
 				location.href= url;
 				
+			}else{
+				var url = "${contextPath}/personnel/personnelList";
+				location.href= url;
 			}
 				
 		});
@@ -69,11 +72,10 @@
 			var memberNo = ${eInfo.memberNo};
 			var sal = prompt("수정할 시급을 입력해주세요","");
 			var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo+"&sal="+sal;
-			//var url = "${contextPath}/personnel/updateHourlyWage?memberNo="+memberNo;
-			console.log(sal);
-			console.log(memberNo);
-			
+			if(sal != null){
+				
 			location.href = url;			
+			}
 		});
 
 		
