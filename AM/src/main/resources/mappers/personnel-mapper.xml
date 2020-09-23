@@ -11,6 +11,7 @@
 		<result property="memberStatus" column="MEMBER_STATUS"/>
 		<result property="storeNo" column="STORE_NO"/>
 		<result property="sal" column="EMPLOYEE_SAL"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
 	</resultMap>
 	
 	<resultMap  id="authKeyResultSet" type="memberAuth">
@@ -38,7 +39,7 @@
 	
 	<!-- 알바생 상세조회 -->
 	<select id="selectInfo" parameterType="_int" resultMap="employeeInfoResultSet">
-		SELECT * FROM V_EMPLOYEELIST
+		SELECT * FROM V_EMPLOYEELIST2
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
