@@ -63,7 +63,8 @@
       SELECT STORE_NO, STORE_NM, STORE_BIZ_NO, MEMBER_ENROLL_DT,STORE_BIZ_CHECK
        FROM STORE
       JOIN MEMBER USING (MEMBER_NO)
-      ORDER BY STORE_NO DESC
+      ORDER BY  STORE_BIZ_CHECK,
+      STORE_NO DESC
        
   </select>
   
@@ -132,10 +133,18 @@
     DELETE FROM CURRENT_SAL
     WHERE CURRENT_YEAR = #{currentYear}
   </delete>
+
+
+	<!-- 시급 한개 조회 -->
+	<select id="selectCheck" resultType="string">
+		SELECT CURRENT_YEAR FROM CURRENT_SAL
+		WHERE CURRENT_YEAR= #{currentYear}
+	</select>
+
+	<!-- 시급 수정 -->
+	<update id="updateSal" parameterType="CurrentSal">
+	UPDATE  CURRENT_SAL SET
+	CURRENT_MIN_SAL=#{currentMinSal} WHERE current_year= #{currentYear}
+	</update>
 </mapper>
-
-
-
-
-
 

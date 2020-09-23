@@ -14,6 +14,7 @@ public class EmployeeInfo {
 	private String memberStatus; 
 	private int sal;
 	private int storeNo;
+	private Date memberEnrollDate;
 	
 	public EmployeeInfo() {
 		// TODO Auto-generated constructor stub
@@ -21,7 +22,7 @@ public class EmployeeInfo {
 	
 	
 	public EmployeeInfo(int memberNo, String memberEmail, String memberName, String memberPhone, String memberStatus,
-			int sal, int storeNo) {
+			int sal, int storeNo, Date memberEnrollDate) {
 		super();
 		this.memberNo = memberNo;
 		this.memberEmail = memberEmail;
@@ -30,10 +31,21 @@ public class EmployeeInfo {
 		this.memberStatus = memberStatus;
 		this.sal = sal;
 		this.storeNo = storeNo;
+		this.memberEnrollDate = memberEnrollDate;
 	}
 
 	
 	
+	public Date getMemberEnrollDate() {
+		return memberEnrollDate;
+	}
+
+
+	public void setMemberEnrollDate(Date memberEnrollDate) {
+		this.memberEnrollDate = memberEnrollDate;
+	}
+
+
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -108,7 +120,7 @@ public class EmployeeInfo {
 	public String toString() {
 		return "EmployeeInfo [memberNo=" + memberNo + ", memberEmail=" + memberEmail + ", memberName=" + memberName
 				+ ", memberPhone=" + memberPhone + ", memberStatus=" + memberStatus + ", sal=" + sal
-				+ ", storeNo=" + storeNo + "]";
+				+ ", storeNo=" + storeNo + ", memberEnrollDate=" + memberEnrollDate + "]";
 	}
 	
 	
