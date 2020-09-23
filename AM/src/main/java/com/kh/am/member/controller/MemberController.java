@@ -1,8 +1,11 @@
 package com.kh.am.member.controller;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -212,40 +215,169 @@ public class MemberController {
 	private int sendEmail(String memberEmail, String memberName) {
         
 		int result = 0;
+		
+		MimeMessage mail = mailSender.createMimeMessage();
+		String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+		                    + "<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=" 
+		                    + memberEmail + "' target='_blenk'>이메일 인증 확인</a>";
 		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-			
-			 messageHelper.setFrom("AlbeitManagement@gmail.com"); 
-	         messageHelper.setTo(memberEmail); 
+	         mail.setSubject("AM 회원가입 이메일 인증 ", "utf-8");
+	         mail.setText(mailContent, "utf-8", "html");
+	         mail.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail));
+	         mailSender.send(mail);
 	         
-	         messageHelper.setSubject("AM 회원가입 인증메일 입니다."); 
-	         messageHelper.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-	                 .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-	                 .append("<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=")
-	                 .append(memberEmail)
-	                 .append("' target='_blenk'>이메일 인증 확인</a>")
-	                 .toString()); 
-			
-	         mailSender.send(message);
+	         result = 1;
 	         
 		} catch (MessagingException e) {
+			result = 0;
 			e.printStackTrace();
 		}
-		  
+		
+		System.out.println(result);
 		return result;
 	}
 	
 	
 	// 인증 이메일 확인
 	@GetMapping("signUpEmail")
-	public void signUpEmail(@RequestParam String memberEmail) {
+	public String signUpEmail(@RequestParam String memberEmail, HttpServletRequest req) {
 		System.out.println(memberEmail);
 		
+		String status = null;
+		String msg = null;
+		
 		if(memberEmail != null) {
-			memberService.signUpEmail(memberEmail);
+			int result = memberService.signUpEmail(memberEmail);
+			
+			if(result > 0) {
+				status = "success";
+				msg = "이메일 인증 성공";
+				 req.setAttribute("text", "이제 로그인하면 모든 AM의 기능을 누릴 수 있습니다!");
+			}else {
+				status = "error";
+				msg = "이메일 인증 실패";
+			}
 		}
+		req.setAttribute("status", status);
+		req.setAttribute("msg", msg);
+        
+		return "member/login"; 
 	}
+	
+	
+	// ----------------------- 회원정보 수정 ------------------------------------------------------
+	
+		@RequestMapping("updateMemberAction")
+		public String updateMemberAction(String memberPhone, String storePhone, 
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
+			
+			Member loginMember = (Member) model.getAttribute("loginMember");
+			Store loginEmployer = (Store)model.getAttribute("loginEmployer");
+			int memberNo = loginMember.getMemberNo();
+			
+			
+			int result = memberService.updateMemberAction(memberNo, memberPhone);
+			
+			String status = null;
+			String msg = null;
+			
+			if(result > 0) {
+				
+				loginMember.setMemberPhone(memberPhone);
+				model.addAttribute("loginMember", loginMember);
+				
+				result = memberService.updateStoreAction(memberNo, storePhone);
+				
+				if(result > 0) {
+					loginEmployer.setStorePhone(storePhone);
+					model.addAttribute("loginEmployer", loginEmployer);
+					
+					status = "success";
+					msg = "수정 성공";
+					
+				}else {
+					status = "error";
+					msg = "가게 수정 실패";
+				}
+				
+				
+				
+			}else {
+				status = "error";
+				msg = "회원 수정 실패";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			
+			request.getHeader("referer");
+			return "redirect:" + request.getHeader("referer");
+		}
+		
+		
+		// ----------------------- 비밀번호 수정 ------------------------------------------------------
+		
+		@RequestMapping("updatePwdAction")
+		public String updatePwdAction(String nowPwd, String newPwd,
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
+			
+			Member loginMember = (Member) model.getAttribute("loginMember");
+			
+			loginMember.setMemberPwd(nowPwd);
+			
+			int result = memberService.updatePwdAction(loginMember, newPwd);
+			
+			String status = null;
+			String msg = null;
+			String text = null;
+			
+			if(result > 0) {
+				status = "success";
+				msg = "비밀번호 변경 성공";
+			}else {
+				status = "error";
+				msg = "비밀번호 변경 실패";
+				text = "현재 비밀번호를 확인해 주세요.";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			rdAttr.addFlashAttribute("text", text);
+			
+			return "redirect:updatePwd";
+		}
+		
+		// ----------------------- 회원 탈퇴 ------------------------------------------------------
+		@RequestMapping("secessionAction")
+		public String secessionAction(String memberPwd,
+						Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus sessionStatus) {
+			
+			Member loginMember = (Member)model.getAttribute("loginMember");
+			loginMember.setMemberPwd(memberPwd);
+			
+			int result = memberService.secessionAction(loginMember, memberPwd);
+			
+			String status = null;
+			String msg = null;
+			String text = null;
+			String path = null;
+			
+			if(result > 0) {
+				status = "success";
+				msg = "회원 탈퇴 성공";
+				path = "/";
+				
+				sessionStatus.setComplete();
+			}else {
+				status = "error";
+				msg = "회원 탈퇴 실패";
+				text = "현재 비밀번호를 확인해 주세요.";
+				path= "secession";
+			}
+			rdAttr.addFlashAttribute("status", status);
+			rdAttr.addFlashAttribute("msg", msg);
+			rdAttr.addFlashAttribute("text", text);
+			
+			return "redirect:" + path;
+		}
 	
 	
 	

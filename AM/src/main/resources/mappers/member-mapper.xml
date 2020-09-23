@@ -78,5 +78,35 @@
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_GRADE = 'R'
 	</update>
+	
+	<!-- 마이페이지_회원정보 수정 -->
+	<update id="updateMemberAction" parameterType="map">
+		UPDATE MEMBER
+		SET MEMBER_PHONE = #{memberPhone}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 마이페이지_가게정보 수정 -->
+	<update id="updateStoreAction" parameterType="map">
+		UPDATE STORE
+		SET STORE_PHONE = #{storePhone}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 마이페이지_비밀번호 조회 -->
+	<select id="selectPwd" parameterType="_int" resultType="string">
+		SELECT MEMBER_PWD FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 마이페이지_비밀번호 수정 -->
+	<update id="updatePwdAction" parameterType="Member">
+		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 마이페이지_회원 탈퇴 -->
+	<update id="secessionAction" parameterType="_int">
+		UPDATE MEMBER SET MEMBER_STATUS = 'N' WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 
 </mapper>

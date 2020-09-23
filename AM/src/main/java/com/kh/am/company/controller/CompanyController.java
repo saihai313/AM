@@ -41,7 +41,7 @@ public class CompanyController {
 			 String guestName, String guestEmail, String guestQuestion, String guestMessage) throws IOException {
 		  
 		  String sendMessage = guestName + " 님이 작성하였습니다." + "\n\n문의 유형: " + guestQuestion + "\n\n문의 내용: " + guestMessage;
-		  String adminEmail = "AlbeitManagement@gmail.com";
+		  String adminEmail = "testforam3@gmail.com";
 		  
 		  try {
 			MimeMessage message = mailSender.createMimeMessage();

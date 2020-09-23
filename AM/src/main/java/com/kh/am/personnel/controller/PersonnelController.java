@@ -36,6 +36,7 @@ public class PersonnelController {
 		Member loginMember = (Member)model.getAttribute("loginMember");
 		
 		int memberNo = loginMember.getMemberNo();
+			
 		
 		int storeNo = personnelService.selectStoreNo(memberNo);
 		

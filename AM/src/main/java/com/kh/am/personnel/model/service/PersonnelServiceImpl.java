@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.am.personnel.model.dao.PersonnelDAO;
 import com.kh.am.personnel.model.vo.EmployeeInfo;
-import com.kh.am.personnel.model.vo.ListInfo;
 import com.kh.am.personnel.model.vo.MailUtils;
 import com.kh.am.personnel.model.vo.MemberAuth;
 
