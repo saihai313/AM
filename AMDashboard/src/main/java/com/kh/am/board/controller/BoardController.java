@@ -133,11 +133,11 @@ import com.kh.am.board.model.vo.Store;
         String path;
         if (result > 0) {
             status = "success";
-            msg = "등록 성공";
+            msg = "등록/수정 성공";
             path = "redirect:" + request.getHeader("referer");
         } else {
             status = "error";
-            msg = "등록 실패";
+            msg = "등록/수정 실패";
             path = "board/insertSal";
         }
         rdAttr.addFlashAttribute("status",status);
@@ -214,6 +214,10 @@ import com.kh.am.board.model.vo.Store;
         return result;
         
     }
+    
+    
+    
+    
     
     
 }

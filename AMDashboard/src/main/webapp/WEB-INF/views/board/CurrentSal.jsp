@@ -76,7 +76,7 @@
 														<td name="currentYear">${CurrentSal.currentYear }</td>
 														<td>${CurrentSal.currentMinSal }</td>
 														<td>
-														    <img name="deleteIcon" type="submit" src="${contextPath}/resources/assets/img/delete.ico" style=width:20px; height:20px; >
+														    <img name="deleteIcon" type="submit" src="${contextPath}/resources/assets/img/delete.ico" style=width:17px; height:17px; >
 														</td>
 													</tr>
 												</c:forEach>
@@ -91,7 +91,7 @@
 					  <div class="col-md-6">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title"> 시급 등록</h4>
+                <h4 class="card-title"> 시급 등록/수정</h4>
               </div>
               <div class="card-body">
                       <form action="${contextPath }/board/insertSal" onsubmit="return validate();">
@@ -152,8 +152,12 @@
 	
 	<script>
 		$("#selectYear").on("change", function(){
-			var sel = $(this).val();
+			$("input[name='currentMinSal']").val("");
+		//아이디가 selectYear(년도)가 바뀌면 입력창 초기화 
 			
+			var sel = $(this).val();
+			// 현재 선택한 년도
+
 			$("td[name='currentYear']").each(function(index, item){
 				console.log("a : " + $(item).text());
 				console.log("b : " + sel);
@@ -161,8 +165,7 @@
 				
 				if($(item).text() == sel){
 					$("input[name='currentMinSal']").val($(item).next().text());
-				}
-				
+				}	
 			});
 		});
 	
