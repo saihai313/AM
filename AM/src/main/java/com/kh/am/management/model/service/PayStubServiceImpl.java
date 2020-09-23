@@ -78,5 +78,11 @@ public class PayStubServiceImpl implements PayStubService {
 		return paystubDAO.requestMonthlist(pmonth);
 	}
 
+	@Override
+	public List<PayStub> selectPaystub(PayStub pmonth) {
+		// TODO Auto-generated method stub
+		return paystubDAO.selectPaystub(pmonth);
+	}
+
 
 }

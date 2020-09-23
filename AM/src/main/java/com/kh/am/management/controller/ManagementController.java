@@ -179,8 +179,27 @@ public class ManagementController {
 			System.out.println(list);
 			model.addAttribute("list",list);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			 return gson.toJson(list);
+			return gson.toJson(list);
 		}
+		
+		// 같은월 찾기!
+		// 급여명세서
+		@ResponseBody
+		@RequestMapping("selectPaystub")
+		public String selectPaystub(int month, Model model) {
+			int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();			
+			PayStub pmonth = new PayStub();
+			pmonth.setMemberNo(memberNo);
+			pmonth.setPayDay(month);
+			List<PayStub> list = paystubService.selectPaystub(pmonth);
+			System.out.println("list!!!!! : " + list);
+			model.addAttribute("list",list);
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(list);
+		}
+		
+		
+		
 		 
 		
 		

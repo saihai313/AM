@@ -60,4 +60,8 @@ public class PayStubDAO {
 		return sqlSession.selectList("paystubMapper.requestMonthlist", pmonth);
 	}
 
+	public List<PayStub> selectPaystub(PayStub pmonth) {
+		return sqlSession.selectList("paystubMapper.selectPaystub", pmonth);
+	}
+
 }
