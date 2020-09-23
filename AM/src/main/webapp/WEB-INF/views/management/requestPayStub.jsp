@@ -489,7 +489,7 @@
                			
         			 });
         		 },error:function(){
-        			 location.reload();
+        			 console.log("ajax 통신실패");
         		 }
         	 });
          });

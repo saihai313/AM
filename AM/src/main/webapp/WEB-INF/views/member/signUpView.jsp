@@ -419,9 +419,6 @@
 		</div>
 	</section>
 
-	<!-- ------------------------- footer ---------------------------- -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	
 	<script type="text/javascript">
 		$("document").ready(function() {
 			
