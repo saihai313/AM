@@ -106,8 +106,8 @@
 			AND EXTRACT(MONTH FROM CORR_CREATE_DT) = #{payDay}
 	</select>
 	
-	<select id="selectPaystub" parameterType="PayStub" resultMap="requestResultSet">
-			SELECT P.*, M.MEMBER_NM
+	<select id="selectPaystub" parameterType="PayStub" resultMap="PayStubResultSet">
+			SELECT P.*, S.STORE_NM, M.MEMBER_NM
 			FROM PAY P
 			JOIN STORE S ON(P.STORE_NO=S.STORE_NO)
 			JOIN MEMBER M ON(P.MEMBER_NO = M.MEMBER_NO)

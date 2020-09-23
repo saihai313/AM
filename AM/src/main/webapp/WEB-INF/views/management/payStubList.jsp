@@ -137,7 +137,7 @@
               		
                   <table class="table table-hover tabType1 table-striped" id="list-table">
                   	<select id="month" class="custom-select custom-select-sm" >
-						  <option selected>월별 검색</option>
+						  <option id="all">월별 검색</option>
 						  <option value="01">01</option>
 						  <option value="02">02</option>
 						  <option value="03">03</option>
@@ -230,6 +230,10 @@
      	 
      	 console.log(month);
      	 
+     	 if($("#all").prop("selected")){
+     		location.href="${contextPath}/management/payStubList";
+     	 }
+     	 
      	 $.ajax({
      		 url:"selectPaystub",
      		 data:{"month":month},
@@ -242,25 +246,31 @@
      			
      			
      			$tbody.html("");
-     			
+     			var payNo;
      			 $.each(list, function(index, item){
     					$tr = $("<tr>");
-            			
     					$td1 = $("<td>").text(item.payNo);
     					$td2 = $("<td>").text(item.storeName);
     					$td3 = $("<td>").text(item.memberName);
-    					$td4 = $("<td>").text(item.payCreateDt);
-    					$td5 = $("<td>").text(item.payStatus);
+    					$td4 = $("<td>").text(item.payCreateDate);
 
-    					$tr.append($td1, $td2, $td3, $td4, $td5);
+    					$tr.append($td1, $td2, $td3, $td4);
             			$tbody.append($tr);
-            			
+            			payNo = item.payNo;
      			 });
+     			 
+     			 $tr.on("click",function(){
+     				var payboardUrl="${contextPath}/management/bills/" + payNo;
+     	            location.href=payboardUrl;
+     			 });
+     	            
+     			 
+     			
      		 },error:function(){
-     			 alert("ajax전송실패");
+     			console.log("ajax 통신실패");
      		 }
      	 });
-      
+      });
       
    </script>
 

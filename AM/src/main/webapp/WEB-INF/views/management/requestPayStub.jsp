@@ -137,7 +137,7 @@
 		        <div style="height:530px">
 		            <table class="table table-hover tabType1 table-striped" id="updatePayStub">
 		              <select id="month" class="custom-select custom-select-sm" >
-						  <option selected>월별 검색</option>
+						  <option id="all">월별 검색</option>
 						  <option value="01">01</option>
 						  <option value="02">02</option>
 						  <option value="03">03</option>
@@ -448,6 +448,11 @@
         	 
         	 console.log(month);
         	 
+        	 if($("#all").prop("selected")){
+          		location.href="${contextPath}/management/payStubList";
+          	 }
+        	 
+        	 
         	 $.ajax({
         		 url:"select",
         		 data:{"month":month},
@@ -483,7 +488,7 @@
                			
         			 });
         		 },error:function(){
-        			 alert("ajax전송실패");
+        			 location.reload();
         		 }
         	 });
          });

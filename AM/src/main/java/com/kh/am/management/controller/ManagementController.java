@@ -192,7 +192,7 @@ public class ManagementController {
 			pmonth.setMemberNo(memberNo);
 			pmonth.setPayDay(month);
 			List<PayStub> list = paystubService.selectPaystub(pmonth);
-			System.out.println("list : " + list);
+			System.out.println("list!!!!! : " + list);
 			model.addAttribute("list",list);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			return gson.toJson(list);
