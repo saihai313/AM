@@ -6,7 +6,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import com.kh.am.personnel.model.vo.EmployeeInfo;
-import com.kh.am.personnel.model.vo.ListInfo;
 
 public interface PersonnelService {
 

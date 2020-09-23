@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.am.personnel.model.vo.EmployeeInfo;
-import com.kh.am.personnel.model.vo.ListInfo;
 
 @Repository
 public class PersonnelDAO {

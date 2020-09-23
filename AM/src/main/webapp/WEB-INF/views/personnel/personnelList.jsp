@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
-
+<title>직원 목록</title>
+    <link rel="shortcut icon" href="${contextPath}/resources/images/icons/favicon.ico">
 <style>
 	#notLogin{
 		width: 100%;

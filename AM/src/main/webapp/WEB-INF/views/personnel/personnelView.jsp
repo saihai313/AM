@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${eInfo.memberName}님의 상세정보</title>
+  <link rel="shortcut icon" href="${contextPath}/resources/images/icons/favicon.ico">
 <style>
 	.employeeInfo{
 		
@@ -13,13 +14,13 @@
 	}
 	
 	.bottom_btn{
-		margin-bottom: 50px;
+		margin-bottom: 250px;
 	}
 	
 	.employeeInfo > div{
 		padding-bottom: 10px;
 	}
-
+	
 	
 </style>
 </head>
@@ -30,6 +31,7 @@
 		<div class="employee__email"><h4>이메일 : ${eInfo.memberEmail}</h4></div>
 		<div class="employee__phone"><h4>연락처 : ${eInfo.memberPhone}</h4></div>
 		<div class="employee__hourlyWage"><h4>시급 : ${eInfo.sal}</h4></div>
+		<div><h4>가입일 : </h4></div>
 <!-- 		<div class="employee__shift"><h4>근무조 :</h4></div>
 		<div class="employee__workDay"><h4>근무시간 :</h4></div>			
 		<div class="employee__workDay"><h4>근무요일 :</h4></div>	 -->		
