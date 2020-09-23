@@ -86,6 +86,44 @@ public class BoardDAO {
         return sqlSession.insert("boardMapper.insertSal",currentSal);
     }
 
+	
+
+
+    /** 시급 삭제
+     * @param currentYear
+     * @return
+     */
+    public int deleteSal(int currentYear) {
+        return sqlSession.delete("boardMapper.deleteSal",currentYear);
+    }
+
+
+	/** 시급 한개 조회
+	 * @param currentSal
+	 * @return
+	 */
+	public int selectCheck(CurrentSal currentSal) {
+		String check = sqlSession.selectOne("boardMapper.selectCheck",currentSal);
+		
+		int check2 =0;
+		if(check == null) {
+			check2 = 2;
+		}else {
+			check2 = 1;
+		}
+		return check2;
+	}
+
+
+	/** 시급 수정
+	 * @param currentSal
+	 * @return
+	 */
+	public int updateSal(CurrentSal currentSal) {
+		return sqlSession.update("boardMapper.updateSal",currentSal);
+	}
+
+
 	/** 뉴스 정보 조회
 	 * @return
 	 */
@@ -101,18 +139,6 @@ public class BoardDAO {
     public int insertnews(NewsBoard newsBoard) {
         return sqlSession.insert("boardMapper.insertNews", newsBoard);
     }
-
-
-    /** 시급 삭제
-     * @param currentYear
-     * @return
-     */
-    public int deleteSal(int currentYear) {
-        return sqlSession.delete("boardMapper.deleteSal",currentYear);
-    }
-
-
-
 
 
 

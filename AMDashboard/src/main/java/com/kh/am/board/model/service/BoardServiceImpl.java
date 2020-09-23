@@ -71,11 +71,31 @@ public class BoardServiceImpl implements BoardService  {
 	}
 	
 	   // 시급 등록
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int insertSal(CurrentSal currentSal) {
-        return boardDAO.insertSal(currentSal);
+    	int check = boardDAO.selectCheck(currentSal);
+
+    	int result=0;
+    	
+    	if(check == 2) {
+    		result= boardDAO.insertSal(currentSal);
+    	}else {
+    		result = boardDAO.updateSal(currentSal);
+    	}
+    	
+        return result;
     }
 
+
+    // 시급 삭제
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int deleteSal(int currentYear) {
+        return boardDAO.deleteSal(currentYear);
+    }
+    
+    
 	// 뉴스정보 조회
 	@Override
 	public List<NewsBoard> selectnews() {
@@ -89,12 +109,6 @@ public class BoardServiceImpl implements BoardService  {
         return boardDAO.insertnews(newsBoard);
     }
 
-    // 시급 삭제
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public int deleteSal(int currentYear) {
-        return boardDAO.deleteSal(currentYear);
-    }
 
  
 
