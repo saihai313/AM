@@ -347,10 +347,17 @@ body {margin:0;}
 						 <c:set var="start" value="${partTime.partStart}"/>								
 						</c:if>
 						
+						<c:if test="${partTime.partEnd <10}">
+						 <c:set var="end" value="0${partTime.partEnd}"/>								
+						</c:if>
+						
+						<c:if test="${partTime.partEnd >=10}">
+						 <c:set var="end" value="${partTime.partEnd}"/>								
+						</c:if>
 								
 								
-							<option value="${partTime.partName}[${start}:00 ~ ${partTime.partEnd}:00]" value2="${start}${partTime.partEnd}">
-									${partTime.partName}[${start}:00 ~ ${partTime.partEnd}:00]</option>
+							<option value="${partTime.partName}[${start}:00 ~ ${end}:00]" value2="${start}${end}">
+									${partTime.partName}[${start}:00 ~ ${end}:00]</option>
 							
 						</c:forEach>
 						</select> 
@@ -425,11 +432,20 @@ body {margin:0;}
 						 <c:set var="start" value="${partTime.partStart}"/>								
 						</c:if>
 						
+						
+						<c:if test="${partTime.partEnd <10}">
+						 <c:set var="end" value="0${partTime.partEnd}"/>								
+						</c:if>
+						
+						<c:if test="${partTime.partEnd >=10}">
+						 <c:set var="end" value="${partTime.partEnd}"/>								
+						</c:if>
+						
 								
 								
 							<option value2="${start}${partTime.partEnd}" 
-									value="${partTime.partName}[${start}:00 ~ ${partTime.partEnd}:00]">
-									${partTime.partName}[${start}:00 ~ ${partTime.partEnd}:00]</option>
+									value="${partTime.partName}[${start}:00 ~ ${end}:00]">
+									${partTime.partName}[${start}:00 ~ ${end}:00]</option>
 							
 						</c:forEach>
 						
@@ -456,7 +472,7 @@ body {margin:0;}
 						 <c:set var="end" value="${pList[0].partEnd}"/>								
 						</c:if>
 						
-						<input type="time" class="timeCss" id="timeS2"  value="${start}:00"> ~ <input type="time" id="timeE2"value="${end}:00">
+						<input type="time" class="timeCss" id="timeS2"  value="${start}:00"> ~ <input type="time" id="timeE2" value="${end}:00">
 						
 						<br>
 			
@@ -1027,8 +1043,9 @@ var b;
  // 삽입 submit 동작
 	function validate(){
     
-		console.log("시작" + $("input[id=timeS]").val().substr(0,2));
-		console.log("끝" + $("input[id=timeE]").val().substr(0,2));
+		console.log("시작 시작시간" + $("input[id=timeS]").val().substr(0,2));
+		console.log("끝 끝나는시간" + $("input[id=timeE]").val().substr(0,2));
+		
 	 
 	 
  		console.log("서브밋동작" + $("#no").val());
@@ -1042,12 +1059,32 @@ var b;
     	console.log("시간 쪼개기" + time);
  		
     	
+    	var start;
+    	var end;
+    	// 오전 12시이면 0으로 나옴
+		if($("input[id=timeE]").val().substr(0,2) == 0){
+			console.log("0 임");
+			end = 24;
+			console.log("end"+ end);
+		}else{
+			
+			end = $("input[id=timeE]").val().substr(0,2);
+		}
+    	
+		if($("input[id=timeS]").val().substr(0,2) == 0){
+			console.log("0 임");
+			start = 24;
+		}else{
+			start = $("input[id=timeS]").val().substr(0,2);
+		}
+    	
+    	
  		
  		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-			value :  $("input[id=timeS]").val().substr(0,2)});
+			value :  start});
  		
  		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-			value :  $("input[id=timeE]").val().substr(0,2)});
+			value :  end});
  		
  		console.log(workDay);
  		// 날짜
@@ -1056,6 +1093,7 @@ var b;
  		
  		$("form[name='insertCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
  		
+ 	
  		
  			
 	 }	
@@ -1081,14 +1119,50 @@ var b;
 	 		
 	    	var time = $("#updateTime").val();
 	    	
-	    	console.log("시간 쪼개기" + time);
 	 		
+	    	console.log("시간 쪼개기" + time);
 	 		
 	    	
 	    	var start = $("input[id=timeS2]").val().substr(0,2);
 	    	var end = $("input[id=timeE2]").val().substr(0,2);
 	    	
+	    	console.log("시작시간" + start);
+	    	console.log("종료시간" + end);
 	    	
+	    	
+	    	if(start == 0){
+				console.log("0 임");
+				start = 24;
+				console.log("start"+ start);
+			}
+	    	
+			if(end == 0){
+				console.log("0 임");
+				end = 24;
+				console.log("end"+ end);
+			}
+			
+			
+			
+			
+			if(updateS == 0){
+				console.log("0 임 바꾼다");
+				updateS = 24;
+				console.log("0 임 바꾼다" + updateS);
+			}
+	    	
+			if(updateE == 0){
+				updateE = 24;
+				console.log("0 임 바꾼다" + updateE);
+			}
+	    	
+			
+			//test
+				console.log("예전시간 시작" + updateS);
+				console.log("예전시간 종료" + updateE);
+				console.log("바꾼시간 시작" + start);
+				console.log("바꾼시간 종료" + end);
+			
 	    	
 	 		// 뒤에서부터 숫자 끊어서 가져오기
 	 		// str.slice(-3,-1);
@@ -1101,10 +1175,10 @@ var b;
 	 		
 	 		
 	 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
-				value :  $("input[id=timeS2]").val().substr(0,2)});
+				value :  start});
 	 		
 	 		$workEnd =$("<input>", {type : "hidden", name : "workEnd", 
-				value :  $("input[id=timeE2]").val().substr(0,2)});
+				value :  end});
 	 		
 	 		console.log(workDay);
 	 		// 날짜
@@ -1112,8 +1186,6 @@ var b;
 						value : workDay});
 	 		
 	 		$("form[name='updateCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay, $beforeStart, $beforeEnd, $beforeMemberNo  );
-	 		
-	 		
 	 		
 		 }	
 	 
@@ -1141,6 +1213,22 @@ var b;
 	 		// str.slice(-3,-1);
 	 		
 	 		
+	 		console.log("시작시간"+updateS);
+	 		console.log("종료시간"+updateE);
+	    	// 오전 12시이면 0으로 나옴
+			if(updateS == 0){
+				console.log("0 임");
+				updateS = 24;
+				console.log("end"+ end);
+			}
+	    	
+			if(updateE == 0){
+				console.log("0 임");
+				updateE = 24;
+			}
+	    	
+	 		
+	 		
 	 		$workStart =$("<input>", {type : "hidden", name : "workStart", 
 				value :  updateS});
 	 		
@@ -1153,6 +1241,7 @@ var b;
 						value : workDay});
 	 		
 	 		$("form[name='deleteCalendarForm']").append($memberNo, $workStart, $workEnd, $workDay);
+	 		
 		}
 		
 	 
