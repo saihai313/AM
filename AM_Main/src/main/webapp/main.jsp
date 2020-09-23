@@ -46,8 +46,8 @@
 					<div class="col-md-6 d-flex align-items-center">
 						<p class="mb-0 phone pl-md-2 nav-top">
 							<a href="company/contact" class="mr-2"><span class="fa mr-1"></span>고객센터&nbsp;&nbsp;</a> 
-						<a href="tel://12345678" class="mr-2"><span class="fa fa-phone mr-1"></span>+ 1234-5678</a> 
-						<a href="mailto:AlbeitManagement@gmail.com"><span class="fa fa-paper-plane mr-1"></span> AlbeitManagement@gmail.com</a>
+							<a href="tel://12345678" class="mr-2"><span class="fa fa-phone mr-1"></span>+ 1234-5678</a> 
+							<a href="mailto:AlbeitManagement@gmail.com"><span class="fa fa-paper-plane mr-1"></span> AlbeitManagement@gmail.com</a>
 						</p>
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 		</div>
     
 
-    <div class="hero-wrap" style="background-image: url('resources/images/main_img.png');" data-stellar-background-ratio="0.5" id="main-slide"> 
+    <div class="hero-wrap" style="background-image: url('resources/images/main_img.png'); background-size: 80%" data-stellar-background-ratio="0.5" id="main-slide"> 
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center">
@@ -75,6 +75,77 @@
         </div>
       </div>
     </div>
+    
+    <section class="ftco-section bg-light" style="padding-top: 6em">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">Services</span>
+            <h2>제공하는 서비스</h2>
+          </div>
+        </div>
+    	</div>
+    	<div class="container-fluid px-0">
+    		<div class="row no-gutters">
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img" style="background-image: url(images/services-1.jpg);"></div>
+    					<div class="text">
+    						<h2>Relation Problem</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img" style="background-image: url(images/services-2.jpg);"></div>
+    					<div class="text">
+    						<h2>Couples Counseling</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img order-md-last" style="background-image: url(images/services-3.jpg);"></div>
+    					<div class="text">
+    						<h2>Depression Treatment</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img order-md-last" style="background-image: url(images/services-4.jpg);"></div>
+    					<div class="text">
+    						<h2>Family Problem</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img" style="background-image: url(images/services-5.jpg);"></div>
+    					<div class="text">
+    						<h2>Personal Problem</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6">
+    				<div class="services-wrap d-flex">
+    					<div class="img" style="background-image: url(images/services-6.jpg);"></div>
+    					<div class="text">
+    						<h2>Business Problem</h2>
+    						<p></p>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
 
    
    <!-- Bootstrap core JS-->
