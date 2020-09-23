@@ -216,8 +216,8 @@ body {margin:0;}
         </div>
             <hr>
           </div>
-            <button class="btn btn-primary plus" type="button">+</button>
-            <button class="btn btn-primary minus2" type="button">-</button>
+         <%--    <button class="btn btn-primary plus" type="button">+</button>
+            <button class="btn btn-primary minus2" type="button">-</button> --%>
             <hr>
          <a class="btn btn-primary pixSubmit " href="${contextPath}/calendar/workList">돌아가기</a>
          <a class="btn btn-primary pixSubmit okBtn2 " href="${contextPath}/calendar/partTime">완료</a>
