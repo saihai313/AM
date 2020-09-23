@@ -182,7 +182,7 @@ public class ManagementController {
 			return gson.toJson(list);
 		}
 		
-		// 같은월 찾기
+		// 같은월 찾기!
 		// 급여명세서
 		@ResponseBody
 		@RequestMapping("selectPaystub")

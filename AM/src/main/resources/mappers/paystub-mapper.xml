@@ -106,6 +106,7 @@
 			AND EXTRACT(MONTH FROM CORR_CREATE_DT) = #{payDay}
 	</select>
 	
+	<!-- 급여명세서 월별 조회 -->
 	<select id="selectPaystub" parameterType="PayStub" resultMap="PayStubResultSet">
 			SELECT P.*, S.STORE_NM, M.MEMBER_NM
 			FROM PAY P

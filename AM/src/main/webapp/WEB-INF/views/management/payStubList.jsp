@@ -225,10 +225,12 @@
       });
       
       
+      /* 월별 조회 */
       $("#month").change(function(){
      	 var month=$(this).val();
      	 
      	 console.log(month);
+     	 
      	 
      	 if($("#all").prop("selected")){
      		location.href="${contextPath}/management/payStubList";
