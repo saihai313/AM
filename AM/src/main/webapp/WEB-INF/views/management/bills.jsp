@@ -24,6 +24,7 @@
 
 
 
+
 .tabType1 li.on a {
    color: #fff;
 }
@@ -70,6 +71,10 @@ table.type07 td {
 	float: right;
 }
 
+{
+	text-align: center;
+}
+
 
 </style>
 
@@ -99,11 +104,11 @@ table.type07 td {
                <!-- 제목  -->
                <div class="col-md-10 text-center mb-5">
                   <fmt:formatDate var="payTitle" value="${plus.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
-                       <h1 style="font-weight: bold;">${payTitle }</h1>
+                       <h1 style="font-family: 'S-CoreDream-6Bold';">${payTitle }</h1>
                   <hr>
                </div>
-               <form action="../../pay/updatePayAction/${payNo}" method="post">
-	               <div class="row" style="width: 500px;">
+               <form action="../../pay/updatePayAction/${payNo}" method="post" class="contactForm">
+	               <div class="row" style="width: 500px; font-family: 'S-CoreDream-6Bold';">
 			               <!-- 내용  -->
 			               <div class="col-md-12">
 			               <table class="col-md-12 p-5 table table-borderless mx-auto">
@@ -125,7 +130,9 @@ table.type07 td {
 			                  </tr>
 			                  <tr>
 			                     <td>총 근무시간</td>
-			                     <td><input class="form-control" style="width: 100px;" type="number" name="payTime" value="${plus.payTime}"></td>
+			                     <td>
+			                     	<input class="form-control" style="width: 100px;" type="number" name="payTime" value="${plus.payTime}">
+			                     </td>
 			                  </tr>
 			                  <tr>
 			                     <td>총 근무일수</td>
@@ -138,6 +145,7 @@ table.type07 td {
 			                  
 			               </table>
 			               </div>
+			               
 			               
 			               
 		               

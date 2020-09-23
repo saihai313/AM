@@ -187,7 +187,7 @@
 		                            <td>${paystubplus.corrCreateDt }</td>
 		                            <td class="mddate">${paystubplus.corrModifyDt }</td>
 		                            <td >${paystubplus.corrStatus }</td>
-		                            <td><button id="test" class="btn btn-warning contentBtn btn-rounded nameBtn" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
+		                            <td><button id="test" class="btn btn-outline-secondary contentBtn btn-rounded nameBtn" type="button"  data-toggle="modal" data-target="#staticBackdrop">${paystubplus.memberName }</button></td>
 		                            <%--<td>${paystubplus.memberName }</td> --%>
 		                            
 		                            <%-- <input type="hidden" id="mid" value="${paystubplus.memberNo}"> --%>
@@ -341,7 +341,7 @@
                       	
                         <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                        <!--  <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button> -->
-		                <button type="button" id="correction" data-dismiss="modal" class="btn btn-warning contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려이유작성</button>
+		                <button type="button" id="correction" data-dismiss="modal" class="btn btn-success contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려이유작성</button>
 		                <!--class="btn btn-warning contentBtn btn-rounded"  -->
                       </div>
                     </div>

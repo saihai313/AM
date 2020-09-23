@@ -117,12 +117,13 @@ public class PayController {
 		if(result > 0) {
 			status = "success";
 			msg = "급여 등록 성공";
-			url = "redirect:/";
 		}else {
 			status = "error";
 			msg = "급여 등록 실패";
-			url = "pay/insertPay";
+			
 		}
+		
+		url = "pay/insertPay";
 		
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);

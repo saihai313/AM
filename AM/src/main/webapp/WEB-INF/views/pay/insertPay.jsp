@@ -307,6 +307,7 @@
 							$payExtra = $("#payExtra").val(pay.payExtra);
 							
 							$("input[name=tax]").on("change",function(){
+								$paySal = $("#paySal").val("");
 								if($("#tax3").prop("checked")){
 									$("#paySal").val(Math.floor(pay.paySal - (pay.paySal * $(this).val())));
 								}else{
@@ -324,31 +325,56 @@
 						console.log("ajax 통신 실패");
 					}
 				});
-				
-				
-				
-				
 			});
+		});
+		
+		
+		var check = { 
+				"payPayment":false,
+			};
+		
+		var $payP = $("#payPayment");
 			
+		$payP.on("input", function(){
+			var regExp = /^\d{1,}$/;
 			
-			
-			
-			
+			if(!regExp.test($(this).val())){
+				check.payPayment = false;
+			}else{
+				check.payPayment = true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+			}
 			
 		});
 		
+		
+		
+		
 		function validate(){
-			var payment = $("#payPament").val();
-			
-			var regExp = /^\d$/;
-			
-			if(regExp.test(payment)){
-				$("#paymentCheck").text("급여일은 숫자만 입력 가능합니다.").css("color","red");
-				return false;
+
+		
+			for(var key in check){
+				if(!check[key]){
+					
+					var msg;
+					switch(key){
+					case "payPayment" : msg="급여일이";  break;
+					
+					}
+					console.log(msg)
+					
+					swal({
+						  title: msg + " 유효하지 않습니다.",
+						  icon: "error",
+						  button: "닫기"
+						});
+					var el = "#"+key;
+					$(el).focus();
+					return false;
+				}
+				
 			}
-			
-			
-		}
+		}	
+	
 		
 		
 			
