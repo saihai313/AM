@@ -12,19 +12,11 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script> 
 
 <style>
-
-
 .tabType1 {
    height: 50px;
    text-align: center;
    font-family: 'S-CoreDream-6Bold';
 }
-
-
-
-
-
-
 .tabType1 li.on a {
    color: #fff;
 }
@@ -62,20 +54,18 @@ table.type07 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
 #correction{
    float: right;
 }
-
 #btnArea > button{
-	float: right;
+   float: right;
 }
-
+{
+   text-align: center;
+}
 {
 	text-align: center;
 }
-
-
 </style>
 
 </head>
@@ -94,11 +84,11 @@ table.type07 td {
             <div class="row justify-content-center p-5 col-md-10 mx-auto" style="border: 50px solid #F5F4F0">
                
               <!--  <div class="row justify-content-center pb-5">
-		            <div class="col-md-12 heading-section text-center fadeInUp">
-		               <span class="subheading">Salary</span>
-		               <h2> 급여명세서</h2>
-		            </div>
-         	  </div> -->
+                  <div class="col-md-12 heading-section text-center fadeInUp">
+                     <span class="subheading">Salary</span>
+                     <h2> 급여명세서</h2>
+                  </div>
+              </div> -->
                
                
                <!-- 제목  -->
@@ -108,6 +98,7 @@ table.type07 td {
                   <hr>
                </div>
                <form action="../../pay/updatePayAction/${payNo}" method="post" class="contactForm">
+
 	               <div class="row" style="width: 500px; font-family: 'S-CoreDream-6Bold';">
 			               <!-- 내용  -->
 			               <div class="col-md-12">
@@ -165,6 +156,7 @@ table.type07 td {
 		
 	               
 	              </div>
+
               </form>
             </div>
          </div>
