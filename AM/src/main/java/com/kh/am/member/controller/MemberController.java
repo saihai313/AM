@@ -1,5 +1,7 @@
 package com.kh.am.member.controller;
 
+import java.io.File;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -217,14 +220,92 @@ public class MemberController {
 		int result = 0;
 		
 		MimeMessage mail = mailSender.createMimeMessage();
-		String mailContent = "<h1>[이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-		                    + "<a href='http://localhost:8080/am/member/signUpEmail?memberEmail=" 
-		                    + memberEmail + "' target='_blenk'>이메일 인증 확인</a>";
+	
+		
+		String mailContent = "<!DOCTYPE html>\r\n" + 
+				"<html lang=\"ko\">\r\n" + 
+				"<head>\r\n" + 
+				"    <meta charset=\"utf-8\">\r\n" + 
+				"\r\n" + 
+				"<style>\r\n" + 
+				".bg_white{\r\n" + 
+				"	background: #ffffff;\r\n" + 
+				"}\r\n" + 
+				".bg_light{\r\n" + 
+				"	background: #fafafa;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				".btn{\r\n" + 
+				"    text-decoration: none;\r\n" + 
+				"	padding: 10px 15px;\r\n" + 
+				"    font-family: 'S-CoreDream-6Bold' !important;\r\n" + 
+				"    border-radius: 30px;\r\n" + 
+				"	background-color: #589168;\r\n" + 
+				"	color: #ffffff;\r\n" + 
+				"    border: none;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"body{\r\n" + 
+				"	font-family: 'Montserrat', sans-serif;\r\n" + 
+				"	font-weight: 400;\r\n" + 
+				"	font-size: 15px;\r\n" + 
+				"	line-height: 1.8;\r\n" + 
+				"	color: rgba(0,0,0,.4);\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				".heading-section h2{\r\n" + 
+				"    font-family:  'S-CoreDream-6Bold';\r\n" + 
+				"	color: #589168 !important;\r\n" + 
+				"	font-size: 28px;\r\n" + 
+				"	margin-top: 0;\r\n" + 
+				"	line-height: 1.4;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"/* 에스코어드림B(bold)*/\r\n" + 
+				"@font-face {\r\n" + 
+				"  font-family: 'S-CoreDream-6Bold';\r\n" + 
+				"  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');\r\n" + 
+				"  font-weight: normal;\r\n" + 
+				"  font-style: normal;\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"</style>\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"</head>\r\n" + 
+				"\r\n" + 
+				"<body>\r\n" + 
+				"	<center style=\"width: 100%; background-color: #f1f1f1;\">\r\n" + 
+				"     <div style=\"max-width: 600px; margin: 0 auto;\" >\r\n" + 
+				"    	<!-- BEGIN BODY -->\r\n" + 
+				"      <table align=\"center\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\" style=\"margin: auto; border: 100px solid  #f1f1f1;\">\r\n" + 
+				"       \r\n" + 
+				"        <tr>\r\n" + 
+				"        <td class=\"bg_white\" style=\"text-align: center;\">\r\n" + 
+				"            <div class=\"heading-section\" style=\"text-align: center; padding: 30px 30px;\">\r\n" + 
+				"                <span class=\"subheading\" style=\"border-bottom: 3px solid #589168; \">Services</span>\r\n" + 
+				"                <h2 style=\"margin-top: 5px;\">이메일 인증</h2>\r\n" + 
+				"                <p style=\"font-weight: bold; font-family: 'S-CoreDream-6Bold';\">아래 버튼을 클릭하면 이메일 인증이 완료됩니다.</p>\r\n" + 
+				"                <a class=\"btn\"\r\n" + 
+				"                href='http://localhost:8080/am/member/signUpEmail?memberEmail=" + memberEmail + "' target='_blenk'>이메일 인증 확인</a>\r\n" + 
+				"            </div>\r\n" + 
+				"        </td>\r\n" + 
+				"        \r\n" + 
+				"    </table>\r\n" + 
+				"\r\n" + 
+				"</tr><!-- end:tr -->\r\n" + 
+				"    </div>\r\n" + 
+				"  </center>\r\n" + 
+				"</body>\r\n" + 
+				"</html>";
 		try {
 	         mail.setSubject("AM 회원가입 이메일 인증 ", "utf-8");
 	         mail.setText(mailContent, "utf-8", "html");
 	         mail.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail));
 	         mailSender.send(mail);
+	         
+
 	         
 	         result = 1;
 	         

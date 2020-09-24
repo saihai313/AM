@@ -1,0 +1,113 @@
+package com.kh.am_employee.pay.model.service;
+
+import java.sql.Date;
+import java.util.List;
+
+import com.kh.am_employee.pay.model.vo.PageInfo;
+import com.kh.am_employee.pay.model.vo.Pay;
+import com.kh.am_employee.pay.model.vo.PayCorrRejection;
+import com.kh.am_employee.pay.model.vo.PayCorrection;
+
+public interface PayService {
+
+	/** 급여명세서 목록_페이징 처리
+	 * @param cp
+	 * @param memberNo
+	 * @param boardType 
+	 * @return pInfo
+	 */
+	PageInfo pagination(int cp, int memberNo);
+	
+	/** 급여 명세서 목록 
+	 * @param pInfo 
+	 * @param memberNo 
+	 * @return payList
+	 */
+	List<Pay> payList(PageInfo pInfo, int memberNo);
+
+	/** 급여 명세서 상세조회
+	 * @param payNo
+	 * @return payView
+	 */
+	Pay payView(int payNo, String correctionCreateDate);
+
+	/** 급여 명세서 확인 완료
+	 * @param payNo
+	 * @return result
+	 */
+	int payConfirm(int payNo);
+
+	/** 급여 명세서 정정 신청
+	 * @param payCorr
+	 * @return result
+	 */
+	int payCorrection(PayCorrection payCorr);
+
+	/** 급여 정정 신청_목록
+	 * @param pInfo
+	 * @param memberNo
+	 * @return correctionList
+	 */
+	List<PayCorrection> correctionList(PageInfo pInfo2, int memberNo);
+
+	/** 급여 정정 신청 _목록_페이지 처리
+	 * @param cp
+	 * @param memberNo
+	 * @return pInfo2
+	 */
+	PageInfo pagination2(int cp, int memberNo);
+
+	/** 급여 정정 신청_세부조회
+	 * @param correctionNo
+	 * @return payCorr
+	 */
+	PayCorrection correctionView(int correctionNo, Date correctionCreateDate);
+	
+	/** 급여 정정 신청_세부조회(반려)
+	 * @param correctionNo
+	 * @return
+	 */
+	PayCorrRejection rejectionView(int correctionNo);
+
+	/** 급여 정정 신청_삭제
+	 * @param correctionNo
+	 * @param payNo 
+	 * @return result
+	 */
+	int correctionDelete(int correctionNo, int payNo);
+
+	/** 급여 정정 신청_수정
+	 * @param correctionNo
+	 * @param correctionContent 
+	 * @return result
+	 */
+	int correctionUpdate(PayCorrection payCorr);
+
+	/** 급여 정정 신청_확인 완료
+	 * @param correctionNo
+	 * @return
+	 */
+	int payConfirm2(int correctionNo);
+
+	
+	/** 메인_확인 안한 급여 명세서
+	 * @param memberNo
+	 * @return payList
+	 */
+	List<Pay> payListMain(int memberNo);
+
+	/** 메인_확인 안한 급여 정정 결과
+	 * @param memberNo
+	 * @return correctionList
+	 */
+	List<PayCorrection> correctionListMain(int memberNo);
+
+	/** 급여 정정 상세 조회
+	 * @param payNo
+	 * @param correctionCreateDate
+	 * @return pay
+	 */
+	Pay payView2(int payNo, Date correctionCreateDate);
+
+
+}

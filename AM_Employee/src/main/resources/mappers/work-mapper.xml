@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="workMapper">
+
+	<resultMap type="WorkCalendar" id="workCalendarResultSet">
+		<id property="workNo" column="WORK_NO"/>
+		<result property="workDay" column="WORK_DAY"/>
+		<result property="workStart" column="WORK_START"/>
+		<result property="workEnd" column="WORK_END"/>
+		<result property="storeNo" column="STORE_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberName" column="MEMBER_NM"/>
+	</resultMap>
+
+	<resultMap type="Employee" id="employeeResultSet">
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="storeNo" column="STORE_NO"/>
+		<result property="sal" column="EMPLOYEE_SAL"/>
+	</resultMap>
+		
+	<resultMap type="Member" id="memberResultSet" >
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NM"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
+		<result property="memberGrade" column="MEMBER_GRADE"/>
+		<result property="memberCheck" column="MEMBER_CHECK"/>
+	</resultMap>
+	
+	<!-- 스케쥴 조회 (알바) -->
+	<select id="workCalendar" parameterType="Member" resultMap="workCalendarResultSet">
+		SELECT WORK_NO, STORE_NO,  MEMBER_NO, WORK_DAY, WORK_START, WORK_END, MEMBER_NM 
+		FROM WORK_CALENDAL JOIN MEMBER USING(MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 스케쥴 조회 (전체) -->
+	<select id="workCalendar2" parameterType="Store" resultMap="workCalendarResultSet">
+		SELECT WORK_NO, STORE_NO,  MEMBER_NO, WORK_DAY, WORK_START, WORK_END, MEMBER_NM 
+		FROM WORK_CALENDAL JOIN MEMBER USING(MEMBER_NO)
+		WHERE STORE_NO =  #{storeNo}
+	</select>
+
+</mapper>
