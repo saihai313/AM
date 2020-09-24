@@ -38,8 +38,6 @@ public class MemberController {
     public String loginAction(Member member,Model model, RedirectAttributes rdAttr,
                               HttpServletResponse response) {
         
-        System.out.println("member로그인"+member.getMemberEmail());
-        System.out.println("memberps"+member.getMemberPwd());
 
         Member loginMember = memberService.login(member);
         
@@ -53,9 +51,6 @@ public class MemberController {
         }else {
             model.addAttribute("loginMember",loginMember);
         }
-        
-        System.out.println(loginMember+"로그인 다믕ㄴ거");
-         
         
          return "member/main";
     }
