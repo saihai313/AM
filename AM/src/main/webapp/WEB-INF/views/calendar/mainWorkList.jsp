@@ -255,7 +255,7 @@ $(document).ready(function() {
                 var start = new Date(year, month, day, startTime, 0);
                 var end = new Date(year, month, day, endTime, 0);
                 //var obj = {"year" : year, "month" : month, "day" : day, "name" : name, "startTime" : startTime, "endtTime" : endtTime };
-                var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false};
+                var obj = {"title" : name ,"start" : start, "end" : end, "allDay" : false, "color" : "#"+Math.round(Math.random()*0xffffff).toString(16)};
                 console.log(obj);
                 
                 
