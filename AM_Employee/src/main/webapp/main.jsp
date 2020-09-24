@@ -13,7 +13,7 @@
 			border-bottom: 3px solid #eceaea; 
 		}
 		.main-text{font-family: 'S-CoreDream-4Regular' !important;}
-		.main-title{font-family: 'S-CoreDream-8Heavy'!important; color: #FEEBB6;}
+		.main-title{font-family: 'S-CoreDream-8Heavy'!important;}
 		.mainTable *{font-size: small; color: grey;}
 		.mainTable thead tr:first-child{font-weight: bold; font-family: 'S-CoreDream-6Bold';}
 		.mainTable thead tr:last-child{border-bottom: 3px solid #F5F4F0;}
