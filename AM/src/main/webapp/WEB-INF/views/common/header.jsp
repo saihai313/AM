@@ -75,7 +75,7 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="${contextPath}"><img src="${contextPath}/resources/images/main_logo.png" width="70%"> </a>
+	      <a class="navbar-brand" href="${contextPath}"><img src="${contextPath}/resources/images/main_logo_employer.png" width="70%"> </a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>Menu
 	      </button>
@@ -93,20 +93,21 @@
 	  </nav>
 	  <!-- END nav -->
 	  
-	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.animateNumber.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.easing.1.3.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.stellar.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.waypoints.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery-migrate-3.0.1.min.js"></script>
-	  <script type="text/javascript" src="${contextPath}/resources/js/main.js"></script>
-	  <script type="text/javascript" src="${contextPath}/resources/js/bootstrap.min.js"></script>
-	  <script type="text/javascript" src="${contextPath}/resources/js/owl.carousel.min.js"></script>
-	  <script type="text/javascript" src="${contextPath}/resources/js/popper.min.js"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	  <script type="text/javascript" src="${contextPath}/resources/js/scrollax.min.js"></script>
 	  
 	  <script type="text/javascript" src="${contextPath}/resources/js/jquery.easing.1.3.js"></script>
+	  <script type="text/javascript" src="${contextPath}/resources/js/owl.carousel.min.js"></script>
+	  <script type="text/javascript" src="${contextPath}/resources/js/main.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	 
   </body>
 </html>

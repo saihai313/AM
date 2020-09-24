@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+
+	<resultMap id="memberResultSet" type="Member" >
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPwd" column="MEMBER_PWD"/>
+		<result property="memberName" column="MEMBER_NM"/>
+		<result property="memberPhone" column="MEMBER_PHONE"/>
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE"/>
+		<result property="memberGrade" column="MEMBER_GRADE"/>
+		<result property="memberCheck" column="MEMBER_CHECK"/>
+		<result property="memberStatus" column="MEMBER_STATUS"/>
+	</resultMap>
+	
+	<resultMap id="memberAuthResultSet" type="MemberAuth" >
+		<id property="authEmail" column="AUTH_EMAIL"/>
+		<id property="storeNo" column="STORE_NO"/>
+		<result property="authKey" column="AUTH_KEY"/>
+		<result property="authCheck" column="AUTH_CHECK"/>
+	</resultMap>
+	
+	<resultMap id="storeResultSet" type="Store" >
+		<id property="storeNo" column="STORE_NO"/>
+		<result property="storeName" column="STORE_NM"/>
+		<result property="storePhone" column="STORE_PHONE"/>
+		<result property="storeAddress" column="STORE_ADDR"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+	</resultMap>
+
+	<resultMap id="CurrentSalaryResultSet" type="CurrentSalary" >
+		<id property="currentYear" column="CURRENT_YEAR"/>
+		<result property="currentMinSalary" column="CURRENT_MIN_SAL"/>
+	</resultMap>
+
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_GRADE = 'E'
+		AND MEMBER_CHECK = 'Y'
+		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	<!-- 로그인_가게정보 -->
+	<select id="loginStore" parameterType="Member" resultMap="storeResultSet">
+		SELECT STORE_NO, STORE_NM, STORE_PHONE, STORE_ADDR, MEMBER_NO
+		FROM STORE 
+		WHERE STORE_NO = (SELECT STORE_NO 
+		                  FROM EMPLOYEE 
+    	                  WHERE MEMBER_NO = #{memberNo})
+	</select>
+
+	<!-- 회원가입_인증 확인 -->
+	<select id="certificate" parameterType="MemberAuth" resultMap="memberAuthResultSet">
+		SELECT * FROM MEMBER_AUTH
+		WHERE AUTH_EMAIL = #{authEmail}
+	</select>
+	
+	<!-- 회원가입_이메일 중복 검사 -->
+	<select id="emailDupCheck" parameterType="MemberAuth" resultMap="memberResultSet">
+		SELECT MEMBER_EMAIL FROM MEMBER
+		WHERE MEMBER_EMAIL = #{authEmail}
+		AND MEMBER_GRADE = 'E'
+		AND MEMBER_CHECK = 'Y'
+		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	<!-- 회원가입_공통 정보 -->
+	<insert id="signUpMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MNO.NEXTVAL, #{memberEmail}, #{memberPwd}, #{memberName}, #{memberPhone}, 
+				SYSDATE, 'E', 'Y', 'Y')
+	</insert>
+	
+	<!-- 회원가입_회원번호 조회  -->
+	<select id="memberNo" parameterType="MemberAuth" resultMap="memberResultSet">
+		SELECT MEMBER_NO FROM MEMBER
+		WHERE MEMBER_EMAIL = #{authEmail}
+		AND MEMBER_GRADE = 'E'
+		AND MEMBER_CHECK = 'Y'
+		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	<!-- 회원가입_알바생 정보  -->
+	<insert id="signUpEmployee" parameterType="map">
+		INSERT INTO EMPLOYEE
+		VALUES(#{memberNo}, #{storeNo}, 8590)
+	</insert>
+	
+	<!-- 최저 시급 조회  -->
+	<select id="currentMinSalary" resultMap="CurrentSalaryResultSet">
+	   SELECT CURRENT_YEAR, CURRENT_MIN_SAL
+		FROM(
+		 SELECT ROWNUM,  C.*
+		 FROM CURRENT_SAL C
+		 ORDER BY CURRENT_YEAR DESC)
+	   WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 마이페이지_회원정보 수정 -->
+	<update id="updateMemberAction" parameterType="map">
+		UPDATE MEMBER
+		SET MEMBER_PHONE = #{memberPhone}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 마이페이지_비밀번호 조회 -->
+	<select id="selectPwd" parameterType="_int" resultType="string">
+		SELECT MEMBER_PWD FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 마이페이지_비밀번호 수정 -->
+	<update id="updatePwdAction" parameterType="Member">
+		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 마이페이지_회원 탈퇴 -->
+	<update id="secessionAction" parameterType="_int">
+		UPDATE MEMBER SET MEMBER_STATUS = 'N' WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+</mapper>

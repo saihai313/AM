@@ -53,16 +53,6 @@ public interface BoardService {
 
     
     
-	/** 뉴스 정보 조회
-	 * @return
-	 */
-	List<NewsBoard> selectnews();
-
-    /** 뉴스 등록
-     * @param newsBoard
-     * @return
-     */
-    int insertNews(NewsBoard newsBoard);
 
     /** 시급 삭제
      * @param currentYear
@@ -70,6 +60,20 @@ public interface BoardService {
      */
     int deleteSal(int currentYear);
 
+    
+    
+    /** 뉴스 정보 조회
+	 * @return
+	 */
+	List<NewsBoard> selectnews();
+
+	
+	
+    /** 뉴스 등록
+     * @param newsBoard
+     * @return
+     */
+    int insertNews(NewsBoard newsBoard);
 
     
   

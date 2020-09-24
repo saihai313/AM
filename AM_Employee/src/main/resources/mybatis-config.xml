@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN " "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 마이바티스 설정 파일 -->
+	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.am_employee.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.am_employee.member.model.vo.MemberAuth" alias="MemberAuth"/>
+		<typeAlias type="com.kh.am_employee.member.model.vo.Store" alias="Store"/>
+		<typeAlias type="com.kh.am_employee.member.model.vo.CurrentSalary" alias="CurrentSalary"/>
+		
+		<typeAlias type="com.kh.am_employee.pay.model.vo.Pay" alias="Pay"/>
+		<typeAlias type="com.kh.am_employee.pay.model.vo.PayWork" alias="PayWork"/>
+		<typeAlias type="com.kh.am_employee.pay.model.vo.PayCorrection" alias="PayCorrection"/>
+		<typeAlias type="com.kh.am_employee.pay.model.vo.PayCorrRejection" alias="PayCorrRejection"/>
+		
+		<typeAlias type="com.kh.am_employee.work.model.vo.Employee" alias="Employee"/>
+		<typeAlias type="com.kh.am_employee.work.model.vo.WorkCalendar" alias="WorkCalendar"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml" />
+		<mapper resource="/mappers/pay-mapper.xml" />
+		<mapper resource="/mappers/work-mapper.xml" />
+	</mappers>
+</configuration>

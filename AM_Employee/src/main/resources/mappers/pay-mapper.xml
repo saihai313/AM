@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="payMapper">
+
+  <resultMap type="Pay" id="payResultSet">
+       <id property="payNo" column="PAY_NO"/>
+       <result property="payTime" column="PAY_TIME"/>
+       <result property="payDay" column="PAY_DAY"/>
+       <result property="payExtra" column="PAY_EXTRA"/>
+       <result property="paySalary" column="PAY_SAL"/>
+       <result property="payCreateDate" column="PAY_CREATE_DT"/>
+       <result property="payStatus" column="PAY_STATUS"/>
+       <result property="memberNo" column="MEMBER_NO"/>
+       <result property="storeNo" column="STORE_NO"/>
+       <result property="paystubNo" column="PAYSTUB_NO"/>
+       <result property="correctionCreateDate" column="CORR_CREATE_DT"/>
+       <result property="correctionModifyDate" column="CORR_MODIFY_DT"/>
+   </resultMap>
+   
+   <resultMap type="PayWork" id="payWorkResultSet">
+       <id property="workNo" column="WORK_NO"/>
+       <result property="workDay" column="WORK_DAY"/>
+       <result property="workStart" column="WORK_START"/>
+       <result property="workEnd" column="WORK_END"/>
+   </resultMap>
+   
+   <resultMap type="PayCorrection" id="payCorrectionResultSet">
+       <id property="correctionNo" column="CORR_NO"/>
+       <result property="correctionContent" column="CORR_CONTENT"/>
+       <result property="correctionCreateDate" column="CORR_CREATE_DT"/>
+       <result property="correctionModifyDate" column="CORR_MODIFY_DT"/>
+       <result property="correctionStatus" column="CORR_STATUS"/>
+       <result property="correctionResult" column="CORR_RESULT"/>
+       <result property="correctionSubmit" column="CORR_SUBMIT"/>
+       <result property="memberNo" column="MEMBER_NO"/>
+       <result property="storeNo" column="STORE_NO"/>
+       <result property="payNo" column="PAY_NO"/>
+       <result property="corrRejectionDate" column="CORR_RE_DT"/>
+   </resultMap>
+   
+    <resultMap type="PayCorrRejection" id="payCorrRejectionResultSet">
+       <id property="corrRejectionNo" column="CORR_RE_NO"/>
+       <result property="corrRejectionContent" column="CORR_RE_CONTENT"/>
+       <result property="corrRejectionDate" column="CORR_RE_DT"/>
+       <result property="correctionNo" column="CORR_NO"/>
+       <result property="storeNo" column="STORE_NO"/>
+   </resultMap>
+   
+  
+   <!-- 급여 명세서 목록_글 개수 조회 -->
+   <select id="getListCount" parameterType="Member" resultType="_int">
+   	SELECT COUNT(*) FROM V_PAY_EMPLOYEE
+   	WHERE MEMBER_NO= #{memberNo}
+   </select>
+   
+   <!-- 급여 명세서 목록 조회 -->
+   <select id="payList" parameterType="_int" resultMap="payResultSet">
+   	SELECT * 
+	FROM (SELECT ROWNUM PAYSTUB_NO, V.* 
+	      FROM(SELECT * 
+	           FROM V_PAY_EMPLOYEE)V
+		  WHERE MEMBER_NO = #{memberNo}
+		  ORDER BY PAYSTUB_NO DESC)
+   </select>
+   
+   <!-- 급여 명세서 상세 조회 -->
+   <select id="payView" parameterType="Pay" resultMap="payResultSet">
+   	SELECT * FROM V_PAY_EMPLOYEE
+   	WHERE PAY_NO = #{payNo}
+   	<if test="correctionCreateDate != 'null'"> AND TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}</if> 
+   </select>
+   
+   <!-- 급여 명세서 상세 조회_근무기간 -->
+   <!-- <select id="payWorkView" parameterType="map" resultMap="payWorkResultSet">
+   	SELECT * 
+	FROM WORK_CALENDAL
+	WHERE MEMBER_NO = #{memberNo}
+	AND WORK_DAY BETWEEN #{payWork.payStartDate} AND #{payWork.payEndDate};
+   </select> -->
+   
+   <!-- 급여 명세서 확인완료 -->
+   <update id="payConfirm" parameterType="Pay">
+   	UPDATE PAY
+   	SET PAY_STATUS = 'Y'
+   	WHERE PAY_NO = #{payNo}
+   </update>
+   
+   <!-- 급여 명세서 정정 신청-->
+   <update id="payCorrection2" parameterType="PayCorrection">
+   	UPDATE PAY
+   	SET PAY_STATUS = 'N'
+   	WHERE PAY_NO = #{payNo}
+   </update>
+   
+   <!-- 급여 명세서 정정 신청 -->
+   <insert id="payCorrection" parameterType="PayCorrection">
+   	INSERT INTO PAY_CORR
+   	VALUES(SEQ_CNO.NEXTVAL, #{correctionContent}, 
+   			DEFAULT, DEFAULT, 'W', 'W', 'Y',
+   			#{memberNo}, #{storeNo}, #{payNo})
+   </insert>
+   
+    <!-- 급여 정정 신청_글 개수 조회 -->
+   <select id="getListCount2" parameterType="Member" resultType="_int">
+   	SELECT COUNT(*) FROM PAY_CORR
+   	WHERE MEMBER_NO= #{memberNo}
+   	AND CORR_SUBMIT = 'Y'
+   </select>
+   
+   <!-- 급여 정정 신청_목록 조회 -->
+   <select id="correctionList" parameterType="_int" resultMap="payCorrectionResultSet">
+   	SELECT * FROM V_PAY_CORRECTION
+	WHERE MEMBER_NO = #{memberNo}
+   </select>
+   
+   <!-- 급여 정정 신청_세부조회 -->
+   <select id="correctionView" parameterType="PayCorrection" resultMap="payCorrectionResultSet">
+    SELECT * FROM PAY_CORR
+	WHERE CORR_NO = #{correctionNo}
+	AND  TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}
+   </select>
+   
+   <!-- 급여 정정 신청_세부조회(반려) -->
+   <select id="rejectionView" parameterType="PayCorrRejection" resultMap="payCorrRejectionResultSet">
+   	SELECT * FROM PAY_CORR_RE
+   	WHERE CORR_NO = #{correctionNo}
+   </select>
+   
+   <!-- 급여 정정 신청_삭제 -->
+   <update id="correctionDelete" parameterType="PayCorrection">
+   	UPDATE PAY_CORR
+   	SET CORR_SUBMIT = 'N'
+   	WHERE CORR_NO = #{correctionNo}
+   </update>
+   
+   <!-- 급여 정정 신청_수정 -->
+   <update id="correctionUpdate" parameterType="PayCorrection">
+   	UPDATE PAY_CORR
+   	SET CORR_CONTENT = #{correctionContent}, CORR_MODIFY_DT = SYSDATE
+   	WHERE CORR_NO = #{correctionNo}
+   </update>
+   
+    <!-- 급여 명세서 확인완료2 -->
+   <update id="payConfirm2" parameterType="PayCorrection">
+   	UPDATE PAY_CORR
+   	SET CORR_RESULT = 'Y'
+   	WHERE CORR_NO = #{correctionNo}
+   </update>
+   
+   <!-- 메인_확인 안한 급여 명세서 -->
+   <select id="payListMain" parameterType="_int" resultMap="payResultSet">
+   	SELECT PAY_CREATE_DT FROM PAY
+   	WHERE MEMBER_NO = #{memberNo}
+   	AND PAY_STATUS = 'W'
+   	ORDER BY PAY_CREATE_DT DESC
+   </select>
+   
+    <!-- 메인_확인 안한 급여 정정 신청-->
+   <select id="correctionListMain" parameterType="_int" resultMap="payCorrectionResultSet">
+   	SELECT CORR_CREATE_DT, CORR_STATUS
+	FROM PAY_CORR 
+	WHERE CORR_SUBMIT = 'Y'
+	AND CORR_STATUS != 'W'
+	AND CORR_RESULT = 'W'
+	AND MEMBER_NO = #{memberNo}
+	ORDER BY CORR_CREATE_DT DESC
+   </select>
+   
+    <!-- 급여 명세서 상세 조회2 -->
+   <select id="payView2" parameterType="map" resultMap="payResultSet">
+   	SELECT * FROM V_PAY_EMPLOYEE
+   	WHERE PAY_NO = #{payNo}
+   	AND TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}
+   </select>
+   
+</mapper>

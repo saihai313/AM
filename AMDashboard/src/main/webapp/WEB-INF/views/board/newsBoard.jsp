@@ -86,7 +86,7 @@
 												<c:choose>
 													<c:when test="${empty selectnews}">
 														<tr>
-															<td colspan="6">존재하는 회원이 없습니다.</td>
+															<td colspan="6">존재하는 기사가 없습니다.</td>
 														</tr>
 													</c:when>
 													<c:otherwise>
