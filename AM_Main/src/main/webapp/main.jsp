@@ -33,9 +33,9 @@
 					
 					<div class="col-md-6 d-flex justify-content-md-end">
 					<p class="mb-0 phone pl-md-2 nav-top">
-						<a href="../am/member/login"><span class="fa" id="nav-first"></span>사장님 로그인</a>
+						<a href="../am/member/login"><span class="fa" id="nav-first"></span>사장님 로그인 바로가기</a>
 	           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="../am_employee/member/login"><span class="fa"></span>알바생 로그인</a>
+						<a href="../am_employee/member/login"><span class="fa"></span>알바생 로그인 바로가기</a>
 					</p>
 				</div>
 					
@@ -48,28 +48,34 @@
     		<img src="resources/images/main_img1.png" width="100%" style="margin-left: 10em;">
     		<div style="z-index: 999; position: absolute; top: 50px;" class="text-center">
          		<img src="resources/images/main_logo.png" width="100%">
-         		<h3 class="mt-3" style="font-family: 'S-CoreDream-8Heavy'; color: grey;">
-         			오른쪽 버튼을 클릭하여<br>전용 사이트로 접속해주세요.</h3>
+         		<h3 class="mt-3" style="font-family: 'S-CoreDream-6Bold';">
+         			알바생 전용 관리 사이트<br>"AM"에 오신 것을 환영합니다.</h3>
          	</div>
-         	<div style="z-index: 999; position: absolute; top: 250px; left: 938px">
+         	<div style="z-index: 999; position: absolute; top: 230px; left: 935px">
          	    <div style="display: inline-block;">
-	         	    <div><span style="color: #589168;">service</span><p style="font-family: 'S-CoreDream-6Bold';">FOR EMPLOYER</p></div>
-			    	<a href="../am" class="btn btn-primary py-3 px-4 pl-5 pr-5" style="margin-right: 75px;">사장님</a>
+	         	    <div><span style="color: #589168;">service</span><p class="p-0 m-0 mb-1" style="font-family: 'S-CoreDream-6Bold';">FOR EMPLOYER</p></div>
+			    	<a href="../am" class="btn btn-primary py-3 px-4" style="margin-right: 85px;">사장님<br>전용 사이트<br>바로가기</a>
 	    		</div>
 	    		<div style="display: inline-block;">
-		    		<div><span style="color: #589168;">service</span><p style="font-family: 'S-CoreDream-6Bold';">FOR EMPLOYER</p></div>
-					<a href="../am_employee" class="btn btn-primary py-3 px-4  pl-5 pr-5">알바생</a> 
+		    		<div><span style="color: #589168;">service</span><p class="p-0 m-0 mb-1" style="font-family: 'S-CoreDream-6Bold';">FOR EMPLOYEE</p></div>
+					<a href="../am_employee" class="btn btn-primary py-3 px-4">알바생<br>전용 사이트<br>바로가기</a> 
 				</div>
 			</div>
     	</div>
     </section>
     
     <section class="ftco-section bg-light">
+    	<img src="resources/images/main_img2.png" width="100%">
     	<div class="container">
-    		
-    	</div>
+          
+          	<div style="z-index: 999; position: absolute; top: 100px; left: 800px">
+	            <p class="mb-0 pb-0 main-text">귀찮고 어려운 알바생 관리? 이제 AM에 맡기세요!</p>
+	            <h1 class="mb-4 main-title" style="color:#589168;">Leave it up to AM</h1>
+	            <p class="main-text">소규모 사업장에서도 부담 없이 사용할 수 있는<br>인사, 근무, 급여 관리 프로그램</p>
+            </div>
+          
+        </div>
     </section>
-		
     
 
    
