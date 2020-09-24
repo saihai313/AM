@@ -43,9 +43,9 @@
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Family</h2>
               <ul class="list-unstyled">
-                <li><a href="../am"><span class="fa fa-chevron-right mr-2"></span>사장님</a></li>
-                <li><a href="../am_employee"><span class="fa fa-chevron-right mr-2"></span>알바생</a></li>
-                <li><a href="../am_admin"><span class="fa fa-chevron-right mr-2"></span>관리자</a></li>
+                <li><a href="${contextPath}"><span class="fa fa-chevron-right mr-2"></span>사장님</a></li>
+                <li><a href="${contextPath}/../am_employee"><span class="fa fa-chevron-right mr-2"></span>알바생</a></li>
+                <li><a href="${contextPath}/../am_admin"><span class="fa fa-chevron-right mr-2"></span>관리자</a></li>
               </ul>
             </div>
           </div>

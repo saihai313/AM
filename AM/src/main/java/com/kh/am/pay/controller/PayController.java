@@ -123,7 +123,7 @@ public class PayController {
 			
 		}
 		
-		url = "pay/insertPay";
+		url = "redirect:insertPay";
 		
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);

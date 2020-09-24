@@ -72,7 +72,6 @@
 	<select id="selectEmployeeWork" parameterType="_int" resultMap="calendarResultSet">
 		SELECT COUNT(*) AS WORK_START,  SUM(WORK_END - WORK_START) AS WORK_END 
 		FROM WORK_CALENDAL
-		JOIN PAY USING(MEMBER_NO)
 		WHERE TO_CHAR(WORK_DAY, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 		GROUP BY MEMBER_NO
 		HAVING MEMBER_NO = #{memberNo}
