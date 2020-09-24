@@ -197,10 +197,18 @@ public class PersonnelController {
     }
     
     @RequestMapping("updateAuthKey")
-    public void updateAuthKey(@RequestParam
+    public String updateAuthKey(@RequestParam
     							String employeeEmail, @RequestParam String authKey) {
     	
     	int result = personnelService.updateAuthKey(employeeEmail, authKey);
+
+    	String path = null;
+    	
+    	if(result > 0) {
+    		path = "redirect:/../am_employee/member/signUp";
+    	}
+    	
+    	return path;
     }
 	
 
