@@ -12,19 +12,11 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script> 
 
 <style>
-
-
 .tabType1 {
    height: 50px;
    text-align: center;
    font-family: 'S-CoreDream-6Bold';
 }
-
-
-
-
-
-
 .tabType1 li.on a {
    color: #fff;
 }
@@ -62,24 +54,18 @@ table.type07 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
 #correction{
    float: right;
 }
-
 #btnArea > button{
    float: right;
 }
-
 {
    text-align: center;
 }
-
 {
 	text-align: center;
 }
-
-
 </style>
 
 </head>
@@ -187,3 +173,4 @@ table.type07 td {
 
 </body>
 </html>
+
