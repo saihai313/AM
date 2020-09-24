@@ -1,7 +1,6 @@
 package com.kh.am_employee.pay.controller;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.kh.am_employee.member.model.vo.Member;
 import com.kh.am_employee.member.model.vo.Store;
 import com.kh.am_employee.pay.model.service.PayService;
@@ -63,12 +60,9 @@ public class PayController {
 	// 급여 명세서 상세 조회
 	@RequestMapping("payView/{payNo}")
 	public String payView(@PathVariable int payNo, 
-						  @RequestParam(value="day", required = false, defaultValue = "null") String correctionCreateDate,
 						  Model model, RedirectAttributes rdAttr, HttpServletRequest request){
-		
-		System.out.println(payNo);
-		System.out.println(correctionCreateDate);
-		Pay payView = payService.payView(payNo, correctionCreateDate);
+
+		Pay payView = payService.payView(payNo);
 		System.out.println(payView);
 		
 		String url = null;
@@ -170,14 +164,13 @@ public class PayController {
 	// 급여 정정 신청_세부조회
 	@ResponseBody
 	@RequestMapping("correctionView")
-	public String correctionView(int correctionNo, Date correctionCreateDate, Model model) {
+	public String correctionView(int correctionNo, Model model) {
 		
 		System.out.println(correctionNo);
-		System.out.println(correctionCreateDate);
 		
 		
 		// 1) 정정 신청 정보(PAY_CORR)
-		PayCorrection payCorr = payService.correctionView(correctionNo, correctionCreateDate);
+		PayCorrection payCorr = payService.correctionView(correctionNo);
 		System.out.println(payCorr);
 
 		
@@ -186,7 +179,7 @@ public class PayController {
 		System.out.println(payCorrRe);
 		
 		// 3) 해당 명세서 정보(PAY)
-		Pay pay = payService.payView2(payCorr.getPayNo(), correctionCreateDate);
+		Pay pay = payService.payView(payCorr.getPayNo());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("payCorr", payCorr);
@@ -218,7 +211,7 @@ public class PayController {
 		int result = payService.correctionUpdate(payCorr);
 		
 		if(result > 0) {
-			payCorr = payService.correctionView(correctionNo, correctionCreateDate);
+			payCorr = payService.correctionView(correctionNo);
 		}
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -258,6 +251,14 @@ public class PayController {
 		PayCorrection payCorr = new PayCorrection(correctionContent, memberNo, storeNo, payNo);
 		
 		int result = payService.payCorrection(payCorr);
+		
+		
+		// 이전 정정 신청 상태 변경(재신청)
+		if(result > 0) {
+			result = payService.payCorrectionRe(payCorr);
+		}else {
+			result = 0;
+		}
 		
 		return result;
 	}

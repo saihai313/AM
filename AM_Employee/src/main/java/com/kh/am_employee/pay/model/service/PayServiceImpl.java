@@ -1,9 +1,6 @@
 package com.kh.am_employee.pay.model.service;
 
-import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,13 +39,8 @@ public class PayServiceImpl implements PayService{
 
 	// 급여 명세서 상세조회
 	@Override
-	public Pay payView(int payNo, String correctionCreateDate) {
-		
-		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("payNo", payNo);
-		map.put("correctionCreateDate", correctionCreateDate);
-		
-		return payDAO.payView(map);
+	public Pay payView(int payNo) {
+		return payDAO.payView(payNo);
 	}
 
 	// 급여 명세서 확인 완료
@@ -90,13 +82,8 @@ public class PayServiceImpl implements PayService{
 
 	// 급여 정정 신청_세부조회
 	@Override
-	public PayCorrection correctionView(int correctionNo,  Date correctionCreateDate) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("correctionNo", correctionNo);
-		map.put("correctionCreateDate", correctionCreateDate);
-		
-		return payDAO.correctionView(map);
+	public PayCorrection correctionView(int correctionNo) {
+		return payDAO.correctionView(correctionNo);
 	}
 	
 	// 급여 정정 신청_세부조회(반려)
@@ -134,6 +121,14 @@ public class PayServiceImpl implements PayService{
 	public int payConfirm2(int correctionNo) {
 		return payDAO.payConfirm2(correctionNo);
 	}
+	
+	// 급여 정정 재신청_상태 변경
+	@Transactional(rollbackFor=Exception.class)
+	@Override
+	public int payCorrectionRe(PayCorrection payCorr) {
+		return payDAO.payCorrectionRe(payCorr);
+	}
+	
 
 	// 메인_확인안한 급여 명세서
 	@Override
@@ -146,17 +141,6 @@ public class PayServiceImpl implements PayService{
 	public List<PayCorrection> correctionListMain(int memberNo) {
 		return payDAO.correctionListMain(memberNo);
 	}
-
-	@Override
-	public Pay payView2(int payNo, Date correctionCreateDate) {
-		
-		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("payNo", payNo);
-		map.put("correctionCreateDate", correctionCreateDate);
-		
-		return payDAO.payView2(map);
-	}
-
 
 	
 

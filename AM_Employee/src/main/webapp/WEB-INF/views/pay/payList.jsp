@@ -37,7 +37,6 @@
 						<th width="15%">발급일</th>
 						<th width="40%">명세서명</th>
 						<th width="20%">상태</th>
-						<th width="15%">정정 신청일</th>
 					</tr>
 				</thead>
 				 <tbody>
@@ -72,14 +71,6 @@
                 						</c:choose>
                 					</td>
                 						
-                					<td>
-               							<c:choose>
-                							<c:when test="${pay.correctionCreateDate != null }">
-                								${pay.correctionCreateDate }
-                							</c:when>
-                							<c:otherwise/>
-                						</c:choose>
-                					</td>
                 				</tr>
                 			</c:forEach>
                 		</c:otherwise>
@@ -147,10 +138,8 @@
 				
 				var payNo = $(this).parent().attr('id');
 				var paystubNo = $(this).parent().children().eq(0).text();
-				var correctionCreateDate = $(this).parent().children().eq(4).text().trim();
-				console.log(correctionCreateDate);
 				
-				location.href = "${contextPath}/pay/payView/" + payNo + "?cp=${pInfo.currentPage }&day=" + correctionCreateDate;
+				location.href = "${contextPath}/pay/payView/" + payNo + "?cp=${pInfo.currentPage }";
 				
 			});
 		});

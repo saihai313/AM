@@ -49,25 +49,24 @@
   
    <!-- 급여 명세서 목록_글 개수 조회 -->
    <select id="getListCount" parameterType="Member" resultType="_int">
-   	SELECT COUNT(*) FROM V_PAY_EMPLOYEE
+   	SELECT COUNT(*) FROM PAY
    	WHERE MEMBER_NO= #{memberNo}
    </select>
    
    <!-- 급여 명세서 목록 조회 -->
    <select id="payList" parameterType="_int" resultMap="payResultSet">
    	SELECT * 
-	FROM (SELECT ROWNUM PAYSTUB_NO, V.* 
+	FROM (SELECT ROWNUM PAYSTUB_NO, P.* 
 	      FROM(SELECT * 
-	           FROM V_PAY_EMPLOYEE)V
-		  WHERE MEMBER_NO = #{memberNo}
+	           FROM PAY
+		  WHERE MEMBER_NO = #{memberNo})P
 		  ORDER BY PAYSTUB_NO DESC)
    </select>
    
    <!-- 급여 명세서 상세 조회 -->
    <select id="payView" parameterType="Pay" resultMap="payResultSet">
-   	SELECT * FROM V_PAY_EMPLOYEE
-   	WHERE PAY_NO = #{payNo}
-   	<if test="correctionCreateDate != 'null'"> AND TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}</if> 
+   	SELECT * FROM PAY
+   	WHERE PAY_NO = #{payNo} 
    </select>
    
    <!-- 급여 명세서 상세 조회_근무기간 -->
@@ -109,15 +108,16 @@
    
    <!-- 급여 정정 신청_목록 조회 -->
    <select id="correctionList" parameterType="_int" resultMap="payCorrectionResultSet">
-   	SELECT * FROM V_PAY_CORRECTION
+   	SELECT * FROM PAY_CORR
 	WHERE MEMBER_NO = #{memberNo}
+	AND CORR_SUBMIT = 'Y'
+	ORDER BY CORR_NO DESC
    </select>
    
    <!-- 급여 정정 신청_세부조회 -->
    <select id="correctionView" parameterType="PayCorrection" resultMap="payCorrectionResultSet">
     SELECT * FROM PAY_CORR
 	WHERE CORR_NO = #{correctionNo}
-	AND  TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}
    </select>
    
    <!-- 급여 정정 신청_세부조회(반려) -->
@@ -140,12 +140,20 @@
    	WHERE CORR_NO = #{correctionNo}
    </update>
    
+   <!-- 급여 정정 재신청_상태 변경 -->
+   <update id="payCorrectionRe" parameterType="PayCorrection">
+    UPDATE PAY_CORR
+   	SET CORR_RESULT = 'N'
+   	WHERE CORR_NO = #{correctionNo}
+   </update>
+   
     <!-- 급여 명세서 확인완료2 -->
    <update id="payConfirm2" parameterType="PayCorrection">
    	UPDATE PAY_CORR
    	SET CORR_RESULT = 'Y'
    	WHERE CORR_NO = #{correctionNo}
    </update>
+   
    
    <!-- 메인_확인 안한 급여 명세서 -->
    <select id="payListMain" parameterType="_int" resultMap="payResultSet">
@@ -164,13 +172,6 @@
 	AND CORR_RESULT = 'W'
 	AND MEMBER_NO = #{memberNo}
 	ORDER BY CORR_CREATE_DT DESC
-   </select>
-   
-    <!-- 급여 명세서 상세 조회2 -->
-   <select id="payView2" parameterType="map" resultMap="payResultSet">
-   	SELECT * FROM V_PAY_EMPLOYEE
-   	WHERE PAY_NO = #{payNo}
-   	AND TO_CHAR(CORR_CREATE_DT, 'YYYY-MM-DD') = #{correctionCreateDate}
    </select>
    
 </mapper>

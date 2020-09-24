@@ -49,7 +49,6 @@
 						<th width="30%">해당 명세서명</th>
 						<th width="15%">신청 결과</th>
 						<th width="15%">상태</th>
-						<th width="15%">정정 반려일</th>
 					</tr>
 				</thead>
 				 <tbody>
@@ -91,15 +90,6 @@
                 							</c:when>
                 							<c:when test="${correction.correctionResult == 'N' }">
                 								정정 재신청
-                							</c:when>
-                							<c:otherwise/>
-                						</c:choose>
-                					</td>
-                					
-                					<td>
-                						<c:choose>
-                							<c:when test="${correction.correctionStatus == 'N' }">
-                								${correction.corrRejectionDate }
                 							</c:when>
                 							<c:otherwise/>
                 						</c:choose>
@@ -375,7 +365,7 @@
 				
 				$.ajax({
 					url : "correctionView",
-					data : {"correctionNo": correctionNo, "correctionCreateDate" : correctionCreateDate},
+					data : {"correctionNo": correctionNo},
 					dataType: "JSON",
 					type : "GET",
 					success : function(map){

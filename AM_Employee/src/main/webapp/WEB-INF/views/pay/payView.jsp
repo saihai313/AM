@@ -10,7 +10,6 @@
 <title>급여 명세서</title>
 <style>
 
-
 	#payView tr{
 		border-bottom: 1px solid #F5F4F0;
 		font-family: 'S-CoreDream-4Regular';
@@ -62,6 +61,12 @@
 	}
 	
 	#payView textarea:focus {border: 1px solid #FEEBB6;}
+	
+	#corrCompleteLine{
+		font-family: 'S-CoreDream-8Heavy';
+		background-color: #589168;
+		color: white;
+	}
 </style>
 </head>
 <body>
@@ -93,7 +98,7 @@
 					
 					<div class="row">
 					<!-- 내용  -->
-					<table class="col-md-7 p-5 table table-borderless mx-auto">
+					<table class="col-md-10 p-5 table table-borderless mx-auto">
 						<tr>
 							<td>이름</td>
 							<td>${loginMember.memberName }</td>
@@ -129,7 +134,7 @@
 						</h3>
 					</div>
 					
-					<div class="col-md-10 row mt-5 mb-3 justify-content-center" id="corrCompleteLine">
+					<div class="col-md-10 row mt-5 mb-3 pt-3 justify-content-center  mx-auto " id="corrCompleteLine">
 						<p>급여 정정이 신청된 명세서입니다.</p>
 					</div>
 					

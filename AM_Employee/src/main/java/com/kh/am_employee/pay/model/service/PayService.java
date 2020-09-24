@@ -1,6 +1,5 @@
 package com.kh.am_employee.pay.model.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kh.am_employee.pay.model.vo.PageInfo;
@@ -29,7 +28,7 @@ public interface PayService {
 	 * @param payNo
 	 * @return payView
 	 */
-	Pay payView(int payNo, String correctionCreateDate);
+	Pay payView(int payNo);
 
 	/** 급여 명세서 확인 완료
 	 * @param payNo
@@ -61,7 +60,7 @@ public interface PayService {
 	 * @param correctionNo
 	 * @return payCorr
 	 */
-	PayCorrection correctionView(int correctionNo, Date correctionCreateDate);
+	PayCorrection correctionView(int correctionNo);
 	
 	/** 급여 정정 신청_세부조회(반려)
 	 * @param correctionNo
@@ -88,6 +87,12 @@ public interface PayService {
 	 * @return
 	 */
 	int payConfirm2(int correctionNo);
+	
+	/** 급여 정정 재신청_상태 변경
+	 * @param payCorr
+	 * @return
+	 */
+	int payCorrectionRe(PayCorrection payCorr);
 
 	
 	/** 메인_확인 안한 급여 명세서
@@ -102,12 +107,6 @@ public interface PayService {
 	 */
 	List<PayCorrection> correctionListMain(int memberNo);
 
-	/** 급여 정정 상세 조회
-	 * @param payNo
-	 * @param correctionCreateDate
-	 * @return pay
-	 */
-	Pay payView2(int payNo, Date correctionCreateDate);
-
+	
 
 }

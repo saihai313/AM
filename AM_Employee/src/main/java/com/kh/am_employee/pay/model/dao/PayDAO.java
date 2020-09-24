@@ -1,7 +1,6 @@
 package com.kh.am_employee.pay.model.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,8 +46,8 @@ public class PayDAO {
 	 * @param payNo
 	 * @return payView
 	 */
-	public Pay payView(Map<String, Object> map) {
-		return sqlSession.selectOne("payMapper.payView", map);
+	public Pay payView(int payNo) {
+		return sqlSession.selectOne("payMapper.payView", payNo);
 	}
 
 
@@ -106,8 +105,8 @@ public class PayDAO {
 	 * @param correctionNo
 	 * @return payCorr
 	 */
-	public PayCorrection correctionView(Map<String, Object> map) {
-		return sqlSession.selectOne("payMapper.correctionView", map);
+	public PayCorrection correctionView(int correctionNo) {
+		return sqlSession.selectOne("payMapper.correctionView", correctionNo);
 	}
 
 	/** 급여 정정 신청_세부조회
@@ -145,6 +144,14 @@ public class PayDAO {
 	public int payConfirm2(int correctionNo) {
 		return sqlSession.update("payMapper.payConfirm2", correctionNo);
 	}
+	
+	/** 급여 정정 재신청_상태 변경
+	 * @param payCorr
+	 * @return result
+	 */
+	public int payCorrectionRe(PayCorrection payCorr) {
+		return sqlSession.update("payMapper.payCorrectionRe", payCorr);
+	}
 
 
 	/** 메인_확인 안한 급여 명세서
@@ -165,9 +172,6 @@ public class PayDAO {
 	}
 
 
-	public Pay payView2(Map<String, Object> map) {
-		return sqlSession.selectOne("payMapper.payView2", map);
-	}
-
+	
 
 }
