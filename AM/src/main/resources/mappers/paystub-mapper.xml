@@ -88,7 +88,7 @@
 	
 	<update id="correction" parameterType="_int" >
 			
-	UPDATE   PAY_CORR  SET CORR_STATUS='N' WHERE CORR_NO=#{corrNo}
+	UPDATE   PAY_CORR  SET CORR_STATUS='N' ,CORR_MODIFY_DT=SYSDATE WHERE CORR_NO=#{corrNo} 
 	</update>
 	
 	<insert id="transmit" parameterType="CorrectionReply">
