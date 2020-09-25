@@ -250,7 +250,7 @@
 				dataType:"JSON",
 				success:function(eList){
 					console.log(eList);
-					
+					$select.append($("<option>").text("선택").attr("selected", true));
 					$.each(eList, function(index, item){
 						
 						$option = $("<option>").text(item.memberName).attr("value", item.memberNo);
