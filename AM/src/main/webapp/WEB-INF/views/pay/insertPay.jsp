@@ -230,6 +230,7 @@
 	
 	
 	<script>
+	/* @ */
 		
 		var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block", "margin-top":"8px"}).attr("name","memberNo");
 		var $option;
