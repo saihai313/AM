@@ -70,12 +70,13 @@
    </select>
    
    <!-- 급여 명세서 상세 조회_근무기간 -->
-   <!-- <select id="payWorkView" parameterType="map" resultMap="payWorkResultSet">
+   <select id="payWorkView" parameterType="map" resultMap="payWorkResultSet">
    	SELECT * 
 	FROM WORK_CALENDAL
 	WHERE MEMBER_NO = #{memberNo}
-	AND WORK_DAY BETWEEN #{payWork.payStartDate} AND #{payWork.payEndDate};
-   </select> -->
+	AND EXTRACT(MONTH FROM WORK_DAY) =  EXTRACT(MONTH FROM(#{payCreateDate}))
+	ORDER BY WORK_DAY
+   </select>
    
    <!-- 급여 명세서 확인완료 -->
    <update id="payConfirm" parameterType="Pay">

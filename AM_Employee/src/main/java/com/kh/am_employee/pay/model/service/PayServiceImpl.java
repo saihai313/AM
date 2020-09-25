@@ -1,6 +1,9 @@
 package com.kh.am_employee.pay.model.service;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import com.kh.am_employee.pay.model.vo.PageInfo;
 import com.kh.am_employee.pay.model.vo.Pay;
 import com.kh.am_employee.pay.model.vo.PayCorrRejection;
 import com.kh.am_employee.pay.model.vo.PayCorrection;
+import com.kh.am_employee.pay.model.vo.PayWork;
 
 @Service
 public class PayServiceImpl implements PayService{
@@ -41,6 +45,17 @@ public class PayServiceImpl implements PayService{
 	@Override
 	public Pay payView(int payNo) {
 		return payDAO.payView(payNo);
+	}
+	
+	// 급여 명세서 상세조회_스케줄
+	@Override
+	public List<PayWork> payWorkView(int memberNo, Date payCreateDate) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("payCreateDate", payCreateDate);
+		
+		return payDAO.payWorkView(map);
 	}
 
 	// 급여 명세서 확인 완료

@@ -1,6 +1,7 @@
 package com.kh.am_employee.pay.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,6 +12,7 @@ import com.kh.am_employee.pay.model.vo.PageInfo;
 import com.kh.am_employee.pay.model.vo.Pay;
 import com.kh.am_employee.pay.model.vo.PayCorrRejection;
 import com.kh.am_employee.pay.model.vo.PayCorrection;
+import com.kh.am_employee.pay.model.vo.PayWork;
 
 @Repository
 public class PayDAO {
@@ -48,6 +50,15 @@ public class PayDAO {
 	 */
 	public Pay payView(int payNo) {
 		return sqlSession.selectOne("payMapper.payView", payNo);
+	}
+	
+	
+	/** 급여 명세서 상세 조회_스케줄
+	 * @param map
+	 * @return payWorkList
+	 */
+	public List<PayWork> payWorkView(Map<String, Object> map) {
+		return sqlSession.selectList("payMapper.payWorkView", map);
 	}
 
 

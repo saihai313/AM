@@ -67,6 +67,8 @@
 		background-color: #589168;
 		color: white;
 	}
+	
+	.viewTable{font-size: small;}
 </style>
 </head>
 <body>
@@ -87,7 +89,7 @@
 				</div>
 			</div>
 				
-			<div class="row justify-content-center p-5 col-md-10 mx-auto" style="border: 50px solid #F5F4F0">
+			<div class="row justify-content-center p-5 col-md-12 mx-auto" style="border: 50px solid #F5F4F0">
 					
 					<!-- 제목  -->
 					<div class="col-md-10 text-center mb-5">
@@ -97,11 +99,13 @@
 					</div>
 					
 					<div class="row">
+					
 					<!-- 내용  -->
-					<table class="col-md-10 p-5 table table-borderless mx-auto">
+					<table class="col-md-5 ml-5 table table-bordered mx-auto viewTable">
 						<tr>
-							<td>이름</td>
+							<td>이름</td> 
 							<td>${loginMember.memberName }</td>
+							
 						</tr>
 						<tr>
 							<td>근무 가게</td>
@@ -124,7 +128,38 @@
 							<td>${payView.payExtra }</td>
 						</tr>
 					</table>
-					
+
+					<table class="col-md-6 table mx-auto viewTable text-center">
+						<thead class="thead-light">
+							<tr>
+								<th width="25%">근무일</th>
+								<th width="25%">시작 시간</th>
+								<th width="25%">종료 시간</th>
+								<th width="25%">근무시간</th>
+							</tr>
+						</thead>
+						 <tbody>
+		                	<c:choose>
+		                	
+		                		<c:when test="${empty payWorkList}">
+		                			<tr><td colspan="4">존재하는 근무 스케줄이 없습니다.</td><tr>
+		                		</c:when>
+		                		
+		                		<c:otherwise>
+		                			<c:forEach var="work" items="${payWorkList}">
+		                				<tr>
+		                					<td class="text-center">${work.workDay }</td>
+		                					<td>${work.workStart }</td>
+		                					<td>${work.workEnd  }</td>
+		                					<td>${work.workEnd - work.workStart }</td>
+		                				</tr>
+		                			</c:forEach>
+		                		</c:otherwise>
+		                		
+		                	</c:choose>
+		                	
+		                </tbody>
+					</table>
 					
 					<div class="col-md-12 row mt-5 mb-5 justify-content-center" id="total-sal">
 						<h3 id="total">

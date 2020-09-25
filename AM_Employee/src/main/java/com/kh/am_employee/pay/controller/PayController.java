@@ -26,8 +26,9 @@ import com.kh.am_employee.pay.model.vo.PageInfo;
 import com.kh.am_employee.pay.model.vo.Pay;
 import com.kh.am_employee.pay.model.vo.PayCorrRejection;
 import com.kh.am_employee.pay.model.vo.PayCorrection;
+import com.kh.am_employee.pay.model.vo.PayWork;
 
-@SessionAttributes({"loginMember", "loginStore"})
+@SessionAttributes({"loginMember", "loginStore", "payWorkList"})
 @Controller
 @RequestMapping("/pay/*")
 public class PayController {
@@ -63,26 +64,21 @@ public class PayController {
 						  Model model, RedirectAttributes rdAttr, HttpServletRequest request){
 
 		Pay payView = payService.payView(payNo);
-		System.out.println(payView);
-		
 		String url = null;
 		
 		if(payView != null) {
 			model.addAttribute("payView", payView);
 			url = "pay/payView";
 			
-			/*
-			 * // 알바생 번호 Member loginMember = (Member) model.getAttribute("loginMember");
-			 * int memberNo = loginMember.getMemberNo();
-			 * 
-			 * // 이전 명세서 날짜 Date payStartDate = payView.getPayCreateDate();
-			 * 
-			 * // 이번 명세서 날짜 Date payEndDate = payView.getPayCreateDate();
-			 * 
-			 * List<PayWork> payWorkList = payService.payWorkView(memberNo, payStartDate,
-			 * payEndDate);
-			 */
+			Member loginMember = (Member)model.getAttribute("loginMember");
+			int memberNo = loginMember.getMemberNo();
 			
+			Date payCreateDate = payView.getPayCreateDate();
+			List<PayWork> payWorkList = payService.payWorkView(memberNo, payCreateDate);
+			
+			if(payWorkList != null) {
+				model.addAttribute("payWorkList", payWorkList);
+			}
 			
 		}else {
 			rdAttr.addFlashAttribute("status", "error");
@@ -117,7 +113,6 @@ public class PayController {
 		
 		// 가게 번호
 		Store loginStore = (Store)model.getAttribute("loginStore");
-		System.out.println(loginStore);
 		int storeNo = loginStore.getStoreNo();
 		
 		PayCorrection payCorr = new PayCorrection(correctionContent, memberNo, storeNo, payNo);
@@ -166,17 +161,12 @@ public class PayController {
 	@RequestMapping("correctionView")
 	public String correctionView(int correctionNo, Model model) {
 		
-		System.out.println(correctionNo);
-		
-		
 		// 1) 정정 신청 정보(PAY_CORR)
 		PayCorrection payCorr = payService.correctionView(correctionNo);
-		System.out.println(payCorr);
 
 		
 		// 2) 정정 신청 반려 정보(PAY_CORR_RE)
 		PayCorrRejection payCorrRe = payService.rejectionView(correctionNo);
-		System.out.println(payCorrRe);
 		
 		// 3) 해당 명세서 정보(PAY)
 		Pay pay = payService.payView(payCorr.getPayNo());
@@ -206,7 +196,6 @@ public class PayController {
 	@RequestMapping("correctionUpdate")
 	public String correctionUpdate(int correctionNo, String correctionContent, Date correctionCreateDate, Model model) {
 		
-		System.out.println(correctionNo);
 		PayCorrection payCorr = new PayCorrection(correctionNo, correctionContent);
 		int result = payService.correctionUpdate(payCorr);
 		
@@ -245,7 +234,6 @@ public class PayController {
 		
 		// 가게 번호
 		Store loginStore = (Store)model.getAttribute("loginStore");
-		System.out.println(loginStore);
 		int storeNo = loginStore.getStoreNo();
 		
 		PayCorrection payCorr = new PayCorrection(correctionContent, memberNo, storeNo, payNo);

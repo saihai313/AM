@@ -1,11 +1,13 @@
 package com.kh.am_employee.pay.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kh.am_employee.pay.model.vo.PageInfo;
 import com.kh.am_employee.pay.model.vo.Pay;
 import com.kh.am_employee.pay.model.vo.PayCorrRejection;
 import com.kh.am_employee.pay.model.vo.PayCorrection;
+import com.kh.am_employee.pay.model.vo.PayWork;
 
 public interface PayService {
 
@@ -29,6 +31,13 @@ public interface PayService {
 	 * @return payView
 	 */
 	Pay payView(int payNo);
+	
+	/** 급여 명세서 상세조회_스케줄
+	 * @param memberNo
+	 * @param payDate
+	 * @return payWorkList
+	 */
+	List<PayWork> payWorkView(int memberNo, Date payCreateDate);
 
 	/** 급여 명세서 확인 완료
 	 * @param payNo
@@ -106,6 +115,8 @@ public interface PayService {
 	 * @return correctionList
 	 */
 	List<PayCorrection> correctionListMain(int memberNo);
+
+	
 
 	
 
