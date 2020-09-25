@@ -34,8 +34,8 @@
             <div class="ftco-footer-widget mb-4 ml-md-4">
               <h2 class="ftco-heading-2">User</h2>
               <ul class="list-unstyled">
-                <li><a href="${contextPath}/member/login"><span class="fa fa-chevron-right mr-2"></span>Join us</a></li>
-                <li><a href="${contextPath}/member/signUp"><span class="fa fa-chevron-right mr-2"></span>Login</a></li>
+                <li><a href="${contextPath}/member/signUp"><span class="fa fa-chevron-right mr-2"></span>Join us</a></li>
+                <li><a href="${contextPath}/member/login"><span class="fa fa-chevron-right mr-2"></span>Login</a></li>
               </ul>
             </div>
           </div>
