@@ -270,11 +270,14 @@
 			// selected 된 알바생 이번달 총 근무시간, 총 근무일수 조회
 			$select.on("click", function(){
 				
+				var payDate = $("#payDate").val();
+				console.log("1 : " + payDate);
+				
 				memberNo = $(this).prop("seleted",true).val();
 				
 				$.ajax({
 					url:"selectEmployeeWork",
-					data:{"memberNo": memberNo},
+					data:{"memberNo": memberNo, "payDate":payDate},
 					dataType : "JSON",
 					success:function(wc){
 						console.log(wc);

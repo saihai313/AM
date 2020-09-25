@@ -1,6 +1,7 @@
 package com.kh.am.pay.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,11 @@ public class PayDAO {
 	}
 
 	/** 알바생 일한 정보 조회 DAO
-	 * @param memberNo
+	 * @param map
 	 * @return wc
 	 */
-	public WorkCalendar selectEmployeeWork(int memberNo) {
-		return sqlSession.selectOne("payMapper.selectEmployeeWork", memberNo);
+	public WorkCalendar selectEmployeeWork(Map<String, Object> map) {
+		return sqlSession.selectOne("payMapper.selectEmployeeWork", map);
 	}
 
 	/** 알바생 총급여, 주휴수당 조회 DAO

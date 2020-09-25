@@ -1,6 +1,9 @@
 package com.kh.am.pay.model.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +30,15 @@ public class PayServiceImpl implements PayService{
 	
 	// 알바생 이번달 총 근무시간, 총 근무일수 조회 Service 구현
 	@Override
-	public WorkCalendar selectEmployeeWork(int memberNo) {
-		return payDAO.selectEmployeeWork(memberNo);
+	public WorkCalendar selectEmployeeWork(int memberNo, String date) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("date", date);
+		
+		System.out.println("map : " + map);
+	
+		return payDAO.selectEmployeeWork(map);
 	}
 
 	
