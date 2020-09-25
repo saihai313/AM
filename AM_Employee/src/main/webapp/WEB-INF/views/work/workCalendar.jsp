@@ -44,6 +44,8 @@
 	color: #fff;
 }
 
+.fc-sat{color: #1187CF;}
+.fc-sun{color: #B23535;}
 </style>
 
 </head>
