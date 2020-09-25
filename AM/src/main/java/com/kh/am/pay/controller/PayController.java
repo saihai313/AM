@@ -71,7 +71,7 @@ public class PayController {
 	@RequestMapping("selectEmployeeWork")
 	public String selectEmployeeWork(int memberNo, String payDate) throws ParseException {
 		
-		System.out.println("payDate 나와라 : " + payDate);
+		System.out.println("payDate : " + payDate);
 		
 		String date = payDate.substring(0,7);
 		System.out.println(date);

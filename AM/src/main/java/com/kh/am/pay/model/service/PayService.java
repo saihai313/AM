@@ -22,7 +22,7 @@ public interface PayService {
 	 */
 	public abstract WorkCalendar selectEmployeeWork(int memberNo, String date);
 
-	/** 알바생 총급여, 주휴수당 조회 Service
+	/** 알바생 총급여, 주휴수당 조회 Service!
 	 * @param pay
 	 * @return payTotal
 	 */

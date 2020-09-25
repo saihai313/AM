@@ -25,7 +25,7 @@ public class PayDAO {
 		return sqlSession.selectList("payMapper.selectEmployeeList", storeNo);
 	}
 
-	/** 알바생 일한 정보 조회 DAO
+	/** 알바생 일한 정보 조회 DAO!
 	 * @param map
 	 * @return wc
 	 */

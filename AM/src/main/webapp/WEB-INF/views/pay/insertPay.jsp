@@ -267,7 +267,7 @@
 			});
 			
 			
-			// selected 된 알바생 이번달 총 근무시간, 총 근무일수 조회
+			// selected 된 알바생 이번달 총 근무시간, 총 근무일수 조회!
 			$select.on("click", function(){
 				
 				var payDate = $("#payDate").val();
