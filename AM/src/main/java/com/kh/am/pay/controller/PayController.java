@@ -132,19 +132,22 @@ public class PayController {
 		String status = null;
 		String msg = null;
 		String url = null;
+		String text = null;
 		if(result > 0) {
 			status = "success";
 			msg = "급여 등록 성공";
+			text = "급여명세서에서 확인 가능합니다.";
 		}else {
 			status = "error";
 			msg = "급여 등록 실패";
 			
 		}
 		
-		url = "redirect:insertPay";
+		url = "redirect:../management/payStubList";
 		
 		rdAttr.addFlashAttribute("status", status);
 		rdAttr.addFlashAttribute("msg", msg);
+		rdAttr.addFlashAttribute("text", text);
 		
 		return url;
 	}
