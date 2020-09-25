@@ -230,6 +230,7 @@
 	
 	
 	<script>
+	/* @ */
 		
 		var $select = $("<select>").addClass("form-control").css({"width":"120px", "display":"inline-block", "margin-top":"8px"}).attr("name","memberNo");
 		var $option;
@@ -250,7 +251,7 @@
 				dataType:"JSON",
 				success:function(eList){
 					console.log(eList);
-					
+					$select.append($("<option>").text("선택").attr("selected", true));
 					$.each(eList, function(index, item){
 						
 						$option = $("<option>").text(item.memberName).attr("value", item.memberNo);
