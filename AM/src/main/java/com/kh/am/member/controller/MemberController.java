@@ -288,7 +288,7 @@ public class MemberController {
 				"                <h2 style=\"margin-top: 5px;\">이메일 인증</h2>\r\n" + 
 				"                <p style=\"font-weight: bold; font-family: 'S-CoreDream-6Bold';\">아래 버튼을 클릭하면 이메일 인증이 완료됩니다.</p>\r\n" + 
 				"                <a class=\"btn\"\r\n" + 
-				"                href='http://localhost:8080/am/member/signUpEmail?memberEmail=" + memberEmail + "' target='_blenk'>이메일 인증 확인</a>\r\n" + 
+				"                href='http://aclass.xyz:8081/am/member/signUpEmail?memberEmail=" + memberEmail + "' target='_blenk'>이메일 인증 확인</a>\r\n" + 
 				"            </div>\r\n" + 
 				"        </td>\r\n" + 
 				"        \r\n" + 

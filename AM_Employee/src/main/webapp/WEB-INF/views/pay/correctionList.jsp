@@ -361,7 +361,7 @@
 				
 				correctionNo = $(this).parent().attr('id');
 				correctionCreateDate = $(this).parent().children().eq(1).text();
-				console.log(correctionCreateDate);
+				console.log(correctionNo + '세부');
 				
 				$.ajax({
 					url : "correctionView",
@@ -562,12 +562,13 @@
 			
 			// 정정 신청 결과 확인 후, 정정 재신청_동작
 			$("#correction").on("click", function(){
-				console.log(payNo);
+				
 				console.log($("#corrReContent").val());
+				console.log(correctionNo + '재신청');
 				
 				$.ajax({
 					url : "payReCorrection",
-					data : {"payNo": payNo, "correctionContent" : $("#corrReContent").val()},
+					data : { "payNo" : payNo, "correctionContent" : $("#corrReContent").val(), "correctionNo" : correctionNo },
 					dataType: "JSON",
 					type : "GET",
 					success : function(result){
@@ -578,6 +579,8 @@
 							$("#corrModal").modal("hide");
 							$("#staticBackdrop").modal("show"); 
 							
+						}else{
+							swal("급여 정정 재신청 완료!", {icon: "fail",});
 						}
 						
 					}, error : function(){

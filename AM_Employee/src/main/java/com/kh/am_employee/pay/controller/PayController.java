@@ -226,7 +226,7 @@ public class PayController {
 	// 급여 명세서 정정 재신청
 	@ResponseBody
 	@RequestMapping("payReCorrection")
-	public int payReCorrection(int payNo, String correctionContent, Model model) {
+	public int payReCorrection(int payNo, String correctionContent, int correctionNo, Model model) {
 		
 		// 회원 번호
 		Member loginMember = (Member)model.getAttribute("loginMember");
@@ -240,12 +240,14 @@ public class PayController {
 		
 		int result = payService.payCorrection(payCorr);
 		
-		
 		// 이전 정정 신청 상태 변경(재신청)
 		if(result > 0) {
-			result = payService.payCorrectionRe(payCorr);
+			System.out.println(correctionNo);
+			result = payService.payCorrectionRe(correctionNo);
+			System.out.println(result);
+			
 		}else {
-			result = 0;
+			result = -1;
 		}
 		
 		return result;

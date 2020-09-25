@@ -101,7 +101,7 @@ public interface PayService {
 	 * @param payCorr
 	 * @return
 	 */
-	int payCorrectionRe(PayCorrection payCorr);
+	int payCorrectionRe(int correctionNo);
 
 	
 	/** 메인_확인 안한 급여 명세서

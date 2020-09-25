@@ -160,8 +160,8 @@ public class PayDAO {
 	 * @param payCorr
 	 * @return result
 	 */
-	public int payCorrectionRe(PayCorrection payCorr) {
-		return sqlSession.update("payMapper.payCorrectionRe", payCorr);
+	public int payCorrectionRe(int correctionNo) {
+		return sqlSession.update("payMapper.payCorrectionRe", correctionNo);
 	}
 
 

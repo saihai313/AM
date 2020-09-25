@@ -140,8 +140,8 @@ public class PayServiceImpl implements PayService{
 	// 급여 정정 재신청_상태 변경
 	@Transactional(rollbackFor=Exception.class)
 	@Override
-	public int payCorrectionRe(PayCorrection payCorr) {
-		return payDAO.payCorrectionRe(payCorr);
+	public int payCorrectionRe(int correctionNo) {
+		return payDAO.payCorrectionRe(correctionNo);
 	}
 	
 
