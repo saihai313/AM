@@ -68,11 +68,11 @@
 	
 	</select>
 	
-	<!-- 알바생 일한 정보 조회 -->
-	<select id="selectEmployeeWork" parameterType="_int" resultMap="calendarResultSet">
+	<!-- 알바생 일한 정보 조회! -->
+	<select id="selectEmployeeWork" parameterType="map" resultMap="calendarResultSet">
 		SELECT COUNT(*) AS WORK_START,  SUM(WORK_END - WORK_START) AS WORK_END 
 		FROM WORK_CALENDAL
-		WHERE TO_CHAR(WORK_DAY, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+		WHERE TO_CHAR(WORK_DAY, 'YYYY-MM') = #{date}
 		GROUP BY MEMBER_NO
 		HAVING MEMBER_NO = #{memberNo}
 	</select>

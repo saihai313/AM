@@ -1,6 +1,8 @@
 package com.kh.am.pay.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,9 +69,22 @@ public class PayController {
 	// 알바생 이번달 총 근무일수, 총 근무시간 조회
 	@ResponseBody
 	@RequestMapping("selectEmployeeWork")
-	public String selectEmployeeWork(int memberNo) {
+	public String selectEmployeeWork(int memberNo, String payDate) throws ParseException {
 		
-		WorkCalendar wc = payService.selectEmployeeWork(memberNo);
+		System.out.println("payDate : " + payDate);
+		
+		String date = payDate.substring(0,7);
+		System.out.println(date);
+		/*SimpleDateFormat str = new SimpleDateFormat("yyyy-MM");
+		
+		Date date = str.parse(payDate);
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM");
+		
+		
+		System.out.println("date : " + fm.format(date));*/
+		
+		WorkCalendar wc = payService.selectEmployeeWork(memberNo, date);
+		
 		
 		System.out.println("WC : " + wc);
 		
