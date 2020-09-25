@@ -14,7 +14,7 @@
 		}
 		.main-text{font-family: 'S-CoreDream-4Regular' !important;}
 		.main-title{font-family: 'S-CoreDream-8Heavy'!important;}
-		.mainTable *{font-size: small; color: grey;}
+		.mainTable *{font-size: small; color: grey; cursor: pointer;}
 		.mainTable thead tr:first-child{font-weight: bold; font-family: 'S-CoreDream-6Bold';}
 		.mainTable thead tr:last-child{border-bottom: 3px solid #F5F4F0;}
 		.mainTable tbody tr{border-bottom: 1px solid #F5F4F0;}
@@ -45,42 +45,40 @@
 								<h3 class="main-title">${titleMonth}</h3>
 							</div>
 							
+							<table class="col-md-12 mt-3 mb-5 mainTable" id="payStubTable">
+									<thead>
+										<tr><th colspan="2" class="text-left">미확인 급여 명세서</th></tr>
+										<tr><th colspan="2" class="text-left" style="color: transparent;">공백</th></tr>
+										<tr>
+											<th width="50%">발급일</th>
+											<th width="50%">명세서명</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:choose>
+					                		<c:when test="${empty payListMain}">
+					                			<tr><td colspan="2">새로운 급여 명세서가 없습니다.</td><tr>
+					                		</c:when>
+					                		
+					                		<c:otherwise>
+					                			<c:forEach var="pay" items="${payListMain}">
+					                				<tr>
+					                					<td>${pay.payCreateDate }</td>
+					                					<td>
+															<fmt:formatDate var="payTitle" value="${pay.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
+					               							${payTitle }
+					                					</td>
+					                					<td></td>
+					                				</tr>
+					                			</c:forEach>
+					                		</c:otherwise>
+					                		
+					                	</c:choose>
+					                	
+									</tbody>
+								</table>
 							
-							<table class="col-md-12 mt-3 mb-5 mainTable">
-								<thead>
-									<tr><th colspan="2" class="text-left">미확인 급여 명세서</th></tr>
-									<tr><th colspan="2" class="text-left" style="color: transparent;">공백</th></tr>
-									<tr>
-										<th width="50%">발급일</th>
-										<th width="50%">명세서명</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:choose>
-				                		<c:when test="${empty payListMain}">
-				                			<tr><td colspan="2">새로운 급여 명세서가 없습니다.</td><tr>
-				                		</c:when>
-				                		
-				                		<c:otherwise>
-				                			<c:forEach var="pay" items="${payListMain}">
-				                				<tr>
-				                					<td>${pay.payCreateDate }</td>
-				                					<td>
-														<fmt:formatDate var="payTitle" value="${pay.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
-				               							${payTitle }
-				                					</td>
-				                					<td></td>
-				                				</tr>
-				                			</c:forEach>
-				                		</c:otherwise>
-				                		
-				                	</c:choose>
-				                	
-								</tbody>
-							</table>
-							
-							
-							<table class="col-md-12 mb-3  mainTable">
+							<table class="col-md-12 mb-3 mainTable" id="payCorrectionTable">
 								<thead>
 									<tr><th colspan="2" class="text-left">미확인 급여 정정 신청 결과</th></tr>
 									<tr><th colspan="2" class="text-left" style="color: transparent;">공백</th></tr>
@@ -224,6 +222,21 @@
     
     <!-- ------------------------- footer ---------------------------- -->
     <jsp:include page="WEB-INF/views/common/footer.jsp" />
+    
+    <script>
+    	$(function(){
+    		
+    		$("#payStubTable").on("click", function(){
+    			location.href = "${contextPath}/pay/payList";
+    		});
+    		
+    		$("#payCorrectionTable").on("click", function(){
+    			location.href = "${contextPath}/pay/correctionList";
+    		});
+    		
+    		
+    	});
+    </script>
     
   </body>
 </html>
