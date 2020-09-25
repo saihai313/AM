@@ -155,7 +155,7 @@
     	</c:otherwise>
     </c:choose>
 
-		<section class="ftco-section">
+		<section class="ftco-section mt-5">
 		<div class="container">
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp">
