@@ -8,7 +8,20 @@
 
 <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
-
+<style>
+ .one1{
+ 	    background-color: bisque;
+ 	        border-radius: 14px;
+ 	        padding: 10px;
+ 	        border: 2px solid lightgray;
+ 	        height: 950px;
+ }
+ 
+ .backColor{
+	 background-image: url(${contextPath}/resources/images/배경2.png);
+    background-repeat: no-repeat;
+}
+</style>
 </head>
 <body>
 
@@ -18,7 +31,7 @@
 	<!-- ------------------------- main ---------------------------- -->
 	<section class="ftco-section">
 		<div class="overlay"></div>
-		<div class="container">
+		<div class="container one1 backColor">
 
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp" id="work-title">
