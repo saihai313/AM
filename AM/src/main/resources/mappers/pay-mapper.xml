@@ -118,7 +118,7 @@
 	<insert id="insertPay" parameterType="Pay" >
 		INSERT INTO PAY VALUES(SEQ_PNO.NEXTVAL, #{payTime}, #{payDay}, 
 								#{payExtra}, #{paySal}, #{payPayment}, 
-								SYSDATE, DEFAULT, #{memberNo}, #{storeNo})
+								#{payCreateDate}, DEFAULT, #{memberNo}, #{storeNo})
 		
 	</insert>
 	

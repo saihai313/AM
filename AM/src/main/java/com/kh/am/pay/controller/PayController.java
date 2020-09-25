@@ -115,9 +115,12 @@ public class PayController {
 	
 	// 알바생 급여 등록
 	@RequestMapping("insertPayAction")
-	public String insertPayAction(Pay pay, Model model, HttpServletRequest request, RedirectAttributes rdAttr) {
+	public String insertPayAction(java.sql.Date payDate, Pay pay, Model model, HttpServletRequest request, RedirectAttributes rdAttr) {
 		
 		Store loginEmployer = (Store)model.getAttribute("loginEmployer");
+		
+		System.out.println("payDate : " + payDate);
+		pay.setPayCreateDate(payDate);
 		
 		pay.setStoreNo(loginEmployer.getStoreNo());
 		
