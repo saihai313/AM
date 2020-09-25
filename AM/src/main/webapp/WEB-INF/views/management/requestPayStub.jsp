@@ -166,7 +166,7 @@
 		                </thead>
 		                 <tbody>
 		                   <c:choose>
-		                      <c:when test="">
+		                      <c:when test="${empty list}">
 		                         <tr>
 		                         <td colspan="5">알바생이 없습니다.</td>
 		                         </tr>

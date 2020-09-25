@@ -161,7 +161,7 @@
 													<div class="form-group">
 														<label class="label" for="payTime">총 근무시간</label> <input
 															type="text" class="form-control" name="payTime" id="payTime"
-															placeholder="시간">
+															placeholder="시간" readonly="readonly">
 													</div>
 												</div>
 												
@@ -169,7 +169,7 @@
 													<div class="form-group">
 														<label class="label" for="payDay">총 근무 일수</label> <input
 															type="text" class="form-control" name="payDay" id="payDay"
-															placeholder="일">
+															placeholder="일" readonly="readonly">
 													</div>
 												</div>
 												
@@ -180,7 +180,7 @@
 													<div class="form-group">
 														<label class="label" for="payExtra">주휴수당</label> <input
 															type="text" class="form-control" name="payExtra" id="payExtra"
-															placeholder="원" >
+															placeholder="원" readonly="readonly">
 													</div>
 												</div>
 												
@@ -199,7 +199,7 @@
 													<div class="form-group">
 														<label class="label" for="paySal">총 지급액</label> <input
 															type="text" class="form-control" name="paySal" id="paySal"
-															placeholder="원">
+															placeholder="원" readonly="readonly">
 													</div>
 												</div>
 												
