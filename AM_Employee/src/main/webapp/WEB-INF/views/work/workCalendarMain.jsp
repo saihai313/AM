@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/calendar.css">
 
 <style>
-	#work-title{border-bottom: 3px solid #F5F4F0;}
+#work-title{border-bottom: 3px solid #F5F4F0;}
+.fc-sat{color: #1187CF;}
+.fc-sun{color: #B23535;}
 </style>
 </head>
 <body>
