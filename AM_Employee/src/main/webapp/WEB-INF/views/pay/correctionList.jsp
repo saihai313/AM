@@ -578,9 +578,7 @@
 						
 						if(result > 0){
 							swal("급여 정정 재신청 완료!", {icon: "success",});
-							
-							$("#corrModal").modal("hide");
-							$("#staticBackdrop").modal("show"); 
+							location.reload();
 							
 						}else{
 							swal("급여 정정 재신청 완료!", {icon: "fail",});
