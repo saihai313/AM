@@ -462,9 +462,12 @@
 			$("#corrUpdate").on("click", function(){
 				var now = new Date();
 				var year = now.getFullYear();
-				var month = now.getMonth();
+				var month = now.getMonth() + 1;
 				var date = now.getDate();
-				var nowDate = year+"-"+month+"-"+date
+				var hour = now.getHours();
+				var min = now.getMinutes();
+				
+				var nowDate = year+"/"+month+"/"+date+" "+hour+":"+min;
 				
 				$("#corrUpdate").hide();
 				$("#corrDelete").hide();
