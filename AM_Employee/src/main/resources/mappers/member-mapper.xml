@@ -86,7 +86,7 @@
 	<!-- 회원가입_알바생 정보  -->
 	<insert id="signUpEmployee" parameterType="map">
 		INSERT INTO EMPLOYEE
-		VALUES(#{memberNo}, #{storeNo}, 8590)
+		VALUES(#{memberNo}, #{storeNo}, #{currentMinSalary})
 	</insert>
 	
 	<!-- 최저 시급 조회  -->
