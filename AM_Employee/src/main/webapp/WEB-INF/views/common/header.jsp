@@ -60,7 +60,7 @@
 							<a href="${contextPath}/member/signUp"><span class="fa"></span>회원가입</a>
 	            		</c:when>
 	            		<c:otherwise>
-	            			<a href="${contextPath}/member/mypage"><span class="fa" id="nav-first"></span>${loginMember.memberName} 님</a>
+	            			<a href="${contextPath}/member/updateMember"><span class="fa" id="nav-first"></span>${loginMember.memberName} 님</a>
 	            			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            			<a href="${contextPath}/member/logout"><span class="fa" id="nav-first"></span>로그아웃</a>
 	            		</c:otherwise>

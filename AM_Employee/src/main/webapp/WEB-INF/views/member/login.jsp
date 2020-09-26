@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 			
-				<div class="col-md-4" >
+				<div class="col-md-4 mt-5 pt-5" >
 					<a class="mb-2" href="${contextPath}">
 						<img src="${contextPath}/resources/images/main_logo.png" width="80%" class="mx-auto d-block"> 
 					</a>
