@@ -116,5 +116,8 @@
 			AND EXTRACT(MONTH FROM PAY_CREATE_DT) = #{payDay}
 	</select>
 	
+	<update id="check" parameterType="_int">
+	update pay_corr set corr_status='Y' where CORR_NO=#{corrNo} 
+	</update>
   
 </mapper>

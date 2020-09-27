@@ -198,6 +198,22 @@ public class ManagementController {
 			return gson.toJson(list);
 		}
 		
+		@RequestMapping("check/{corrNo}")
+		public String check(@PathVariable int corrNo,Model model,RedirectAttributes rdAttr,HttpServletRequest request) {
+			
+			System.out.println("이거를 봐 : " + corrNo);
+			String url=null;
+			int result=paystubService.check(corrNo);
+			if(result>0) {
+				model.addAttribute("result", result);
+				url="redirect:../requestPayStub";
+			}else {
+				rdAttr.addFlashAttribute("status", "error");
+				rdAttr.addFlashAttribute("msg", "확인되지 않았습니다");
+				url="redirect:../requestPayStub";
+			}
+			return url;
+		}
 		
 		
 		 
