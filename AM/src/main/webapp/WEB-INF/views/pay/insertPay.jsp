@@ -311,11 +311,12 @@
 							$payExtra = $("#payExtra").val(pay.payExtra);
 							
 							$("input[name=tax]").on("change",function(){
-								$paySal = $("#paySal").val("");
-								if($("#tax3").prop("checked")){
-									$("#paySal").val(Math.floor(pay.paySal - (pay.paySal * $(this).val())));
-								}else{
+								if($("#tax3").prop("checked") && $("#paySal").val() != 0){
+									$("#paySal").val(Math.floor(pay.paySal - (pay.paySal * $("#tax3").val())));
+								}else if($("#taxN").prop("checked") && $("#paySal").val() != 0){
 									$("#paySal").val(pay.paySal);
+								}else{
+									$("#paySal").val(0);
 								}
 							});
 							
