@@ -25,6 +25,12 @@ public interface PayService {
 	 * @return payList
 	 */
 	List<Pay> payList(PageInfo pInfo, int memberNo);
+	
+	/** 급여 명세서 재발급 확인
+	 * @param payNo
+	 * @return result
+	 */
+	int rePayStub(int payNo);
 
 	/** 급여 명세서 상세조회
 	 * @param payNo
@@ -116,8 +122,5 @@ public interface PayService {
 	 */
 	List<PayCorrection> correctionListMain(int memberNo);
 
-	
-
-	
 
 }

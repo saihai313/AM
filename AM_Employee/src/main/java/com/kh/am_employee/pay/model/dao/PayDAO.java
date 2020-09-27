@@ -43,6 +43,13 @@ public class PayDAO {
 		return sqlSession.selectList("payMapper.payList", memberNo, rowBounds);
 	}
 
+	/** 급여 명세서 재발급 확인
+	 * @param payNo
+	 * @return result
+	 */
+	public int rePayStub(int payNo) {
+		return sqlSession.selectOne("payMapper.rePayStub", payNo);
+	}
 
 	/** 급여 명세서 상세 조회
 	 * @param payNo
@@ -182,7 +189,5 @@ public class PayDAO {
 		return sqlSession.selectList("payMapper.correctionListMain", memberNo);
 	}
 
-
-	
 
 }

@@ -56,10 +56,10 @@
                 					
                 					<td>
 										<fmt:formatDate var="payTitle" value="${pay.payCreateDate }" pattern="YYYY년  MM월 명세서"/>
-               							${payTitle }
+               							${payTitle }${pay.check }
                 					</td>
                 					
-                					<td>
+                					<td id="${pay.payStatus }">
                 						<c:choose>
                 							<c:when test="${pay.payStatus == 'Y' }">
                 								확인 완료
@@ -70,7 +70,7 @@
                 							<c:otherwise/>
                 						</c:choose>
                 					</td>
-                						
+
                 				</tr>
                 			</c:forEach>
                 		</c:otherwise>
@@ -132,16 +132,46 @@
     
     <script>
     
-    	// 상세 조회
 		$(function(){
+
+    		// 상세 조회
 			$("#list-table td").on("click", function(){
 				
 				var payNo = $(this).parent().attr('id');
 				var paystubNo = $(this).parent().children().eq(0).text();
+				var payStatus = $(this).parent().children().eq(3).attr('id');
 				
-				location.href = "${contextPath}/pay/payView/" + payNo + "?cp=${pInfo.currentPage }";
+				if(payStatus == 'N'){
+						
+					$.ajax({
+						url : "rePayStub",
+						data : {"payNo": payNo},
+						type : "GET",
+						success : function(result){
+							if(result > 0){
+								swal({
+									  title: "폐기된 명세서",
+									  text: "재발급된 명세서를 확인해주세요.",
+									  icon: "info",
+									  button: "닫기",
+									})
+							}else{
+								location.href = "${contextPath}/pay/payView/" + payNo + "?cp=${pInfo.currentPage }";
+							}
+							
+						}, error : function(){
+							console.log("급여명세서 재발급 확인 실패");
+						}
+					
+					});	
+					
+				}else{
+					location.href = "${contextPath}/pay/payView/" + payNo + "?cp=${pInfo.currentPage }";
+				}
 				
 			});
+    		
+    		
 		});
 	</script>
 

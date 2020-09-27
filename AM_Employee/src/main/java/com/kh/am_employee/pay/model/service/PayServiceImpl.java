@@ -40,6 +40,12 @@ public class PayServiceImpl implements PayService{
 	public List<Pay> payList(PageInfo pInfo, int memberNo) {
 		return payDAO.payList(pInfo, memberNo);
 	}
+	
+	// 급여 명세서 재발급 확인
+	@Override
+	public int rePayStub(int payNo) {
+		return payDAO.rePayStub(payNo);
+	}
 
 	// 급여 명세서 상세조회
 	@Override
@@ -158,5 +164,4 @@ public class PayServiceImpl implements PayService{
 	}
 
 	
-
 }

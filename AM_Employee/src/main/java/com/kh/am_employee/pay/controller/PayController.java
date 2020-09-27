@@ -52,10 +52,26 @@ public class PayController {
 		// 2) 현재 로그인한 회원의 급여 명세서 목록
 		List<Pay> payList = payService.payList(pInfo, memberNo);
 		
+		
+		for(Pay p : payList) {
+			if(p.getPayStatus().equals("N")) {
+				if(payService.rePayStub(p.getPayNo()) > 0) {
+					p.setCheck("(폐기)");;
+				}
+			}
+		}
+		
 		model.addAttribute("pInfo", pInfo);
 		model.addAttribute("payList", payList);
 		
 		return "pay/payList";
+	}
+	
+	// 급여 명세서 재발급 확인
+	@ResponseBody
+	@RequestMapping("rePayStub")
+	public int rePayStub(int payNo) {
+		return payService.rePayStub(payNo);
 	}
 	
 	// 급여 명세서 상세 조회
@@ -67,6 +83,7 @@ public class PayController {
 		String url = null;
 		
 		if(payView != null) {
+
 			model.addAttribute("payView", payView);
 			url = "pay/payView";
 			
@@ -249,9 +266,7 @@ public class PayController {
 		
 		// 이전 정정 신청 상태 변경(재신청)
 		if(result > 0) {
-			System.out.println(correctionNo);
 			result = payService.payCorrectionRe(correctionNo);
-			System.out.println(result);
 			
 		}else {
 			result = -1;

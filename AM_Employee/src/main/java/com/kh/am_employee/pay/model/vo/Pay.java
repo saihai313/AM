@@ -14,10 +14,8 @@ public class Pay {
 	private int memberNo;
 	private int storeNo;
 	
-	// V_PAY_EMPLOYEE
 	private int paystubNo;
-	private Date correctionCreateDate;
-	private Date correctionModifyDate;
+	private String check;
 	
 	
 	public Pay() {
@@ -26,7 +24,7 @@ public class Pay {
 
 
 	public Pay(int payNo, int payTime, int payDay, int payExtra, int paySalary, Date payCreateDate, String payStatus,
-			int memberNo, int storeNo, int paystubNo, Date correctionCreateDate, Date correctionModifyDate) {
+			int memberNo, int storeNo, int paystubNo, String check) {
 		super();
 		this.payNo = payNo;
 		this.payTime = payTime;
@@ -38,8 +36,7 @@ public class Pay {
 		this.memberNo = memberNo;
 		this.storeNo = storeNo;
 		this.paystubNo = paystubNo;
-		this.correctionCreateDate = correctionCreateDate;
-		this.correctionModifyDate = correctionModifyDate;
+		this.check = check;
 	}
 
 
@@ -143,23 +140,13 @@ public class Pay {
 	}
 
 
-	public Date getCorrectionCreateDate() {
-		return correctionCreateDate;
+	public String getCheck() {
+		return check;
 	}
 
 
-	public void setCorrectionCreateDate(Date correctionCreateDate) {
-		this.correctionCreateDate = correctionCreateDate;
-	}
-
-
-	public Date getCorrectionModifyDate() {
-		return correctionModifyDate;
-	}
-
-
-	public void setCorrectionModifyDate(Date correctionModifyDate) {
-		this.correctionModifyDate = correctionModifyDate;
+	public void setCheck(String check) {
+		this.check = check;
 	}
 
 
@@ -167,10 +154,8 @@ public class Pay {
 	public String toString() {
 		return "Pay [payNo=" + payNo + ", payTime=" + payTime + ", payDay=" + payDay + ", payExtra=" + payExtra
 				+ ", paySalary=" + paySalary + ", payCreateDate=" + payCreateDate + ", payStatus=" + payStatus
-				+ ", memberNo=" + memberNo + ", storeNo=" + storeNo + ", paystubNo=" + paystubNo
-				+ ", correctionCreateDate=" + correctionCreateDate + ", correctionModifyDate=" + correctionModifyDate
+				+ ", memberNo=" + memberNo + ", storeNo=" + storeNo + ", paystubNo=" + paystubNo + ", check=" + check
 				+ "]";
 	}
-
 
 }

@@ -365,7 +365,6 @@
 				
 				correctionNo = $(this).parent().attr('id');
 				correctionCreateDate = $(this).parent().children().eq(1).text();
-				console.log(correctionNo + '세부');
 				
 				$.ajax({
 					url : "correctionView",
@@ -520,8 +519,6 @@
 			
 			// 정정 신청 결과 확인 후, 확인 완료
 			$("#corrComplete").on("click", function(){
-				console.log(payNo);
-				console.log(correctionNo);
 				
 				swal({
 					  title: "급여에 이상이 없습니까?",
@@ -538,8 +535,6 @@
 							data : {"payNo": payNo, "correctionNo" : correctionNo},
 							type : "GET",
 							success : function(result){
-								console.log(result);
-								
 								if(result > 0){
 									$("#staticBackdrop").modal("hide");
 									swal("급여 확인완료!", {icon: "success",});
@@ -569,9 +564,6 @@
 			
 			// 정정 신청 결과 확인 후, 정정 재신청_동작
 			$("#correction").on("click", function(){
-				
-				console.log($("#corrReContent").val());
-				console.log(correctionNo + '재신청');
 				
 				$.ajax({
 					url : "payReCorrection",
