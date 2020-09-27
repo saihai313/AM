@@ -12,6 +12,8 @@ import com.kh.am.management.model.vo.PageInfo;
 import com.kh.am.management.model.vo.PayStub;
 import com.kh.am.management.model.vo.Paystubplus;
 
+import oracle.net.aso.p;
+
 @Service
 public class PayStubServiceImpl implements PayStubService {
 
@@ -82,6 +84,13 @@ public class PayStubServiceImpl implements PayStubService {
 	public List<PayStub> selectPaystub(PayStub pmonth) {
 		// TODO Auto-generated method stub
 		return paystubDAO.selectPaystub(pmonth);
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int check(int corrNo) {
+		// TODO Auto-generated method stub
+		return paystubDAO.check(corrNo);
 	}
 
 

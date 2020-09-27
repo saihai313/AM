@@ -32,4 +32,6 @@ public interface PayStubService {
 
 	public abstract List<PayStub> selectPaystub(PayStub pmonth);
 
+	public abstract int check(int corrNo);
+
 }

@@ -64,4 +64,9 @@ public class PayStubDAO {
 		return sqlSession.selectList("paystubMapper.selectPaystub", pmonth);
 	}
 
+	public int check(int corrNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("paystubMapper.check",corrNo);
+	}
+
 }

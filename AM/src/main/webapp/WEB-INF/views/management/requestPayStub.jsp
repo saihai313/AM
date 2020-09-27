@@ -181,7 +181,7 @@
 		                          <c:forEach var="paystubplus" items="${list}">
 		                         <tr>
 		                         	
-		                             <td>${paystubplus.corrNo }</td> 
+		                             <td id="a">${paystubplus.corrNo }</td> 
 		               <%-- <td><a href='#' onClick="fn_view(${result.code})"><c:out value="${result.title }"/></a></td>  --%>
 		                           
 		                            <td>${paystubplus.corrCreateDt }</td>
@@ -338,8 +338,8 @@
 
                       </div>
                       <div class="modal-footer">
-                      	
-                        <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
+                      	<input type="hidden" id="corr1">
+                        <button type="button" id="check" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
                        <!--  <button type="button" id="correction" class="btn btn-primary viewBtn">반려</button> -->
 		                <button type="button" id="correction" data-dismiss="modal" class="btn btn-success contentBtn btn-rounded " data-toggle="modal" data-target="#static">반려이유작성</button>
 		                <!--class="btn btn-warning contentBtn btn-rounded"  -->
@@ -379,7 +379,7 @@
                       </div>
                       <div class="modal-footer">
                       	<input type="hidden" id="corr">
-                        <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">확인</button>
+                        <button type="button" class="btn btn-secondary viewBtn" data-dismiss="modal">닫기</button>
                         <button type="button"data-dismiss="modal" id="transmit" class="btn btn-primary viewBtn">반려내용전송</button>
                       </div>
                     </div>
@@ -391,6 +391,7 @@
         	 var memberNo = $("#test1").text(); 
         	 var corrNo=$(this).parent().parent().children().eq(0).text();
         	 $("#corr").val(corrNo);
+        	 $("#corr1").val(corrNo);
         	 var corrContent= $("#rList.corrContent").text();
         	 
          	console.log("corrNo:"+corrNo)
@@ -493,6 +494,13 @@
         		 }
         	 });
          });
+        
+        //확인버튼누르면 w->y로 바뀌게하기
+        $("#check").click(function(){
+        	var corrNo = $("#corr1").val();
+        	console.log(corrNo);
+        	location.href="check/"+corrNo;
+        });
     </script>  
     </body>
 </html>
