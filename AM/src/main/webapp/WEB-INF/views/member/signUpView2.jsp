@@ -25,7 +25,7 @@
 	<!-- ------------------------- main ---------------------------- -->
 	<section class="ftco-section bg-light" id="signUp">
 		<div class="overlay"></div>
-		<div class="container">
+		<div class="container" style="padding-top: 6em;">
 
 			<div class="contact-wrap w-100 p-md-5 p-4 justify-content-center col-md-12">
 				

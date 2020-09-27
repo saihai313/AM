@@ -30,7 +30,6 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND MEMBER_GRADE = 'R'
-		AND MEMBER_CHECK = 'Y'
 		AND MEMBER_STATUS = 'Y'
 	</select>
 	

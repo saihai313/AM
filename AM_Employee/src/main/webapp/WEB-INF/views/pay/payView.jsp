@@ -181,7 +181,7 @@
 								</div>
 								<div class="col-md-6">
 									<button type="button" id="confirm2" class="btn btn-primary form-control m-1 viewBtn"
-									        data-toggle="modal" data-target="#staticBackdrop">정정신청</button>
+									        data-toggle="modal" data-target="#staticBackdrop">정정 신청</button>
 								</div>
 							</div>
 						</c:when>
@@ -291,9 +291,8 @@
 								
 								if(result > 0){
 									$("#confirm").remove();
-									$("#correction").remove();
+									$("#confirm2").remove();
 									
-									$("#corrCompleteLine").show();
 									swal("급여 확인완료!", {icon: "success",});
 								}
 								
@@ -324,6 +323,7 @@
 						if(result > 0){
 							$("#confirm").remove();
 							$("#confirm2").remove();
+							$("#corrCompleteLine").show();
 							
 							$("#staticBackdrop").modal("hide");
 							
@@ -333,6 +333,7 @@
 								  icon: "info",
 								  button: "닫기",
 								})
+								
 						}
 						
 					}, error : function(){

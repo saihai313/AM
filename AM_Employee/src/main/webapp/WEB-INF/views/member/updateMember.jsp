@@ -67,7 +67,7 @@
 
 			<div class="row justify-content-center pb-5">
 				<div class="col-md-7 heading-section text-center fadeInUp">
-					<span class="subheading">MY FAGE</span>
+					<span class="subheading">MY PAGE</span>
 					<h2>회원정보 수정</h2>
 				</div>
 			</div>

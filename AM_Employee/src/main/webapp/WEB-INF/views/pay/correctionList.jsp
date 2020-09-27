@@ -91,7 +91,11 @@
                 							<c:when test="${correction.correctionResult == 'N' }">
                 								정정 재신청
                 							</c:when>
-                							<c:otherwise/>
+                							<c:when test="${correction.correctionResult == 'W' }">
+                							</c:when>
+                							<c:otherwise>
+                								${correction.correctionResult }
+                							</c:otherwise>
                 						</c:choose>
                 					</td>
                 				</tr>

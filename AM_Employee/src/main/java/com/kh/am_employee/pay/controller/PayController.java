@@ -140,13 +140,20 @@ public class PayController {
 		// 2) 현재 로그인한 회원의 급여 명세서 목록
 		List<PayCorrection> correctionList = payService.correctionList(pInfo2, memberNo);
 		
-		
-		// 3) 글번호 지정
 		if(correctionList != null) {
-			
 			int tempNo = pInfo2.getListCount();
+			
 			for(PayCorrection c:correctionList) {
+				
+				// 3) 글번호 지정
 				c.setTempNo(tempNo--);
+				
+				// 4) 정정 승인 시, 결과 변경
+				if(c.getCorrectionStatus().equals("Y")) {
+					payService.payConfirm2(c.getCorrectionNo());
+					c.setCorrectionResult("명세서 재발급");
+				}
+				
 			}
 		}
 		
