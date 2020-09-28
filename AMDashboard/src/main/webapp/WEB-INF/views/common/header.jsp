@@ -139,12 +139,12 @@
               <p>회원 관리</p>
             </a>
           </li>
-           <li>
+           <%-- <li>
             <a href="${contextPath}/member/adminProfile">
               <i class="tim-icons icon-single-02"></i>
               <p>USER PROFILE</p>
             </a>
-          </li>
+          </li> --%>
           <li>
             <a href="${contextPath}/board/CurrentSal">
               <i class="tim-icons icon-pin"></i>
