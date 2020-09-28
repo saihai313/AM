@@ -39,7 +39,7 @@
 }
 
 .modal1 {
-	width: 700px;
+	width: 650px;
 	height: 550px;
 }
 </style>
@@ -171,8 +171,8 @@
 			<div>
 				<h2 class="text-center text1">상세 정보 조회</h2>
 				<p>&nbsp;</p>
-				<div class="table table-responsive storeNo">
-					<table class="modal-table">
+				<div class="table storeNo">
+					<table class="modal-table" >
 						<tr>
 							<th class="success">이름</th>
 							<td id="name">${store.memberName }</td>
@@ -208,7 +208,7 @@
 
 			</div>
 			<div
-				style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
+				style="cursor: pointer; text-align: center; padding-bottom: 10px; padding-top: 10px;"
 				onClick="">
 
 				<tr>
